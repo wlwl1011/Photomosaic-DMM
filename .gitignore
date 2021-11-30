@@ -1,0 +1,7 @@
+node_modules
+.env
+localhost*
+.DS_Store
+
+*package-lock.json
+*.pem
