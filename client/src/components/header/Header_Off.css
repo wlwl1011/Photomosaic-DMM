@@ -120,6 +120,10 @@
     color: #fff;
   }
 
+  .header__link:hover {
+    border-bottom: 1px solid #fff;
+  }
+
   .header_logo {
     width: 60px;
     height: 60px;
@@ -127,13 +131,11 @@
 
   .header__list {
     margin-right: 70px;
+    padding-bottom: 0px;
   }
 
   .header_title {
     font-size: 60px;
-  }
-  .header__item:hover {
-    border-bottom: 1px solid #fff;
   }
 
   .header_box1 {
