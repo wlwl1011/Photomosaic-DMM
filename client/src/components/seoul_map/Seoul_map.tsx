@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Seoul_map.css";
+import Menu_list from "../menu_list/Menu_list";
 
 interface Iclose {
   close: string;
@@ -11,7 +12,7 @@ interface Ilocal {
 
 function Seoul_map() {
   const [hidden, setHidden] = useState<Iclose>({
-    close: "login_hidden",
+    close: "map_modal-hidden",
   });
 
   const [local, setLocal] = useState<Ilocal>({
@@ -31,12 +32,12 @@ function Seoul_map() {
   };
   const handleCloseModal = () => {
     setHidden({
-      close: "login_hidden",
+      close: "map_modal-hidden",
     });
   };
 
   return (
-    <div className="main_wrap">
+    <div className={`main_wrap`}>
       <aside className="main_container">
         <svg
           className="main_svg-map"
@@ -326,14 +327,23 @@ function Seoul_map() {
           </g>
         </svg>
       </aside>
-      <div id="demo-modal" className={`modal ${hidden.close}`}>
-        <div className="modal__overlay"></div>
-        <div className="modal__content">
-          <button className="closeBtn" onClick={handleCloseModal}>
+      <div className={`map_modal ${hidden.close}`}>
+        <div className="map_modal-overlay"></div>
+        <div className="map_modal-content">
+          <button className="map_closeBtn" onClick={handleCloseModal}>
             ❌
           </button>
-          <h1>{`${local.local}`}</h1>
-          <h2>대표 음식</h2>
+          <div className="map_modal-title-box">
+            <h1>{`${local.local}`}</h1>
+            <h2 className="map_modal-title">대표 음식 👍 </h2>
+          </div>
+          <section className="map_list-container">
+            <ul className="map_list-box">
+              <Menu_list />
+              <Menu_list />
+              <Menu_list />
+            </ul>
+          </section>
         </div>
       </div>
     </div>
