@@ -1,0 +1,265 @@
+.main_wrap {
+  width: 100%;
+  margin-top: 170px;
+}
+
+.main_wrap,
+.main_container {
+  width: 100%;
+  height: 500px;
+}
+
+.main_svg-map {
+  overflow: visible;
+  width: 65%;
+  height: 65%;
+  padding: 0 0 0 150px;
+}
+
+.main_bottom-box {
+  width: 100%;
+  height: 700px;
+}
+
+@media (max-width: 1600px) {
+  .main_svg-map {
+    padding: 0 0 0 0;
+  }
+}
+
+@media (max-width: 1440px) {
+  .main_container {
+    width: 80%;
+    height: 500px;
+  }
+  .main_svg-map {
+    overflow: visible;
+    width: 80%;
+    height: 60%;
+  }
+}
+
+@media (max-width: 1240px) {
+  .main_container {
+    width: 70%;
+    height: 500px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .main_container {
+    width: 50%;
+    height: 500px;
+  }
+}
+
+@media (max-width: 770px) {
+  .main_wrap {
+    margin-top: 0px;
+  }
+}
+
+.OUTLINE {
+  stroke-linejoin: round;
+  stroke: #febe54;
+  stroke-width: 2;
+}
+
+.TEXT {
+  fill: #454343;
+  font-size: 14px;
+  text-anchor: middle;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.CD11110 {
+  fill: #ffffff;
+}
+.CD11110:hover {
+  fill: #febe54;
+}
+
+#CD11140 {
+  fill: #ffffff;
+}
+#CD11140:hover {
+  fill: #febe54;
+}
+
+#CD11170 {
+  fill: #ffffff;
+}
+#CD11170:hover {
+  fill: #febe54;
+}
+
+#CD11200 {
+  fill: #ffffff;
+}
+#CD11200:hover {
+  fill: #febe54;
+}
+
+#CD11215 {
+  fill: #ffffff;
+}
+#CD11215:hover {
+  fill: #febe54;
+}
+
+#CD11230 {
+  fill: #ffffff;
+}
+#CD11230:hover {
+  fill: #febe54;
+}
+
+#CD11260 {
+  fill: #ffffff;
+}
+#CD11260:hover {
+  fill: #febe54;
+}
+
+#CD11290 {
+  fill: #ffffff;
+}
+#CD11290:hover {
+  fill: #febe54;
+}
+
+#CD11305 {
+  fill: #ffffff;
+}
+#CD11305:hover {
+  fill: #febe54;
+}
+
+#CD11320 {
+  fill: #ffffff;
+}
+#CD11320:hover {
+  fill: #febe54;
+}
+
+#CD11350 {
+  fill: #ffffff;
+}
+#CD11350:hover {
+  fill: #febe54;
+}
+
+#CD11380 {
+  fill: #ffffff;
+}
+#CD11380:hover {
+  fill: #febe54;
+}
+
+#CD11410 {
+  fill: #ffffff;
+}
+#CD11410:hover {
+  fill: #febe54;
+}
+
+#CD11440 {
+  fill: #ffffff;
+}
+#CD11440:hover {
+  fill: #febe54;
+}
+
+#CD11470 {
+  fill: #ffffff;
+}
+#CD11470:hover {
+  fill: #febe54;
+}
+
+#CD11500 {
+  fill: #ffffff;
+}
+#CD11500:hover {
+  fill: #febe54;
+}
+
+#CD11530 {
+  fill: #ffffff;
+}
+#CD11530:hover {
+  fill: #febe54;
+}
+
+#CD11545 {
+  fill: #ffffff;
+}
+#CD11545:hover {
+  fill: #febe54;
+}
+
+#CD11560 {
+  fill: #ffffff;
+}
+#CD11560:hover {
+  fill: #febe54;
+}
+
+#CD11590 {
+  fill: #ffffff;
+}
+#CD11590:hover {
+  fill: #febe54;
+}
+
+#CD11620 {
+  fill: #ffffff;
+}
+#CD11620:hover {
+  fill: #febe54;
+}
+
+#CD11650 {
+  fill: #ffffff;
+}
+#CD11650:hover {
+  fill: #febe54;
+}
+
+#CD11680 {
+  fill: #ffffff;
+}
+#CD11680:hover {
+  fill: #febe54;
+}
+
+#CD11710 {
+  fill: #ffffff;
+}
+#CD11710:hover {
+  fill: #febe54;
+}
+
+#CD11740 {
+  fill: #ffffff;
+}
+#CD11740:hover {
+  fill: #febe54;
+}
+
+.LINE {
+  stroke-linejoin: round;
+  stroke: #ffffff;
+  stroke-width: 1;
+  fill: none;
+}
+.POINT {
+  stroke: #ffffff;
+  stroke-width: 1;
+  fill: #ffffff;
+}

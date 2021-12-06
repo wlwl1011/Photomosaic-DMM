@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Nanum";
+}
+
+li {
+  list-style: none;
+}
+
+a:link {
+  text-decoration: none;
+  cursor: default;
+}
+
+.wrap {
+  width: 1905px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1904px) {
+  .wrap {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
