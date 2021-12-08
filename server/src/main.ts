@@ -1,11 +1,14 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import express from 'express';
+import { join } from 'path';
 import { AppModule } from './app.module';
 const fs = require("fs");
 
 const httpsOptions = {
-  key: fs.readFileSync(__dirname+'/../key.pem'),
-  cert: fs.readFileSync(__dirname+'/../cert.pem'),
+  key: fs.readFileSync(__dirname+'/../../key.pem'),
+  cert: fs.readFileSync(__dirname+'/../../cert.pem'),
 };
 
 async function bootstrap() {
@@ -18,6 +21,9 @@ async function bootstrap() {
       whitelist: true,
     })
   )
+
+  // const apps: NestExpressApplication = await NestFactory.create<NestExpressApplication>(AppModule);
+  // apps.use('/public', express.static(join(__dirname, '../public')));
 
   app.enableCors({
     origin: '*',
