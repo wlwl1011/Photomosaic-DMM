@@ -51,9 +51,9 @@ constructor(
   }
 
   @Patch('change-image')
-  async change_image(@Request() request, @Res() response: Response, @UploadedFile() files: File[]){
-    console.log(files)
-    const uploadedFiles: string[] = this.userService.uploadFiles(files)
+  async change_image(@Request() request, @Res() response: Response, @UploadedFile() file: File[]){
+    console.log(file)
+    const uploadedFiles: string[] = this.userService.uploadFiles(file)
     if(uploadedFiles){
       response.status(201).json({ message: '성공'})
     }
