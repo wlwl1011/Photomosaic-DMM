@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,6 +8,7 @@ import { StoreController } from './store/store.controller';
 import { MenuByAreaController } from './menu-by-area/menu-by-area.controller';
 import { ReviewController } from './review/review.controller';
 import { SearchWordController } from './search-word/search-word.controller';
+import { UserController } from './user/user.controller';
 //SERVICE
 import { FavoriteService } from './favorite/favorite.service';
 import { StoreService } from './store/store.service';
@@ -21,11 +22,12 @@ import { ReviewLike } from './entities/review_like';
 import { Review } from './entities/review';
 import { SearchWord } from './entities/search-word';
 import { Store } from './entities/store';
-import { User } from './entities/user';
 
 import { ConfigModule } from '@nestjs/config';
 import *as ormconfig from '../ormconfig';
-import { appendFile } from 'fs';
+import { UserModule } from './user/user.module';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
 
 @Module({
   imports: [
@@ -34,9 +36,15 @@ import { appendFile } from 'fs';
       isGlobal:true
     }),
     TypeOrmModule.forRoot(ormconfig),
-    TypeOrmModule.forFeature([Store,Review,ReviewLike,MenuByArea,SearchWord,User,Favorite])
+    TypeOrmModule.forFeature([Store,Review,ReviewLike,MenuByArea,SearchWord,Favorite]),
+    UserModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '3600s' },
+    }),
   ],
-  controllers: [AppController, FavoriteController, StoreController, MenuByAreaController, ReviewController, SearchWordController],
+  
+  controllers: [AppController, FavoriteController, StoreController, MenuByAreaController, ReviewController, SearchWordController,UserController],
   providers: [AppService, StoreService, FavoriteService, MenuByAreaService, ReviewService, SearchWordService],
 })
 

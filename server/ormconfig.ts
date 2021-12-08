@@ -1,4 +1,4 @@
-import {TypeOrmModuleOptions} from '@nestjs/typeorm'
+import { TypeOrmModuleOptions } from '@nestjs/typeorm'
 import {Favorite} from './src/entities/favorite'
 import {MenuByArea} from './src/entities/menu-by-area'
 import {ReviewLike} from './src/entities/review_like'

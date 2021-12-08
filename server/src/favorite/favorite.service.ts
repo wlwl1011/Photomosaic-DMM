@@ -22,13 +22,7 @@ export class FavoriteService {
         //     .from(Favorite)
         //     .where({user_id:user_id , store_name:storeName })
         //     .execute()
-        // if(store.length===0){
-        //     throw new HttpException({
-        //         status: HttpStatus.NOT_FOUND,
-        //         data : null,
-        //         message: "Store doesn't exist",
-        //     }, 404);
-        // }
+       
         return {"data":null ,"message":"delete favorite success"}
     }
     

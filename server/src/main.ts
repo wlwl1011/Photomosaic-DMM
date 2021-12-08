@@ -1,5 +1,8 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import express from 'express';
+import { join } from 'path';
 import { AppModule } from './app.module';
 const fs = require("fs");
 
@@ -18,6 +21,9 @@ async function bootstrap() {
       whitelist: true,
     })
   )
+
+  // const apps: NestExpressApplication = await NestFactory.create<NestExpressApplication>(AppModule);
+  // apps.use('/public', express.static(join(__dirname, '../public')));
 
   app.enableCors({
     origin: '*',
