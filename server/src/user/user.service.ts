@@ -1,39 +1,107 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Res } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './user.entities';
-import { Body, Controller, Get, HttpCode, Post, Redirect } from '@nestjs/common';
+import { AbstractRepository, EntityRepository, Repository } from 'typeorm';
+import { response, Response } from 'express';
+import { User } from './../entities/user';
+import { JwtService } from '@nestjs/jwt';
+import { createImageURL } from 'src/middleware/multeroption';
 
 @Injectable()
+@EntityRepository()
 export class UserService {
     constructor(
+        private jwtService: JwtService,
         @InjectRepository(User)
         private userRepository: Repository<User>,
         ) {}
-    async login(email: string, password: string){
-        const userdata = {
-            email,
-            password
+        
+
+    async login(data): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { email: data.email, password: data.password } });
+        if(userdata){
+            const payload = { id: userdata.id, user_name: userdata.user_name, email: userdata.email, user_img: userdata.user_img, password: userdata.password };
+            return this.jwtService.sign(payload)
         }
-        const usercheck = await this.userRepository.findOne(userdata);
-        if(usercheck){
-            return Object.assign({
-                statusMsg: 'login success'
-            })
-        }
-            throw new NotFoundException("user not exist")
+            throw new NotFoundException("login fail")
     }
 
-    async signup(email: string, password: string, user_name: string, user_img: string ){
-        const userdata = { email, password, user_name, user_img }
-        const usercheck = await this.userRepository.findOne(email);
+    async signup(userdata: any): Promise<any>{
+        const usercheck = await this.userRepository.findOne({ where: { email: userdata.email }});
         if(!usercheck){
-            return 'sign up successfully'
+            await this.userRepository.save(userdata)
+            return true
+            // this.createQueryBuilder('User')
+            // .insert()
+            // .into(tables)
+            // .values(값)
+            // .where('user_name = :userdata.user_name', { user_name })
         }
-        return Object.assign({
-            statusMsg: 'user exists'
-        })
+        return false
     }
+    
+    async userinfo(data: string): Promise<any> {
+        return data
+    }
+
+    async changepassword(data: any, user: any): Promise<any> {
+        const { password } = data;
+        const userdata = await this.userRepository.findOne({ where: { email: user.email } });
+        if(password === userdata.password){
+            return false;
+        }
+        if(password !== userdata.password){
+            userdata.password = password
+            await this.userRepository.save(userdata)
+            return true
+        }
+    }
+
+    async changeusername(data: any, user: any): Promise<any> {
+        const { user_name } = data;
+        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
+        if(!userdata){
+            const useremail = await this.userRepository.findOne({ where: { email: user.email } });
+            useremail.user_name = user_name;
+            await this.userRepository.save(useremail);
+            return true;
+        }
+        if(userdata){
+            return false;
+        }
+    }
+
+    async delete_account(data: any, user: any): Promise<any> {
+        if(data.password !== user.password){
+            return 1;
+        }
+        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
+        console.log(userdata)
+        if(!userdata){
+            return false;
+        }
+        if(userdata){
+            await this.userRepository.delete(userdata.id);
+            return true;
+        }
+    }
+
+    async check_username(data: any): Promise<any> {
+        const userdata = await this.userRepository.findOne({ where: { user_name: data.user_name } });
+        if(!userdata){
+            return true;
+        }
+        return false;
+    }
+
+    public uploadFiles(files: File[]): string [] {
+            const generatedFiles: string [] = [];
+        
+              generatedFiles.push(createImageURL(files));
+            
+            return generatedFiles;
+    }
+
+
 
 
 }

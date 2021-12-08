@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "Ubuntu";
+  font-display: fallback;
+  src: url("./Ubuntu-MediumItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
