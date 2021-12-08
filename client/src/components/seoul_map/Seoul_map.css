@@ -1,12 +1,15 @@
 .main_wrap {
-  width: 1920px;
-  margin-top: 170px;
+  width: 100%;
+  margin: 170px 0;
 }
 
 .main_wrap,
 .main_container {
-  width: 100%;
   height: 500px;
+}
+
+.map_search_hidden {
+  position: relative;
 }
 
 .main_svg-map {
@@ -19,24 +22,6 @@
 .main_bottom-box {
   width: 100%;
   height: 700px;
-}
-
-@media (max-width: 1600px) {
-  .main_svg-map {
-    padding: 0 0 0 0;
-  }
-}
-
-@media (max-width: 1440px) {
-  .main_container {
-    width: 80%;
-    height: 500px;
-  }
-  .main_svg-map {
-    overflow: visible;
-    width: 80%;
-    height: 60%;
-  }
 }
 
 .OUTLINE {
@@ -117,7 +102,7 @@
   }
 }
 
-.closeBtn {
+.map_closeBtn {
   all: unset;
   background-color: none;
   position: absolute;
@@ -126,7 +111,7 @@
   cursor: pointer;
 }
 
-.modal {
+.map_modal {
   position: fixed;
   top: 60px;
   left: 0;
@@ -151,15 +136,15 @@
   }
 }
 
-.modal__overlay {
+.map_modal-overlay {
   width: 100%;
   height: 100%;
   position: absolute;
 }
 
-.modal__content {
+.map_modal-content {
   background-color: #fff;
-  padding: 80px 50px;
+  padding: 40px 50px;
   text-align: center;
   position: relative;
   width: 700px;
@@ -168,8 +153,56 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-.login_hidden {
+.map_modal-hidden {
   display: none;
+}
+
+.map_modal-title-box {
+  background-color: #fff;
+}
+
+.map_modal-title {
+  border-bottom: 2px solid rgb(221, 221, 221);
+}
+
+.map_list-container {
+  width: 100%;
+  height: 300px;
+  margin: 20px auto 0 auto;
+  border-radius: 15px;
+}
+
+.map_list-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100%;
+  width: 100%;
+  padding: 30px 15px;
+  overflow: scroll;
+}
+
+.map_list-box::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+/* ########################## 반응형 관리 영역 ########################## */
+
+@media (max-width: 1600px) {
+  .main_svg-map {
+    padding: 0 0 0 0;
+  }
+}
+
+@media (max-width: 1440px) {
+  .main_container {
+    width: 80%;
+    height: 500px;
+  }
+  .main_svg-map {
+    overflow: visible;
+    width: 80%;
+    height: 60%;
+  }
 }
 
 @media (max-width: 1240px) {
@@ -191,12 +224,37 @@
     margin-top: 0px;
   }
 
-  .modal {
+  .map_modal {
     top: 0px;
   }
 
-  .modal__content {
+  .map_modal-content {
     width: 500px;
     height: 500px;
+  }
+
+  .map_list-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .map_list-box {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .map_search_hidden {
+    position: static;
+  }
+}
+
+@media (max-width: 550px) {
+  .map_modal-content {
+    width: 400px;
+    height: 400px;
+  }
+
+  .map_list-container {
+    width: 300px;
+    height: 260px;
   }
 }
