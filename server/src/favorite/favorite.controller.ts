@@ -1,23 +1,23 @@
-import { Controller, Delete, Get, Header, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Header, Param, Post, Req } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
+import { Request } from 'express';
 
 @Controller('favorite')
 export class FavoriteController {
     constructor (private readonly FavoriteService: FavoriteService){}
 
     @Get('/list')
-    getList(){
-        return this.FavoriteService.getList()
-      
+    getList(@Req() request : Request){
+        return this.FavoriteService.getList(request.body) 
     }
     
     @Post('/add-favorite')
-    addFavorite(){
-        return this.FavoriteService.addFavorite()
+    addFavorite(@Req() request : Request ){
+        return this.FavoriteService.addFavorite(request.body)
     }
 
     @Delete('/:store_name')
-    deleteFavorite(){
-        return this.FavoriteService.deleteFavorite()
+    deleteFavorite(@Req() request : Request, @Param('store_name') storeName:string ){
+        return this.FavoriteService.deleteFavorite(request.body ,storeName)
     }
 }

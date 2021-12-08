@@ -18,7 +18,7 @@ const config:TypeOrmModuleOptions={
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
     entities: [Favorite,MenuByArea,ReviewLike,Review,SearchWord,Store,User],
-    synchronize: true,
+    synchronize: false,
     autoLoadEntities:true,
     logging:true,
 }
