@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
+import axios from "axios";
 
 interface Iprops {
   loginNone: string;
@@ -40,6 +41,21 @@ function Login(props: Iprops) {
     }
   }, [email, password]);
 
+  // api 연결
+  const handleLogin = async () => {
+    await axios.post(
+      "https://localhost:4000/user/login",
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+  };
+
   return (
     <>
       <div id="demo-modal" className={`login_modal ${props.loginNone}`}>
@@ -72,7 +88,9 @@ function Login(props: Iprops) {
                 {logFail ? "로그인이 실패되었습니다." : null}
               </h3>
             </div>
-            <button className="login_btn">로그인</button>
+            <button className="login_btn" onClick={handleLogin}>
+              로그인
+            </button>
             <div className="login_OAuth-box">
               <img className="login_OAuth" src="./oauth/naver.png" />
               <img className="login_OAuth" src="./oauth/google.jpeg" />

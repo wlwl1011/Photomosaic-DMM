@@ -4,7 +4,8 @@ import Footer from "../../components/footer/Footer";
 import Star_avg from "../../components/star/star_avg/Star_avg";
 import Store_list from "../../components/store_list/Store_list";
 import Kakao_map from "../../components/kakao_map/Kakao_map";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Store() {
   const [chMessage, setChMessage] = useState<boolean>(false);
@@ -18,6 +19,23 @@ function Store() {
       setMesNone("store_balloon-none");
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      await axios
+        .get(`https://localhost:4000/store/byId/1`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => console.log(res));
+      await axios
+        .get(`https://localhost:4000/review/byStoreId/1`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => console.log(res));
+    })();
+  }, []);
 
   return (
     <>
