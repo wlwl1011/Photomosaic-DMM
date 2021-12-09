@@ -12,57 +12,63 @@
 
 .menu_infor-box {
   display: flex;
+  align-items: center;
   width: 85%;
   height: 100%;
   margin: 0 auto;
-  /* background-color: #c3903e; */
 }
 
 .menu_infor-box1 {
   display: flex;
-  width: 45%;
+  width: 50%;
   height: 100%;
-  padding: 50px 0;
-  /* background-color: #ddb77a; */
 }
 
-.menu_infor-box2 {
+.menu_infor-map-box {
   display: flex;
-  align-items: center;
+
   justify-content: flex-end;
-  width: 55%;
+  width: 50%;
+
+  margin: 30px auto;
 
   /* background-color: #443113; */
 }
 
+.menu_infor-map {
+  width: 650px;
+  height: 400px;
+}
+
 .menu_infor-container-img {
   display: flex;
-  width: 100%;
+  width: 70%;
   align-items: center;
+  padding: 40px 20px;
 }
 
 .menu_infor-container-text {
-  height: 100%;
-  width: 285px;
   display: flex;
   flex-direction: column;
   align-content: flex-end;
-  padding-top: 25%;
+  padding-top: 36%;
+  width: 30%;
 }
 
 .menu_infor-img {
-  width: 95%;
-  height: 85%;
+  width: 100%;
+  height: 100%;
 }
 
 .menu_infor-text {
   padding-top: 40px;
   border-top: 5px solid black;
   font-size: 23px;
+  width: 80%;
 }
 
 .menu_infor-text-main {
-  font-size: 55px;
+  font-size: 40px;
 }
 
 .menu_infor-img-2 {
@@ -113,22 +119,17 @@
 }
 
 @media screen and (max-width: 1650px) {
-  .menu_infor-text {
-    font-size: 19px;
-  }
-  .menu_infor-text-main {
-    font-size: 41px;
-  }
-  .menu_infor-container-text {
-    width: 35%;
-  }
-
   .menu_result-box {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .menu_infor-map {
+    width: 550px;
+    height: 350px;
+  }
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 1500px) {
   .menu_infor-text {
     font-size: 15px;
   }
@@ -143,16 +144,18 @@
     flex-direction: column;
   }
   .menu_infor-box1 {
-    justify-content: center;
     width: 100%;
+    align-items: center;
+    flex-direction: column;
   }
   .menu_infor-container-img {
     width: 600px;
     height: 445px;
   }
   .menu_infor-container-text {
-    width: 150px;
-    padding-top: 290px;
+    width: 190px;
+    padding-top: 10px;
+    text-align: center;
   }
 
   .menu_infor-img-2 {
@@ -166,6 +169,7 @@
   }
   .menu_infor-text {
     font-size: 19px;
+    width: 100%;
   }
   .menu_infor-text-main {
     font-size: 39px;
@@ -182,6 +186,14 @@
 @media screen and (max-width: 1050px) {
   .menu_infor-container-img {
     width: 550px;
+  }
+  .menu_infor-map {
+    width: 400px;
+    height: 350px;
+  }
+  .menu_infor-map-box {
+    width: 100%;
+    justify-content: center;
   }
 }
 

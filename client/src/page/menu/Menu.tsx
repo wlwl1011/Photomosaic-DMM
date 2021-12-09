@@ -2,8 +2,8 @@ import "./Menu.css";
 import React, { useState } from "react";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
-import Star_avg from "../../components/star_avg/Star_avg";
 import Menu_result from "../../components/menu_result/Menu_result";
+import Kakao_map from "../../components/kakao_map/Kakao_map";
 
 function Menu() {
   // ******************************************************
@@ -36,11 +36,13 @@ function Menu() {
               </div>
               <div className="menu_infor-container-text">
                 <h4 className="menu_infor-text">종로의 대표 음식</h4>
-                <h1 className="menu_infor-text-main">생선구이</h1>
+                <h1 className="menu_infor-text-main">가자미구이</h1>
               </div>
             </aside>
-            <div className="menu_infor-box2">
-              <img className="menu_infor-img-2" src="./naver.png" />
+            <div className="menu_infor-map-box">
+              <div className="menu_infor-map">
+                <Kakao_map />
+              </div>
             </div>
           </div>
         </div>

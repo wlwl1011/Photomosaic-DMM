@@ -1,4 +1,4 @@
-import Star_avg from "../../components/star_avg/Star_avg";
+import Star_avg from "../star/star_avg/Star_avg";
 import "./Menu_result.css";
 
 // image, star 영역 디스플레이, 포지션 동적 관리

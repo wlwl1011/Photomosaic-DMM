@@ -1,10 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn,OneToMany } from 'typeorm';  
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn,OneToMany, BaseEntity } from 'typeorm';  
 import {Favorite} from './favorite'
 import { Review } from './review';
 import { ReviewLike } from './review_like';
 import { SearchWord } from './search-word';
 
-@Entity() export class User {     
+@Entity() export class User extends BaseEntity {
+
     @PrimaryGeneratedColumn()     
     id: number;      
     
@@ -37,5 +38,6 @@ import { SearchWord } from './search-word';
 
     @OneToMany(()=>ReviewLike , (reviewlike)=>reviewlike.user_id)
     reviewlike: ReviewLike[]
+    findOne: any;
 
 }
