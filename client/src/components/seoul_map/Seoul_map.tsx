@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Seoul_map.css";
 import Menu_list from "../menu_list/Menu_list";
+import axios from "axios";
 
 interface Iclose {
   close: string;
@@ -19,16 +20,26 @@ function Seoul_map() {
     local: "",
   });
 
-  const handleClick = (e: any) => {
+  const handleClick = async (e: any) => {
     let data = e.target;
-    // console.log(data)
-    console.log(data.getAttribute("values"));
+    //console.log("검사용", data);
+
     setHidden({
       close: "",
     });
     setLocal({
       local: data.getAttribute("values"),
     });
+
+    await axios
+      .get(
+        `https://localhost:4000/menu-by-area/${data.getAttribute("values")}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => console.log(res));
   };
   const handleCloseModal = () => {
     setHidden({

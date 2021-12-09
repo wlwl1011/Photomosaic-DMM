@@ -7,25 +7,28 @@ import { database } from 'ormconfig';
 
 @Injectable()
 export class MenuByAreaService {
-    constructor(
-        @InjectRepository(MenuByArea)
-        private MenuByAreaRepository: Repository<MenuByArea>,
-    ){}
+  constructor(
+    @InjectRepository(MenuByArea)
+    private MenuByAreaRepository: Repository<MenuByArea>,
+  ) {}
 
-    async menuByArea(area_name:string) {
-        const data=await this.MenuByAreaRepository.find({
-            where:{area_name:area_name}
-        })
+  async menuByArea(area_name: string) {
+    const data = await this.MenuByAreaRepository.find({
+      where: { area_name: area_name },
+    });
 
-        console.log(data);
+    console.log(data);
 
-        if(data.length===0){
-            throw new HttpException({
-                status: HttpStatus.NOT_FOUND,
-                data : null,
-                message: "Empty menu list",
-            }, 404);
-        }
-        return {"data":data, "message": "get favorite list successfully"}
-    } 
+    if (data.length === 0) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          data: null,
+          message: 'Empty menu list',
+        },
+        404,
+      );
+    }
+    return { data: data, message: 'get favorite list successfully' };
+  }
 }
