@@ -1,23 +1,27 @@
-import { Controller, Delete, Get, Header, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Header, Param, Post, Request } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
-import { Request } from 'express';
+import { UserService } from 'src/user/user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('favorite')
 export class FavoriteController {
-    constructor (private readonly FavoriteService: FavoriteService){}
-
+    
+    constructor (private readonly FavoriteService: FavoriteService , private jwtService: JwtService){}
+  
+    
     @Get('/list')
-    getList(@Req() request : Request){
-        return this.FavoriteService.getList(request.body) 
+    async getList(@Request() req){     
+        return this.FavoriteService.getList(req.user.id) 
     }
     
     @Post('/add-favorite')
-    addFavorite(@Req() request : Request ){
-        return this.FavoriteService.addFavorite(request.body)
+    addFavorite(@Request() req ){
+        console.log(req.user.id)
+        return this.FavoriteService.addFavorite(req.user.id, req.body)
     }
 
     @Delete('/:store_name')
-    deleteFavorite(@Req() request : Request, @Param('store_name') storeName:string ){
-        return this.FavoriteService.deleteFavorite(request.body ,storeName)
+    deleteFavorite(@Request() req, @Param('store_name') storeName:string ){
+        return this.FavoriteService.deleteFavorite(req.user.id ,storeName)
     }
 }

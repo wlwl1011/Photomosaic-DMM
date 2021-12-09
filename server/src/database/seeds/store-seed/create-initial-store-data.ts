@@ -1,6 +1,6 @@
 import { Connection } from "typeorm";
 import {Seeder,Factory} from "typeorm-seeding"
-import { Favorite } from "src/entities/favorite";
+import { Favorite } from "../../..//entities/favorite";
 import { MenuByArea } from "../../../entities/menu-by-area";
 import { Review } from "../../../entities/review";
 import { ReviewLike } from "../../../entities/review_like";
@@ -149,6 +149,28 @@ export class CreateInitialData implements Seeder {
                 comment:"맛잇어요!",
                 rating:7   
             },
+            
+        ])
+        .execute();
+
+        await connection
+        .createQueryBuilder()
+        .insert()
+        .into(Favorite)
+        .values([
+            {
+                user_id:1,
+                store_address:"asdf",
+                store_name:"생선구이가게",
+                store_img:"./store.jpg"    
+            },
+            {
+                user_id:1,
+                store_address:"asdf",
+                store_name:"생선구이가게2",
+                store_img:"./store.jpg"    
+            },
+            
             
         ])
         .execute();

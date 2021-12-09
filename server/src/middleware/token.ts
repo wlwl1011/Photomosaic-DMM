@@ -10,7 +10,7 @@ export class login implements NestMiddleware {
         private jwtService: JwtService ){}
 
        use(req: ReqCustomWithAuth, res: Response, next: NextFunction){
-
+        
         if(!req.headers.cookie){
             res.status(404).json({ message: 'not exist token'})
             next();
@@ -18,8 +18,6 @@ export class login implements NestMiddleware {
             const token = req.headers.cookie.split('=')[1];
             const userdata = this.jwtService.verify(token);
             req.user = { ...userdata};
-            
-            
             next();
         }
     }

@@ -28,6 +28,9 @@ import *as ormconfig from '../ormconfig';
 import { UserModule } from './user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth/constants';
+import { FavoriteModule } from './favorite/favorite.module';
+import { ReviewModule } from './review/review.module';
+import { SearchWordModule } from './search-word/search-word.module';
 
 @Module({
   imports: [
@@ -38,14 +41,17 @@ import { jwtConstants } from './auth/constants';
     TypeOrmModule.forRoot(ormconfig),
     TypeOrmModule.forFeature([Store,Review,ReviewLike,MenuByArea,SearchWord,Favorite]),
     UserModule,
+    FavoriteModule,
+    ReviewModule,
+    SearchWordModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '3600s' },
     }),
   ],
   
-  controllers: [AppController, FavoriteController, StoreController, MenuByAreaController, ReviewController, SearchWordController,UserController],
-  providers: [AppService, StoreService, FavoriteService, MenuByAreaService, ReviewService, SearchWordService],
+  controllers: [AppController, StoreController, MenuByAreaController, ReviewController,SearchWordController,UserController],
+  providers: [AppService, StoreService, MenuByAreaService],
 })
 
 

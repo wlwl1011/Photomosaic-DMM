@@ -13,7 +13,7 @@ export class Favorite {
   store_name: string;
 
   @Column()
-  address: string;
+  store_address: string;
 
   @Column()
   store_img: string;
