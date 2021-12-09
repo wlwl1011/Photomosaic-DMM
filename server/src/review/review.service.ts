@@ -53,7 +53,7 @@ export class ReviewService {
         }
         return {"data":null ,"message":"delete review success"}
     }
-
+    //!USER랑 리뷰좋아요 갯수 조인하기
     async getReview(storeId : number) {
         const data = await this.ReviewRepostory.find({where:{store_id:storeId}})
         if(data.length===0){

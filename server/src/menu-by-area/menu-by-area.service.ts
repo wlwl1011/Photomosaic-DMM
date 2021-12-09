@@ -19,7 +19,7 @@ export class MenuByAreaService {
 
         console.log(data);
 
-        if(!data){
+        if(data.length===0){
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
                 data : null,
