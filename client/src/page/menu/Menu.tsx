@@ -1,9 +1,10 @@
 import "./Menu.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Menu_result from "../../components/menu_result/Menu_result";
 import Kakao_map from "../../components/kakao_map/Kakao_map";
+import axios from "axios";
 
 function Menu() {
   // ******************************************************
@@ -24,6 +25,16 @@ function Menu() {
     }
   };
   // ******************************************************
+  useEffect(() => {
+    (async () => {
+      await axios
+        .get(`https://localhost:4000/store/byMenu/생선구이`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => console.log(res));
+    })();
+  }, []);
   return (
     <>
       <Header handleImg={handleImg} />
