@@ -50,7 +50,7 @@ import { SearchWordModule } from './search-word/search-word.module';
     }),
   ],
   
-  controllers: [AppController, StoreController, MenuByAreaController, ReviewController,SearchWordController,UserController],
+  controllers: [AppController, StoreController,FavoriteController, MenuByAreaController, ReviewController,SearchWordController,UserController],
   providers: [AppService, StoreService, MenuByAreaService],
 })
 

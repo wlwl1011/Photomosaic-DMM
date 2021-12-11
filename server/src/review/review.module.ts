@@ -7,7 +7,7 @@ import { Review } from 'src/entities/review';
 import { ReviewService } from './review.service';
 import { ReviewController } from './review.controller';
 import { ReviewLike } from 'src/entities/review_like';
-
+import { RequestMethod } from '@nestjs/common';
 
 @Module({
     imports:[
@@ -23,7 +23,8 @@ import { ReviewLike } from 'src/entities/review_like';
 
 export class ReviewModule implements NestModule{
     configure(consumer: MiddlewareConsumer) {
-      consumer.apply(login) 
+      consumer.apply(login).exclude(
+        { path: 'review/byStoreId/:store_id', method: RequestMethod.GET })
         .forRoutes(ReviewController);
     }
 }

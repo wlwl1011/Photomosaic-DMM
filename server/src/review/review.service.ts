@@ -53,15 +53,28 @@ export class ReviewService {
         }
         return {"data":null ,"message":"delete review success"}
     }
-
+    //!USER랑 리뷰좋아요 갯수 조인하기
     async getReview(storeId : number) {
-        const data = await this.ReviewRepostory.find({where:{store_id:storeId}})
+        // const data = await this.ReviewRepostory.find({where:{store_id:storeId}})
+        const query = `Select review.id,review.comment,review.rating,review.created_at,review.user_id,user.user_name, user.user_img 
+                        FROM review 
+                        INNER JOIN user ON user.id=review.user_id 
+                        WHERE review.store_id=${storeId}`
+                        
+        const entityManager = getManager();
+        const data = await entityManager.query(query)
+        
         if(data.length===0){
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
                 data : null,
                 message: "empty review",
             }, 404);
+        }
+        for(let i=0;i<data.length;i++){
+            let data2 = await entityManager.query(`Select COUNT(review_like.review_id) AS num_review_like FROM review_like WHERE review_id=${data[i].id}`)
+            console.log(data2)
+            data[i].num_review_like = Number(data2[0].num_review_like);
         }
         return {"data":data , "message":"get review successully"}
     }
