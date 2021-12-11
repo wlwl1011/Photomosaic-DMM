@@ -10,7 +10,7 @@ export class FavoriteController {
   
     
     @Get('/list')
-    async getList(@Request() req){     
+    getList(@Request() req){       
         return this.FavoriteService.getList(req.user.id) 
     }
     
