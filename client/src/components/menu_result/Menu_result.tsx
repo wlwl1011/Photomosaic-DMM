@@ -13,7 +13,7 @@ function Menu_result(props: Iprops) {
       <li className="menu_result-list">
         <div className={`menu_result-img-box ${props.imageBox}`}>
           <div className={`menu_result-star-box ${props.starNone}`}>
-            <Star_avg />
+            <Star_avg avg_rating={0} />
           </div>
           <img className="menu_result-img" src="./jongro.jpeg" />
         </div>

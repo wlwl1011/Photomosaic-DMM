@@ -12,7 +12,7 @@ function Mypage_review(props: Iprops) {
         <div className="mypage_review_box">
           <div className="mypage_review_box">
             <h1 className="mypage_review_title">대박난 종로 닭</h1>
-            <Star_avg />
+            <Star_avg avg_rating={0} />
           </div>
           <span className="mypage_review_day">2021-12-03</span>
         </div>

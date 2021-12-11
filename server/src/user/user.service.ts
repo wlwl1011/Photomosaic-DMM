@@ -27,6 +27,7 @@ export class UserService {
         email: userdata.email,
         user_img: userdata.user_img,
         password: userdata.password,
+        created_at:userdata.created_at
       };
       return this.jwtService.sign(payload);
     }

@@ -15,7 +15,7 @@ function Mypage_fav(props: Iprops) {
               <h1 className="mypage_fav-title">이거시 구이</h1>
               <span className="mypage_fav-text-day">2021-12-03</span>
             </div>
-            <Star_avg />
+            <Star_avg avg_rating={0} />
             <h3 className="mypage_fav-text">서울시 종로구 5가 1231-2</h3>
           </div>
         </div>
