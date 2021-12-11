@@ -8,39 +8,38 @@ import { useState, useEffect, MouseEventHandler } from "react";
 import axios from "axios";
 import Login from "../../components/login/Login";
 
-
 function Store() {
   const [chMessage, setChMessage] = useState<boolean>(false);
   const [mesNone, setMesNone] = useState<string>("");
-  const [count,setCount]=useState<number>(0)
-  const [addFav,setAddFav]=useState<boolean>(false);
-  const [reviewlike,setReviewLike]=useState<boolean>(false);
+  const [count, setCount] = useState<number>(0);
+  const [addFav, setAddFav] = useState<boolean>(false);
+  const [reviewlike, setReviewLike] = useState<boolean>(false);
 
-  type Store={
-    address: string,
-    avg_rating: number,
-    created_at: string,
-    id: number,
-    menu_name: string,
-    open_time: string,
-    phone_number: string,
-    store_img: string,
-    store_name: string,
-    updated_at: string,
-  }
+  type Store = {
+    address: string;
+    avg_rating: number;
+    created_at: string;
+    id: number;
+    menu_name: string;
+    open_time: string;
+    phone_number: string;
+    store_img: string;
+    store_name: string;
+    updated_at: string;
+  };
 
-  type Review={
-    id: number; 
-    user_id:number,
-    comment: string; 
-    rating: number; 
-    created_at: string; 
-    user_name: string; 
-    user_img: string; 
+  type Review = {
+    id: number;
+    user_id: number;
+    comment: string;
+    rating: number;
+    created_at: string;
+    user_name: string;
+    user_img: string;
     num_review_like: number;
-  }
+  };
 
-  const [StoreInfo,setStoreInfo] = useState<Store>({
+  const [StoreInfo, setStoreInfo] = useState<Store>({
     address: "",
     avg_rating: 0,
     created_at: "",
@@ -52,8 +51,8 @@ function Store() {
     store_name: "",
     updated_at: "",
   });
-  const [ReviewInfo,setReviewInfo] = useState<Review[]>([]);
-  const [UserId,setUserId] = useState<number>(0)
+  const [ReviewInfo, setReviewInfo] = useState<Review[]>([]);
+  const [UserId, setUserId] = useState<number>(0);
 
   const handleImg = () => {
     setChMessage(!chMessage);
@@ -71,7 +70,7 @@ function Store() {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
-        .then((res) =>{ 
+        .then((res) => {
           setStoreInfo(res.data.data);
         });
 
@@ -80,62 +79,71 @@ function Store() {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
-        .then((res) =>{
+        .then((res) => {
           setReviewInfo(res.data.data);
         });
-      if(document.cookie.length!==0){
+      if (document.cookie.length !== 0) {
         await axios
           .get(`https://localhost:4000/user/userinfo/userdata`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
-          .then((res)=>{
-            setUserId(res.data.data.id)
-          })
+          .then((res) => {
+            setUserId(res.data.data.id);
+          });
       }
     })();
-    
-  }, [count,addFav,reviewlike]);
+  }, [count, addFav, reviewlike]);
 
-//!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
-  const  favoriteHandler = async() =>{
+  //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
+  const favoriteHandler = async () => {
     await axios
-        .post(`https://localhost:4000/favorite/add-favorite`,
+      .post(
+        `https://localhost:4000/favorite/add-favorite`,
         {
-            store_address:StoreInfo.address,
-            store_name:StoreInfo.store_name,
-            store_img:StoreInfo.store_img
-        }
-        ,{
+          store_address: StoreInfo.address,
+          store_name: StoreInfo.store_name,
+          store_img: StoreInfo.store_img,
+        },
+        {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        })
-        .then((res) =>{ 
-          console.log(res)
-          setAddFav(true);
-        });
-  }
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setAddFav(true);
+      });
+  };
 
-  const deleteReviewHandler = async()=>{
-    await axios.delete(`https://localhost:4000/review/${StoreInfo.id}`, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      //console.log(res)
-      setCount(count+1);
-    });
-  }
+  const deleteReviewHandler = async () => {
+    await axios
+      .delete(`https://localhost:4000/review/${StoreInfo.id}`, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
+      .then((res) => {
+        //console.log(res)
+        setCount(count + 1);
+      });
+  };
 
-  const reviewLikeHandler = async(review_id:number)=>{
-    await axios.post(`https://localhost:4000/review/like/${review_id}`, {},{
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      console.log(res)
-      setCount(count+1);
-    });
-  }
-  console.log('cookie',document.cookie.length);
+  const reviewLikeHandler = async (review_id: number) => {
+    await axios
+      .post(
+        `https://localhost:4000/review/like/${review_id}`,
+        {},
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setCount(count + 1);
+      });
+  };
+  console.log("cookie", document.cookie.length);
 
   return (
     <>
@@ -151,21 +159,34 @@ function Store() {
                 <div className="store_tx-title-box">
                   <div className="store_tx-box">
                     <h1 className="store_tx-title">{StoreInfo.store_name}</h1>
-                    <Star_avg avg_rating={StoreInfo.avg_rating}/>
+                    <Star_avg avg_rating={StoreInfo.avg_rating} />
                   </div>
                   <div className="store_tx-icon-box">
-                    <img className="store_tx-icon" src="./store/heart.svg" onClick={favoriteHandler}/>
-                    <img className="store_tx-icon" src="./store/edit.svg" />
+                    <img
+                      className="store_tx-icon"
+                      src="/store/heart.svg"
+                      onClick={favoriteHandler}
+                    />
+                    <img className="store_tx-icon" src="/store/edit.svg" />
                   </div>
                 </div>
                 <div className="store_tx-info-box">
                   <h3 className="store_tx-info-text">
-                    주소: {StoreInfo.address!==undefined ? StoreInfo.address : null}
+                    주소:{" "}
+                    {StoreInfo.address !== undefined ? StoreInfo.address : null}
                   </h3>
                   <h3 className="store_tx-info-text">
-                    영업시간: {StoreInfo.open_time!==undefined ? StoreInfo.open_time : null}
+                    영업시간:{" "}
+                    {StoreInfo.open_time !== undefined
+                      ? StoreInfo.open_time
+                      : null}
                   </h3>
-                  <h3 className="store_tx-info-text">연락처: {StoreInfo.phone_number!==undefined ? StoreInfo.phone_number : null}</h3>
+                  <h3 className="store_tx-info-text">
+                    연락처:{" "}
+                    {StoreInfo.phone_number !== undefined
+                      ? StoreInfo.phone_number
+                      : null}
+                  </h3>
                 </div>
                 <div className="store_tx-btn-box">
                   <button className="store-btn">대중교통 길찾기</button>
@@ -181,11 +202,17 @@ function Store() {
               <span>리뷰 ({ReviewInfo.length})</span>
             </div>
             <ul className="store_review_ul-box">
-            {
-              ReviewInfo.map((el: Review)=>{
-                return <Store_list mesNone={mesNone} ReviewInfo={el} UserId={UserId} deleteReviewHandler={deleteReviewHandler} reviewLikeHandler={reviewLikeHandler} />
-              })
-            }
+              {ReviewInfo.map((el: Review) => {
+                return (
+                  <Store_list
+                    mesNone={mesNone}
+                    ReviewInfo={el}
+                    UserId={UserId}
+                    deleteReviewHandler={deleteReviewHandler}
+                    reviewLikeHandler={reviewLikeHandler}
+                  />
+                );
+              })}
             </ul>
           </div>
         </section>
@@ -196,4 +223,3 @@ function Store() {
 }
 
 export default Store;
-
