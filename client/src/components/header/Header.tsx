@@ -60,48 +60,53 @@ function Header_Off(props: Iprops) {
         <nav className="header_nav header_container">
           <div className="header_box1"></div>
           <a href="#" className="header_title header_box2">
-            Yummy <img className="header_logo" src="./logo.svg" /> Seoul
+            Yummy <img className="header_logo" src="/logo.svg" /> Seoul
           </a>
           <div className={`header__menu ${hidden} header_box3`}>
             <ul className="header__list header_grid">
-              <li className="header__item" onClick={() => handleLgoin("")}>
-                <a href="#" className="header__link">
-                  <img className="header_icon-size" src="./menu/signin.svg" />
-                  로그인
-                </a>
-              </li>
-              <li className="header__item" onClick={() => handleSignup("")}>
-                <a href="#" className="header__link">
+              <li className="header__item">
+                <div className="header__link">
                   <img
+                    onClick={() => handleLgoin("")}
                     className="header_icon-size"
-                    src="./menu/user-plus.svg"
+                    src="/menu/signin.svg"
                   />
-                  회원가입
-                </a>
+                  <h4 onClick={() => handleLgoin("")}>로그인</h4>
+                </div>
               </li>
               <li className="header__item">
-                <a href="#" className="header__link">
+                <div className="header__link">
+                  <img
+                    onClick={() => handleSignup("")}
+                    className="header_icon-size"
+                    src="/menu/user-plus.svg"
+                  />
+                  <h4 onClick={() => handleSignup("")}>회원가입</h4>
+                </div>
+              </li>
+              <li className="header__item">
+                <div className="header__link">
                   <label
                     htmlFor="search_modal"
                     className="search_label-box"
                     onClick={handleSearch}
                   >
                     검색
-                    <img className="header_icon-size" src="./menu/search.svg" />
+                    <img className="header_icon-size" src="/menu/search.svg" />
                   </label>
-                </a>
+                </div>
 
                 <img
                   onClick={handleMenuOff}
                   className="header_close-icon header_icon-size"
-                  src="./search/close_tap.svg"
+                  src="/search/close_tap.svg"
                 />
               </li>
             </ul>
           </div>
           <div>
             <div className="header__toggle" onClick={handleMenuOn}>
-              <img className="header_icon-size" src="./menu/apps.svg" />
+              <img className="header_icon-size" src="/menu/apps.svg" />
             </div>
           </div>
         </nav>

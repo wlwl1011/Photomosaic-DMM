@@ -4,7 +4,15 @@ import Footer from "../../components/footer/Footer";
 import Mypage_review from "../../components/mypage_review/Mypage_review";
 import Mypage_fav from "../../components/mypage_fav/Mypage_fav";
 import Mypage_empty from "../../components/mypage_empty/Mypage_empty";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface user_info {
+  user_name: string;
+  created_at: string;
+  user_img: string;
+}
+
 function Mypage() {
   const handleImg = () => {};
   // empty 빈 화면 출력 관리
@@ -18,6 +26,12 @@ function Mypage() {
   const [revselect, setRevSelect] = useState<string>("");
   const [favselect, setFavSelect] = useState<string>("");
 
+  // 유저 정보
+  const [userInfo, setUserInfo] = useState<user_info>({
+    user_name: "",
+    created_at: "",
+    user_img: "",
+  });
   const handleFav = () => {
     setEmptyNone("empty_none");
     setReviewNone("review_none");
@@ -33,12 +47,31 @@ function Mypage() {
     setRevSelect("mypage_select_review-check");
     setFavSelect("");
   };
+
+  useEffect(() => {
+    (async () => {
+      const userData = await axios
+        .get(`https://localhost:4000/user/userinfo/userdata`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => console.log(res));
+
+      const reviewData = await axios
+        .get(`https://localhost:4000/review/myreview `, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => console.log(res));
+    })();
+  });
+
   return (
     <>
       <Header handleImg={handleImg} />
       <section className="mypage_info_container">
         <div className="mypage_info_box">
-          <img className="mypage_info_img" src="./store/model.jpeg" />
+          <img className="mypage_info_img" src="/store/model.jpeg" />
           <div className="mypage_info_text-box">
             <h1 className="mypage_info_title">California</h1>
             <span className="mypage_info_sign">가입일자</span>

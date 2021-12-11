@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./Star_avg.css";
 
 interface Iprops {
-  avg_rating:number
- }
+  avg_rating: number;
+}
 
 function Star_avg(props : Iprops) {
   console.log(props.avg_rating)

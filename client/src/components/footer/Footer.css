@@ -111,6 +111,9 @@
   .footer_box3 {
     width: 156px;
   }
+  .footer_box1 {
+    font-size: 27px;
+  }
 }
 
 @media screen and (max-width: 770px) {

@@ -3,49 +3,51 @@ import "./Seoul_map.css";
 import Menu_list from "../menu_list/Menu_list";
 import axios from "axios";
 
-interface Iclose {
-  close: string;
-}
-
-interface Ilocal {
-  local: string;
+interface menu_list {
+  area_name: string;
+  comment: string;
+  menu_img: string;
+  menu_name: string;
 }
 
 function Seoul_map() {
-  const [hidden, setHidden] = useState<Iclose>({
-    close: "map_modal-hidden",
-  });
+  const [hidden, setHidden] = useState<string>("map_modal-hidden");
+  const [local, setLocal] = useState<string>("");
+  const [empty, setEmpty] = useState<boolean>(true);
+  const [gridNone, setGridNone] = useState<string>("map_list-box-none");
 
-  const [local, setLocal] = useState<Ilocal>({
-    local: "",
-  });
+  const [menuData, setMenuData] = useState<menu_list[]>([]);
+
+  const handleCloseModal = () => {
+    setHidden("map_modal-hidden");
+    setMenuData([]);
+    setEmpty(true);
+    setGridNone("map_list-box-none");
+  };
 
   const handleClick = async (e: any) => {
     let data = e.target;
     //console.log("검사용", data);
 
-    setHidden({
-      close: "",
-    });
-    setLocal({
-      local: data.getAttribute("values"),
-    });
+    setHidden("");
+    setLocal(data.getAttribute("values"));
 
-    await axios
-      .get(
-        `https://localhost:4000/menu-by-area/${data.getAttribute("values")}`,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then((res) => console.log(res));
+    const menu = await axios.get(
+      `https://localhost:4000/menu-by-area/${data.getAttribute("values")}`,
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+
+    if (menu) {
+      setGridNone("");
+      setEmpty(false);
+      setMenuData(menu.data.data);
+    }
   };
-  const handleCloseModal = () => {
-    setHidden({
-      close: "map_modal-hidden",
-    });
-  };
+
+  console.log(menuData);
 
   return (
     <div className={`main_wrap`}>
@@ -338,21 +340,28 @@ function Seoul_map() {
           </g>
         </svg>
       </aside>
-      <div className={`map_modal ${hidden.close}`}>
+      <div className={`map_modal ${hidden}`}>
         <div className="map_modal-overlay"></div>
         <div className="map_modal-content">
           <button className="map_closeBtn" onClick={handleCloseModal}>
             ❌
           </button>
           <div className="map_modal-title-box">
-            <h1>{`${local.local}`}</h1>
+            <h1>{`${local}`}</h1>
             <h2 className="map_modal-title">대표 음식 👍 </h2>
           </div>
           <section className="map_list-container">
-            <ul className="map_list-box">
-              <Menu_list />
-              <Menu_list />
-              <Menu_list />
+            <ul className={`map_list-box ${gridNone}`}>
+              {empty ? (
+                <div className="map_list-empty-box">
+                  <img className="map_list-empty-img" src="/empty_local.png" />
+                  <h1>해당 지역구는 대표 음식이 없습니다.</h1>
+                </div>
+              ) : (
+                menuData.map((item: menu_list) => (
+                  <Menu_list menu_list={item} />
+                ))
+              )}
             </ul>
           </section>
         </div>

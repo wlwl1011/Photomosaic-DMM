@@ -39,7 +39,7 @@ function Search(props: Iprops) {
                 <label htmlFor="search_modal">
                   <img
                     className="search_container_close"
-                    src="./search/close_tap.svg"
+                    src="/search/close_tap.svg"
                     onClick={props.handleSearch}
                   />
                 </label>
@@ -53,12 +53,12 @@ function Search(props: Iprops) {
                         {list ? (
                           <img
                             className="search_icon-arrow"
-                            src="./search/arrow-up.svg"
+                            src="/search/arrow-up.svg"
                           />
                         ) : (
                           <img
                             className="search_icon-arrow"
-                            src="./search/arrow-down.svg"
+                            src="/search/arrow-down.svg"
                           />
                         )}
                       </span>
@@ -88,7 +88,7 @@ function Search(props: Iprops) {
                       placeholder="필터를 선택하여 검색어를 입력해주세요"
                     />
                     <div className="search_icon-box">
-                      <img className="search_icon" src="./search/search.svg" />
+                      <img className="search_icon" src="/search/search.svg" />
                     </div>
                   </div>
                 </nav>

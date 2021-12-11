@@ -1,0 +1,44 @@
+.render_intro_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: end;
+  height: 650px;
+  padding-bottom: 100px;
+  align-items: center;
+  background-color: #febe54;
+}
+
+.render_intro_title-box {
+  padding-bottom: 200px;
+  text-align: center;
+}
+
+.render_intro_title {
+  font-family: "Jua";
+  font-size: 45px;
+  color: rgb(254, 253, 253);
+}
+
+.render_intro_box {
+  position: relative;
+}
+
+.balloon_03 {
+  position: absolute;
+  margin: 50px;
+  width: 200px;
+  height: 100px;
+  background: #333333;
+  border-radius: 150px;
+}
+.balloon_03:after {
+  border-top: 25px solid #333333;
+  border-left: 25px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: -14px;
+}
