@@ -51,11 +51,11 @@ function Store() {
                 <div className="store_tx-title-box">
                   <div className="store_tx-box">
                     <h1 className="store_tx-title">전주식당</h1>
-                    <Star_avg />
+                    <Star_avg avg_rating={0} />
                   </div>
                   <div className="store_tx-icon-box">
-                    <img className="store_tx-icon" src="./store/heart.svg" />
-                    <img className="store_tx-icon" src="./store/edit.svg" />
+                    <img className="store_tx-icon" src="/store/heart.svg" />
+                    <img className="store_tx-icon" src="/store/edit.svg" />
                   </div>
                 </div>
                 <div className="store_tx-info-box">

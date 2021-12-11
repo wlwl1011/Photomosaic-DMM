@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 interface Iprops {
@@ -13,6 +14,8 @@ interface Infor {
 }
 
 function Login(props: Iprops) {
+  const history = useHistory();
+
   const [infor, setInfor] = useState<Infor>({
     email: "",
     password: "",
@@ -43,17 +46,28 @@ function Login(props: Iprops) {
 
   // api 연결
   const handleLogin = async () => {
-    await axios.post(
-      "https://localhost:4000/user/login",
-      {
-        email: email,
-        password: password,
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    );
+    const loginData = await axios
+      .post(
+        "https://localhost:4000/user/login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .catch((err) => {
+        setLogFail(true);
+        console.log("🚫 Not Found 🚫", err);
+      });
+
+    if (loginData) {
+      setLogFail(false);
+      // window.location.href: 현 url 주소
+      window.location.replace(window.location.href);
+    }
   };
 
   return (
@@ -92,9 +106,9 @@ function Login(props: Iprops) {
               로그인
             </button>
             <div className="login_OAuth-box">
-              <img className="login_OAuth" src="./oauth/naver.png" />
-              <img className="login_OAuth" src="./oauth/google.jpeg" />
-              <img className="login_OAuth" src="./oauth/kakao.svg" />
+              <img className="login_OAuth" src="/oauth/naver.png" />
+              <img className="login_OAuth" src="/oauth/google.jpeg" />
+              <img className="login_OAuth" src="/oauth/kakao.svg" />
             </div>
           </section>
         </div>
