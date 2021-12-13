@@ -8,7 +8,7 @@ function Main() {
 
   return (
     <>
-      <Header handleImg={handleImg} />
+      <Header handleImg={handleImg} isLogin={true}/>
       <Seoul_map />
       <Footer />
     </>

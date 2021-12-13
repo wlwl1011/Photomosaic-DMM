@@ -7,6 +7,7 @@ import Login from "../login/Login";
 
 interface Iprops {
   handleImg: () => void;
+  isLogin : boolean
 }
 
 function Header_Off(props: Iprops) {
@@ -24,9 +25,6 @@ function Header_Off(props: Iprops) {
   // 검색 모달 right -50% 좌표 주기
   const [chRight, setChRight] = useState<boolean>(true);
   const [right, setRight] = useState<string>("");
-
-  // 토큰 유무 관리
-  const [token, setToken] = useState<boolean>(false);
 
   // 태블릿 스마트폰 버전 함수
   const handleMenuOn = () => {
@@ -56,9 +54,7 @@ function Header_Off(props: Iprops) {
     setSignNone(e);
   };
 
-  const handleToken = (e: boolean) => {
-    setToken(e);
-  };
+
 
   return (
     <>
@@ -70,7 +66,7 @@ function Header_Off(props: Iprops) {
           </a>
           <div className={`header__menu ${hidden} header_box3`}>
             <ul className="header__list header_grid">
-              {token ? (
+              {props.isLogin ? (
                 <li className="header__item">
                   <div className="header__link">
                     <img
@@ -93,7 +89,7 @@ function Header_Off(props: Iprops) {
                   </div>
                 </li>
               )}
-              {token ? (
+              {props.isLogin ? (
                 <li className="header__item">
                   <div className="header__link">
                     <img
@@ -149,7 +145,6 @@ function Header_Off(props: Iprops) {
       <Login
         loginNone={loginNone}
         handleLgoin={handleLgoin}
-        handleToken={handleToken}
       />
     </>
   );
