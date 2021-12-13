@@ -20,7 +20,6 @@ export class UserService {
   ) {}
 
   async login(data): Promise<any> {
-    console.log(data);
     const userdata = await this.userRepository.findOne({
       where: { email: data.email, password: data.password },
     });
@@ -49,16 +48,16 @@ export class UserService {
         return token;
     }
 
-    async signup(data: any): Promise<any>{
-        const usercheck = await this.userRepository.findOne({ where: { email: data.email }});
-        if(!usercheck){
-            await this.userRepository.save(data)
+    async signup(data: any, image: string): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { email: data.email }});
+        if(!userdata){
+            await this.userRepository.save({
+              email: data.email,
+              password: data.password,
+              user_name: data.user_name,
+              user_img: image
+            })
             return true
-            // this.createQueryBuilder('User')
-            // .insert()
-            // .into(tables)
-            // .values(값)
-            // .where('user_name = :userdata.user_name', { user_name })
         }
         return false
     }
@@ -102,7 +101,9 @@ export class UserService {
       const useremail = await this.userRepository.findOne({
         where: { email: user.email },
       });
-      useremail.user_name = user_name;
+
+      useremail.user_name = String(user_name);
+
       await this.userRepository.save(useremail);
       return true;
     }
@@ -120,7 +121,6 @@ export class UserService {
         const userdata = await this.userRepository.findOne({
       where: { user_name: user.user_name },
     });
-    console.log(userdata);
     if (!userdata) {
       return false;
     }
@@ -145,11 +145,11 @@ export class UserService {
         }
     }
 
-    async sign_image(data: any, image: any): Promise<any>{
-        const userdata = await this.userRepository.findOne({ where: { user_name: data.user_name } });
-        userdata.user_img = image;
-        await this.userRepository.save(userdata);
-    }
+    // async sign_image(data: any, image: string): Promise<any>{
+    //     const userdata = await this.userRepository.findOne({ where: { user_name: data.user_name } });
+    //     userdata.user_img = image;
+    //     await this.userRepository.save(userdata);
+    // }
 
     async delete_image(data: any, user: any): Promise<any>{
         const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
