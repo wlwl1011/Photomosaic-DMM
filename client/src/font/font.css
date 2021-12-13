@@ -13,3 +13,18 @@
   font-weight: 100;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Nanum_bolder";
+  font-display: fallback;
+  src: url("./NanumSquare_acEB.woff") format("woff");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Jua";
+  font-display: fallback;
+  src: url("./Jua.woff") format("woff");
+  font-weight: 1000;
+  font-style: small;
+}

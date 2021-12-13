@@ -5,12 +5,12 @@ import {StoreService} from './store.service'
 export class StoreController {
     constructor(private readonly StoreService: StoreService ){}
 
-    @Get()
-    getAll() :{} {
-        return this.StoreService.getAll()
+    @Get('byMenu/:menu_name')
+    getAll(@Param('menu_name') menu_name:string) :{} {
+        return this.StoreService.getAll(menu_name)
     }
 
-    @Get(':id')
+    @Get('byId/:id')
     getOne(@Param('id') storeId : string){
         return this.StoreService.getOne(storeId)
     }

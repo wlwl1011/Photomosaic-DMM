@@ -9,6 +9,7 @@ import { NestFactory } from '@nestjs/core';
 @Injectable()
 export class login implements NestMiddleware {
     constructor(
+
         private jwtService: JwtService,
         private userService: UserService ){}
 
@@ -16,6 +17,7 @@ export class login implements NestMiddleware {
         if(!req.headers.cookie){
             res.status(404).json({ message: 'not exist token'})
         } else {
+
             const headers = req.headers.cookie.split(';')[1];
             if(!headers){
                 const refreshtoken = req.headers.cookie.split('jwt1')[1];
@@ -36,7 +38,6 @@ export class login implements NestMiddleware {
                 next();
                 // accesstoken이 있을때
             }
-            
         }
     }
 }
