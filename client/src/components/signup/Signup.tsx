@@ -19,6 +19,7 @@ interface UserName {
 }
 
 function Signup(props: Iprops) {
+  const [proImage, setProImage] = useState<undefined | string>(undefined);
   const [image, setImage] = useState<File | string | Blob>("");
   const [pwConfirm, setPwConfirm] = useState<boolean>(false);
   const [pwCheck, setPwCheck] = useState<boolean>(false);
@@ -57,6 +58,11 @@ function Signup(props: Iprops) {
   // 프로필 이미지 등록하는 함수
   const handleImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    const imageUrl = URL.createObjectURL(file);
+    //console.log(imageUrl, typeof imageUrl);
+    // 이래 찍힘 blob:http://localhost:3000/2091452d-c3e9-4d62-9a47-4b01e3069394
+    setProImage(imageUrl);
 
     if (target.files) {
       const uploadFile = target.files[0];
@@ -105,7 +111,7 @@ function Signup(props: Iprops) {
     formData.append("password", password);
     formData.append("file", image);
 
-    if (pwConfirm && userCheck) {
+    if (pwConfirm && userCheck && !pwCheck) {
       await axios
         .post("https://localhost:4000/user/signup", formData, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -167,7 +173,7 @@ function Signup(props: Iprops) {
             <h1 className="signup_title">회원가입</h1>
 
             <div className="signup_container">
-              <img className="signup_image-box" src={""}></img>
+              <img className="signup_image-box" src={proImage}></img>
             </div>
             <form>
               <div className="signup_image-label">

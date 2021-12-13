@@ -10,10 +10,10 @@ import axios from "axios";
 function Store() {
   const [chMessage, setChMessage] = useState<boolean>(false);
   const [mesNone, setMesNone] = useState<string>("");
-  const [count,setCount]=useState<number>(0)
-  const [addFav,setAddFav]=useState<boolean>(false);
-  const [reviewlike,setReviewLike]=useState<boolean>(false);
-  const [UserId,setUserId] = useState<number>(0)
+  const [count, setCount] = useState<number>(0);
+  const [addFav, setAddFav] = useState<boolean>(false);
+  const [reviewlike, setReviewLike] = useState<boolean>(false);
+  const [UserId, setUserId] = useState<number>(0);
 
   type Store = {
     address: string;
@@ -41,7 +41,7 @@ function Store() {
 
   //like list 에서 받아온 Review id 랑 review 에 id 랑 같으면 true로
 
-  const [StoreInfo,setStoreInfo] = useState<Store>({
+  const [StoreInfo, setStoreInfo] = useState<Store>({
     address: "",
     avg_rating: 0,
     created_at: "",
@@ -54,7 +54,7 @@ function Store() {
     updated_at: "",
   });
 
-  const [ReviewInfo,setReviewInfo] = useState<Review[]>([]);
+  const [ReviewInfo, setReviewInfo] = useState<Review[]>([]);
 
   const handleImg = () => {
     setChMessage(!chMessage);
@@ -86,15 +86,15 @@ function Store() {
         });
 
       //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
-      if(document.cookie.length!==0){
+      if (document.cookie.length !== 0) {
         await axios
           .get(`https://localhost:4000/user/userinfo/userdata`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
-          .then((res)=>{
-            setUserId(res.data.data.id)
-          })
+          .then((res) => {
+            setUserId(res.data.data.id);
+          });
 
         // await axios
         //   .get(`https://localhost:4000/review/likelist`, {
@@ -102,16 +102,14 @@ function Store() {
         //     withCredentials: true,
         //   })
         //   .then((res)=>{
-         
-        //     setUserId(res.data.data.id)
-        //   })     
 
+        //     setUserId(res.data.data.id)
+        //   })
       }
     })();
   }, [count, addFav, reviewlike]);
 
-
-  const  favoriteHandler = async() =>{
+  const favoriteHandler = async () => {
     await axios
       .post(
         `https://localhost:4000/favorite/add-favorite`,
@@ -123,67 +121,82 @@ function Store() {
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        })
-        .then((res) =>{ 
-          setAddFav(true);
-        });
-  }
+        }
+      )
+      .then((res) => {
+        setAddFav(true);
+      });
+  };
 
-  const deleteFavoriteHandler = async()=>{
+  const deleteFavoriteHandler = async () => {
     await axios
-      .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`,
-      {
+      .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      }).then((res)=>{
-        setAddFav(false);
       })
-  }
+      .then((res) => {
+        setAddFav(false);
+      });
+  };
 
-  const addReviewHandler = async()=>{
-    await axios.post(`https://localhost:4000/review/add-review/`, 
-    {
-      store_id:0,
-      comment:"",
-      rating:"",
-    },
-    {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      setReviewLike(true);
-    });
-  }
+  const addReviewHandler = async () => {
+    await axios
+      .post(
+        `https://localhost:4000/review/add-review/`,
+        {
+          store_id: 0,
+          comment: "",
+          rating: "",
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setReviewLike(true);
+      });
+  };
 
-  const deleteReviewHandler = async()=>{
-    await axios.delete(`https://localhost:4000/review/${StoreInfo.id}`, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      //console.log(res)
-      setCount(count+1);
-    });
-  }
+  const deleteReviewHandler = async () => {
+    await axios
+      .delete(`https://localhost:4000/review/${StoreInfo.id}`, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
+      .then((res) => {
+        //console.log(res)
+        setCount(count + 1);
+      });
+  };
 
-  const reviewLikeHandler = async(review_id:number)=>{
-    await axios.post(`https://localhost:4000/review/like/${review_id}`, {},{
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      console.log(res)
-      setReviewLike(true);
-    });
-  }
+  const reviewLikeHandler = async (review_id: number) => {
+    await axios
+      .post(
+        `https://localhost:4000/review/like/${review_id}`,
+        {},
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setReviewLike(true);
+      });
+  };
 
-  const DeletereviewLikeHandler = async(review_id:number)=>{
-    await axios.delete(`https://localhost:4000/review/like/${review_id}`,{
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      console.log(res)
-      setReviewLike(false);
-    });
-  }
+  const DeletereviewLikeHandler = async (review_id: number) => {
+    await axios
+      .delete(`https://localhost:4000/review/like/${review_id}`, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+        setReviewLike(false);
+      });
+  };
 
   return (
     <>
@@ -202,10 +215,19 @@ function Store() {
                     <Star_avg avg_rating={StoreInfo.avg_rating} />
                   </div>
                   <div className="store_tx-icon-box">
-                    {
-                      !addFav ? <img className="store_tx-icon" src="/store/heart.svg" onClick={favoriteHandler}/>
-                       : <img className="store_tx-icon" src="/store/heart_full.png" onClick={deleteFavoriteHandler}/>
-                    }
+                    {!addFav ? (
+                      <img
+                        className="store_tx-icon"
+                        src="/store/heart.svg"
+                        onClick={favoriteHandler}
+                      />
+                    ) : (
+                      <img
+                        className="store_tx-icon"
+                        src="/store/heart_full.png"
+                        onClick={deleteFavoriteHandler}
+                      />
+                    )}
 
                     <img className="store_tx-icon" src="/store/edit.svg" />
                   </div>
