@@ -94,8 +94,14 @@ export class ReviewService {
         return { "data":data , "message":"get my review list success"}
     }   
 
-    async getLikeList(userId:number){
-        const data= await this.ReviewlikeRepostory.find({user_id:userId})
+    async getLikeList(userId:number,storeId:number){
+        const entityManager = getManager();
+        const data = await entityManager.query(
+        `SELECT review_like.id,review_like.user_id,review_like.review_id 
+        from review_like 
+        INNER JOIN Review ON review_like.review_id = review.id 
+        WHERE review_like.user_id=${userId} AND store_id=${storeId}`)
+
         if(data.length===0){
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,

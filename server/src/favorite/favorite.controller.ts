@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Header, Param, Post, Request } from '@ne
 import { FavoriteService } from './favorite.service';
 import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
+import { request } from 'express';
 
 @Controller('favorite')
 export class FavoriteController {
@@ -13,6 +14,12 @@ export class FavoriteController {
     getList(@Request() req){       
         return this.FavoriteService.getList(req.user.id) 
     }
+
+    @Get('/check-favorite/:store_name')
+    checkFavorite(@Request() req, @Param('store_name') storeName:string){
+        return this.FavoriteService.checkFavorite(req.user.id ,storeName)
+    }
+
     
     @Post('/add-favorite')
     addFavorite(@Request() req ){

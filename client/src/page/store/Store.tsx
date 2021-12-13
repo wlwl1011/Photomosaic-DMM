@@ -4,7 +4,8 @@ import Footer from "../../components/footer/Footer";
 import Star_avg from "../../components/star/star_avg/Star_avg";
 import Store_list from "../../components/store_list/Store_list";
 import Kakao_map from "../../components/kakao_map/Kakao_map";
-import { useState, useEffect, MouseEventHandler } from "react";
+import ReviewEdit from "../../components/reviewedit/ReviewEdit";
+import { useState, useEffect, MouseEventHandler, SetStateAction } from "react";
 import axios from "axios";
 
 function Store() {
@@ -12,9 +13,10 @@ function Store() {
   const [mesNone, setMesNone] = useState<string>("");
   const [count,setCount]=useState<number>(0)
   const [addFav,setAddFav]=useState<boolean>(false);
-  const [reviewlike,setReviewLike]=useState<boolean>(false);
+  const [reviewlike,setReviewLike]=useState<number>(0);
   const [UserId,setUserId] = useState<number>(0)
-
+  const [isLogin,setisLogin]=useState<boolean>(true);
+  
   type Store = {
     address: string;
     avg_rating: number;
@@ -39,8 +41,13 @@ function Store() {
     num_review_like: number;
   };
 
-  //like list 에서 받아온 Review id 랑 review 에 id 랑 같으면 true로
+  type likelist={
+    id:number,
+    user_id:number,
+    review_id:number
+  }
 
+  const [likeList,setLikelist]= useState<likelist[]>([])
   const [StoreInfo,setStoreInfo] = useState<Store>({
     address: "",
     avg_rating: 0,
@@ -53,8 +60,8 @@ function Store() {
     store_name: "",
     updated_at: "",
   });
-
   const [ReviewInfo,setReviewInfo] = useState<Review[]>([]);
+ 
 
   const handleImg = () => {
     setChMessage(!chMessage);
@@ -86,30 +93,50 @@ function Store() {
         });
 
       //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
-      if(document.cookie.length!==0){
+      if(isLogin){
         await axios
           .get(`https://localhost:4000/user/userinfo/userdata`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
           .then((res)=>{
+            setisLogin(true);
             setUserId(res.data.data.id)
+          }).catch((err)=>{
+            setisLogin(false);
           })
-
-        // await axios
-        //   .get(`https://localhost:4000/review/likelist`, {
-        //     headers: { "Content-Type": "application/json" },
-        //     withCredentials: true,
-        //   })
-        //   .then((res)=>{
-         
-        //     setUserId(res.data.data.id)
-        //   })     
-
-      }
+        }
+      //! 스토어별 리뷰중에 로그인한 유저가 좋아요한 리뷰리스트
+      if(isLogin){
+        await axios
+          .get(`https://localhost:4000/review/likelist/1`, {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          })
+          .then((res)=>{
+            setLikelist(res.data.data)
+          }).catch((err)=>{
+            setLikelist([]);
+            //이거안하면 오류남ㅇㅇ
+          })  
+        }
+      //!유저가 이 가게를 찜햇는지 아닌지 확인
+      if(isLogin){
+        await axios
+          .get(`https://localhost:4000/favorite/check-favorite/${StoreInfo.store_name}`, {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          })
+          .then((res)=>setAddFav(true))
+          .catch((err)=>{
+            setAddFav(false);
+          })  
+        }  
+      
     })();
   }, [count, addFav, reviewlike]);
 
+ console.log('addFav',addFav)
 
   const  favoriteHandler = async() =>{
     await axios
@@ -151,7 +178,7 @@ function Store() {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
-      setReviewLike(true);
+      setCount(count+1);
     });
   }
 
@@ -160,8 +187,7 @@ function Store() {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
-      //console.log(res)
-      setCount(count+1);
+      setCount(count-1);
     });
   }
 
@@ -170,8 +196,7 @@ function Store() {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
-      console.log(res)
-      setReviewLike(true);
+      setReviewLike(reviewlike+1);
     });
   }
 
@@ -180,14 +205,21 @@ function Store() {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
-      console.log(res)
-      setReviewLike(false);
+      setReviewLike(reviewlike-1);
     });
   }
 
+  const [isReview,setIsReview]=useState<boolean>(false)
+  const reviewEdit = ()=>{
+    if(isReview) setIsReview(false);
+    else setIsReview(true);
+  }
+
+  
+  
   return (
     <>
-      <Header handleImg={handleImg} />
+      <Header handleImg={handleImg} isLogin={isLogin}/>
       <div className="store_container">
         <section className="store_info_container">
           <div className="store_info_box">
@@ -207,7 +239,14 @@ function Store() {
                        : <img className="store_tx-icon" src="/store/heart_full.png" onClick={deleteFavoriteHandler}/>
                     }
 
-                    <img className="store_tx-icon" src="/store/edit.svg" />
+                    {
+                    isReview? <ReviewEdit signNone={""} handleSignup={function (e: string): void {
+                        throw new Error("Function not implemented.");
+                      } } reviewEdit={""} />: null
+                    
+                    }   
+                  <img className="store_tx-icon" src="/store/edit.svg" onClick={reviewEdit} />
+
                   </div>
                 </div>
                 <div className="store_tx-info-box">
@@ -241,8 +280,17 @@ function Store() {
             <div className="store_review_count">
               <span>리뷰 ({ReviewInfo.length})</span>
             </div>
+
             <ul className="store_review_ul-box">
               {ReviewInfo.map((el: Review) => {
+                let flag=false;
+                for(let i=0;i<likeList.length;i++){
+                  if(likeList[i].review_id===el.id){                      
+                      flag=true;
+                      break;
+                    }
+                  }
+                
                 return (
                   <Store_list
                     mesNone={mesNone}
@@ -250,10 +298,14 @@ function Store() {
                     UserId={UserId}
                     deleteReviewHandler={deleteReviewHandler}
                     reviewLikeHandler={reviewLikeHandler}
-                  />
-                );
-              })}
+                    deletereviewLikeHandler={ DeletereviewLikeHandler}
+                    isLike={flag}
+                    />
+                    );               
+                  })
+                }        
             </ul>
+
           </div>
         </section>
       </div>

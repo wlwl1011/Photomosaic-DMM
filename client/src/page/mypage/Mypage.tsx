@@ -119,7 +119,7 @@ function Mypage() {
 
   return (
     <>
-      <Header handleImg={handleImg} />
+      <Header handleImg={handleImg} isLogin={true}/>
       <section className="mypage_info_container">
         <div className="mypage_info_box">
           <img className="mypage_info_img" src="/store/model.jpeg" />

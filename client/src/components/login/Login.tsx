@@ -5,7 +5,6 @@ import axios from "axios";
 interface Iprops {
   loginNone: string;
   handleLgoin: (e: string) => void;
-  handleToken: (e: boolean) => void;
 }
 
 interface Infor {
@@ -68,22 +67,15 @@ function Login(props: Iprops) {
         setLogFail(true);
         console.log("🚫 Not Found 🚫", err);
       });
-
+      
     if (loginData) {
+      console.log('===============')
       setLogFail(false);
       // window.location.href: 현 url 주소
       window.location.replace(window.location.href);
     }
   };
 
-  //console.log("토큰 확인", document.cookie);
-
-  // 토큰 있을 경우 if문 없을 경우 else 문
-  if (document.cookie) {
-    props.handleToken(true);
-  } else {
-    props.handleToken(false);
-  }
 
   return (
     <>

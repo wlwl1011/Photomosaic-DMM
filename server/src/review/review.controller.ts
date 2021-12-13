@@ -25,9 +25,10 @@ export class ReviewController {
         return this.ReviewService.getMyReview(req.user.id)
     }
 
-    @Get('/likelist')
-    getLikeList(@Request() req){
-        return this.ReviewService.getLikeList(req.user.id)
+    //Review 와 Review like Join 해서 user_id 와 store_id 로 검색 , 각 store별 유저가 좋아요 한 리뷰들
+    @Get('/likelist/:store_id')
+    getLikeList(@Request() req, @Param('store_id') storeId:number){
+        return this.ReviewService.getLikeList(req.user.id,storeId)
     }
 
 

@@ -25,6 +25,21 @@ export class FavoriteService {
         }
         return {"data":data, "message":"get favorite list successfully"}
     }
+
+    async checkFavorite(user_id:number , storeName:string){
+        const data=await this.FavoriteRepostory.find({where:{user_id:user_id,store_name:storeName}})
+        if(data.length===0){
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                data : null,
+                message: "favorite list doesn't have this store",
+            }, 404);
+        } 
+        return {"data":true, "message":"favorite list have this store"}
+    }
+
+
+
     //!중복 불가!
     async addFavorite(user_id :number , body)  {
         //body 에 정보누락
