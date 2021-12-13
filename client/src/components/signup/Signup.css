@@ -138,7 +138,9 @@
 .signup_nickname-box {
   overflow: hidden;
   width: 250px;
+  height: 20px;
   margin: 0 auto;
+  position: relative;
 }
 
 .signup_nickname-info {
@@ -150,9 +152,10 @@
 .signup_nickname-check {
   all: unset;
   cursor: pointer;
+  position: absolute;
   font-size: 13px;
   color: #939393;
-  float: left;
+  right: 0px;
 }
 
 .signup_success {
