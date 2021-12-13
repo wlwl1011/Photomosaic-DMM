@@ -1,0 +1,51 @@
+.mypage_review_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px dashed black;
+  margin-bottom: 65px;
+}
+
+.review_none {
+  display: none;
+}
+
+.mypage_review_box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mypage_review_title {
+  margin-right: 15px;
+}
+
+.mypage_review_day {
+  align-items: end;
+  display: flex;
+}
+
+.mypage_review_text-box {
+  margin: 30px auto;
+  width: 85%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 30px;
+  border: 1px solid rgb(175, 175, 175);
+}
+
+@media screen and (max-width: 900px) {
+  .mypage_review_box {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .mypage_review_title {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .mypage_review_title {
+    font-size: 25px;
+  }
+}
