@@ -5,7 +5,7 @@ import axios from "axios";
 
 //내가 바꾼 함수
 
-const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://localhost:4000/user/google_login&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email + https://www.googleapis.com/auth/userinfo.password`;
+const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://localhost:4000/user/google_login&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
 
 interface Iprops {
   loginNone: string;
