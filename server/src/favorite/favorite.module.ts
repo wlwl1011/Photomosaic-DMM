@@ -7,12 +7,17 @@ import { FavoriteController } from './favorite.controller';
 import { FavoriteService } from './favorite.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from '../auth/constants';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Favorite,User]), JwtModule.register({
-        secret: jwtConstants.secret,
-        signOptions: { expiresIn: '7200s' },
-      }),],
+    imports:[
+      TypeOrmModule.forFeature([Favorite,User]), 
+      JwtModule.register({
+        secret: jwtConstants.accesssecret,
+        //signOptions: { expiresIn: '7200s' },
+      }),
+      UserModule
+    ],
     providers:[FavoriteService],
     exports:[FavoriteService]
 })

@@ -45,7 +45,7 @@ import { SearchWordModule } from './search-word/search-word.module';
     ReviewModule,
     SearchWordModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: jwtConstants.accesssecret,
       signOptions: { expiresIn: '3600s' },
     }),
   ],

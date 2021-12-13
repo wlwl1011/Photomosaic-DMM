@@ -5,6 +5,7 @@ import { response, Response } from 'express';
 import { User } from './../entities/user';
 import { JwtService } from '@nestjs/jwt';
 import { createImageURL } from 'src/middleware/multeroption';
+import { jwtConstants } from 'src/auth/constants';
 
 @Injectable()
 @EntityRepository()
@@ -34,22 +35,32 @@ export class UserService {
     throw new NotFoundException('login fail');
   }
 
-  async signup(userdata: any): Promise<any> {
-    const usercheck = await this.userRepository.findOne({
-      where: { email: userdata.email },
-    });
-    if (!usercheck) {
-      await this.userRepository.save(userdata);
-      return true;
-      // this.createQueryBuilder('User')
-      // .insert()
-      // .into(tables)
-      // .values(값)
-      // .where('user_name = :userdata.user_name', { user_name })
-    }
-    return false;
-  }
+    async refreshtoken(data): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { email: data.email, password: data.password } });
+        const payload = { id: userdata.id, user_name: userdata.user_name, email: userdata.email, user_img: userdata.user_img, password: userdata.password };
+        const token = this.jwtService.sign(payload, {
+            secret: jwtConstants.refreshsecret,
+            expiresIn: `10800s`
+        })
 
+        return token;
+    }
+
+    async signup(data: any): Promise<any>{
+        console.log(typeof(data))
+        const usercheck = await this.userRepository.findOne({ where: { email: data.email }});
+        if(!usercheck){
+            await this.userRepository.save(data)
+            return true
+            // this.createQueryBuilder('User')
+            // .insert()
+            // .into(tables)
+            // .values(값)
+            // .where('user_name = :userdata.user_name', { user_name })
+        }
+        return false
+    }
+    
   async userinfo(data: string): Promise<any> {
     return data;
   }
@@ -62,12 +73,23 @@ export class UserService {
     if (password === userdata.password) {
       return false;
     }
-    if (password !== userdata.password) {
-      userdata.password = password;
-      await this.userRepository.save(userdata);
-      return true;
+}
+
+    async delete_account(data: any, user: any): Promise<any> {
+        if(data.password !== user.password){
+            return 1;
+        }
+        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
+        if(!userdata){
+            return false;
+        }
+        if(userdata){
+            await this.userRepository.delete(userdata.id);
+            return true;
+        }
+
     }
-  }
+  
 
   async changeusername(data: any, user: any): Promise<any> {
     const { user_name } = data;
@@ -87,11 +109,13 @@ export class UserService {
     }
   }
 
-  async delete_account(data: any, user: any): Promise<any> {
-    if (data.password !== user.password) {
-      return 1;
+    public uploadFiles(file: File[]): string [] {
+            const generatedFiles: string [] = [];
+              generatedFiles.push(createImageURL(file));
+            return generatedFiles;
     }
-    const userdata = await this.userRepository.findOne({
+    async check_username(user: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({
       where: { user_name: user.user_name },
     });
     console.log(userdata);
@@ -99,26 +123,43 @@ export class UserService {
       return false;
     }
     if (userdata) {
-      await this.userRepository.delete(userdata.id);
+
       return true;
     }
   }
-
-  async check_username(data: any): Promise<any> {
-    const userdata = await this.userRepository.findOne({
-      where: { user_name: data.user_name },
-    });
-    if (!userdata) {
-      return true;
+    
+    async change_image(data: string, user: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
+        if(!userdata){
+           return false;
+        }
+        if(userdata){
+            userdata.user_img = data;
+            await this.userRepository.save(userdata);
+            return true;
+        }
+        if(userdata.user_img === data){
+            return 1
+        }
     }
-    return false;
+
+    async sign_image(data: any, image: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { user_name: data.user_name } });
+        userdata.user_img = image;
+        await this.userRepository.save(userdata);
+    }
+
+    async delete_image(data: any, user: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
+        if(!userdata){
+            return false;
+        }
+        if(userdata){
+            userdata.user_img = 'default image로 변환' ///////////////////////////////////////////////////////////////////////
+            await this.userRepository.save(userdata);
+            return true;
+        }
+
+    }
   }
 
-  public uploadFiles(files: File[]): string[] {
-    const generatedFiles: string[] = [];
-
-    generatedFiles.push(createImageURL(files));
-
-    return generatedFiles;
-  }
-}
