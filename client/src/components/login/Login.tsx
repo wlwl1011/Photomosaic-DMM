@@ -24,6 +24,14 @@ function Login(props: Iprops) {
 
   // 로그인 모달창 on/off 함수
   const handleNone = () => {
+    const inputElement: NodeListOf<Element> =
+      document.querySelectorAll(".login_input");
+
+    inputElement.forEach((el) => {
+      let data = el as HTMLInputElement;
+      data.value = "";
+    });
+    setLogFail(false);
     props.handleLgoin("login_hidden");
   };
 
