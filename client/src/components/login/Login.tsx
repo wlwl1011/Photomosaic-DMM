@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 interface Iprops {
   loginNone: string;
   handleLgoin: (e: string) => void;
+  handleToken: (e: boolean) => void;
 }
 
 interface Infor {
@@ -14,8 +14,6 @@ interface Infor {
 }
 
 function Login(props: Iprops) {
-  const history = useHistory();
-
   const [infor, setInfor] = useState<Infor>({
     email: "",
     password: "",
@@ -69,6 +67,15 @@ function Login(props: Iprops) {
       window.location.replace(window.location.href);
     }
   };
+
+  //console.log("토큰 확인", document.cookie);
+
+  // 토큰 있을 경우 if문 없을 경우 else 문
+  if (document.cookie) {
+    props.handleToken(true);
+  } else {
+    props.handleToken(false);
+  }
 
   return (
     <>

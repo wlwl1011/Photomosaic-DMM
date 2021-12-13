@@ -210,6 +210,18 @@
   }
 }
 
+@media screen and (max-height: 750px) {
+  .search_result-list {
+    padding: 10px 15px;
+  }
+  .search_result-container {
+    padding-top: 35px;
+  }
+  .search_container_close-box {
+    height: 0px;
+  }
+}
+
 @media screen and (max-width: 1445px) {
   .search_container_close-box {
     width: 800px;
@@ -348,5 +360,14 @@
 
   .search_container_close-box {
     width: 350px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .search_container {
+    padding: 75px 0%;
+  }
+  .search_container_close-box {
+    width: 300px;
   }
 }

@@ -5,13 +5,14 @@ interface Iprops {
   avg_rating: number;
 }
 
-function Star_avg(props : Iprops) {
-  console.log(props.avg_rating)
+function Star_avg(props: Iprops) {
   return (
     <>
       <div className="star-box">
         <div className="star-rating">
-          <span className={`star-background star-rating-size${props.avg_rating}`}></span>
+          <span
+            className={`star-background star-rating-size${props.avg_rating}`}
+          ></span>
         </div>
       </div>
     </>

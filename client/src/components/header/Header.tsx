@@ -15,7 +15,6 @@ function Header_Off(props: Iprops) {
 
   // 회원가입 모달 관리
   const [signNone, setSignNone] = useState<string>("signup_hidden");
-
   // 로그인 모달 관리
   const [loginNone, setLoginNone] = useState<string>("login_hidden");
 
@@ -25,6 +24,9 @@ function Header_Off(props: Iprops) {
   // 검색 모달 right -50% 좌표 주기
   const [chRight, setChRight] = useState<boolean>(true);
   const [right, setRight] = useState<string>("");
+
+  // 토큰 유무 관리
+  const [token, setToken] = useState<boolean>(false);
 
   // 태블릿 스마트폰 버전 함수
   const handleMenuOn = () => {
@@ -54,6 +56,10 @@ function Header_Off(props: Iprops) {
     setSignNone(e);
   };
 
+  const handleToken = (e: boolean) => {
+    setToken(e);
+  };
+
   return (
     <>
       <header className="header_main">
@@ -64,26 +70,53 @@ function Header_Off(props: Iprops) {
           </a>
           <div className={`header__menu ${hidden} header_box3`}>
             <ul className="header__list header_grid">
-              <li className="header__item">
-                <div className="header__link">
-                  <img
-                    onClick={() => handleLgoin("")}
-                    className="header_icon-size"
-                    src="/menu/signin.svg"
-                  />
-                  <h4 onClick={() => handleLgoin("")}>로그인</h4>
-                </div>
-              </li>
-              <li className="header__item">
-                <div className="header__link">
-                  <img
-                    onClick={() => handleSignup("")}
-                    className="header_icon-size"
-                    src="/menu/user-plus.svg"
-                  />
-                  <h4 onClick={() => handleSignup("")}>회원가입</h4>
-                </div>
-              </li>
+              {token ? (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleLgoin("")}
+                      className="header_icon-size"
+                      src="/menu/signout.svg"
+                    />
+                    <h4 onClick={() => handleLgoin("")}>로그아웃</h4>
+                  </div>
+                </li>
+              ) : (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleLgoin("")}
+                      className="header_icon-size"
+                      src="/menu/signin.svg"
+                    />
+                    <h4 onClick={() => handleLgoin("")}>로그인</h4>
+                  </div>
+                </li>
+              )}
+              {token ? (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleLgoin("")}
+                      className="header_icon-size"
+                      src="/menu/user.svg"
+                    />
+                    <h4 onClick={() => handleLgoin("")}>마이페이지</h4>
+                  </div>
+                </li>
+              ) : (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleSignup("")}
+                      className="header_icon-size"
+                      src="/menu/user-plus.svg"
+                    />
+                    <h4 onClick={() => handleSignup("")}>회원가입</h4>
+                  </div>
+                </li>
+              )}
+
               <li className="header__item">
                 <div className="header__link">
                   <label
@@ -113,7 +146,11 @@ function Header_Off(props: Iprops) {
       </header>
       <Search animation={animation} right={right} handleSearch={handleSearch} />
       <Signup signNone={signNone} handleSignup={handleSignup} />
-      <Login loginNone={loginNone} handleLgoin={handleLgoin} />
+      <Login
+        loginNone={loginNone}
+        handleLgoin={handleLgoin}
+        handleToken={handleToken}
+      />
     </>
   );
 }
