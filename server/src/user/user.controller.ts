@@ -61,11 +61,7 @@ constructor(
   }
 
   @Patch('change-password')
-<<<<<<< HEAD
-  async change_password(@Request() req, @Res() response: Response){
-=======
   async change_password(@Request() req, @Res() response){
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
     const boolean = await this.userService.changepassword(req.body, req.user)
     if(!boolean){
       response.status(409).json({ message: 'this password alredy exist'})
@@ -75,22 +71,8 @@ constructor(
     }
   }
 
-<<<<<<< HEAD
-  @Patch('change-image')
-  async change_image(@Request() request, @Res() response: Response, @UploadedFile() file: File[]){
-    console.log(file)
-    const uploadedFiles: string[] = this.userService.uploadFiles(file)
-    if(uploadedFiles){
-      response.status(201).json({ message: '성공'})
-    }
-  }
-
-  @Patch('change-username')
-  async change_username(@Request() req, @Res() response: Response){
-=======
   @Patch('change-username')
   async change_username(@Request() req, @Res() response){
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
     const boolean = await this.userService.changeusername(req.body, req.user)
     if(!boolean){
       response.status(400).json({ message: 'this username already exist'})
@@ -100,10 +82,6 @@ constructor(
     }
  }
 
-<<<<<<< HEAD
-  @Delete('delete-account')
-  async delete_account(@Request() req, @Res() response: Response){
-=======
   @Patch('change-image')
   @UseInterceptors(FileInterceptor('file', multerOptions))
   async change_image(@Request() req, @Res() response, @UploadedFile() file: File[]){
@@ -133,7 +111,6 @@ constructor(
 
   @Delete('delete-account')
   async delete_account(@Request() req, @Res() response){
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
     const boolean = await this.userService.delete_account(req.body, req.user)
     if(boolean === 1){
       response.status(401).json({ message: 'Wrong password' })
