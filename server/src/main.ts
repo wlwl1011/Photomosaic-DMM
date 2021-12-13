@@ -26,7 +26,7 @@ async function bootstrap() {
   // apps.use('/public', express.static(join(__dirname, '../public')));
 
   app.enableCors({
-    origin: '*',
+    origin: true,
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
   });
 

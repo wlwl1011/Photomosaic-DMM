@@ -36,7 +36,7 @@ import { jwtConstants } from './auth/constants';
     TypeOrmModule.forRoot(ormconfig),
     UserModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: jwtConstants.accesssecret,
       signOptions: { expiresIn: '3600s' },
     }),
     

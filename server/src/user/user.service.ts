@@ -5,6 +5,7 @@ import { response, Response } from 'express';
 import { User } from './../entities/user';
 import { JwtService } from '@nestjs/jwt';
 import { createImageURL } from 'src/middleware/multeroption';
+import { jwtConstants } from 'src/auth/constants';
 
 @Injectable()
 @EntityRepository()
@@ -25,10 +26,22 @@ export class UserService {
             throw new NotFoundException("login fail")
     }
 
-    async signup(userdata: any): Promise<any>{
-        const usercheck = await this.userRepository.findOne({ where: { email: userdata.email }});
+    async refreshtoken(data): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { email: data.email, password: data.password } });
+        const payload = { id: userdata.id, user_name: userdata.user_name, email: userdata.email, user_img: userdata.user_img, password: userdata.password };
+        const token = this.jwtService.sign(payload, {
+            secret: jwtConstants.refreshsecret,
+            expiresIn: `10800s`
+        })
+
+        return token;
+    }
+
+    async signup(data: any): Promise<any>{
+        console.log(typeof(data))
+        const usercheck = await this.userRepository.findOne({ where: { email: data.email }});
         if(!usercheck){
-            await this.userRepository.save(userdata)
+            await this.userRepository.save(data)
             return true
             // this.createQueryBuilder('User')
             // .insert()
@@ -75,7 +88,6 @@ export class UserService {
             return 1;
         }
         const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
-        console.log(userdata)
         if(!userdata){
             return false;
         }
@@ -93,15 +105,45 @@ export class UserService {
         return false;
     }
 
-    public uploadFiles(files: File[]): string [] {
+    public uploadFiles(file: File[]): string [] {
             const generatedFiles: string [] = [];
-        
-              generatedFiles.push(createImageURL(files));
-            
+              generatedFiles.push(createImageURL(file));
             return generatedFiles;
     }
 
+    async change_image(data: string, user: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
+        if(!userdata){
+           return false;
+        }
+        if(userdata){
+            userdata.user_img = data;
+            await this.userRepository.save(userdata);
+            return true;
+        }
+        if(userdata.user_img === data){
+            return 1
+        }
+    }
 
+    async sign_image(data: any, image: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { user_name: data.user_name } });
+        userdata.user_img = image;
+        await this.userRepository.save(userdata);
+    }
+
+    async delete_image(data: any, user: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
+        if(!userdata){
+            return false;
+        }
+        if(userdata){
+            userdata.user_img = 'default image로 변환' ///////////////////////////////////////////////////////////////////////
+            await this.userRepository.save(userdata);
+            return true;
+        }
+
+    }
 
 
 }
