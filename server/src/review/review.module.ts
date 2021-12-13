@@ -8,14 +8,16 @@ import { ReviewService } from './review.service';
 import { ReviewController } from './review.controller';
 import { ReviewLike } from 'src/entities/review_like';
 import { RequestMethod } from '@nestjs/common';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
     imports:[
         TypeOrmModule.forFeature([Review,ReviewLike]), 
         JwtModule.register({
             secret: jwtConstants.accesssecret,
-            signOptions: { expiresIn: '7200s' },
-        })
+            //signOptions: { expiresIn: '7200s' },
+        }),
+        UserModule
     ],
     providers:[ReviewService],
     exports:[ReviewService]
