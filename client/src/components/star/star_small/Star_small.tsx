@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./Star_small.css";
 
 interface Iprops {
-    rating:number
+  rating: number;
 }
 
-function Star_avg(props : Iprops) {
+function Star_avg(props: Iprops) {
   return (
     <>
       <div className="star_small-box">
