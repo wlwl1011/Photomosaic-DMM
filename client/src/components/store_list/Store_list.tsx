@@ -22,11 +22,10 @@ interface Iprops {
 
 function Store_list(props: Iprops) {
   
-  
   return (
     <>
       <li className="store_review_li-box">
-        <img className="store_review_img" src="./store/model.jpeg" />
+        <img className="store_review_img" src="/store/model.jpeg" />
 
         <div className={`store_balloon ${props.mesNone}`}>
           <div className="store_review-info">
@@ -34,9 +33,13 @@ function Store_list(props: Iprops) {
               <span className="store_review-info-text">{props.ReviewInfo.user_name!==undefined ? props.ReviewInfo.user_name : null}</span>
               <span className="store_review-info-day">{props.ReviewInfo.created_at!==undefined ? props.ReviewInfo.created_at.slice(0,10) : null}</span>
               <Star_small rating={props.ReviewInfo.rating}/>
-              <span className="store_review-good" onClick={()=>props.reviewLikeHandler(props.ReviewInfo.id)}>👍🏻 {props.ReviewInfo.num_review_like!==undefined ? props.ReviewInfo.num_review_like : null}</span>
+              
+              <span className="store_review-good" onClick={()=>props.reviewLikeHandler(props.ReviewInfo.id)}><img className="store-review-like" src="/store/thumb_full.png" />
+              {props.ReviewInfo.num_review_like!==undefined ? props.ReviewInfo.num_review_like : null}
+              </span>
+
             </div>
-            {props.UserId===props.ReviewInfo.user_id ? <img className="store_review-icon" src="./search/close.svg" onClick={props.deleteReviewHandler}/> : null}
+            {props.UserId===props.ReviewInfo.user_id ? <img className="store_review-icon" src="/search/close.svg" onClick={props.deleteReviewHandler}/> : null}
           </div>
           <h3 className="store_review-content">
             {props.ReviewInfo.comment!==undefined ? props.ReviewInfo.comment : null}

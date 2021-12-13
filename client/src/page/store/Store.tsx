@@ -6,14 +6,14 @@ import Store_list from "../../components/store_list/Store_list";
 import Kakao_map from "../../components/kakao_map/Kakao_map";
 import { useState, useEffect, MouseEventHandler } from "react";
 import axios from "axios";
-import Login from "../../components/login/Login";
 
 function Store() {
   const [chMessage, setChMessage] = useState<boolean>(false);
   const [mesNone, setMesNone] = useState<string>("");
-  const [count, setCount] = useState<number>(0);
-  const [addFav, setAddFav] = useState<boolean>(false);
-  const [reviewlike, setReviewLike] = useState<boolean>(false);
+  const [count,setCount]=useState<number>(0)
+  const [addFav,setAddFav]=useState<boolean>(false);
+  const [reviewlike,setReviewLike]=useState<boolean>(false);
+  const [UserId,setUserId] = useState<number>(0)
 
   type Store = {
     address: string;
@@ -39,7 +39,9 @@ function Store() {
     num_review_like: number;
   };
 
-  const [StoreInfo, setStoreInfo] = useState<Store>({
+  //like list 에서 받아온 Review id 랑 review 에 id 랑 같으면 true로
+
+  const [StoreInfo,setStoreInfo] = useState<Store>({
     address: "",
     avg_rating: 0,
     created_at: "",
@@ -51,8 +53,8 @@ function Store() {
     store_name: "",
     updated_at: "",
   });
-  const [ReviewInfo, setReviewInfo] = useState<Review[]>([]);
-  const [UserId, setUserId] = useState<number>(0);
+
+  const [ReviewInfo,setReviewInfo] = useState<Review[]>([]);
 
   const handleImg = () => {
     setChMessage(!chMessage);
@@ -82,21 +84,34 @@ function Store() {
         .then((res) => {
           setReviewInfo(res.data.data);
         });
-      if (document.cookie.length !== 0) {
+
+      //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
+      if(document.cookie.length!==0){
         await axios
           .get(`https://localhost:4000/user/userinfo/userdata`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
-          .then((res) => {
-            setUserId(res.data.data.id);
-          });
+          .then((res)=>{
+            setUserId(res.data.data.id)
+          })
+
+        // await axios
+        //   .get(`https://localhost:4000/review/likelist`, {
+        //     headers: { "Content-Type": "application/json" },
+        //     withCredentials: true,
+        //   })
+        //   .then((res)=>{
+         
+        //     setUserId(res.data.data.id)
+        //   })     
+
       }
     })();
   }, [count, addFav, reviewlike]);
 
-  //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
-  const favoriteHandler = async () => {
+
+  const  favoriteHandler = async() =>{
     await axios
       .post(
         `https://localhost:4000/favorite/add-favorite`,
@@ -108,42 +123,67 @@ function Store() {
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        setAddFav(true);
-      });
-  };
+        })
+        .then((res) =>{ 
+          setAddFav(true);
+        });
+  }
 
-  const deleteReviewHandler = async () => {
+  const deleteFavoriteHandler = async()=>{
     await axios
-      .delete(`https://localhost:4000/review/${StoreInfo.id}`, {
+      .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`,
+      {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
+      }).then((res)=>{
+        setAddFav(false);
       })
-      .then((res) => {
-        //console.log(res)
-        setCount(count + 1);
-      });
-  };
+  }
 
-  const reviewLikeHandler = async (review_id: number) => {
-    await axios
-      .post(
-        `https://localhost:4000/review/like/${review_id}`,
-        {},
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        setCount(count + 1);
-      });
-  };
-  console.log("cookie", document.cookie.length);
+  const addReviewHandler = async()=>{
+    await axios.post(`https://localhost:4000/review/add-review/`, 
+    {
+      store_id:0,
+      comment:"",
+      rating:"",
+    },
+    {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    }).then((res) =>{ 
+      setReviewLike(true);
+    });
+  }
+
+  const deleteReviewHandler = async()=>{
+    await axios.delete(`https://localhost:4000/review/${StoreInfo.id}`, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    }).then((res) =>{ 
+      //console.log(res)
+      setCount(count+1);
+    });
+  }
+
+  const reviewLikeHandler = async(review_id:number)=>{
+    await axios.post(`https://localhost:4000/review/like/${review_id}`, {},{
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    }).then((res) =>{ 
+      console.log(res)
+      setReviewLike(true);
+    });
+  }
+
+  const DeletereviewLikeHandler = async(review_id:number)=>{
+    await axios.delete(`https://localhost:4000/review/like/${review_id}`,{
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    }).then((res) =>{ 
+      console.log(res)
+      setReviewLike(false);
+    });
+  }
 
   return (
     <>
@@ -162,11 +202,11 @@ function Store() {
                     <Star_avg avg_rating={StoreInfo.avg_rating} />
                   </div>
                   <div className="store_tx-icon-box">
-                    <img
-                      className="store_tx-icon"
-                      src="/store/heart.svg"
-                      onClick={favoriteHandler}
-                    />
+                    {
+                      !addFav ? <img className="store_tx-icon" src="/store/heart.svg" onClick={favoriteHandler}/>
+                       : <img className="store_tx-icon" src="/store/heart_full.png" onClick={deleteFavoriteHandler}/>
+                    }
+
                     <img className="store_tx-icon" src="/store/edit.svg" />
                   </div>
                 </div>

@@ -5,7 +5,8 @@ interface Iprops {
   avg_rating: number;
 }
 
-function Star_avg(props: Iprops) {
+
+function Star_avg(props : Iprops) {
   return (
     <>
       <div className="star-box">

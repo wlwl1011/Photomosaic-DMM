@@ -25,6 +25,12 @@ export class ReviewController {
         return this.ReviewService.getMyReview(req.user.id)
     }
 
+    @Get('/likelist')
+    getLikeList(@Request() req){
+        return this.ReviewService.getLikeList(req.user.id)
+    }
+
+
     @Post('/like/:review_id')
     addLikeReview(@Request() req, @Param('review_id') reviewId:number){
         return this.ReviewService.addLikeReview(req.user.id,reviewId)
