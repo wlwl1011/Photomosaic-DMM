@@ -73,7 +73,6 @@ export class ReviewService {
         }
         for(let i=0;i<data.length;i++){
             let data2 = await entityManager.query(`Select COUNT(review_like.review_id) AS num_review_like FROM review_like WHERE review_id=${data[i].id}`)
-            console.log(data2)
             data[i].num_review_like = Number(data2[0].num_review_like);
         }
         return {"data":data , "message":"get review successully"}
@@ -94,6 +93,21 @@ export class ReviewService {
         }
         return { "data":data , "message":"get my review list success"}
     }   
+
+    async getLikeList(userId:number){
+        const data= await this.ReviewlikeRepostory.find({user_id:userId})
+        if(data.length===0){
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                data : null,
+                message: "empty review like",
+            }, 404); 
+        }
+        
+        return {"data":data,"message":"get like list success"}
+    }
+
+
     //!중복방지
     async addLikeReview(userId:number ,reviewId:number ) {
         const data = await this.ReviewlikeRepostory.find({
@@ -101,11 +115,11 @@ export class ReviewService {
             user_id:userId
         })
         if(data.length!==0){
-                throw new HttpException({
-                    status: HttpStatus.NOT_FOUND,
-                    data : null,
-                    message: "you already like this review",
-                }, 404); 
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                data : null,
+                message: "you already like this review",
+            }, 404); 
         }
         await this.ReviewlikeRepostory.save({
             review_id:reviewId,
