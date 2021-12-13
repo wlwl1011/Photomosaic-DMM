@@ -1,4 +1,4 @@
-import {TypeOrmModuleOptions} from '@nestjs/typeorm'
+import { TypeOrmModuleOptions } from '@nestjs/typeorm'
 import {Favorite} from './src/entities/favorite'
 import {MenuByArea} from './src/entities/menu-by-area'
 import {ReviewLike} from './src/entities/review_like'
@@ -18,7 +18,7 @@ const config:TypeOrmModuleOptions={
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
     entities: [Favorite,MenuByArea,ReviewLike,Review,SearchWord,Store,User],
-    synchronize: true,
+    synchronize: false,
     autoLoadEntities:true,
     logging:true,
 }

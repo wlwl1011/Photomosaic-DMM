@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FavoriteController } from './favorite/favorite.controller';
@@ -17,12 +17,14 @@ import { ReviewService } from './review/review.service';
 import { SearchWordService } from './search-word/search-word.service';
 import { ConfigModule } from '@nestjs/config';
 import *as ormconfig from '../ormconfig';
+import { UserModule } from './user/user.module';
 
-import { MenuByArea } from './entities/menu-by-area'
-import { ReviewLike } from './entities/review_like';
-import { Review } from './entities/review';
-import { SearchWord } from './entities/search-word';
-import { Store } from './entities/store';
+import { UserController } from './user/user.controller';
+import { response } from 'express';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
+
+
 
 
 @Module({
@@ -31,11 +33,16 @@ import { Store } from './entities/store';
     ConfigModule.forRoot({
       isGlobal:true
     }),
-
-    TypeOrmModule.forRoot(ormconfig)
+    TypeOrmModule.forRoot(ormconfig),
+    UserModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '3600s' },
+    }),
+    
   ],
 
-  controllers: [AppController, FavoriteController, StoreController, MenuByAreaController, ReviewController, SearchWordController],
+  controllers: [AppController, FavoriteController, StoreController, MenuByAreaController, ReviewController, SearchWordController, UserController],
   providers: [AppService, StoreService, FavoriteService, MenuByAreaService, ReviewService, SearchWordService],
 })
 
