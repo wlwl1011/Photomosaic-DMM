@@ -29,6 +29,6 @@ export class MenuByAreaService {
         404,
       );
     }
-    return { data: data, message: 'get favorite list successfully' };
+    return { data: data, message: 'get menu list successfully' };
   }
 }

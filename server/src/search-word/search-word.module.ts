@@ -9,10 +9,7 @@ import { SearchWordService } from './search-word.service';
 @Module({
     imports:[
         TypeOrmModule.forFeature([SearchWord]), 
-        JwtModule.register({
-            secret: jwtConstants.secret,
-            signOptions: { expiresIn: '7200s' },
-        })
+        JwtModule
     ],
     providers:[SearchWordService],
     exports:[SearchWordService]

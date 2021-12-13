@@ -61,40 +61,6 @@ export class UserService {
         return false
     }
     
-    async userinfo(data: string): Promise<any> {
-        return data
-    }
-<<<<<<< HEAD
-
-    async changepassword(data: any, user: any): Promise<any> {
-        const { password } = data;
-        const userdata = await this.userRepository.findOne({ where: { email: user.email } });
-        if(password === userdata.password){
-            return false;
-        }
-        if(password !== userdata.password){
-            userdata.password = password
-            await this.userRepository.save(userdata)
-            return true
-        }
-    }
-
-    async changeusername(data: any, user: any): Promise<any> {
-        const { user_name } = data;
-        const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
-        if(!userdata){
-            const useremail = await this.userRepository.findOne({ where: { email: user.email } });
-            useremail.user_name = user_name;
-            await this.userRepository.save(useremail);
-            return true;
-        }
-        if(userdata){
-            return false;
-        }
-=======
-    return false;
-  }
-
   async userinfo(data: string): Promise<any> {
     return data;
   }
@@ -106,18 +72,14 @@ export class UserService {
     });
     if (password === userdata.password) {
       return false;
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
     }
+}
 
     async delete_account(data: any, user: any): Promise<any> {
         if(data.password !== user.password){
             return 1;
         }
         const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
-<<<<<<< HEAD
-        console.log(userdata)
-=======
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
         if(!userdata){
             return false;
         }
@@ -125,32 +87,9 @@ export class UserService {
             await this.userRepository.delete(userdata.id);
             return true;
         }
-<<<<<<< HEAD
-    }
-
-    async check_username(data: any): Promise<any> {
-        const userdata = await this.userRepository.findOne({ where: { user_name: data.user_name } });
-        if(!userdata){
-            return true;
-        }
-        return false;
-    }
-
-    public uploadFiles(files: File[]): string [] {
-            const generatedFiles: string [] = [];
-        
-              generatedFiles.push(createImageURL(files));
-            
-            return generatedFiles;
-    }
-
-
-
-
-=======
 
     }
-  }
+  
 
   async changeusername(data: any, user: any): Promise<any> {
     const { user_name } = data;
@@ -175,7 +114,8 @@ export class UserService {
               generatedFiles.push(createImageURL(file));
             return generatedFiles;
     }
-    const userdata = await this.userRepository.findOne({
+    async check_username(user: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({
       where: { user_name: user.user_name },
     });
     console.log(userdata);
@@ -183,11 +123,11 @@ export class UserService {
       return false;
     }
     if (userdata) {
-      await this.userRepository.delete(userdata.id);
+
       return true;
     }
   }
-
+    
     async change_image(data: string, user: any): Promise<any>{
         const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
         if(!userdata){
@@ -221,10 +161,5 @@ export class UserService {
         }
 
     }
-
-    generatedFiles.push(createImageURL(files));
-
-    return generatedFiles;
   }
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
-}
+
