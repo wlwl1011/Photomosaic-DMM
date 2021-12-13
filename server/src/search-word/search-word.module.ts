@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import { Module } from '@nestjs/common';
-
-@Module({})
-export class SearchWordModule {}
-=======
 import { Module ,NestModule, MiddlewareConsumer} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { login } from '../middleware/token';
@@ -30,4 +24,3 @@ export class SearchWordModule implements NestModule{
         .forRoutes(SearchWordController);
     }
 }
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd

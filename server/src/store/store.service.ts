@@ -1,33 +1,13 @@
-<<<<<<< HEAD
-import { Injectable } from '@nestjs/common';
-=======
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Store } from 'src/entities/store';
 import { Review } from 'src/entities/review';
 import { getConnection, getManager, Repository } from 'typeorm';
 import { HttpException } from '@nestjs/common';
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
 
 @Injectable()
 export class StoreService {
 
-<<<<<<< HEAD
-    getAll() :{} {
-        //DB에서 찾자 
-        const data:[string,string] = ['1','2'];
-        console.log(data.length);
-
-        if(data !== []){
-            return {"data":data , "message":"get all store infos successfully"}
-        }
-        return {"data":null , "message":"Store doesn't exist"}
-    }
-    getOne(storeId : string){
-        return `get store by ${storeId}` 
-    }
-}
-=======
     constructor(
         @InjectRepository(Store)
         private StoreRepository: Repository<Store>,
@@ -122,4 +102,3 @@ export class StoreService {
 //! 경로 area로 먼저 나눠야하지 않나?
 
 //SELECT ROUND(AVG(rating)) as avg_rating FROM perfume_infos 
->>>>>>> f8bf167468369ad28bfa869e0d377277ad8439bd
