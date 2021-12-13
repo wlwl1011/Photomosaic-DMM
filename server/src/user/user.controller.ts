@@ -15,6 +15,7 @@ import { UserService } from './user.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from '../middleware/multeroption';
 
+
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
@@ -36,10 +37,9 @@ export class UserController {
   @Post('signup')
   @UseInterceptors(FileInterceptor('file', multerOptions))
   async signup(@Request() req, @Res() response, @UploadedFile() file: File[]) {
-    console.log(req);
-    const data = await this.userService.signup(req.body);
     if (req.file === '') {
-      this.userService.sign_image(req.body, 'default image'); //이미지 없으면 default image 삽입
+      // this.userService.sign_image(req.body, 'default image'); //이미지 없으면 default image 삽입
+      const data = await this.userService.signup(req.body, req.file.path);
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
       } else {
@@ -48,8 +48,7 @@ export class UserController {
     }
     if (req.file !== '') {
       const uploadedFiles: string[] = this.userService.uploadFiles(file);
-      this.userService.sign_image(req.body, req.file.path);
-      console.log(uploadedFiles);
+      const data = await this.userService.signup(req.body, req.file.path);
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
       } else {
@@ -168,4 +167,10 @@ export class UserController {
       response.json({ message: 'this username already exist' });
     }
   }
+
+  @Get('google_login')
+  async google_login(@Request() req, @Res() respnse){
+    const google = await this.userService.google_login(req.query.code)
+  }
+
 }
