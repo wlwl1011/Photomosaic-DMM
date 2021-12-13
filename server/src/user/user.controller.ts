@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from '../middleware/multeroption';
 
+
 @Controller('user')
 export class UserController {
 constructor(
@@ -27,14 +28,14 @@ constructor(
   @UseInterceptors(FileInterceptor('file', multerOptions))
   async signup(@Request() req, @Res() response, @UploadedFile() file: File[]) {
     const data = await this.userService.signup(req.body)
-    if(req.body.user_img === '') {
-      this.userService.sign_image(req.body, 'default image')             //이미지 없으면 default image 삽입
+    if(req.file === "") {
+      this.userService.sign_image(req.file, 'default image')             //이미지 없으면 default image 삽입
       if(data){response.status(201).json({ message: 'sign up successfully' })}
       else{response.status(409).json({ message: 'email exists' })}
     }
-    if(req.body.user_img !== '') {
+    if(req.file !== "") {
       const uploadedFiles: string[] = this.userService.uploadFiles(file)
-      this.userService.sign_image(req.body, uploadedFiles[0])
+      this.userService.sign_image(req.file, uploadedFiles[0])
       if(data){response.status(201).json({ message: 'sign up successfully' })}
       else{response.status(409).json({ message: 'email exists' })}
     }
@@ -124,7 +125,7 @@ constructor(
   }
 
   @Post('check-username')
-  async check_username(@Request() req, @Res() response: Response){
+  async check_username(@Request() req, @Res() response){
     const boolean = await this.userService.check_username(req.body)
     if(boolean){
       response.json({ message: 'possible to use this username'})
@@ -134,7 +135,10 @@ constructor(
     }
   }
 
-
+  @Get('google_login')
+  async google_login(@Request() req, @Res() respnse){
+    const google = await this.userService.google_login(req.query.code)
+  }
 
 }
 

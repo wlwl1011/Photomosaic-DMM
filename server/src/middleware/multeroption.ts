@@ -1,8 +1,7 @@
 import { existsSync, mkdirSync } from "fs";
 import { diskStorage } from "multer";
 import uuidRandom from "./uuidRandom";
-import *as dotenv from 'dotenv'
-dotenv.config();
+
 
 export const multerOptions = {
   fileFilter: (request, file, callback) => {
