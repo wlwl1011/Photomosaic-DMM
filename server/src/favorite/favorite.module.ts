@@ -10,7 +10,7 @@ import { jwtConstants } from '../auth/constants';
 
 @Module({
     imports:[TypeOrmModule.forFeature([Favorite,User]), JwtModule.register({
-        secret: jwtConstants.secret,
+        secret: jwtConstants.accesssecret,
         signOptions: { expiresIn: '7200s' },
       }),],
     providers:[FavoriteService],

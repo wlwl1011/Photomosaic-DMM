@@ -61,12 +61,6 @@ export class UserService {
         return false
     }
     
-    async userinfo(data: string): Promise<any> {
-        return data
-    }
-    return false;
-  }
-
   async userinfo(data: string): Promise<any> {
     return data;
   }
@@ -79,6 +73,7 @@ export class UserService {
     if (password === userdata.password) {
       return false;
     }
+}
 
     async delete_account(data: any, user: any): Promise<any> {
         if(data.password !== user.password){
@@ -94,7 +89,7 @@ export class UserService {
         }
 
     }
-  }
+  
 
   async changeusername(data: any, user: any): Promise<any> {
     const { user_name } = data;
@@ -119,7 +114,8 @@ export class UserService {
               generatedFiles.push(createImageURL(file));
             return generatedFiles;
     }
-    const userdata = await this.userRepository.findOne({
+    async check_username(user: any): Promise<any>{
+        const userdata = await this.userRepository.findOne({
       where: { user_name: user.user_name },
     });
     console.log(userdata);
@@ -127,11 +123,11 @@ export class UserService {
       return false;
     }
     if (userdata) {
-      await this.userRepository.delete(userdata.id);
+
       return true;
     }
   }
-
+    
     async change_image(data: string, user: any): Promise<any>{
         const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
         if(!userdata){
@@ -165,9 +161,5 @@ export class UserService {
         }
 
     }
-
-    generatedFiles.push(createImageURL(files));
-
-    return generatedFiles;
   }
-}
+

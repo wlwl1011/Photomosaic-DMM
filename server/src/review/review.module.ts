@@ -13,7 +13,7 @@ import { RequestMethod } from '@nestjs/common';
     imports:[
         TypeOrmModule.forFeature([Review,ReviewLike]), 
         JwtModule.register({
-            secret: jwtConstants.secret,
+            secret: jwtConstants.accesssecret,
             signOptions: { expiresIn: '7200s' },
         })
     ],
