@@ -73,7 +73,7 @@ function Menu() {
 
   return (
     <>
-      <Header handleImg={handleImg} />
+      <Header handleImg={handleImg} isLogin={true}/>
       <section className="menu_container">
         <div className="menu_box">
           <div className="menu_infor-box">

@@ -16,12 +16,14 @@ interface Iprops {
     num_review_like:number
   },
   UserId:number
+  isLike:boolean
   deleteReviewHandler: ()=>void
   reviewLikeHandler: (reivew_id :number)=>void
+  deletereviewLikeHandler: (reivew_id :number)=>void
 }
 
 function Store_list(props: Iprops) {
-  
+
   return (
     <>
       <li className="store_review_li-box">
@@ -30,19 +32,30 @@ function Store_list(props: Iprops) {
         <div className={`store_balloon ${props.mesNone}`}>
           <div className="store_review-info">
             <div className="store_review-info-box">
-              <span className="store_review-info-text">{props.ReviewInfo.user_name!==undefined ? props.ReviewInfo.user_name : null}</span>
-              <span className="store_review-info-day">{props.ReviewInfo.created_at!==undefined ? props.ReviewInfo.created_at.slice(0,10) : null}</span>
+              <span className="store_review-info-text">{props.ReviewInfo.user_name}</span>
+              <span className="store_review-info-day">{props.ReviewInfo.created_at.slice(0,10)}</span>
               <Star_small rating={props.ReviewInfo.rating}/>
-              
-              <span className="store_review-good" onClick={()=>props.reviewLikeHandler(props.ReviewInfo.id)}><img className="store-review-like" src="/store/thumb_full.png" />
-              {props.ReviewInfo.num_review_like!==undefined ? props.ReviewInfo.num_review_like : null}
+
+            {  
+            props.isLike ?
+              <span className="store_review-good" onClick={()=>props.deletereviewLikeHandler(props.ReviewInfo.id)}><img className="store-review-like" src="/store/thumb_full.png" />
+              {props.ReviewInfo.num_review_like}
               </span>
+              :
+              <span className="store_review-good" onClick={()=>props.reviewLikeHandler(props.ReviewInfo.id)}><img className="store-review-like" src="/store/thumb.png" />
+              {props.ReviewInfo.num_review_like}
+              </span>
+            }
+
+
+
+
 
             </div>
             {props.UserId===props.ReviewInfo.user_id ? <img className="store_review-icon" src="/search/close.svg" onClick={props.deleteReviewHandler}/> : null}
           </div>
           <h3 className="store_review-content">
-            {props.ReviewInfo.comment!==undefined ? props.ReviewInfo.comment : null}
+            {props.ReviewInfo.comment}
           </h3>
         </div>
       </li>
