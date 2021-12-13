@@ -1,15 +1,11 @@
 import "./Mypage_empty.css";
 
-interface Iprops {
-  emptyNone: string;
-}
-
-function Mypage_empty(props: Iprops) {
+function Mypage_empty() {
   return (
     <>
-      <div className={`mypage_empty_container ${props.emptyNone}`}>
-        <img className="mypage_empty-img" src="./mypage/empty.png" />
-        <h1 className="mypage_empty-text">위 메뉴 항목을 클릭해주세요!</h1>
+      <div className={`mypage_empty_container`}>
+        <img className="mypage_empty-img" src="/mypage/empty.png" />
+        <h1 className="mypage_empty-text">해당 항목이 비어있습니다.</h1>
       </div>
     </>
   );

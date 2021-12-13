@@ -1,18 +1,13 @@
 import "./Render.css";
-
+import Render_intro from "../../components/render_intro/Render_intro";
+import Render_start from "../../components/render_start/Render_start";
 function Render() {
   return (
     <>
-      <section className="render_intro_container">
-        <div className="render_intro_title-box">
-          <h1 className="render_intro_title">야미서울은</h1>
-          <h1 className="render_intro_title">이런 분들을 위해 만들어졌어요!</h1>
-        </div>
-        <div className="render_intro_box">
-          <div className="balloon_03"></div>
-          <img src="/jonglo_gui.gif" />
-        </div>
-      </section>
+      <div className="render_container">
+        <Render_intro />
+        <Render_start />
+      </div>
     </>
   );
 }

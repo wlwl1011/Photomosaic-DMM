@@ -171,6 +171,19 @@
   margin: 0 auto 40px auto;
 }
 
+@media screen and (max-height: 770px) {
+  .signup_content {
+    padding: 35px 50px;
+  }
+  .signup_title {
+    font-size: 30px;
+  }
+
+  .signup_btn {
+    margin: 0px auto 6px auto;
+  }
+}
+
 @media screen and (max-width: 770px) {
   .signup_content {
     width: 450px;
