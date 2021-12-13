@@ -224,6 +224,9 @@
 
   .signup_nickname-box {
     display: flex;
+    align-items: center;
+
+    justify-content: center;
   }
 }
 
@@ -246,7 +249,8 @@
     font-size: 15px;
   }
   .signup_nickname-check {
-    font-size: 12px;
+    font-size: 10px;
+    right: 22px;
   }
   .signup_nickname-info {
     width: 70%;

@@ -17,6 +17,7 @@ function Store() {
   const [UserId,setUserId] = useState<number>(0)
   const [isLogin,setisLogin]=useState<boolean>(true);
   
+
   type Store = {
     address: string;
     avg_rating: number;
@@ -47,6 +48,7 @@ function Store() {
     review_id:number
   }
 
+
   const [likeList,setLikelist]= useState<likelist[]>([])
   const [StoreInfo,setStoreInfo] = useState<Store>({
     address: "",
@@ -60,9 +62,9 @@ function Store() {
     store_name: "",
     updated_at: "",
   });
+
   const [ReviewInfo,setReviewInfo] = useState<Review[]>([]);
  
-
   const handleImg = () => {
     setChMessage(!chMessage);
     if (chMessage) {
@@ -93,6 +95,7 @@ function Store() {
         });
 
       //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
+
       if(isLogin){
         await axios
           .get(`https://localhost:4000/user/userinfo/userdata`, {
@@ -150,22 +153,23 @@ function Store() {
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        })
-        .then((res) =>{ 
-          setAddFav(true);
-        });
-  }
+        }
+      )
+      .then((res) => {
+        setAddFav(true);
+      });
+  };
 
-  const deleteFavoriteHandler = async()=>{
+  const deleteFavoriteHandler = async () => {
     await axios
-      .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`,
-      {
+      .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      }).then((res)=>{
-        setAddFav(false);
       })
-  }
+      .then((res) => {
+        setAddFav(false);
+      });
+  };
 
   const addReviewHandler = async()=>{
     await axios.post(`https://localhost:4000/review/add-review/`, 
@@ -234,10 +238,19 @@ function Store() {
                     <Star_avg avg_rating={StoreInfo.avg_rating} />
                   </div>
                   <div className="store_tx-icon-box">
-                    {
-                      !addFav ? <img className="store_tx-icon" src="/store/heart.svg" onClick={favoriteHandler}/>
-                       : <img className="store_tx-icon" src="/store/heart_full.png" onClick={deleteFavoriteHandler}/>
-                    }
+                    {!addFav ? (
+                      <img
+                        className="store_tx-icon"
+                        src="/store/heart.svg"
+                        onClick={favoriteHandler}
+                      />
+                    ) : (
+                      <img
+                        className="store_tx-icon"
+                        src="/store/heart_full.png"
+                        onClick={deleteFavoriteHandler}
+                      />
+                    )}
 
                     {
                     isReview? <ReviewEdit signNone={""} handleSignup={function (e: string): void {
