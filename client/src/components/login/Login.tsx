@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
+import axios from "axios";
 
 interface Iprops {
   loginNone: string;
   handleLgoin: (e: string) => void;
+  handleToken: (e: boolean) => void;
 }
 
 interface Infor {
@@ -40,6 +42,41 @@ function Login(props: Iprops) {
     }
   }, [email, password]);
 
+  // api 연결
+  const handleLogin = async () => {
+    const loginData = await axios
+      .post(
+        "https://localhost:4000/user/login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .catch((err) => {
+        setLogFail(true);
+        console.log("🚫 Not Found 🚫", err);
+      });
+
+    if (loginData) {
+      setLogFail(false);
+      // window.location.href: 현 url 주소
+      window.location.replace(window.location.href);
+    }
+  };
+
+  //console.log("토큰 확인", document.cookie);
+
+  // 토큰 있을 경우 if문 없을 경우 else 문
+  if (document.cookie) {
+    props.handleToken(true);
+  } else {
+    props.handleToken(false);
+  }
+
   return (
     <>
       <div id="demo-modal" className={`login_modal ${props.loginNone}`}>
@@ -72,11 +109,13 @@ function Login(props: Iprops) {
                 {logFail ? "로그인이 실패되었습니다." : null}
               </h3>
             </div>
-            <button className="login_btn">로그인</button>
+            <button className="login_btn" onClick={handleLogin}>
+              로그인
+            </button>
             <div className="login_OAuth-box">
-              <img className="login_OAuth" src="./oauth/naver.png" />
-              <img className="login_OAuth" src="./oauth/google.jpeg" />
-              <img className="login_OAuth" src="./oauth/kakao.svg" />
+              <img className="login_OAuth" src="/oauth/naver.png" />
+              <img className="login_OAuth" src="/oauth/google.jpeg" />
+              <img className="login_OAuth" src="/oauth/kakao.svg" />
             </div>
           </section>
         </div>

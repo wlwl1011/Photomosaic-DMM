@@ -15,7 +15,6 @@ function Header_Off(props: Iprops) {
 
   // 회원가입 모달 관리
   const [signNone, setSignNone] = useState<string>("signup_hidden");
-
   // 로그인 모달 관리
   const [loginNone, setLoginNone] = useState<string>("login_hidden");
 
@@ -25,6 +24,9 @@ function Header_Off(props: Iprops) {
   // 검색 모달 right -50% 좌표 주기
   const [chRight, setChRight] = useState<boolean>(true);
   const [right, setRight] = useState<string>("");
+
+  // 토큰 유무 관리
+  const [token, setToken] = useState<boolean>(false);
 
   // 태블릿 스마트폰 버전 함수
   const handleMenuOn = () => {
@@ -54,61 +56,101 @@ function Header_Off(props: Iprops) {
     setSignNone(e);
   };
 
+  const handleToken = (e: boolean) => {
+    setToken(e);
+  };
+
   return (
     <>
       <header className="header_main">
         <nav className="header_nav header_container">
           <div className="header_box1"></div>
           <a href="#" className="header_title header_box2">
-            Yummy <img className="header_logo" src="./logo.svg" /> Seoul
+            Yummy <img className="header_logo" src="/logo.svg" /> Seoul
           </a>
           <div className={`header__menu ${hidden} header_box3`}>
             <ul className="header__list header_grid">
-              <li className="header__item" onClick={() => handleLgoin("")}>
-                <a href="#" className="header__link">
-                  <img className="header_icon-size" src="./menu/signin.svg" />
-                  로그인
-                </a>
-              </li>
-              <li className="header__item" onClick={() => handleSignup("")}>
-                <a href="#" className="header__link">
-                  <img
-                    className="header_icon-size"
-                    src="./menu/user-plus.svg"
-                  />
-                  회원가입
-                </a>
-              </li>
+              {token ? (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleLgoin("")}
+                      className="header_icon-size"
+                      src="/menu/signout.svg"
+                    />
+                    <h4 onClick={() => handleLgoin("")}>로그아웃</h4>
+                  </div>
+                </li>
+              ) : (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleLgoin("")}
+                      className="header_icon-size"
+                      src="/menu/signin.svg"
+                    />
+                    <h4 onClick={() => handleLgoin("")}>로그인</h4>
+                  </div>
+                </li>
+              )}
+              {token ? (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleLgoin("")}
+                      className="header_icon-size"
+                      src="/menu/user.svg"
+                    />
+                    <h4 onClick={() => handleLgoin("")}>마이페이지</h4>
+                  </div>
+                </li>
+              ) : (
+                <li className="header__item">
+                  <div className="header__link">
+                    <img
+                      onClick={() => handleSignup("")}
+                      className="header_icon-size"
+                      src="/menu/user-plus.svg"
+                    />
+                    <h4 onClick={() => handleSignup("")}>회원가입</h4>
+                  </div>
+                </li>
+              )}
+
               <li className="header__item">
-                <a href="#" className="header__link">
+                <div className="header__link">
                   <label
                     htmlFor="search_modal"
                     className="search_label-box"
                     onClick={handleSearch}
                   >
                     검색
-                    <img className="header_icon-size" src="./menu/search.svg" />
+                    <img className="header_icon-size" src="/menu/search.svg" />
                   </label>
-                </a>
+                </div>
 
                 <img
                   onClick={handleMenuOff}
                   className="header_close-icon header_icon-size"
-                  src="./search/close_tap.svg"
+                  src="/search/close_tap.svg"
                 />
               </li>
             </ul>
           </div>
           <div>
             <div className="header__toggle" onClick={handleMenuOn}>
-              <img className="header_icon-size" src="./menu/apps.svg" />
+              <img className="header_icon-size" src="/menu/apps.svg" />
             </div>
           </div>
         </nav>
       </header>
       <Search animation={animation} right={right} handleSearch={handleSearch} />
       <Signup signNone={signNone} handleSignup={handleSignup} />
-      <Login loginNone={loginNone} handleLgoin={handleLgoin} />
+      <Login
+        loginNone={loginNone}
+        handleLgoin={handleLgoin}
+        handleToken={handleToken}
+      />
     </>
   );
 }

@@ -13,7 +13,7 @@ import { join } from 'path';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User]),JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: jwtConstants.accesssecret,
       signOptions: { expiresIn: '7200s' },
     }),
     ServeStaticModule.forRoot({

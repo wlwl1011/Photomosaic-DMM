@@ -7,7 +7,7 @@ function Search_list() {
         <span>캘리포니아</span>
         <div className="search_lately-list-box">
           <span>2021-12-02</span>
-          <img className="search_list-close" src="./search/close.svg" />
+          <img className="search_list-close" src="/search/close.svg" />
         </div>
       </li>
     </>

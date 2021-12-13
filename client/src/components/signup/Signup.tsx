@@ -27,6 +27,14 @@ function Signup(props: Iprops) {
   const { email, password, passwordCheck, nickname } = infor;
 
   const handleNone = () => {
+    const inputElement: NodeListOf<Element> =
+      document.querySelectorAll(".signup_input");
+
+    inputElement.forEach((el) => {
+      let data = el as HTMLInputElement;
+      data.value = "";
+    });
+    setPwCheck(false);
     props.handleSignup("signup_hidden");
   };
 
@@ -134,13 +142,13 @@ function Signup(props: Iprops) {
               <input
                 type="word"
                 name="nickname"
-                className="signup_input-last"
+                className="signup_input signup_input-last"
                 placeholder="닉네임"
                 onChange={handleInfor}
               />
               <div className="signup_nickname-box">
                 <h5 className="signup_nickname-info">
-                  ✅ 중복된 닉네임입니다.
+                  ⛔️ 중복된 닉네임입니다.
                 </h5>
                 <button className="signup_nickname-check">중복 검사</button>
               </div>

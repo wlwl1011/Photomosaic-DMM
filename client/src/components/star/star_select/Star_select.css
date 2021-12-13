@@ -1,0 +1,90 @@
+/* Base setup */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+body {
+  text-align: center;
+  background: rgb(255, 255, 255);
+  color: #333;
+}
+
+.star_select_imoge-box {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  margin: 15px auto;
+  font-size: 20px;
+}
+.star_select_imoge {
+  position: absolute;
+  animation: slide-in-blurred-top 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Ratings widget */
+.star_select_rate {
+  display: inline-block;
+  border: 0;
+  width: 255px;
+  height: 50px;
+}
+
+@keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+    filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+    transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.star_select_imoge-none {
+  display: none;
+}
+
+/* Hide radio */
+.star_select_rate > .star_select_input {
+  display: none;
+}
+/* Order correctly by floating highest to the right */
+.star_select_rate > .star_select_label {
+  float: right;
+}
+/* The star of the show */
+.star_select_rate > .star_select_label:before {
+  display: inline-block;
+  font-size: 3rem;
+  padding: 0.3rem 0.2rem;
+  margin: 0;
+  cursor: pointer;
+  font-family: FontAwesome;
+  content: "\f005 "; /* full star */
+}
+
+/* Half star trick */
+.star_select_rate .star_select_half:before {
+  content: "\f089 "; /* half star no outline */
+  position: absolute;
+  padding-right: 0;
+}
+/* Click + hover color */
+.star_select_input:checked ~ .star_select_label, /* color current and previous stars on checked */
+.star_select_label:hover, .star_select_label:hover ~ .star_select_label {
+  color: #f4b700;
+} /* color previous stars on hover */
+
+/* Hover highlights */
+.star_select_input:checked + .star_select_input:hover, .star_select_input:checked ~ .star_select_label:hover, /* highlight current and previous stars */
+.star_select_input:checked ~ .star_select_label:hover ~ .star_select_label, /* highlight previous selected stars for new rating */
+.star_select_label:hover ~ .star_select_input:checked ~ .star_select_label /* highlight previous selected stars */ {
+  color: #f4b700;
+}
