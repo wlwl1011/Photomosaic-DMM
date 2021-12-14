@@ -52,6 +52,7 @@
   padding-top: 30px;
   background-color: #fff;
   border-radius: 10px;
+  height: 470px;
   width: 100%;
 }
 
@@ -64,47 +65,23 @@
   display: flex;
   justify-content: space-around;
   padding-bottom: 10px;
+  color: rgb(217, 217, 217);
   border-bottom: 2px solid rgb(217, 217, 217);
 }
 
-.profile_change-container {
-  margin: 50px auto 0 auto;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
-
-.profile_btn-box {
-  display: flex;
-  justify-content: center;
-}
-
-.profile_btn {
-  all: unset;
-  color: white;
-  font-size: 17px;
-  background-color: black;
-  width: 90px;
-  height: 40px;
+.profile_select_text {
+  color: rgb(217, 217, 217);
   cursor: pointer;
-  margin: 30px 0 30px 0;
-  align-items: center;
 }
 
-.profile_btn:hover {
-  color: rgb(207, 206, 206);
+.profile_select_pass-check {
+  color: black;
 }
 
-@media screen and (max-width: 470px) {
-  .logout_content {
-    width: 330px;
-  }
+.profile_select_name-check {
+  color: black;
+}
 
-  .logout_title {
-    font-size: 20px;
-  }
-
-  .logout_btn {
-    font-size: 15px;
-  }
+.profile_select_img-check {
+  color: black;
 }
