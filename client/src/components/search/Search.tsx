@@ -2,6 +2,7 @@ import "./Search.css";
 import React, { useState } from "react";
 import Search_list from "../search_list/Search_list";
 import Search_result from "../search_result/Search_result";
+import axios from "axios";
 
 interface Iprops {
   animation: boolean;
@@ -16,6 +17,12 @@ function Search(props: Iprops) {
   // 검색 리스트 관리
   const [list, setList] = useState<boolean>(false);
 
+  // input 검색어 관리
+  const [Search, setSearch] = useState<string>('')
+
+  // props 내려줄 데이터 관리
+  const [data, setdata] = useState<any>({})
+
   // 검색 필터 관리
   const handleList = () => {
     setList(!list);
@@ -26,6 +33,33 @@ function Search(props: Iprops) {
     const data: string = e.target.getAttribute("value");
     setliValue(data);
   };
+
+  // 검색 아이콘 클릭시 서버에 요청
+  const SearchClick = async() => {
+   const Post: any = (liValue === '가게' ? 
+   await axios.get(
+     `https://localhost:4000/store/byStorename/${Search}`,
+   {
+     headers: { "Content-Type": "application/json" },
+     withCredentials: true
+   }
+  ) :
+   (liValue === '메뉴' ?
+   await axios.get(
+    `https://localhost:4000/store/byMenu/${Search}`,
+  {
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true
+  }
+ ) : '해당하는 메뉴가 없습니다.'))
+    setdata(Post.data.data)
+  }
+
+  // 검색창 검색 value 업데이트
+  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setSearch(value)
+  }
 
   return (
     <>
@@ -86,9 +120,10 @@ function Search(props: Iprops) {
                     <input
                       className="search_input"
                       placeholder="필터를 선택하여 검색어를 입력해주세요"
+                      onChange={inputChange}
                     />
                     <div className="search_icon-box">
-                      <img className="search_icon" src="/search/search.svg" />
+                      <img className="search_icon" src="/search/search.svg" onClick={SearchClick}/>
                     </div>
                   </div>
                 </nav>
@@ -96,9 +131,8 @@ function Search(props: Iprops) {
               <div className="search_lately-container">
                 <h3 className="search_lately-title">최근 검색어</h3>
                 <ul className="search_lately-box">
-                  <Search_list />
-                  <Search_list />
-                  <Search_list />
+                  
+                  
                 </ul>
               </div>
               <div className="search_result-container">

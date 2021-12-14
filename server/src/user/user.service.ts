@@ -178,8 +178,57 @@ export class UserService {
           authorization: `Bearer ${access_token.data.access_token}`,
         },		
           })
-          console.log(userInfo)
+          const userdata = await this.userRepository.findOne({ where: { id: userInfo.data.id } })
+        if(userInfo && !userdata){
+          return ;
+        }
+        if(!userInfo || userdata){
+          await this.userRepository.save({
+            id: userInfo.data.id,
+            email: userInfo.data.email,
+            password: 'admin',
+            user_name: userInfo.data.name,
+            user_img: userInfo.data.picture
+          })
+          return ;
+        }
     }
+
+    async kakao_login(data: any) {
+      const url = `https://kauth.kakao.com/oauth/token?code=${data}&client_id=${process.env.KAKAO_CLIENT_ID}&client_secret=${process.env.KAKAO_CLIENT_SECRET}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}&grant_type=authorization_code`
+      const access_token = await axios.post(
+        url,
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        },
+      )
+      
+      const kakaoAPI = `https://kapi.kakao.com/v2/user/me`
+      const userInfo = await axios
+      .get(kakaoAPI, {
+        headers: {
+          authorization: `Bearer ${access_token.data.access_token}`,
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+      const userdata = await this.userRepository.findOne({ where: { id: userInfo.data.id } })
+      
+      if(userInfo && !userdata){
+        return false;
+      }
+      if(!userInfo || userdata){
+        await this.userRepository.save({
+          id: userInfo.data.properties.id,
+          email: userInfo.data.properties.account_email || userInfo.data.id,
+          password: 'admin',
+          user_name: userInfo.data.properties.nickname,
+          user_img: userInfo.data.properties.profile_image
+        })
+        return true;
+      }
+      
+    }
+    
 
   }
 

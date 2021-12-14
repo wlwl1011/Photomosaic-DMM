@@ -77,11 +77,11 @@ export class CreateInitialData implements Seeder {
         .into(SearchWord)
         .values([
             {
-                user_id:1,
+                user_id:2,
                 search_word:"sh",    
             },
             {
-                user_id:1,
+                user_id:2,
                 search_word:"shsh",    
             } 
         ])

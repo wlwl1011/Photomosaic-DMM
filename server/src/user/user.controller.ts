@@ -76,7 +76,6 @@ export class UserController {
 
   @Get('userinfo/userdata')
   async getprofile(@Request() req, @Res() response) {
-    console.log(req);
     const userdata = await this.userService.userinfo(req);
     delete userdata.user.password;
     response.json({
@@ -158,7 +157,7 @@ export class UserController {
   }
 
   @Post('check-username')
-  async check_username(@Request() req, @Res() response: Response) {
+  async check_username(@Request() req, @Res() response) {
     const boolean = await this.userService.check_username(req.body);
     if (!boolean) {
       response.json({ message: 'possible to use this username' });
@@ -169,8 +168,17 @@ export class UserController {
   }
 
   @Get('google_login')
-  async google_login(@Request() req, @Res() respnse){
+  async google_login(@Request() req, @Res() response){
+    console.log(req)
     const google = await this.userService.google_login(req.query.code)
+      response.json({ message: 'login successfully'})
+  }
+
+  @Get('kakao_login')
+  async kakao_login(@Request() req, @Res() response){
+    const kakao = await this.userService.kakao_login(req.query.code)
+      response.json({ message: 'login successfully'})
+
   }
 
 }

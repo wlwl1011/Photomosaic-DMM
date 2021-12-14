@@ -14,4 +14,9 @@ export class StoreController {
     getOne(@Param('id') storeId : string){
         return this.StoreService.getOne(storeId)
     }
+
+    @Get('/byStorename/:store_name')
+    getByStorename(@Param('store_name') storeName : string){
+        return this.StoreService.getByStoreName(storeName);
+    }
 }
