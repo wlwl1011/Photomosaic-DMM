@@ -76,7 +76,6 @@ export class UserController {
 
   @Get('userinfo/userdata')
   async getprofile(@Request() req, @Res() response) {
-    console.log(req);
     const userdata = await this.userService.userinfo(req);
     delete userdata.user.password;
     response.json({

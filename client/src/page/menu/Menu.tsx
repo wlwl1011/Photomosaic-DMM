@@ -88,7 +88,7 @@ function Menu() {
             </aside>
             <div className="menu_infor-map-box">
               <div className="menu_infor-map">
-                <Kakao_map />
+                <Kakao_map coordsHandler={(x,y)=>{}}/>
               </div>
             </div>
           </div>

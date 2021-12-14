@@ -7,12 +7,13 @@ import Kakao_map from "../../components/kakao_map/Kakao_map";
 import ReviewEdit from "../../components/reviewedit/ReviewEdit";
 import { useState, useEffect, MouseEventHandler, SetStateAction } from "react";
 import axios from "axios";
+import Login from "../../components/login/Login";
 
 function Store() {
   const [chMessage, setChMessage] = useState<boolean>(false);
   const [mesNone, setMesNone] = useState<string>("");
   const [count,setCount]=useState<number>(0)
-  const [addFav,setAddFav]=useState<boolean>(false);
+  const [addFav,setAddFav]=useState<boolean>();
   const [reviewlike,setReviewLike]=useState<number>(0);
   const [UserId,setUserId] = useState<number>(0)
   const [isLogin,setisLogin]=useState<boolean>(true);
@@ -125,6 +126,7 @@ function Store() {
         }
       //!유저가 이 가게를 찜햇는지 아닌지 확인
       if(isLogin){
+        //console.log('store_name',StoreInfo.store_name)
         await axios
           .get(`https://localhost:4000/favorite/check-favorite/${StoreInfo.store_name}`, {
             headers: { "Content-Type": "application/json" },
@@ -138,8 +140,6 @@ function Store() {
       
     })();
   }, [count, addFav, reviewlike]);
-
- console.log('addFav',addFav)
 
   const  favoriteHandler = async() =>{
     await axios
@@ -219,8 +219,13 @@ function Store() {
     else setIsReview(true);
   }
 
-  
-  
+  const [coords,setCoords]=useState<number[]>([]);
+
+  const coordsHandler=(x:number,y:number)=>{
+    setCoords([x,y])
+  }  
+
+  console.log(coords);
   return (
     <>
       <Header handleImg={handleImg} isLogin={isLogin}/>
@@ -229,7 +234,7 @@ function Store() {
           <div className="store_info_box">
             <div className="store_info_box-line">
               <aside className="store_map-box">
-                <Kakao_map />
+                <Kakao_map coordsHandler={coordsHandler}/>
               </aside>
               <div className="store_text-box">
                 <div className="store_tx-title-box">
@@ -281,7 +286,7 @@ function Store() {
                   </h3>
                 </div>
                 <div className="store_tx-btn-box">
-                  <button className="store-btn">대중교통 길찾기</button>
+                  <button className="store-btn"><a href={`https://map.kakao.com/link/to/카카오판교오피스,${coords[0]},${coords[1]}`} target="_blank">대중교통 길찾기</a></button>
                   <button className="store-btn">차량 길찾기</button>
                 </div>
               </div>
@@ -322,6 +327,7 @@ function Store() {
           </div>
         </section>
       </div>
+     
       <Footer />
     </>
   );
