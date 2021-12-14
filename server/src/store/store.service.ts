@@ -94,6 +94,20 @@ export class StoreService {
         }
         return {"data":data , "message":"get store info successfully"}
     }
+
+    async getByStoreName(storeName:string){
+        const store=await this.StoreRepository.findOne({
+            where:{store_name:storeName}
+        })
+        if(!store){
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                data : null,
+                message: "this store name doesn't exist",
+            }, 404);
+        }
+        return {"data":store , "message":"get store info successfully"}
+    }
 }
 
 

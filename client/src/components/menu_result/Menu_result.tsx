@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Star_avg from "../star/star_avg/Star_avg";
 import "./Menu_result.css";
 
@@ -7,6 +8,7 @@ interface Iprops {
   imageBox: string;
   starNone: string;
   store_list: {
+    id:number;
     address: string;
     avg_rating: number;
     menu_name: string;
@@ -20,6 +22,7 @@ interface Iprops {
 function Menu_result(props: Iprops) {
   return (
     <>
+     <Link to={ {pathname:`/store/${props.store_list.id}` }} style={{textDecoration: 'none'}} >
       <li className="menu_result-list">
         <div className={`menu_result-img-box ${props.imageBox}`}>
           <div className={`menu_result-star-box ${props.starNone}`}>
@@ -42,7 +45,8 @@ function Menu_result(props: Iprops) {
           </div>
         </div>
       </li>
-    </>
+      </Link>
+    </> 
   );
 }
 

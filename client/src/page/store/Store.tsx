@@ -9,7 +9,7 @@ import { useState, useEffect, MouseEventHandler, SetStateAction } from "react";
 import axios from "axios";
 import Login from "../../components/login/Login";
 
-function Store() {
+function Store({match}:any) {
   const [chMessage, setChMessage] = useState<boolean>(false);
   const [mesNone, setMesNone] = useState<string>("");
   const [count,setCount]=useState<number>(0)
@@ -78,7 +78,7 @@ function Store() {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://localhost:4000/store/byId/1`, {
+        .get(`https://localhost:4000/store/byId/${match.params.store_id}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -87,13 +87,14 @@ function Store() {
         });
 
       await axios
-        .get(`https://localhost:4000/review/byStoreId/1`, {
+        .get(`https://localhost:4000/review/byStoreId/${match.params.store_id}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
         .then((res) => {
           setReviewInfo(res.data.data);
-        });
+        }).catch((err)=>{})
+        ;
 
       //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
 
@@ -113,7 +114,7 @@ function Store() {
       //! 스토어별 리뷰중에 로그인한 유저가 좋아요한 리뷰리스트
       if(isLogin){
         await axios
-          .get(`https://localhost:4000/review/likelist/1`, {
+          .get(`https://localhost:4000/review/likelist/${match.params.store_id}`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
@@ -171,18 +172,19 @@ function Store() {
       });
   };
 
-  const addReviewHandler = async()=>{
+  const addReviewHandler = async(store_id:number,comment:string,rating:number)=>{
     await axios.post(`https://localhost:4000/review/add-review/`, 
     {
-      store_id:0,
-      comment:"",
-      rating:"",
+      store_id:store_id,
+      comment:comment,
+      rating:rating,
     },
     {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
       setCount(count+1);
+      window.location.replace(window.location.href);
     });
   }
 
@@ -326,7 +328,7 @@ function Store() {
           </div>
         </section>
       </div>
-      <ReviewEdit reviewNone={reviewNone} reviewEdit={reviewEdit} />           
+      <ReviewEdit reviewNone={reviewNone} reviewEdit={reviewEdit} addReviewHandler={addReviewHandler} storeId={StoreInfo.id} />           
       <Footer />
     </>
   );
