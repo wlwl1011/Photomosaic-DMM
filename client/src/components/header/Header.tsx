@@ -66,7 +66,7 @@ function Header_Off(props: Iprops) {
       <header className="header_main">
         <nav className="header_nav header_container">
           <div className="header_box1"></div>
-          <a href="#" className="header_title header_box2">
+          <a href='/main' className="header_title header_box2">
             Yummy <img className="header_logo" src="/logo.svg" /> Seoul
           </a>
           <div className={`header__menu ${hidden} header_box3`}>
