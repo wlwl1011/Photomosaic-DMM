@@ -111,6 +111,10 @@
   .header__menu_hidden {
     bottom: 0%;
   }
+
+  .header__link {
+    cursor: default;
+  }
 }
 
 /* 테블릿, 스마트폰 사이즈에 맞는 하단바 미디어 쿼리 */
@@ -194,10 +198,6 @@
   .header_logo {
     width: 40px;
     height: 40px;
-  }
-
-  .header__link {
-    cursor: default;
   }
 }
 

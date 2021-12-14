@@ -1,72 +1,46 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./ReviewEdit.css";
 import React from "react";
+import Star_select from "../star/star_select/Star_select";
 
 interface Iprops {
-  signNone: string;
-  handleSignup: (e: string) => void;
-  reviewEdit: string;
-}
-
-interface Infor {
-  email: string;
-  password: string;
-  passwordCheck: string;
-  nickname: string;
+  reviewEdit: (e: string) => void;
+  addReviewHandler:(store_id:number,comment:string,rating:number)=>void;
+  reviewNone: string;
+  storeId:number
 }
 
 function ReviewEdit(props: Iprops) {
-  // const [info, setInfo] = useState<Infor>({
-  //   email: "",
-  //   password: "",
-  const [infor, setInfor] = useState<Infor>({
-    email: "",
-    password: "",
-    passwordCheck: "",
-    nickname: "",
-  });
-  const handleInfor = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInfor({ ...infor, [name]: value });
-  };
   const handleNone = () => {
-    props.handleSignup("signup_hidden");
+    props.reviewEdit("reviewEdit_hidden");
   };
+
+  const [rating,setRating]=useState<number>(0);
+  const [comment,setComment]=useState<string>("");
+  
+  const ratingHandler=(rating:number)=>{
+    setRating(rating)
+  }
+
+  const commentHandler=(e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+    setComment(e.target.value)
+  }
 
   return (
     <>
-     <div className={`singout_modal ${props.signNone}`}>
-        <div className="signout_overlay"></div>
-        <div className="reviewEd_content">
-          <button className="signout_closeBtn" onClick={handleNone}>
+      <div className={`reviewEdit_modal ${props.reviewNone}`}>
+        <div className="reviewEdit_overlay"></div>
+        <div className="reviewEdit_content">
+          <button className="reviewEdit_closeBtn" onClick={handleNone}>
             ❌
           </button>
-          <section className="signout_writing">
-            <h1 className="signout_title">리뷰작성</h1>
-            <br />
-            <div className="review_rating"> {/* 별점기능구현..? */}
-            <div className="warning_msg">별점을 선택해 주세요.</div>
-            <div className="rating">
-              <input type="checkbox" id="star1" name="star1" value="1" />
+          <section className="reviewEdit_writing">
+            <h1 className="reviewEdit_title">리뷰 쓰기</h1>
+            <Star_select ratingHandler={ratingHandler}/>
+            <div className="reviewEdit_input-box">
+              <textarea className="reviewEdit_input" onChange={commentHandler}></textarea>
             </div>
-        </div>
-            <br />           
-            
-            <div className="reviewEd_input-box">               
-              <h3 className="reviewEd_input-box2">
-              <input
-              type="review"
-              name="reviewEdit"
-              className="review_input"
-              placeholder="리뷰를 작성해주세요."
-              onChange={handleInfor}
-              />
-              </h3>
-              {/* {passwordError && ()} */}
-           </div>
-           <br />
-            <button className="reviewEd_btn">작성하기</button>
-            
+            <button className="reviewEdit_btn" onClick={()=>{props.addReviewHandler(props.storeId,comment,rating)}}>리뷰 등록</button>
           </section>
         </div>
       </div>
@@ -75,4 +49,3 @@ function ReviewEdit(props: Iprops) {
 }
 
 export default ReviewEdit;
-

@@ -1,0 +1,80 @@
+.nickname_chan {
+  height: 280px;
+}
+
+.nickname_chan-container {
+  margin: 50px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.nickname_chan-box {
+  height: 75px;
+}
+
+.nickname_chan_input {
+  font-weight: 100;
+  padding: 11px 62px 10px 20px;
+  border: 2px solid #8a8a8a !important;
+  margin: 10px auto;
+  height: 40px;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.nickname_chan-text-box {
+  display: flex;
+  justify-content: center;
+}
+
+.nickname_chan-text {
+  font-size: 14px;
+}
+
+.nickname_chan-check {
+  font-size: 13px;
+  position: absolute;
+  right: 157px;
+  top: 258px;
+  cursor: pointer;
+}
+
+.nickname_chan_btn-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130px;
+  margin-top: 75px;
+  flex-direction: column;
+}
+
+.nickname_chan_btn-text-box {
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.nickname_chan_btn-text-success {
+  color: rgb(33 137 32);
+}
+
+.nickname_chan_btn {
+  all: unset;
+  color: white;
+  font-size: 25px;
+  background-color: black;
+  width: 120px;
+  height: 50px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.nickname_chan_btn:hover {
+  color: rgb(207, 206, 206);
+}
+
+.nickname_chan_none {
+  display: none;
+}

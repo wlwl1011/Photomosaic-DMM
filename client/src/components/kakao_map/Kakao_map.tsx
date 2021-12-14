@@ -7,7 +7,11 @@ declare global {
   }
 }
 
-function Kakao_map() {
+interface Iprops {
+  coordsHandler: (x :number,y:number) =>void
+}
+
+function Kakao_map(props:Iprops) {
   // const [width, setWidth] = useState<number>(0);
 
   // let result: any = document.querySelector<HTMLElement>(".kakao_map_container");
@@ -50,7 +54,7 @@ function Kakao_map() {
           );
 
           var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-
+          props.coordsHandler(result[0].y, result[0].x)  
           // 결과값으로 받은 위치를 마커로 표시합니다
           new window.kakao.maps.Marker({
             map: map,

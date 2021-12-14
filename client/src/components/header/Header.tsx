@@ -4,10 +4,12 @@ import "./Header.css";
 import Search from "../search/Search";
 import Signup from "../signup/Signup";
 import Login from "../login/Login";
+import Logout from "../logout/Logout";
+import { Link } from "react-router-dom";
 
 interface Iprops {
   handleImg: () => void;
-  isLogin : boolean
+  isLogin: boolean;
 }
 
 function Header_Off(props: Iprops) {
@@ -18,6 +20,8 @@ function Header_Off(props: Iprops) {
   const [signNone, setSignNone] = useState<string>("signup_hidden");
   // 로그인 모달 관리
   const [loginNone, setLoginNone] = useState<string>("login_hidden");
+  // 로그인 모달 관리
+  const [logoutNone, setLogoutNone] = useState<string>("logout_hidden ");
 
   // 초반 검색 효과 제거
   const [animation, setAnimation] = useState<boolean>(false);
@@ -53,8 +57,9 @@ function Header_Off(props: Iprops) {
   const handleSignup = (e: string) => {
     setSignNone(e);
   };
-
-
+  const handleLogout = (e: string) => {
+    setLogoutNone(e);
+  };
 
   return (
     <>
@@ -74,7 +79,7 @@ function Header_Off(props: Iprops) {
                       className="header_icon-size"
                       src="/menu/signout.svg"
                     />
-                    <h4 onClick={() => handleLgoin("")}>로그아웃</h4>
+                    <h4 onClick={() => handleLogout("")}>로그아웃</h4>
                   </div>
                 </li>
               ) : (
@@ -90,16 +95,18 @@ function Header_Off(props: Iprops) {
                 </li>
               )}
               {props.isLogin ? (
-                <li className="header__item">
-                  <div className="header__link">
-                    <img
-                      onClick={() => handleLgoin("")}
-                      className="header_icon-size"
-                      src="/menu/user.svg"
-                    />
-                    <h4 onClick={() => handleLgoin("")}>마이페이지</h4>
-                  </div>
-                </li>
+                <Link to="/mypage">
+                  <li className="header__item">
+                    <div className="header__link">
+                      <img
+                        onClick={() => handleLgoin("")}
+                        className="header_icon-size"
+                        src="/menu/user.svg"
+                      />
+                      <h4>마이페이지</h4>
+                    </div>
+                  </li>
+                </Link>
               ) : (
                 <li className="header__item">
                   <div className="header__link">
@@ -142,10 +149,8 @@ function Header_Off(props: Iprops) {
       </header>
       <Search animation={animation} right={right} handleSearch={handleSearch} />
       <Signup signNone={signNone} handleSignup={handleSignup} />
-      <Login
-        loginNone={loginNone}
-        handleLgoin={handleLgoin}
-      />
+      <Login loginNone={loginNone} handleLgoin={handleLgoin} />
+      <Logout logoutNone={logoutNone} handleLogout={handleLogout} />
     </>
   );
 }

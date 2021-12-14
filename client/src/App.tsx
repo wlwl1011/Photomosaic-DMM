@@ -8,6 +8,7 @@ import Store from "./page/store/Store";
 import Mypage from "./page/mypage/Mypage";
 import Not_found from "./components/not_found/Not_found";
 import Render from "./page/render/Render";
+import Signout from "./components/signout/Signout";
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
           <Switch>
             <Route exact path="/" render={() => <Render />} />
             <Route exact path="/main" component={Main} />
-            <Route exact path="/menu" component={Menu} />
-            <Route exact path="/store" component={Store} />
+            <Route path="/menu/:area_name/:menu_name/" component={Menu} />
+            <Route path="/store/:store_id" component={Store} />
             <Route exact path="/mypage" component={Mypage} />
             <Route path="*" component={Not_found} />
           </Switch>

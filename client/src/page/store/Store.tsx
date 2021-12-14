@@ -7,16 +7,17 @@ import Kakao_map from "../../components/kakao_map/Kakao_map";
 import ReviewEdit from "../../components/reviewedit/ReviewEdit";
 import { useState, useEffect, MouseEventHandler, SetStateAction } from "react";
 import axios from "axios";
+import Login from "../../components/login/Login";
 
-function Store() {
+function Store({match}:any) {
   const [chMessage, setChMessage] = useState<boolean>(false);
   const [mesNone, setMesNone] = useState<string>("");
   const [count,setCount]=useState<number>(0)
-  const [addFav,setAddFav]=useState<boolean>(false);
+  const [addFav,setAddFav]=useState<boolean>();
   const [reviewlike,setReviewLike]=useState<number>(0);
   const [UserId,setUserId] = useState<number>(0)
   const [isLogin,setisLogin]=useState<boolean>(true);
-  
+  const [reviewNone, setLoginNone] = useState<string>("reviewEdit_hidden");
 
   type Store = {
     address: string;
@@ -77,7 +78,7 @@ function Store() {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://localhost:4000/store/byId/1`, {
+        .get(`https://localhost:4000/store/byId/${match.params.store_id}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -86,13 +87,14 @@ function Store() {
         });
 
       await axios
-        .get(`https://localhost:4000/review/byStoreId/1`, {
+        .get(`https://localhost:4000/review/byStoreId/${match.params.store_id}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
         .then((res) => {
           setReviewInfo(res.data.data);
-        });
+        }).catch((err)=>{})
+        ;
 
       //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
 
@@ -112,7 +114,7 @@ function Store() {
       //! 스토어별 리뷰중에 로그인한 유저가 좋아요한 리뷰리스트
       if(isLogin){
         await axios
-          .get(`https://localhost:4000/review/likelist/1`, {
+          .get(`https://localhost:4000/review/likelist/${match.params.store_id}`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
@@ -125,6 +127,7 @@ function Store() {
         }
       //!유저가 이 가게를 찜햇는지 아닌지 확인
       if(isLogin){
+        //console.log('store_name',StoreInfo.store_name)
         await axios
           .get(`https://localhost:4000/favorite/check-favorite/${StoreInfo.store_name}`, {
             headers: { "Content-Type": "application/json" },
@@ -138,8 +141,6 @@ function Store() {
       
     })();
   }, [count, addFav, reviewlike]);
-
- console.log('addFav',addFav)
 
   const  favoriteHandler = async() =>{
     await axios
@@ -171,18 +172,19 @@ function Store() {
       });
   };
 
-  const addReviewHandler = async()=>{
+  const addReviewHandler = async(store_id:number,comment:string,rating:number)=>{
     await axios.post(`https://localhost:4000/review/add-review/`, 
     {
-      store_id:0,
-      comment:"",
-      rating:"",
+      store_id:store_id,
+      comment:comment,
+      rating:rating,
     },
     {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
       setCount(count+1);
+      window.location.replace(window.location.href);
     });
   }
 
@@ -213,14 +215,20 @@ function Store() {
     });
   }
 
-  const [isReview,setIsReview]=useState<boolean>(false)
-  const reviewEdit = ()=>{
-    if(isReview) setIsReview(false);
-    else setIsReview(true);
-  }
+  const [isReview, setIsReview] = useState<boolean>(false);
+  const reviewEdit = (e: string) => {
+    setLoginNone(e);
+    // if (isReview) setIsReview(false);
+    // else setIsReview(true);
+  };
 
-  
-  
+  const [coords,setCoords]=useState<number[]>([]);
+
+  const coordsHandler=(x:number,y:number)=>{
+    setCoords([x,y])
+  }  
+
+  console.log(coords);
   return (
     <>
       <Header handleImg={handleImg} isLogin={isLogin}/>
@@ -229,7 +237,7 @@ function Store() {
           <div className="store_info_box">
             <div className="store_info_box-line">
               <aside className="store_map-box">
-                <Kakao_map />
+                <Kakao_map coordsHandler={coordsHandler}/>
               </aside>
               <div className="store_text-box">
                 <div className="store_tx-title-box">
@@ -251,14 +259,12 @@ function Store() {
                         onClick={deleteFavoriteHandler}
                       />
                     )}
-
-                    {
-                    isReview? <ReviewEdit signNone={""} handleSignup={function (e: string): void {
-                        throw new Error("Function not implemented.");
-                      } } reviewEdit={""} />: null
-                    
-                    }   
-                  <img className="store_tx-icon" src="/store/edit.svg" onClick={reviewEdit} />
+ 
+                    <img
+                      className="store_tx-icon"
+                      src="/store/edit.svg"
+                      onClick={() => reviewEdit("")}
+                    />
 
                   </div>
                 </div>
@@ -281,7 +287,7 @@ function Store() {
                   </h3>
                 </div>
                 <div className="store_tx-btn-box">
-                  <button className="store-btn">대중교통 길찾기</button>
+                  <button className="store-btn"><a href={`https://map.kakao.com/link/to/카카오판교오피스,${coords[0]},${coords[1]}`} target="_blank">대중교통 길찾기</a></button>
                   <button className="store-btn">차량 길찾기</button>
                 </div>
               </div>
@@ -322,6 +328,7 @@ function Store() {
           </div>
         </section>
       </div>
+      <ReviewEdit reviewNone={reviewNone} reviewEdit={reviewEdit} addReviewHandler={addReviewHandler} storeId={StoreInfo.id} />           
       <Footer />
     </>
   );

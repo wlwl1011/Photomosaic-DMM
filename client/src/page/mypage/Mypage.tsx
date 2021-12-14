@@ -4,6 +4,8 @@ import Footer from "../../components/footer/Footer";
 import Mypage_review from "../../components/mypage_review/Mypage_review";
 import Mypage_fav from "../../components/mypage_fav/Mypage_fav";
 import Mypage_empty from "../../components/mypage_empty/Mypage_empty";
+import ProfileEdit from "../../components/profile/ProfileEdit";
+import Signout from "../../components/signout/Signout";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -40,6 +42,9 @@ function Mypage() {
   const [revselect, setRevSelect] = useState<string>("");
   const [favselect, setFavSelect] = useState<string>("mypage_select_fav-check");
 
+  const [profilewNone, setProfilewNone] = useState<string>("profile_hidden");
+  const [signoutNone, setSignoutNone] = useState<string>("signout_hidden");
+
   // 유저 정보
   const [userInfo, setUserInfo] = useState<user_info>({
     user_name: "",
@@ -74,6 +79,13 @@ function Mypage() {
     } else {
       setEmpty(false);
     }
+  };
+
+  const profileEdit = (e: string) => {
+    setProfilewNone(e);
+  };
+  const signoutEdit = (e: string) => {
+    setSignoutNone(e);
   };
 
   useEffect(() => {
@@ -119,7 +131,7 @@ function Mypage() {
 
   return (
     <>
-      <Header handleImg={handleImg} isLogin={true}/>
+      <Header handleImg={handleImg} isLogin={true} />
       <section className="mypage_info_container">
         <div className="mypage_info_box">
           <img className="mypage_info_img" src="/store/model.jpeg" />
@@ -132,8 +144,12 @@ function Mypage() {
           </div>
         </div>
         <div>
-          <button className="mypage-btn">회원탈퇴</button>
-          <button className="mypage-btn">정보수정</button>
+          <button className="mypage-btn" onClick={() => signoutEdit("")}>
+            회원탈퇴
+          </button>
+          <button className="mypage-btn" onClick={() => profileEdit("")}>
+            정보수정
+          </button>
         </div>
       </section>
       <nav className="mypage_select_container">
@@ -158,6 +174,8 @@ function Mypage() {
 
         {empty ? <Mypage_empty /> : null}
       </ul>
+      <ProfileEdit profilewNone={profilewNone} profileEdit={profileEdit} />
+      <Signout signoutNone={signoutNone} signoutEdit={signoutEdit} />
       <Footer />
     </>
   );

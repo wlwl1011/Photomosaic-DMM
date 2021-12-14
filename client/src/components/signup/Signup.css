@@ -116,7 +116,7 @@
 
 .sign_password-check {
   font-size: 16px;
-  color: red;
+  color: rgb(224, 30, 30);
 }
 
 .sign_input-text-box {
@@ -158,9 +158,17 @@
   right: 0px;
 }
 
-.signup_success {
+.signup_success-box {
   padding: 10px 0;
-  color: rgb(48, 173, 46);
+  height: 50px;
+}
+
+.signup_success {
+  color: rgb(33 137 32);
+}
+
+.signup_fail {
+  color: rgb(224, 30, 30);
 }
 
 .signup_btn {
