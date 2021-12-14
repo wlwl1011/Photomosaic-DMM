@@ -131,7 +131,9 @@ function Search(props: Iprops) {
               <div className="search_lately-container">
                 <h3 className="search_lately-title">최근 검색어</h3>
                 <ul className="search_lately-box">
+
                   <Search_list />
+
                   
                 </ul>
               </div>

@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 
-//내가 바꾼 함수
 
-const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://localhost:4000/user/google_login&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+//내가 바꾼 함수
+const scope = "https://www.googleapis.com/auth/userinfo.email " + "https://www.googleapis.com/auth/userinfo.profile";
+
+const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://localhost:4000/user/google_login&response_type=code&scope=${scope}`;
+const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=52454432a0f6a96cf545b328c12811ae&redirect_uri=https://localhost:4000/user/kakao_login`;
 
 interface Iprops {
   loginNone: string;
@@ -121,10 +124,14 @@ function Login(props: Iprops) {
               로그인
             </button>
             <div className="login_OAuth-box">
+
               <a href={`${GOOGLE_LOGIN_URL}`} target="_blank">
                 <img className="login_OAuth" src="/oauth/google.jpeg" />
+
               </a>
+              <a href= {`${KAKAO_LOGIN_URL}`} target="_blank">
               <img className="login_OAuth" src="/oauth/kakao.svg" />
+              </a>
               <img className="login_OAuth" src="/oauth/naver.png" />
             </div>
           </section>
