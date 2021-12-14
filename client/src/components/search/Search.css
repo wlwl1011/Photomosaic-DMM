@@ -222,6 +222,12 @@
   }
 }
 
+@media screen and (min-width: 1905px) {
+  .search_modal_container {
+    width: 1905px;
+  }
+}
+
 @media screen and (max-width: 1445px) {
   .search_container_close-box {
     width: 800px;

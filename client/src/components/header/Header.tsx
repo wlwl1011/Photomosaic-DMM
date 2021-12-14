@@ -5,6 +5,7 @@ import Search from "../search/Search";
 import Signup from "../signup/Signup";
 import Login from "../login/Login";
 import Logout from "../logout/Logout";
+import { Link } from "react-router-dom";
 
 interface Iprops {
   handleImg: () => void;
@@ -94,16 +95,18 @@ function Header_Off(props: Iprops) {
                 </li>
               )}
               {props.isLogin ? (
-                <li className="header__item">
-                  <div className="header__link">
-                    <img
-                      onClick={() => handleLgoin("")}
-                      className="header_icon-size"
-                      src="/menu/user.svg"
-                    />
-                    <h4 onClick={() => handleLgoin("")}>마이페이지</h4>
-                  </div>
-                </li>
+                <Link to="/mypage">
+                  <li className="header__item">
+                    <div className="header__link">
+                      <img
+                        onClick={() => handleLgoin("")}
+                        className="header_icon-size"
+                        src="/menu/user.svg"
+                      />
+                      <h4>마이페이지</h4>
+                    </div>
+                  </li>
+                </Link>
               ) : (
                 <li className="header__item">
                   <div className="header__link">

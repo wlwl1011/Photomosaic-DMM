@@ -276,7 +276,7 @@ function Signup(props: Iprops) {
                   <h5 className="signup_nickname-info">
                     {nameEmpty
                       ? userCheck
-                        ? "✅ 사용가능한 닉네임입니다."
+                        ? "✅ 사용 가능한 닉네임입니다."
                         : "⛔️ 중복된 닉네임입니다."
                       : null}
                   </h5>
