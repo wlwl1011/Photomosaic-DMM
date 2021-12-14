@@ -19,8 +19,11 @@ interface UserName {
 }
 
 function Signup(props: Iprops) {
-  const [proImage, setProImage] = useState<undefined | string>(undefined);
+  const [proImage, setProImage] = useState<undefined | string>(
+    "/signup/profile_defalut.png"
+  );
   const [image, setImage] = useState<File | string | Blob>("");
+
   const [pwConfirm, setPwConfirm] = useState<boolean>(false);
   const [pwCheck, setPwCheck] = useState<boolean>(false);
 
@@ -32,6 +35,10 @@ function Signup(props: Iprops) {
   const [blank, setBlank] = useState<boolean>(false);
   const [nameEmpty, setNameEmpty] = useState<boolean>(false);
 
+  // 회원가입 결과 관리
+  const [signUp, setSignUp] = useState<boolean>(false);
+  const [first, setFirst] = useState<boolean>(false);
+
   // 회원가입 입력 관리
   const [infor, setInfor] = useState<Infor>({
     email: "",
@@ -42,6 +49,7 @@ function Signup(props: Iprops) {
   const { email, password, passwordCheck, nickname } = infor;
 
   const handleNone = () => {
+    // 로그인, 비밀번호, 비밀번호 확인, 닉네임 초기화
     const inputElement: NodeListOf<Element> =
       document.querySelectorAll(".signup_input");
 
@@ -50,19 +58,36 @@ function Signup(props: Iprops) {
       data.value = "";
     });
 
+    // 프로필 이미지 초기화
+    const inputImg = document.getElementById("chooseFile") as HTMLInputElement;
+    inputImg.value = "";
+    setProImage("/signup/profile_defalut.png");
+
+    setFirst(false);
     setPwCheck(false);
     setNameEmpty(false);
+    setBlank(false);
+    setInfor({
+      email: "",
+      password: "",
+      passwordCheck: "",
+      nickname: "",
+    });
     props.handleSignup("signup_hidden");
   };
 
   // 프로필 이미지 등록하는 함수
   const handleImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("이미지 관리 체크");
     const target = e.target as HTMLInputElement;
+    console.log((target.files as FileList)[0], (target.files as FileList)[1]);
     const file: File = (target.files as FileList)[0];
-    const imageUrl = URL.createObjectURL(file);
-    //console.log(imageUrl, typeof imageUrl);
-    // 이래 찍힘 blob:http://localhost:3000/2091452d-c3e9-4d62-9a47-4b01e3069394
-    setProImage(imageUrl);
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      //console.log(file, typeof file);
+      // 이래 찍힘 blob:http://localhost:3000/2091452d-c3e9-4d62-9a47-4b01e3069394
+      setProImage(imageUrl);
+    }
 
     if (target.files) {
       const uploadFile = target.files[0];
@@ -111,13 +136,21 @@ function Signup(props: Iprops) {
     formData.append("password", password);
     formData.append("file", image);
 
-    if (pwConfirm && userCheck && !pwCheck) {
+    if (pwConfirm && userCheck && !pwCheck && email.length > 7) {
       await axios
         .post("https://localhost:4000/user/signup", formData, {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
         })
-        .then((res) => console.log(res));
+        .catch((err) => {
+          console.log("🚫 Not Found 🚫", err);
+        });
+
+      setSignUp(true);
+      setFirst(true);
+    } else {
+      setSignUp(false);
+      setFirst(true);
     }
   };
 
@@ -256,11 +289,17 @@ function Signup(props: Iprops) {
                   중복 검사
                 </button>
               </div>
-
-              <h3 className="signup_success">
-                🎊 회원 가입에 성공하셨습니다! 🎉
-              </h3>
-
+              <div className="signup_success-box">
+                {first ? (
+                  signUp ? (
+                    <h3 className="signup_success">
+                      🎊 회원 가입에 성공하셨습니다! 🎉
+                    </h3>
+                  ) : (
+                    <h4 className="signup_fail">회원가입에 실패하셨습니다.</h4>
+                  )
+                ) : null}
+              </div>
               <button className="signup_btn" onClick={handleSign}>
                 회원가입
               </button>

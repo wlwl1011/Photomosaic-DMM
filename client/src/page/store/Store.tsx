@@ -17,7 +17,7 @@ function Store() {
   const [reviewlike,setReviewLike]=useState<number>(0);
   const [UserId,setUserId] = useState<number>(0)
   const [isLogin,setisLogin]=useState<boolean>(true);
-  
+  const [reviewNone, setLoginNone] = useState<string>("reviewEdit_hidden");
 
   type Store = {
     address: string;
@@ -213,11 +213,12 @@ function Store() {
     });
   }
 
-  const [isReview,setIsReview]=useState<boolean>(false)
-  const reviewEdit = ()=>{
-    if(isReview) setIsReview(false);
-    else setIsReview(true);
-  }
+  const [isReview, setIsReview] = useState<boolean>(false);
+  const reviewEdit = (e: string) => {
+    setLoginNone(e);
+    // if (isReview) setIsReview(false);
+    // else setIsReview(true);
+  };
 
   const [coords,setCoords]=useState<number[]>([]);
 
@@ -256,14 +257,12 @@ function Store() {
                         onClick={deleteFavoriteHandler}
                       />
                     )}
-
-                    {
-                    isReview? <ReviewEdit signNone={""} handleSignup={function (e: string): void {
-                        throw new Error("Function not implemented.");
-                      } } reviewEdit={""} />: null
-                    
-                    }   
-                  <img className="store_tx-icon" src="/store/edit.svg" onClick={reviewEdit} />
+ 
+                    <img
+                      className="store_tx-icon"
+                      src="/store/edit.svg"
+                      onClick={() => reviewEdit("")}
+                    />
 
                   </div>
                 </div>
@@ -327,7 +326,7 @@ function Store() {
           </div>
         </section>
       </div>
-     
+      <ReviewEdit reviewNone={reviewNone} reviewEdit={reviewEdit} />           
       <Footer />
     </>
   );

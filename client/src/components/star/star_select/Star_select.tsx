@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Star_select.css";
 
 function Star_select() {
-  const [star, setStar] = useState<string>("");
+  const [star, setStar] = useState<string>("6");
   const [imoge, setImoge] = useState<string>("");
   const [imAni, setImAni] = useState<string>("");
 
