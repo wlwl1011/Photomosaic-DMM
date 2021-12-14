@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 
-
 //내가 바꾼 함수
 
 const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://localhost:4000/user/google_login&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
@@ -35,7 +34,12 @@ function Login(props: Iprops) {
       let data = el as HTMLInputElement;
       data.value = "";
     });
+
     setLogFail(false);
+    setInfor({
+      email: "",
+      password: "",
+    });
     props.handleLgoin("login_hidden");
   };
 
@@ -72,15 +76,14 @@ function Login(props: Iprops) {
         setLogFail(true);
         console.log("🚫 Not Found 🚫", err);
       });
-      
+
     if (loginData) {
-      console.log('===============')
+      console.log("===============");
       setLogFail(false);
       // window.location.href: 현 url 주소
       window.location.replace(window.location.href);
     }
   };
-
 
   return (
     <>
@@ -118,9 +121,8 @@ function Login(props: Iprops) {
               로그인
             </button>
             <div className="login_OAuth-box">
-              
-              <a href= {`${GOOGLE_LOGIN_URL}`} target="_blank">
-              <img className="login_OAuth" src="/oauth/google.jpeg"/>
+              <a href={`${GOOGLE_LOGIN_URL}`} target="_blank">
+                <img className="login_OAuth" src="/oauth/google.jpeg" />
               </a>
               <img className="login_OAuth" src="/oauth/kakao.svg" />
               <img className="login_OAuth" src="/oauth/naver.png" />
