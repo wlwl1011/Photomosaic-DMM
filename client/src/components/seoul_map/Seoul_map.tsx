@@ -4,6 +4,7 @@ import Menu_list from "../menu_list/Menu_list";
 import axios from "axios";
 
 interface menu_list {
+  id:number;
   area_name: string;
   comment: string;
   menu_img: string;

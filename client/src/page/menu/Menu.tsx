@@ -7,6 +7,7 @@ import Kakao_map from "../../components/kakao_map/Kakao_map";
 import axios from "axios";
 
 interface store_list {
+  id:number
   address: string;
   avg_rating: number;
   menu_name: string;
@@ -17,7 +18,7 @@ interface store_list {
   store_img: string;
 }
 
-function Menu() {
+function Menu({match}:any) {
   // ******************************************************
   // image, star 영역 디스플레이, 포지션 동적 관리
   // 검색 누를경우 사라지지 않는 문제로 인해 생성
@@ -42,7 +43,7 @@ function Menu() {
   useEffect(() => {
     (async () => {
       const data = await axios.get(
-        `https://localhost:4000/store/byMenu/생선구이`,
+        `https://localhost:4000/store/byMenu/${match.params.menu_name}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -52,7 +53,7 @@ function Menu() {
       setMenuData(data.data.data);
     })();
   }, []);
-
+  console.log(match.params.menu_name)
   console.log("API 결과123", menuData);
 
   useEffect(() => {}, [starBool]);
@@ -82,13 +83,13 @@ function Menu() {
                 <img className="menu_infor-img" src="/jonglo_gui.gif" />
               </div>
               <div className="menu_infor-container-text">
-                <h4 className="menu_infor-text">종로의 대표 음식</h4>
-                <h1 className="menu_infor-text-main">가자미구이</h1>
+                <h4 className="menu_infor-text">{match.params.area_name}의 대표 음식</h4>
+                <h1 className="menu_infor-text-main">{match.params.menu_name}</h1>
               </div>
             </aside>
             <div className="menu_infor-map-box">
               <div className="menu_infor-map">
-                <Kakao_map />
+                <Kakao_map coordsHandler={(x,y)=>{}}/>
               </div>
             </div>
           </div>

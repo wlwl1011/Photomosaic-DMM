@@ -18,8 +18,8 @@ function App() {
           <Switch>
             <Route exact path="/" render={() => <Render />} />
             <Route exact path="/main" component={Main} />
-            <Route exact path="/menu" component={Menu} />
-            <Route exact path="/store" component={Store} />
+            <Route path="/menu/:area_name/:menu_name/" component={Menu} />
+            <Route path="/store/:store_id" component={Store} />
             <Route exact path="/mypage" component={Mypage} />
             <Route path="*" component={Not_found} />
           </Switch>
