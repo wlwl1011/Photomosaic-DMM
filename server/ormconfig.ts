@@ -11,16 +11,16 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const config: TypeOrmModuleOptions = {
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: process.env.USERNAME,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  entities: [Favorite, MenuByArea, ReviewLike, Review, SearchWord, Store, User],
-  synchronize: false,
-  autoLoadEntities: true,
-  logging: true,
+  type: "mysql",
+    host: process.env.DATABASE_HOST,
+    port: 13306,
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME,
+    entities: [Favorite,MenuByArea,ReviewLike,Review,SearchWord,Store,User],
+    synchronize: false,
+    autoLoadEntities:true,
+    logging:true,
 };
 
 export = config;
