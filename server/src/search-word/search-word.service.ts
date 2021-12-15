@@ -22,6 +22,24 @@ export class SearchWordService {
         return {"data":data , "message":"get recent search words success"}
     }
 
+    async addSearchWord(userId:number, searchWord:string){
+        const data= await this.SearchWordRepository.find({where:{user_id:userId , search_word:searchWord}})
+        //중복 처리
+        if(data.length!==0){
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                data : null,
+                message: "you've searched this word already exist",
+            }, 404);
+        }
+
+        await this.SearchWordRepository.save({
+            user_id:userId,
+            search_word:searchWord
+        })
+        return {"data":null ,"message":"add search word success"}
+    }
+
     async deleteSearchWord(userId:number , searchWord : string) {
         const data = await this.SearchWordRepository.delete({user_id:userId,search_word:searchWord})
         if(data.affected===0){

@@ -1,13 +1,23 @@
 import "./Search_list.css";
 
-function Search_list() {
+interface Iprops{
+  searchword:{
+    id:number;
+    user_id:number;
+    search_word:string;
+    created_at:string;
+  }
+  deleteSearchWordHandler:(search_word:string)=>void
+}
+
+function Search_list(props:Iprops) {
   return (
     <>
       <li className="search_lately-list">
-        <span>캘리포니아</span>
+        <span>{props.searchword.search_word}</span>
         <div className="search_lately-list-box">
-          <span>2021-12-02</span>
-          <img className="search_list-close" src="/search/close.svg" />
+          <span>{props.searchword.created_at.slice(0,10)}</span>
+          <img className="search_list-close" src="/search/close.svg" onClick={()=>{props.deleteSearchWordHandler(props.searchword.search_word)}}/>
         </div>
       </li>
     </>

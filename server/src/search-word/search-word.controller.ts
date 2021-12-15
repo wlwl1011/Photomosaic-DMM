@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Request } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Request } from '@nestjs/common';
 import { userInfo } from 'os';
 import { SearchWordService } from './search-word.service';
 
@@ -10,6 +10,11 @@ export class SearchWordController {
     getSearchWord(@Request() req){
         return this.SearchWordService.getSearchWord(req.user.id)
     }
+
+    @Post('/add-search-word/:search_word')
+    addSearchWord(@Request() req, @Param('search_word') searchWord:string){
+        return this.SearchWordService.addSearchWord(req.user.id,searchWord)
+    } 
 
     @Delete(':search_word')
     deleteSearchWord(@Request() req , @Param('search_word') searchWord:string){

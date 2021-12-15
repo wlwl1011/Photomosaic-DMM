@@ -321,6 +321,7 @@ function Store({ match }: any) {
                   </h3>
                 </div>
                 <div className="store_tx-btn-box">
+
                   <a
                     href={`https://map.kakao.com/link/to/카카오판교오피스,${coords[0]},${coords[1]}`}
                     target="_blank"
@@ -336,6 +337,7 @@ function Store({ match }: any) {
                   >
                     <button className="store-btn">차량 길찾기</button>
                   </a>
+
                 </div>
               </div>
             </div>
