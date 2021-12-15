@@ -20,6 +20,7 @@ interface Select_none {
 interface Iprops {
   profilewNone: string;
   profileEdit: (e: string) => void;
+  handleCount: () => void;
 }
 
 function ProfileEdit(props: Iprops) {
@@ -139,6 +140,7 @@ function ProfileEdit(props: Iprops) {
             <Nickname_chan
               nickname_none={selectNone.nickname_none}
               childRef={emptyNickname}
+              handleCount={props.handleCount}
             />
             <Image_chan image_none={selectNone.image_none} />
           </section>

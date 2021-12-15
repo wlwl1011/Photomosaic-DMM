@@ -70,15 +70,18 @@ export class UserService {
         email: data.email,
         password: data.password,
         user_name: data.user_name,
-        user_img: image,
+        user_img: `https://localhost:4000/${image}`,
       });
       return true;
     }
     return false;
   }
 
-  async userinfo(data: string): Promise<any> {
-    return data;
+  async userinfo(data: any): Promise<any> {
+    const userdata = await this.userRepository.findOne({
+      where: { id: data.id },
+    });
+    return userdata;
   }
 
   async changepassword(data: any, user: any): Promise<any> {
@@ -113,7 +116,7 @@ export class UserService {
   async changeusername(data: any, user: any): Promise<any> {
     const { user_name } = data;
     const userdata = await this.userRepository.findOne({
-      where: { user_name: user.user_name },
+      where: { id: user.id },
     });
     const checkname = await this.userRepository.findOne({
       where: { user_name: user_name },

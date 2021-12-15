@@ -15,6 +15,11 @@ function Signout(props: Iprops) {
   const [password, setPassword] = useState<string>("");
 
   const handleNone = () => {
+    const inputElement = document.querySelector(
+      ".signout_input"
+    ) as HTMLInputElement;
+    inputElement.value = "";
+    setCheckPw(false);
     props.signoutEdit("signout_hidden");
   };
 
@@ -27,25 +32,26 @@ function Signout(props: Iprops) {
   };
 
   const handleOut = async () => {
-    // await axios
-    //   .delete(
-    //     "https://localhost:4000/user/delete-account",
-    //     {
-    //       password: password,
-    //     },
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //       withCredentials: true,
-    //     },
-    //   ).catch((err) => {
-    //     console.log("🚫 Not Found 🚫", err);
-    //     setCheckPw(true)
-    //   });
+    await axios
+      .post(
+        "https://localhost:4000/user/delete-account",
+        {
+          password: password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then(() => {
+        setCheckPw(false);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log("🚫 Not Found 🚫", err);
+        setCheckPw(true);
+      });
   };
-
-  // 버튼 누를 경우 결과
-  // setCheckPw(false)
-  // history.push("/");
 
   return (
     <>
@@ -65,12 +71,6 @@ function Signout(props: Iprops) {
 
             <h2 className="signout_subtitle">모두 소멸됩니다.</h2>
 
-            {checkPw ? null : (
-              <h4 className="signout_infor_text">
-                비밀번호 입력 후 버튼을 클릭해주세요.
-              </h4>
-            )}
-
             <div className="signout_input-box">
               <input
                 type="password"
@@ -79,11 +79,10 @@ function Signout(props: Iprops) {
                 placeholder="패스워드 확인"
                 onChange={handleInfor}
               />
-              {checkPw ? (
-                <h3 className="signout_input-box2">
-                  비밀번호를 다시 입력해주세요.
-                </h3>
-              ) : null}
+
+              <h3 className="signout_input-box2">
+                {checkPw ? "비밀번호를 다시 입력해주세요." : null}
+              </h3>
             </div>
             <button className="signout_btn" onClick={handleOut}>
               회원탈퇴

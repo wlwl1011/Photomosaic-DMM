@@ -29,7 +29,24 @@ function Menu({ match }: any) {
   const [menuData, setMenuData] = useState<store_list[]>([]);
   const [starBool, setStarBool] = useState<boolean>(true);
 
+  const [reviewBool, setReviewBool] = useState<boolean>(true);
+
   const accessLogin: any = useRef();
+  const [isLogin, setIsLogin] = useState<boolean>(true);
+
+  useEffect(() => {
+    (async () => {
+      await axios
+        .get("https://localhost:4000/user/userinfo/userdata", {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => {
+          setIsLogin(true);
+        })
+        .catch((err) => setIsLogin(false));
+    })();
+  }, [isLogin]);
 
   const handleImg = () => {
     setChImage(!chImage);
@@ -58,7 +75,7 @@ function Menu({ match }: any) {
   console.log(match.params.menu_name);
   console.log("API 결과123", menuData);
 
-  useEffect(() => {}, [starBool]);
+  useEffect(() => {}, [starBool, reviewBool]);
 
   const star_filter = () => {
     setStarBool(!starBool);
@@ -74,9 +91,24 @@ function Menu({ match }: any) {
     }
   };
 
+  const review_filter = () => {
+    setReviewBool(!reviewBool);
+
+    if (reviewBool) {
+      let data = menuData.sort((a, b) => a.num_review - b.num_review);
+      setMenuData(data);
+    } else {
+      let data = menuData.sort((a, b) => b.num_review - a.num_review);
+      setMenuData(data);
+    }
+  };
   return (
     <>
-      <Header handleImg={handleImg} isLogin={true} accessLogin={accessLogin} />
+      <Header
+        handleImg={handleImg}
+        isLogin={isLogin}
+        accessLogin={accessLogin}
+      />
       <section className="menu_container">
         <div className="menu_box">
           <div className="menu_infor-box">
@@ -102,7 +134,9 @@ function Menu({ match }: any) {
         </div>
         <div className="menu_list-box">
           <div className="menu_filter-box">
-            <button className="menu_filter-btn">리뷰 순</button>
+            <button className="menu_filter-btn" onClick={review_filter}>
+              리뷰 순
+            </button>
             <button className="menu_filter-btn" onClick={star_filter}>
               별점 순
             </button>

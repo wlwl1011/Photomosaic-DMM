@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle } from "react";
+import React, { useRef, useState, useImperativeHandle } from "react";
 //import "./font/font.css";
 import "./Header.css";
 import Search from "../search/Search";
@@ -30,6 +30,8 @@ function Header_Off(props: Iprops) {
   // 검색 모달 right -50% 좌표 주기
   const [chRight, setChRight] = useState<boolean>(true);
   const [right, setRight] = useState<string>("");
+  // 검색 모달 초기화
+  const emptySearch: any = useRef();
 
   useImperativeHandle(props.accessLogin, () => ({
     accessLogin() {
@@ -49,9 +51,19 @@ function Header_Off(props: Iprops) {
   const handleSearch = () => {
     props.handleImg();
     setChRight(!chRight);
+
     if (chRight) {
+      // 검색 모달 on
       setRight("");
     } else {
+      // 검색 모달 off 함수
+      // input text 제거
+      const inputElement = document.querySelector(
+        ".search_input"
+      ) as HTMLInputElement;
+      inputElement.value = "";
+
+      emptySearch.current.emptySearch();
       setRight("search_modal_container_none");
     }
     setAnimation(true);
@@ -73,7 +85,7 @@ function Header_Off(props: Iprops) {
       <header className="header_main">
         <nav className="header_nav header_container">
           <div className="header_box1"></div>
-          <a href='/main' className="header_title header_box2">
+          <a href="/main" className="header_title header_box2">
             Yummy <img className="header_logo" src="/logo.svg" /> Seoul
           </a>
           <div className={`header__menu ${hidden} header_box3`}>
@@ -82,7 +94,7 @@ function Header_Off(props: Iprops) {
                 <li className="header__item">
                   <div className="header__link">
                     <img
-                      onClick={() => handleLgoin("")}
+                      onClick={() => handleLogout("")}
                       className="header_icon-size"
                       src="/menu/signout.svg"
                     />
@@ -150,7 +162,12 @@ function Header_Off(props: Iprops) {
           </div>
         </nav>
       </header>
-      <Search animation={animation} right={right} handleSearch={handleSearch} />
+      <Search
+        animation={animation}
+        right={right}
+        handleSearch={handleSearch}
+        emptySearch={emptySearch}
+      />
       <Signup signNone={signNone} handleSignup={handleSignup} />
       <Login loginNone={loginNone} handleLgoin={handleLgoin} />
       <Logout logoutNone={logoutNone} handleLogout={handleLogout} />
