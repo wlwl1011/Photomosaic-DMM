@@ -17,7 +17,7 @@ function Menu_list(props: Iprops) {
       <li>
         <img className="map_list-img" src="jongro.jpeg" />
         <h3>{props.menu_list.menu_name}</h3>
-        <Link to={ {pathname:`/menu/${props.menu_list.area_name}/${props.menu_list.menu_name}`}} style={{textDecoration: 'none'}} >
+        <Link to={ {pathname:`/menu/${props.menu_list.area_name}/${props.menu_list.menu_name}`}} style={{textDecoration: 'none', color:"black"}} >
           <h4 className="map_list-store">해당 가게 알아보기</h4>
           </Link>
       </li>

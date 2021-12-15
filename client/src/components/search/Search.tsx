@@ -1,5 +1,5 @@
 import "./Search.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search_list from "../search_list/Search_list";
 import Search_result from "../search_result/Search_result";
 import axios from "axios";
@@ -11,6 +11,7 @@ interface Iprops {
 }
 
 function Search(props: Iprops) {
+  const [count,setCount]=useState<number>(0);
   // 검색 리스트 필터 value 관리
   const [liValue, setliValue] = useState<string>("선택");
 
@@ -21,7 +22,27 @@ function Search(props: Iprops) {
   const [Search, setSearch] = useState<string>('')
 
   // props 내려줄 데이터 관리
-  const [data, setdata] = useState<any>({})
+  type Store={
+    address: string;
+    avg_rating: number;
+    created_at: string;
+    id: number;
+    menu_name: string;
+    open_time: string;
+    phone_number: string;
+    store_img: string;
+    store_name: string;
+    updated_at: string;
+  };
+  const [data, setdata] = useState<Store[]>([])
+
+  type SearchWord={
+    id:number;
+    user_id:number;
+    search_word:string;
+    created_at:string;
+  }
+  const [searchWord,setSearchWord]=useState<SearchWord[]>([])
 
   // 검색 필터 관리
   const handleList = () => {
@@ -36,30 +57,82 @@ function Search(props: Iprops) {
 
   // 검색 아이콘 클릭시 서버에 요청
   const SearchClick = async() => {
-   const Post: any = (liValue === '가게' ? 
-   await axios.get(
-     `https://localhost:4000/store/byStorename/${Search}`,
-   {
-     headers: { "Content-Type": "application/json" },
-     withCredentials: true
-   }
-  ) :
-   (liValue === '메뉴' ?
-   await axios.get(
-    `https://localhost:4000/store/byMenu/${Search}`,
-  {
-    headers: { "Content-Type": "application/json" },
-    withCredentials: true
+   if(liValue === '가게') {
+    await axios.get(`https://localhost:4000/store/byStorename/${Search}`,
+    {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true
+    }) 
+    .then(async(res)=>{
+      setdata([res.data.data])
+      //setCount(count+1);
+      await axios.post(`https://localhost:4000/search-word/add-search-word/${Search}`,{},
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      }).then((res)=>setCount(count+1)) 
+      
+    })
+    .catch((err)=>{})
+
+    
+    }
+
+  else if(liValue === '메뉴'){
+    await axios.get(`https://localhost:4000/store/byMenu/${Search}`,
+    {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true
+    })
+    .then(async(res)=>{
+      setdata(res.data.data)
+      await axios.post(`https://localhost:4000/search-word/add-search-word/${Search}`,{},
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      }).then((res)=>setCount(count+1)) 
+    })
+    .catch((err)=>{})
+
+    
+    } 
   }
- ) : '해당하는 메뉴가 없습니다.'))
-    setdata(Post.data.data)
-  }
+  
 
   // 검색창 검색 value 업데이트
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setSearch(value)
   }
+
+  const deleteSearchWordHandler= async(search_word:string)=>{
+    await axios.delete(`https://localhost:4000/search-word/${search_word}`,
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      }).then((res)=>setCount(count+1)) 
+  }
+
+
+  useEffect(()=>{
+    
+  },[count])
+
+  
+  useEffect(() => {
+    (async () => {
+      await axios.get(`https://localhost:4000/search-word/`,
+    {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true
+    })
+    .then((res)=>{
+      setSearchWord(res.data.data)
+    })
+    .catch((err)=>setSearchWord([]))
+      
+    })();
+  }, [count]);
 
   return (
     <>
@@ -131,19 +204,28 @@ function Search(props: Iprops) {
               <div className="search_lately-container">
                 <h3 className="search_lately-title">최근 검색어</h3>
                 <ul className="search_lately-box">
-
-                  <Search_list />
-
+                {
+                    (searchWord.length!==0) ?
+                      searchWord.map((el:SearchWord)=>{             
+                      return <Search_list searchword={el} deleteSearchWordHandler={deleteSearchWordHandler}/> 
+                  })
+                    :null
+                  }   
+                
                   
                 </ul>
               </div>
               <div className="search_result-container">
                 <h3 className="search_lately-title">검색 결과</h3>
                 <div className="search_result-box">
-                  <ul className="search_result-list">
-                    <Search_result />
-                    <Search_result />
-                    <Search_result />
+                  <ul className="search_result-list">    
+                    {
+                    (data.length!==0) ?
+                      data.map((el:Store)=>{
+                      return <Search_result data={el}/> 
+                  })
+                    :null
+                  }   
                   </ul>
                 </div>
               </div>
