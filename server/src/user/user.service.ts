@@ -8,6 +8,7 @@ import { createImageURL } from 'src/middleware/multeroption';
 import { jwtConstants } from 'src/auth/constants';
 import axios from 'axios';
 import *as dotenv from 'dotenv'
+import { stringify } from 'querystring';
 dotenv.config();
 
 @Injectable()
@@ -55,15 +56,16 @@ export class UserService {
               email: data.email,
               password: data.password,
               user_name: data.user_name,
-              user_img: image
+              user_img: `https://localhost:4000/${image}`
             })
             return true
         }
         return false
     }
     
-  async userinfo(data: string): Promise<any> {
-    return data;
+  async userinfo(data: any): Promise<any> {
+    const userdata = await this.userRepository.findOne({ where: { id: data.id }});
+    return userdata;
   }
 
   async changepassword(data: any, user: any): Promise<any> {
@@ -74,7 +76,10 @@ export class UserService {
     if (password === userdata.password) {
       return false;
     }
-}
+    userdata.password = String(password);
+    await this.userRepository.save(userdata)
+    return true;
+  }
 
     async delete_account(data: any, user: any): Promise<any> {
         if(data.password !== user.password){
@@ -91,32 +96,31 @@ export class UserService {
 
     }
   
-
   async changeusername(data: any, user: any): Promise<any> {
     const { user_name } = data;
     const userdata = await this.userRepository.findOne({
-      where: { user_name: user.user_name },
+      where: { id: user.id },
     });
-    if (!userdata) {
-      const useremail = await this.userRepository.findOne({
-        where: { email: user.email },
-      });
-
-      useremail.user_name = String(user_name);
-
-      await this.userRepository.save(useremail);
+    const checkname = await this.userRepository.findOne({
+      where: { user_name: user_name }
+    })
+    if (!checkname) {
+      userdata.user_name = String(user_name);
+      await this.userRepository.save(userdata);
       return true;
     }
-    if (userdata) {
+    if (checkname) {
       return false;
     }
   }
 
     public uploadFiles(file: File[]): string [] {
+      console.log(file)
             const generatedFiles: string [] = [];
               generatedFiles.push(createImageURL(file));
             return generatedFiles;
     }
+
     async check_username(user: any): Promise<any>{
         const userdata = await this.userRepository.findOne({
       where: { user_name: user.user_name },
@@ -136,7 +140,7 @@ export class UserService {
            return false;
         }
         if(userdata){
-            userdata.user_img = data;
+            userdata.user_img = String(data);
             await this.userRepository.save(userdata);
             return true;
         }
@@ -151,7 +155,7 @@ export class UserService {
     //     await this.userRepository.save(userdata);
     // }
 
-    async delete_image(data: any, user: any): Promise<any>{
+    async delete_image(user: any): Promise<any>{
         const userdata = await this.userRepository.findOne({ where: { user_name: user.user_name } });
         if(!userdata){
             return false;
@@ -228,7 +232,6 @@ export class UserService {
       }
       
     }
-    
 
   }
 
