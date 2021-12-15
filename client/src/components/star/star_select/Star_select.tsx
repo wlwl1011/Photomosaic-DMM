@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useImperativeHandle } from "react";
 import "./Star_select.css";
 
-interface Iprops{
-  ratingHandler:(rating:number)=>void
+interface Iprops {
+  ratingHandler: (rating: number) => void;
+  emptyStar: () => void;
 }
 
-function Star_select(props:Iprops) {
+function Star_select(props: Iprops) {
   const [star, setStar] = useState<string>("6");
   const [imoge, setImoge] = useState<string>("");
   const [imAni, setImAni] = useState<string>("");
@@ -28,20 +29,17 @@ function Star_select(props:Iprops) {
     setImAni("star_select_imoge-none");
     const data = e.target.getAttribute("value");
     setStar(data);
-    props.ratingHandler(Number(star))
+    props.ratingHandler(Number(star));
     setTimeout(() => {
       setImAni("");
     }, 100);
   };
 
-  // console.log(star);
-  // console.log(imoge);
-
-  // 타입스크립트 버전
-  // const handleStar = (e: any) => {
-  //   const data: string = e.target.getAttribute("value");
-
-  // };
+  useImperativeHandle(props.emptyStar, () => ({
+    emptyStar() {
+      setStar("6");
+    },
+  }));
 
   return (
     <>

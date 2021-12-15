@@ -41,7 +41,9 @@ export class UserController {
   async signup(@Request() req, @Res() response, @UploadedFile() file: File[]) {
     if (req.file === undefined) {
       // this.userService.sign_image(req.body, 'default image'); //이미지 없으면 default image 삽입
-      const data = await this.userService.signup(req.body, 'default image');
+
+      const data = await this.userService.signup(req.body, req.file.filename);
+
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
       } else {
@@ -50,7 +52,6 @@ export class UserController {
     }
     if (req.file !== undefined) {
       const uploadedFiles: string[] = this.userService.uploadFiles(file);
-      console.log(req.file.path)
       const data = await this.userService.signup(req.body, req.file.filename);
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
@@ -80,7 +81,6 @@ export class UserController {
   @Get('userinfo/userdata')
   async getprofile(@Request() req, @Res() response) {
     const userdata = await this.userService.userinfo(req.user);
-    
     delete userdata.password;
     response.json({
       data: userdata,

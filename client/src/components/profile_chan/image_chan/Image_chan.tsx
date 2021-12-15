@@ -33,23 +33,16 @@ function Image_chan(props: Iprops) {
 
   const handleChange = async () => {
     await axios
-      .delete("https://localhost:4000/user/image")
-      .then(async () => {
-        await axios
-          .patch(
-            "https://localhost:4000/user/change-image",
-            {
-              user_img: image,
-            },
-            {
-              headers: { "Content-Type": "application/json" },
-              withCredentials: true,
-            }
-          )
-          .catch((err) => {
-            console.log("🚫 Not Found 🚫", err);
-          });
-      })
+      .patch(
+        "https://localhost:4000/user/change-image",
+        {
+          user_img: image,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
       .catch((err) => {
         console.log("🚫 Not Found 🚫", err);
       });

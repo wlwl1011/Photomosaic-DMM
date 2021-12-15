@@ -5,6 +5,7 @@ import Star_avg from "../../components/star/star_avg/Star_avg";
 import Store_list from "../../components/store_list/Store_list";
 import Kakao_map from "../../components/kakao_map/Kakao_map";
 import ReviewEdit from "../../components/reviewedit/ReviewEdit";
+import Review_already from "../../components/review_already/Review_already";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
@@ -17,6 +18,7 @@ function Store({ match }: any) {
   const [UserId, setUserId] = useState<number>(0);
   const [isLogin, setisLogin] = useState<boolean>(true);
   const [reviewNone, setRevieNone] = useState<string>("reviewEdit_hidden");
+  const [alreadyNone, setAlreadyNone] = useState<string>("review_alr_hidden");
 
   type Store = {
     address: string;
@@ -153,33 +155,41 @@ function Store({ match }: any) {
   }, [count, addFav, reviewlike]);
 
   const favoriteHandler = async () => {
-    await axios
-      .post(
-        `https://localhost:4000/favorite/add-favorite`,
-        {
-          store_address: StoreInfo.address,
-          store_name: StoreInfo.store_name,
-          store_img: StoreInfo.store_img,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        setAddFav(true);
-      });
+    if (isLogin) {
+      await axios
+        .post(
+          `https://localhost:4000/favorite/add-favorite`,
+          {
+            store_address: StoreInfo.address,
+            store_name: StoreInfo.store_name,
+            store_img: StoreInfo.store_img,
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          setAddFav(true);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
   };
 
   const deleteFavoriteHandler = async () => {
-    await axios
-      .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      })
-      .then((res) => {
-        setAddFav(false);
-      });
+    if (isLogin) {
+      await axios
+        .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => {
+          setAddFav(false);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
   };
 
   const addReviewHandler = async (
@@ -218,35 +228,59 @@ function Store({ match }: any) {
   };
 
   const reviewLikeHandler = async (review_id: number) => {
-    await axios
-      .post(
-        `https://localhost:4000/review/like/${review_id}`,
-        {},
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        setReviewLike(reviewlike + 1);
-      });
+    if (isLogin) {
+      await axios
+        .post(
+          `https://localhost:4000/review/like/${review_id}`,
+          {},
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          setReviewLike(reviewlike + 1);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
   };
 
   const DeletereviewLikeHandler = async (review_id: number) => {
-    await axios
-      .delete(`https://localhost:4000/review/like/${review_id}`, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      })
-      .then((res) => {
-        setReviewLike(reviewlike - 1);
-      });
+    if (isLogin) {
+      await axios
+        .delete(`https://localhost:4000/review/like/${review_id}`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => {
+          setReviewLike(reviewlike - 1);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
   };
 
   const reviewEdit = async (e: string) => {
     // 리뷰 모달 on
     if (isLogin) {
-      setRevieNone(e);
+      // 여기다 임마
+      let data: boolean = true;
+
+      ReviewInfo.filter((el) => {
+        if (el.user_id === UserId) {
+          setAlreadyNone("");
+          data = false;
+        }
+      });
+
+      if (e === "review_alr_hidden") {
+        setAlreadyNone(e);
+      }
+
+      if (data) {
+        setRevieNone(e);
+      }
     } else {
       // 로그인 모달 on
       accessLogin.current.accessLogin();
@@ -259,7 +293,6 @@ function Store({ match }: any) {
     setCoords([x, y]);
   };
 
-  console.log(coords);
   return (
     <>
       <Header
@@ -321,23 +354,13 @@ function Store({ match }: any) {
                   </h3>
                 </div>
                 <div className="store_tx-btn-box">
-
                   <a
                     href={`https://map.kakao.com/link/to/카카오판교오피스,${coords[0]},${coords[1]}`}
                     target="_blank"
                     className="store_btn-word"
                   >
-                    <button className="store-btn">대중교통 길찾기</button>
+                    <button className="store-btn">길찾기</button>
                   </a>
-
-                  <a
-                    href={`https://map.kakao.com/link/to/카카오판교오피스,${coords[0]},${coords[1]}`}
-                    target="_blank"
-                    className="store_btn-word"
-                  >
-                    <button className="store-btn">차량 길찾기</button>
-                  </a>
-
                 </div>
               </div>
             </div>
@@ -381,6 +404,7 @@ function Store({ match }: any) {
         addReviewHandler={addReviewHandler}
         storeId={StoreInfo.id}
       />
+      <Review_already alreadyNone={alreadyNone} reviewEdit={reviewEdit} />
       <Footer />
     </>
   );

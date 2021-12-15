@@ -38,6 +38,10 @@ function Password_chan(props: Iprops) {
       setPwConfirm(false);
       setPwCheck(false);
       setResult(false);
+      setPassword({
+        password: "",
+        passwordCheck: "",
+      });
     },
   }));
 
@@ -58,6 +62,7 @@ function Password_chan(props: Iprops) {
         .catch((err) => {
           console.log("🚫 Not Found 🚫", err);
         });
+      setResult(true);
     } else {
       setResult(false);
     }

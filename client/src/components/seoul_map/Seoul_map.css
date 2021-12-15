@@ -63,6 +63,7 @@
 
 .map_info {
   font-size: 25px;
+  user-select: none;
   font-weight: 600;
 }
 
@@ -218,7 +219,7 @@
 @media (max-height: 700px) {
   .main_wrap,
   .main_container {
-    height: 400px;
+    height: 500px;
   }
   .map_modal-content {
     width: 650px;
@@ -260,7 +261,7 @@
 
 @media (max-width: 770px) {
   .main_wrap {
-    margin-top: 0px;
+    margin-top: 90px;
   }
 
   .map_modal {

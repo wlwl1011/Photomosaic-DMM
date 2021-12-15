@@ -5,6 +5,7 @@ import axios from "axios";
 interface Iprops {
   nickname_none: string;
   childRef: () => void;
+  handleCount: () => void;
 }
 
 interface UserName {
@@ -32,6 +33,7 @@ function Nickname_chan(props: Iprops) {
       setNameEmpty(false);
       setUserCheck(false);
       setBlank(false);
+      setResult(false);
     },
   }));
 
@@ -71,8 +73,11 @@ function Nickname_chan(props: Iprops) {
           }
         )
         .catch((err) => {
+          setResult(false);
           console.log("🚫 Not Found 🚫", err);
         });
+      setResult(true);
+      props.handleCount();
     } else {
       setResult(false);
     }
