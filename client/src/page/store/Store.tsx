@@ -7,7 +7,6 @@ import Kakao_map from "../../components/kakao_map/Kakao_map";
 import ReviewEdit from "../../components/reviewedit/ReviewEdit";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Login from "../../components/login/Login";
 
 function Store({ match }: any) {
   const [chMessage, setChMessage] = useState<boolean>(false);
@@ -245,23 +244,13 @@ function Store({ match }: any) {
   };
 
   const reviewEdit = async (e: string) => {
-    // 유저 정보 조회
-
-    await axios
-      .get(`https://localhost:4000/user/userinfo/userdata`, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      })
-      .then(() => setRevieNone(e))
-      .catch((err) => {
-        console.log("에러 잡힘", err);
-        accessLogin.current.accessLogin();
-      });
-
-    // 조회 합격(리뷰 모달 on)
-
-    // 조회 불합격(로그인 모달 on)
-    // accessLogin.current
+    // 리뷰 모달 on
+    if (isLogin) {
+      setRevieNone(e);
+    } else {
+      // 로그인 모달 on
+      accessLogin.current.accessLogin();
+    }
   };
 
   const [coords, setCoords] = useState<number[]>([]);
