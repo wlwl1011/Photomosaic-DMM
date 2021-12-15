@@ -18,7 +18,6 @@ import { multerOptions } from '../middleware/multeroption';
 import { createReadStream } from 'graceful-fs';
 import { join } from 'path';
 
-
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
@@ -92,6 +91,7 @@ export class UserController {
   @Patch('change-password')
   async change_password(@Request() req, @Res() response) {
     const boolean = await this.userService.changepassword(req.body, req.user);
+    console.log('비밀번호 검사 결과:', boolean);
     if (!boolean) {
       response.status(409).json({ message: 'this password alredy exist' });
     }
@@ -173,17 +173,15 @@ export class UserController {
   }
 
   @Get('google_login')
-  async google_login(@Request() req, @Res() response){
-    console.log(req)
-    const google = await this.userService.google_login(req.query.code)
-      response.json({ message: 'login successfully'})
+  async google_login(@Request() req, @Res() response) {
+    console.log(req);
+    const google = await this.userService.google_login(req.query.code);
+    response.json({ message: 'login successfully' });
   }
 
   @Get('kakao_login')
-  async kakao_login(@Request() req, @Res() response){
-    const kakao = await this.userService.kakao_login(req.query.code)
-      response.json({ message: 'login successfully'})
-
+  async kakao_login(@Request() req, @Res() response) {
+    const kakao = await this.userService.kakao_login(req.query.code);
+    response.json({ message: 'login successfully' });
   }
-
 }

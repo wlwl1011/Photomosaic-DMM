@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Signout.css";
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 interface Iprops {
   signoutNone: string;
@@ -9,7 +10,9 @@ interface Iprops {
 }
 
 function Signout(props: Iprops) {
+  const history = useHistory();
   const [checkPw, setCheckPw] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
 
   const handleNone = () => {
     props.signoutEdit("signout_hidden");
@@ -18,6 +21,31 @@ function Signout(props: Iprops) {
   // 해당 페이지 새로고침
   // window.location.href: 현 url 주소
   // window.location.replace(window.location.href);
+
+  const handleInfor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleOut = async () => {
+    // await axios
+    //   .delete(
+    //     "https://localhost:4000/user/delete-account",
+    //     {
+    //       password: password,
+    //     },
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //       withCredentials: true,
+    //     },
+    //   ).catch((err) => {
+    //     console.log("🚫 Not Found 🚫", err);
+    //     setCheckPw(true)
+    //   });
+  };
+
+  // 버튼 누를 경우 결과
+  // setCheckPw(false)
+  // history.push("/");
 
   return (
     <>
@@ -49,13 +77,17 @@ function Signout(props: Iprops) {
                 name="passwordCheck"
                 className="signout_input"
                 placeholder="패스워드 확인"
+                onChange={handleInfor}
               />
-
-              <h3 className="signout_input-box2">
-                비밀번호를 다시 입력해주세요.
-              </h3>
+              {checkPw ? (
+                <h3 className="signout_input-box2">
+                  비밀번호를 다시 입력해주세요.
+                </h3>
+              ) : null}
             </div>
-            <button className="signout_btn">회원탈퇴</button>
+            <button className="signout_btn" onClick={handleOut}>
+              회원탈퇴
+            </button>
           </section>
         </div>
       </div>

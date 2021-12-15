@@ -48,6 +48,12 @@ function Signup(props: Iprops) {
   });
   const { email, password, passwordCheck, nickname } = infor;
 
+  // 비밀번호 유효성 검사 함수
+  const value =
+    /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{8,}$/.test(
+      password
+    );
+
   const handleNone = () => {
     // 로그인, 비밀번호, 비밀번호 확인, 닉네임 초기화
     const inputElement: NodeListOf<Element> =
@@ -121,8 +127,6 @@ function Signup(props: Iprops) {
           console.log("🚫 Not Found 🚫", err);
         });
       setNameEmpty(true);
-    } else {
-      setBlank(true);
     }
   };
 
@@ -156,19 +160,11 @@ function Signup(props: Iprops) {
 
   useEffect(() => {
     if (userName.message === "possible to use this username") {
-      console.log("중복되지 않음");
       setUserCheck(true);
     } else {
-      console.log("중복됨", userName.message);
       setUserCheck(false);
     }
   }, [userName]);
-
-  // 비밀번호 유효성 검사 함수
-  const value =
-    /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{8,}$/.test(
-      password
-    );
 
   useEffect(() => {
     // 비밀번호와 비밀번호 확인 검사 합격 여부
@@ -183,8 +179,9 @@ function Signup(props: Iprops) {
     } else {
       setPwConfirm(false);
     }
+  }, [password, passwordCheck]);
 
-    // 닉네임 공백 확인
+  useEffect(() => {
     for (let i = 0; i < nickname.length; i++) {
       if (nickname[i] === " ") {
         setBlank(true);
@@ -193,7 +190,13 @@ function Signup(props: Iprops) {
         setBlank(false);
       }
     }
-  }, [password, passwordCheck, nickname]);
+
+    if (nickname.length === 0) {
+      setBlank(false);
+      setNameEmpty(false);
+    }
+  }, [nickname]);
+
   return (
     <>
       <div className={`singup_modal ${props.signNone}`}>

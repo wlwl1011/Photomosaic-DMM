@@ -22,7 +22,7 @@ interface Iprops {
 function Menu_result(props: Iprops) {
   return (
     <>
-     <Link to={ {pathname:`/store/${props.store_list.id}` }} style={{textDecoration: 'none'}} >
+     <Link to={ {pathname:`/store/${props.store_list.id}` }} style={{textDecoration: 'none', color:"black"}} >
       <li className="menu_result-list">
         <div className={`menu_result-img-box ${props.imageBox}`}>
           <div className={`menu_result-star-box ${props.starNone}`}>
