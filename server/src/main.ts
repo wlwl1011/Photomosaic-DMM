@@ -12,7 +12,7 @@ const httpsOptions = {
 };
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
+  const app= await NestFactory.create(AppModule, {
     httpsOptions,
   });
   app.useGlobalPipes(
@@ -23,7 +23,7 @@ async function bootstrap() {
   );
 
   // const apps: NestExpressApplication = await NestFactory.create<NestExpressApplication>(AppModule);
-  // apps.use('/public', express.static(join(__dirname, '../public')));
+  // app.use('/public', express.static(join(__dirname, '../public')));
 
   app.enableCors({
     origin: true,

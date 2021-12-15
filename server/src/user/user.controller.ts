@@ -9,11 +9,14 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  StreamableFile,
 } from '@nestjs/common';
 import { request, response, Response } from 'express';
 import { UserService } from './user.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from '../middleware/multeroption';
+import { createReadStream } from 'graceful-fs';
+import { join } from 'path';
 
 @Controller('user')
 export class UserController {
@@ -36,16 +39,18 @@ export class UserController {
   @Post('signup')
   @UseInterceptors(FileInterceptor('file', multerOptions))
   async signup(@Request() req, @Res() response, @UploadedFile() file: File[]) {
-    if (req.file === '') {
+    if (req.file === undefined) {
       // this.userService.sign_image(req.body, 'default image'); //이미지 없으면 default image 삽입
+
       const data = await this.userService.signup(req.body, req.file.filename);
+
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
       } else {
         response.status(409).json({ message: 'email exists' });
       }
     }
-    if (req.file !== '') {
+    if (req.file !== undefined) {
       const uploadedFiles: string[] = this.userService.uploadFiles(file);
       const data = await this.userService.signup(req.body, req.file.filename);
       if (data) {
@@ -66,9 +71,9 @@ export class UserController {
 
   @Get('userinfo/userimage')
   async getimage(@Request() req, @Res() response) {
-    const userdata = await this.userService.userinfo(req);
+    const userdata = await this.userService.userinfo(req.user);
     response.json({
-      data: userdata.user.user_img,
+      data: userdata.user_img,
       message: 'get user image succesfully',
     });
   }
@@ -133,7 +138,7 @@ export class UserController {
 
   @Delete('image')
   async delete_image(@Request() req, @Res() response) {
-    const boolean = await this.userService.delete_image(req.body, req.user);
+    const boolean = await this.userService.delete_image(req.user);
     if (!boolean) {
       response.status(401).json({ message: 'Invalid User' });
     }

@@ -17,7 +17,8 @@ import { join } from 'path';
       signOptions: { expiresIn: '7200s' },
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../public')})],
+      rootPath: join(__dirname, '../../public'),
+      exclude: ['/api*']})],
     providers: [UserService],
     exports: [UserService],
     
@@ -30,7 +31,8 @@ import { join } from 'path';
         { path: 'user/signup', method: RequestMethod.POST },
         { path: 'user/check-username', method: RequestMethod.POST },
         { path: 'user/google_login', method: RequestMethod.GET },
-        { path: 'user/kakao_login', method: RequestMethod.GET })
+        { path: 'user/kakao_login', method: RequestMethod.GET },
+        { path: 'user/', method: RequestMethod.GET })
         .forRoutes(UserController);
     }
   }
