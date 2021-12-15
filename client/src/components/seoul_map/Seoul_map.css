@@ -1,6 +1,6 @@
 .main_wrap {
-  width: 65%;
-  margin: 170px 0 200px 0;
+  width: 100%;
+  margin: 170px 0;
 }
 
 .main_wrap,
@@ -213,10 +213,6 @@
   .map_modal-content {
     top: 35px;
   }
-  .main_wrap {
-    width: 65%;
-    margin: 170px 0;
-  }
 }
 
 @media (max-height: 700px) {
@@ -237,10 +233,10 @@
 }
 
 @media (max-width: 1440px) {
-  /* .main_container {
+  .main_container {
     width: 80%;
     height: 500px;
-  } */
+  }
   .main_svg-map {
     overflow: visible;
     width: 80%;
@@ -249,25 +245,16 @@
 }
 
 @media (max-width: 1240px) {
-  /* .main_container {
+  .main_container {
     width: 70%;
     height: 500px;
-  } */
-}
-
-@media (max-width: 1100px) {
-  .main_container {
-    width: 80%;
-    height: 500px;
-  }
-  .main_wrap {
-    width: 65%;
   }
 }
 
 @media (max-width: 1000px) {
-  .main_wrap {
-    width: 55%;
+  .main_container {
+    width: 50%;
+    height: 500px;
   }
 }
 

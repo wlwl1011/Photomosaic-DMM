@@ -85,10 +85,10 @@
   width: 135px;
   height: 40px;
   background-color: black;
-  color: #fff;
   border-radius: 15px;
   font-size: 17px;
   font-weight: 250;
+  color: #fff;
   margin-right: 10px;
   cursor: pointer;
 }

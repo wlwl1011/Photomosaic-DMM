@@ -6,7 +6,7 @@ import Mypage_fav from "../../components/mypage_fav/Mypage_fav";
 import Mypage_empty from "../../components/mypage_empty/Mypage_empty";
 import ProfileEdit from "../../components/profile/ProfileEdit";
 import Signout from "../../components/signout/Signout";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 interface user_info {
@@ -54,6 +54,8 @@ function Mypage() {
 
   const [reviewInfo, setReviewInfo] = useState<review_info[]>([]);
   const [favInfo, setFavInfo] = useState<fav_info[]>([]);
+
+  const accessLogin: any = useRef();
 
   const handleFav = () => {
     setReviewNone("review_none");
@@ -131,7 +133,7 @@ function Mypage() {
 
   return (
     <>
-      <Header handleImg={handleImg} isLogin={true} />
+      <Header handleImg={handleImg} isLogin={true} accessLogin={accessLogin} />
       <section className="mypage_info_container">
         <div className="mypage_info_box">
           <img className="mypage_info_img" src="/store/model.jpeg" />
