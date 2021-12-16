@@ -52,6 +52,7 @@
   flex-direction: column;
   align-content: flex-end;
   padding-top: 36%;
+  padding-right: 20px;
   width: 30%;
 }
 
@@ -64,7 +65,7 @@
   padding-top: 40px;
   border-top: 5px solid black;
   font-size: 23px;
-  width: 80%;
+  width: 100%;
 }
 
 .menu_infor-text-main {

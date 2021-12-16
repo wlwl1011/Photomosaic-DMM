@@ -17,3 +17,14 @@
   width: 300px;
   font-size: 23px;
 }
+
+@media screen and (max-width: 600px) {
+  .search_result-img-box {
+    width: 190px;
+    height: 190px;
+  }
+  .search_result-img-text {
+    width: 232px;
+    font-size: 18px;
+  }
+}

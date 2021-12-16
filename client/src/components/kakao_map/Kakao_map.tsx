@@ -8,19 +8,11 @@ declare global {
 }
 
 interface Iprops {
-  coordsHandler: (x :number,y:number) =>void
+  coordsHandler: (x: number, y: number) => void;
+  address: string;
 }
 
-function Kakao_map(props:Iprops) {
-  // const [width, setWidth] = useState<number>(0);
-
-  // let result: any = document.querySelector<HTMLElement>(".kakao_map_container");
-  // // 좌표 벗어날 경우 재설정 함수
-  // function setCenter() {
-  //   const moveLatLon = new window.kakao.maps.LatLng(37.54699, 127.09598);
-  //   map.setCenter(moveLatLon);
-  // }
-  // setCenter();
+function Kakao_map(props: Iprops) {
   useEffect(() => {
     let container = document.getElementById("map");
 
@@ -37,8 +29,9 @@ function Kakao_map(props:Iprops) {
     let geocoder = new window.kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
+    console.log(props.address);
     geocoder.addressSearch(
-      "제주특별자치도 제주시 첨단로 242",
+      props.address,
       function (result: any, status: string) {
         var imageSrc = "/maker.png", // 마커이미지의 주소입니다
           imageSize = new window.kakao.maps.Size(70, 70), // 마커이미지의 크기입니다
@@ -54,7 +47,7 @@ function Kakao_map(props:Iprops) {
           );
 
           var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-          props.coordsHandler(result[0].y, result[0].x)  
+          props.coordsHandler(result[0].y, result[0].x);
           // 결과값으로 받은 위치를 마커로 표시합니다
           new window.kakao.maps.Marker({
             map: map,
@@ -67,7 +60,7 @@ function Kakao_map(props:Iprops) {
         }
       }
     );
-  }, []);
+  }, [props.address]);
 
   return (
     <>

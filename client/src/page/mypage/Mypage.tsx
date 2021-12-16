@@ -98,21 +98,21 @@ function Mypage() {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://localhost:4000/user/userinfo/userdata`, {
+        .get(`https://yummyseoulserver.tk/user/userinfo/userdata`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
         .then((res) => setUserInfo(res.data.data));
 
       await axios
-        .get(`https://localhost:4000/review/myreview`, {
+        .get(`https://yummyseoulserver.tk/review/myreview`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
         .then((res) => setReviewInfo(res.data.data));
 
       await axios
-        .get(`https://localhost:4000/favorite/list`, {
+        .get(`https://yummyseoulserver.tk/favorite/list`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })

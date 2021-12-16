@@ -233,8 +233,20 @@
   .signup_nickname-box {
     display: flex;
     align-items: center;
-
+    width: 100%;
     justify-content: center;
+  }
+
+  .signup_nickname-check {
+    right: 42px;
+    top: 5px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .signup_nickname-check {
+    right: 30px;
+    top: 5px;
   }
 }
 
@@ -262,6 +274,7 @@
   }
   .signup_nickname-info {
     width: 70%;
+    font-size: 11px;
   }
 
   .sign_password {

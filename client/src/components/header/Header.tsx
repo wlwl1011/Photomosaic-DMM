@@ -98,7 +98,12 @@ function Header_Off(props: Iprops) {
                       className="header_icon-size"
                       src="/menu/signout.svg"
                     />
-                    <h4 onClick={() => handleLogout("")}>로그아웃</h4>
+                    <h4
+                      className="header_icon-logout-text"
+                      onClick={() => handleLogout("")}
+                    >
+                      로그아웃
+                    </h4>
                   </div>
                 </li>
               ) : (
@@ -109,16 +114,24 @@ function Header_Off(props: Iprops) {
                       className="header_icon-size"
                       src="/menu/signin.svg"
                     />
-                    <h4 onClick={() => handleLgoin("")}>로그인</h4>
+                    <h4
+                      className="header_icon-mypage-text"
+                      onClick={() => handleLgoin("")}
+                    >
+                      로그인
+                    </h4>
                   </div>
                 </li>
               )}
               {props.isLogin ? (
-                <Link to="/mypage">
+                <Link
+                  to="/mypage"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <li className="header__item">
                     <div className="header__link">
                       <img className="header_icon-size" src="/menu/user.svg" />
-                      <h4>마이페이지</h4>
+                      <h4 className="header_icon-mypage-text">마이페이지</h4>
                     </div>
                   </li>
                 </Link>
@@ -130,7 +143,12 @@ function Header_Off(props: Iprops) {
                       className="header_icon-size"
                       src="/menu/user-plus.svg"
                     />
-                    <h4 onClick={() => handleSignup("")}>회원가입</h4>
+                    <h4
+                      className="header_icon-signup-text"
+                      onClick={() => handleSignup("")}
+                    >
+                      회원가입
+                    </h4>
                   </div>
                 </li>
               )}

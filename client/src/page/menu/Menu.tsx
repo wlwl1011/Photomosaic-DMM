@@ -37,7 +37,7 @@ function Menu({ match }: any) {
   useEffect(() => {
     (async () => {
       await axios
-        .get("https://localhost:4000/user/userinfo/userdata", {
+        .get("https://yummyseoulserver.tk/user/userinfo/userdata", {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -62,7 +62,7 @@ function Menu({ match }: any) {
   useEffect(() => {
     (async () => {
       const data = await axios.get(
-        `https://localhost:4000/store/byMenu/${match.params.menu_name}`,
+        `https://yummyseoulserver.tk/store/byMenu/${match.params.menu_name}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -127,7 +127,7 @@ function Menu({ match }: any) {
             </aside>
             <div className="menu_infor-map-box">
               <div className="menu_infor-map">
-                <Kakao_map coordsHandler={(x, y) => {}} />
+                <Kakao_map coordsHandler={(x, y) => {}} address={""} />
               </div>
             </div>
           </div>

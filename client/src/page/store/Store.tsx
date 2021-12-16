@@ -80,17 +80,20 @@ function Store({ match }: any) {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://localhost:4000/store/byId/${match.params.store_id}`, {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        })
+        .get(
+          `https://yummyseoulserver.tk/store/byId/${match.params.store_id}`,
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           setStoreInfo(res.data.data);
         });
 
       await axios
         .get(
-          `https://localhost:4000/review/byStoreId/${match.params.store_id}`,
+          `https://yummyseoulserver.tk/review/byStoreId/${match.params.store_id}`,
           {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
@@ -105,7 +108,7 @@ function Store({ match }: any) {
 
       if (isLogin) {
         await axios
-          .get(`https://localhost:4000/user/userinfo/userdata`, {
+          .get(`https://yummyseoulserver.tk/user/userinfo/userdata`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
@@ -121,7 +124,7 @@ function Store({ match }: any) {
       if (isLogin) {
         await axios
           .get(
-            `https://localhost:4000/review/likelist/${match.params.store_id}`,
+            `https://yummyseoulserver.tk/review/likelist/${match.params.store_id}`,
             {
               headers: { "Content-Type": "application/json" },
               withCredentials: true,
@@ -140,7 +143,7 @@ function Store({ match }: any) {
         //console.log('store_name',StoreInfo.store_name)
         await axios
           .get(
-            `https://localhost:4000/favorite/check-favorite/${StoreInfo.store_name}`,
+            `https://yummyseoulserver.tk/favorite/check-favorite/${StoreInfo.store_name}`,
             {
               headers: { "Content-Type": "application/json" },
               withCredentials: true,
@@ -158,7 +161,7 @@ function Store({ match }: any) {
     if (isLogin) {
       await axios
         .post(
-          `https://localhost:4000/favorite/add-favorite`,
+          `https://yummyseoulserver.tk/favorite/add-favorite`,
           {
             store_address: StoreInfo.address,
             store_name: StoreInfo.store_name,
@@ -180,10 +183,13 @@ function Store({ match }: any) {
   const deleteFavoriteHandler = async () => {
     if (isLogin) {
       await axios
-        .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`, {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        })
+        .delete(
+          `https://yummyseoulserver.tk/favorite/${StoreInfo.store_name}`,
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           setAddFav(false);
         });
@@ -199,7 +205,7 @@ function Store({ match }: any) {
   ) => {
     await axios
       .post(
-        `https://localhost:4000/review/add-review/`,
+        `https://yummyseoulserver.tk/review/add-review/`,
         {
           store_id: store_id,
           comment: comment,
@@ -218,7 +224,7 @@ function Store({ match }: any) {
 
   const deleteReviewHandler = async () => {
     await axios
-      .delete(`https://localhost:4000/review/${StoreInfo.id}`, {
+      .delete(`https://yummyseoulserver.tk/review/${StoreInfo.id}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       })
@@ -231,7 +237,7 @@ function Store({ match }: any) {
     if (isLogin) {
       await axios
         .post(
-          `https://localhost:4000/review/like/${review_id}`,
+          `https://yummyseoulserver.tk/review/like/${review_id}`,
           {},
           {
             headers: { "Content-Type": "application/json" },
@@ -249,7 +255,7 @@ function Store({ match }: any) {
   const DeletereviewLikeHandler = async (review_id: number) => {
     if (isLogin) {
       await axios
-        .delete(`https://localhost:4000/review/like/${review_id}`, {
+        .delete(`https://yummyseoulserver.tk/review/like/${review_id}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -264,7 +270,6 @@ function Store({ match }: any) {
   const reviewEdit = async (e: string) => {
     // 리뷰 모달 on
     if (isLogin) {
-      // 여기다 임마
       let data: boolean = true;
 
       ReviewInfo.filter((el) => {
@@ -305,7 +310,10 @@ function Store({ match }: any) {
           <div className="store_info_box">
             <div className="store_info_box-line">
               <aside className="store_map-box">
-                <Kakao_map coordsHandler={coordsHandler} />
+                <Kakao_map
+                  coordsHandler={coordsHandler}
+                  address={StoreInfo.address}
+                />
               </aside>
               <div className="store_text-box">
                 <div className="store_tx-title-box">
@@ -355,7 +363,7 @@ function Store({ match }: any) {
                 </div>
                 <div className="store_tx-btn-box">
                   <a
-                    href={`https://map.kakao.com/link/to/카카오판교오피스,${coords[0]},${coords[1]}`}
+                    href={`https://map.kakao.com/link/to/${StoreInfo.store_name},${coords[0]},${coords[1]}`}
                     target="_blank"
                     className="store_btn-word"
                   >

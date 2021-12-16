@@ -95,6 +95,18 @@
   bottom: 0;
 }
 
+.header_icon-logout-text {
+  cursor: pointer;
+}
+
+.header_icon-signup-text {
+  cursor: pointer;
+}
+
+.header_icon-mypage-text {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 770px) {
   .header__menu {
     position: fixed;
