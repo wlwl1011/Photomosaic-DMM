@@ -29,10 +29,14 @@ export class UserController {
     const refreshtoken = await this.userService.refreshtoken(req.body);
     response.cookie('jwt', accesstoken, {
       httpOnly: true,
+      sameSite: 'none',
+      secure: true
     });
     response.cookie('jwt1', refreshtoken, {
       data: accesstoken,
       httpOnly: true,
+      sameSite: 'none',
+      secure: true
     });
     response.json({ message: 'login successfully' });
   }
@@ -42,7 +46,7 @@ export class UserController {
   async signup(@Request() req, @Res() response, @UploadedFile() file: File[]) {
     if (req.file === undefined) {
       // this.userService.sign_image(req.body, 'default image'); //이미지 없으면 default image 삽입
-      const data = await this.userService.signup(req.body, 'default image');
+      const data = await this.userService.signup(req.body, 'default.png');
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
       } else {

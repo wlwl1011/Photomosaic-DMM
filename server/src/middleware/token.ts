@@ -26,7 +26,9 @@ export class login implements NestMiddleware {
                 req.user = { ...userdata}; 
                 const accesstoken = await this.userService.login(req.body)
                 res.cookie('jwt', accesstoken, {
-                    httpOnly: true
+                    httpOnly: true,
+                    sameSite: 'none',
+                    secure: true
                   })
                   next();
                   // accesstoken이 없을때
