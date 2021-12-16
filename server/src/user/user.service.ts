@@ -71,7 +71,7 @@ export class UserService {
         email: data.email,
         password: data.password,
         user_name: data.user_name,
-        user_img: `https://localhost:4000/${image}`,
+        user_img: `${process.env.SERVER_ADDRESS}/${image}`,
       });
       return true;
     }
@@ -182,7 +182,7 @@ export class UserService {
       return false;
     }
     if (userdata) {
-      userdata.user_img = 'https://localhost:4000/default.png';
+      userdata.user_img = '${process.env.SERVER_ADDRESS}/default.png';
       await this.userRepository.save(userdata);
       return true;
     }
