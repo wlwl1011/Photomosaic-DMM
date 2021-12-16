@@ -5,19 +5,20 @@ import Star_avg from "../../components/star/star_avg/Star_avg";
 import Store_list from "../../components/store_list/Store_list";
 import Kakao_map from "../../components/kakao_map/Kakao_map";
 import ReviewEdit from "../../components/reviewedit/ReviewEdit";
-import { useState, useEffect, MouseEventHandler, SetStateAction } from "react";
+import Review_already from "../../components/review_already/Review_already";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Login from "../../components/login/Login";
 
-function Store({match}:any) {
+function Store({ match }: any) {
   const [chMessage, setChMessage] = useState<boolean>(false);
   const [mesNone, setMesNone] = useState<string>("");
-  const [count,setCount]=useState<number>(0)
-  const [addFav,setAddFav]=useState<boolean>();
-  const [reviewlike,setReviewLike]=useState<number>(0);
-  const [UserId,setUserId] = useState<number>(0)
-  const [isLogin,setisLogin]=useState<boolean>(true);
-  const [reviewNone, setLoginNone] = useState<string>("reviewEdit_hidden");
+  const [count, setCount] = useState<number>(0);
+  const [addFav, setAddFav] = useState<boolean>();
+  const [reviewlike, setReviewLike] = useState<number>(0);
+  const [UserId, setUserId] = useState<number>(0);
+  const [isLogin, setisLogin] = useState<boolean>(true);
+  const [reviewNone, setRevieNone] = useState<string>("reviewEdit_hidden");
+  const [alreadyNone, setAlreadyNone] = useState<string>("review_alr_hidden");
 
   type Store = {
     address: string;
@@ -43,15 +44,14 @@ function Store({match}:any) {
     num_review_like: number;
   };
 
-  type likelist={
-    id:number,
-    user_id:number,
-    review_id:number
-  }
+  type likelist = {
+    id: number;
+    user_id: number;
+    review_id: number;
+  };
 
-
-  const [likeList,setLikelist]= useState<likelist[]>([])
-  const [StoreInfo,setStoreInfo] = useState<Store>({
+  const [likeList, setLikelist] = useState<likelist[]>([]);
+  const [StoreInfo, setStoreInfo] = useState<Store>({
     address: "",
     avg_rating: 0,
     created_at: "",
@@ -64,8 +64,10 @@ function Store({match}:any) {
     updated_at: "",
   });
 
-  const [ReviewInfo,setReviewInfo] = useState<Review[]>([]);
- 
+  const [ReviewInfo, setReviewInfo] = useState<Review[]>([]);
+  // 찜하기, 리뷰쓰기 접근 함수
+  const accessLogin: any = useRef();
+
   const handleImg = () => {
     setChMessage(!chMessage);
     if (chMessage) {
@@ -78,10 +80,13 @@ function Store({match}:any) {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://yummyseoulserver.tk/store/byId/${match.params.store_id}`, {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        })
+        .get(
+          `https://yummyseoulserver.tk/store/byId/${match.params.store_id}`,
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           setStoreInfo(res.data.data);
         });
@@ -93,63 +98,108 @@ function Store({match}:any) {
         })
         .then((res) => {
           setReviewInfo(res.data.data);
-        }).catch((err)=>{})
-        ;
+        })
+        .catch((err) => {});
 
       //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
-
-      if(isLogin){
+      if (isLogin) {
         await axios
           .get(`https://yummyseoulserver.tk/user/userinfo/userdata`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
-          .then((res)=>{
+          .then((res) => {
             setisLogin(true);
-            setUserId(res.data.data.id)
-          }).catch((err)=>{
-            setisLogin(false);
+            setUserId(res.data.data.id);
           })
-        }
+          .catch((err) => {
+            setisLogin(false);
+          });
+      }
       //! 스토어별 리뷰중에 로그인한 유저가 좋아요한 리뷰리스트
-      if(isLogin){
+      if (isLogin) {
         await axios
           .get(`https://yummyseoulserver.tk/review/likelist/${match.params.store_id}`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
-          .then((res)=>{
-            setLikelist(res.data.data)
-          }).catch((err)=>{
+          .catch((err) => {
             setLikelist([]);
             //이거안하면 오류남ㅇㅇ
-          })  
-        }
+          });
+      }
       //!유저가 이 가게를 찜햇는지 아닌지 확인
-      if(isLogin){
+      if (isLogin) {
         //console.log('store_name',StoreInfo.store_name)
         await axios
-          .get(`https://yummyseoulserver.tk/favorite/check-favorite/${StoreInfo.store_name}`, {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          })
-          .then((res)=>setAddFav(true))
-          .catch((err)=>{
+          .get(
+            `https://yummyseoulserver.tk/favorite/check-favorite/${StoreInfo.store_name}`,
+            {
+              headers: { "Content-Type": "application/json" },
+              withCredentials: true,
+            }
+          )
+          .then((res) => setAddFav(true))
+          .catch((err) => {
             setAddFav(false);
-          })  
-        }  
-      
+          });
+      }
     })();
   }, [count, addFav, reviewlike]);
 
-  const  favoriteHandler = async() =>{
+  const favoriteHandler = async () => {
+    if (isLogin) {
+      await axios
+        .post(
+          `https://yummyseoulserver.tk/favorite/add-favorite`,
+          {
+            store_address: StoreInfo.address,
+            store_name: StoreInfo.store_name,
+            store_img: StoreInfo.store_img,
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          setAddFav(true);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
+  };
+
+  const deleteFavoriteHandler = async () => {
+    if (isLogin) {
+      await axios
+        .delete(
+          `https://yummyseoulserver.tk/favorite/${StoreInfo.store_name}`,
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          setAddFav(false);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
+  };
+
+  const addReviewHandler = async (
+    store_id: number,
+    comment: string,
+    rating: number
+  ) => {
     await axios
       .post(
-        `https://yummyseoulserver.tk/favorite/add-favorite`,
+        `https://yummyseoulserver.tk/review/add-review/`,
         {
-          store_address: StoreInfo.address,
-          store_name: StoreInfo.store_name,
-          store_img: StoreInfo.store_img,
+          store_id: store_id,
+          comment: comment,
+          rating: rating,
         },
         {
           headers: { "Content-Type": "application/json" },
@@ -157,87 +207,103 @@ function Store({match}:any) {
         }
       )
       .then((res) => {
-        setAddFav(true);
+        setCount(count + 1);
+        window.location.replace(window.location.href);
       });
   };
 
-  const deleteFavoriteHandler = async () => {
+  const deleteReviewHandler = async () => {
     await axios
-      .delete(`https://yummyseoulserver.tk/favorite/${StoreInfo.store_name}`, {
+      .delete(`https://yummyseoulserver.tk/review/${StoreInfo.id}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       })
       .then((res) => {
-        setAddFav(false);
+        setCount(count - 1);
       });
   };
 
-  const addReviewHandler = async(store_id:number,comment:string,rating:number)=>{
-    await axios.post(`https://yummyseoulserver.tk/review/add-review/`, 
-    {
-      store_id:store_id,
-      comment:comment,
-      rating:rating,
-    },
-    {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      setCount(count+1);
-      window.location.replace(window.location.href);
-    });
-  }
-
-  const deleteReviewHandler = async()=>{
-    await axios.delete(`https://yummyseoulserver.tk/review/${StoreInfo.id}`, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      setCount(count-1);
-    });
-  }
-
-  const reviewLikeHandler = async(review_id:number)=>{
-    await axios.post(`https://yummyseoulserver.tk/review/like/${review_id}`, {},{
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      setReviewLike(reviewlike+1);
-    });
-  }
-
-  const DeletereviewLikeHandler = async(review_id:number)=>{
-    await axios.delete(`https://yummyseoulserver.tk/review/like/${review_id}`,{
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    }).then((res) =>{ 
-      setReviewLike(reviewlike-1);
-    });
-  }
-
-  const [isReview, setIsReview] = useState<boolean>(false);
-  const reviewEdit = (e: string) => {
-    setLoginNone(e);
-    // if (isReview) setIsReview(false);
-    // else setIsReview(true);
+  const reviewLikeHandler = async (review_id: number) => {
+    if (isLogin) {
+      await axios
+        .post(
+          `https://yummyseoulserver.tk/review/like/${review_id}`,
+          {},
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          setReviewLike(reviewlike + 1);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
   };
 
-  const [coords,setCoords]=useState<number[]>([]);
+  const DeletereviewLikeHandler = async (review_id: number) => {
+    if (isLogin) {
+      await axios
+        .delete(`https://yummyseoulserver.tk/review/like/${review_id}`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => {
+          setReviewLike(reviewlike - 1);
+        });
+    } else {
+      accessLogin.current.accessLogin();
+    }
+  };
 
-  const coordsHandler=(x:number,y:number)=>{
-    setCoords([x,y])
-  }  
+  const reviewEdit = async (e: string) => {
+    // 리뷰 모달 on
+    if (isLogin) {
+      let data: boolean = true;
 
-  console.log(coords);
+      ReviewInfo.filter((el) => {
+        if (el.user_id === UserId) {
+          setAlreadyNone("");
+          data = false;
+        }
+      });
+
+      if (e === "review_alr_hidden") {
+        setAlreadyNone(e);
+      }
+
+      if (data) {
+        setRevieNone(e);
+      }
+    } else {
+      // 로그인 모달 on
+      accessLogin.current.accessLogin();
+    }
+  };
+
+  const [coords, setCoords] = useState<number[]>([]);
+
+  const coordsHandler = (x: number, y: number) => {
+    setCoords([x, y]);
+  };
+
   return (
     <>
-      <Header handleImg={handleImg} isLogin={isLogin} />
+      <Header
+        handleImg={handleImg}
+        isLogin={isLogin}
+        accessLogin={accessLogin}
+      />
       <div className="store_container">
         <section className="store_info_container">
           <div className="store_info_box">
             <div className="store_info_box-line">
               <aside className="store_map-box">
-                <Kakao_map coordsHandler={coordsHandler} address={StoreInfo.address}/>
+                <Kakao_map
+                  coordsHandler={coordsHandler}
+                  address={StoreInfo.address}
+                />
               </aside>
               <div className="store_text-box">
                 <div className="store_tx-title-box">
@@ -259,13 +325,12 @@ function Store({match}:any) {
                         onClick={deleteFavoriteHandler}
                       />
                     )}
- 
+
                     <img
                       className="store_tx-icon"
                       src="/store/edit.svg"
                       onClick={() => reviewEdit("")}
                     />
-
                   </div>
                 </div>
                 <div className="store_tx-info-box">
@@ -287,8 +352,13 @@ function Store({match}:any) {
                   </h3>
                 </div>
                 <div className="store_tx-btn-box">
-                  <button className="store-btn"><a href={`https://map.kakao.com/link/to/카카오판교오피스,${coords[0]},${coords[1]}`} target="_blank" style={{textDecoration: 'none'}}>대중교통 길찾기</a></button>
-                  <button className="store-btn">차량 길찾기</button>
+                  <a
+                    href={`https://map.kakao.com/link/to/${StoreInfo.store_name},${coords[0]},${coords[1]}`}
+                    target="_blank"
+                    className="store_btn-word"
+                  >
+                    <button className="store-btn">길찾기</button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -302,14 +372,14 @@ function Store({match}:any) {
 
             <ul className="store_review_ul-box">
               {ReviewInfo.map((el: Review) => {
-                let flag=false;
-                for(let i=0;i<likeList.length;i++){
-                  if(likeList[i].review_id===el.id){                      
-                      flag=true;
-                      break;
-                    }
+                let flag = false;
+                for (let i = 0; i < likeList.length; i++) {
+                  if (likeList[i].review_id === el.id) {
+                    flag = true;
+                    break;
                   }
-                
+                }
+
                 return (
                   <Store_list
                     mesNone={mesNone}
@@ -317,18 +387,22 @@ function Store({match}:any) {
                     UserId={UserId}
                     deleteReviewHandler={deleteReviewHandler}
                     reviewLikeHandler={reviewLikeHandler}
-                    deletereviewLikeHandler={ DeletereviewLikeHandler}
+                    deletereviewLikeHandler={DeletereviewLikeHandler}
                     isLike={flag}
-                    />
-                    );               
-                  })
-                }        
+                  />
+                );
+              })}
             </ul>
-
           </div>
         </section>
       </div>
-      <ReviewEdit reviewNone={reviewNone} reviewEdit={reviewEdit} addReviewHandler={addReviewHandler} storeId={StoreInfo.id} />           
+      <ReviewEdit
+        reviewNone={reviewNone}
+        reviewEdit={reviewEdit}
+        addReviewHandler={addReviewHandler}
+        storeId={StoreInfo.id}
+      />
+      <Review_already alreadyNone={alreadyNone} reviewEdit={reviewEdit} />
       <Footer />
     </>
   );

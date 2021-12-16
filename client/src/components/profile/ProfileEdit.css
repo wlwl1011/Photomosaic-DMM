@@ -85,3 +85,19 @@
 .profile_select_img-check {
   color: black;
 }
+
+@media screen and (max-width: 500px) {
+  .profile_content {
+    width: 400px;
+  }
+
+  .profile_select_text {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile_content {
+    width: 340px;
+  }
+}

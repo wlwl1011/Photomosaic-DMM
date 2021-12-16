@@ -31,13 +31,16 @@ import { jwtConstants } from './auth/constants';
 import { FavoriteModule } from './favorite/favorite.module';
 import { ReviewModule } from './review/review.module';
 import { SearchWordModule } from './search-word/search-word.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
     //이거 쓰면 env 앱 전체에서 쓸 수 있음
     ConfigModule.forRoot({
       isGlobal:true
-    }),
+    }),ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public')}),
     TypeOrmModule.forRoot(ormconfig),
     TypeOrmModule.forFeature([Store,Review,ReviewLike,MenuByArea,SearchWord,Favorite]),
     UserModule,

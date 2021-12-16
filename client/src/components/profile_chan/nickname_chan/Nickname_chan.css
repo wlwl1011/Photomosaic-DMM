@@ -78,3 +78,32 @@
 .nickname_chan_none {
   display: none;
 }
+
+@media screen and (max-width: 500px) {
+  .nickname_chan-container {
+    margin: 50px 0 0 0;
+    width: 100%;
+  }
+
+  .nickname_chan_input {
+    width: 230px;
+  }
+
+  .nickname_chan-check {
+    right: 100px;
+    top: 253px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .nickname_chan_input {
+    width: 190px;
+    height: 35px;
+    font-size: 16px;
+  }
+  .nickname_chan-check {
+    font-size: 11px;
+    right: 87px;
+    top: 252px;
+  }
+}
