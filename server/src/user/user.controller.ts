@@ -26,10 +26,14 @@ export class UserController {
     const refreshtoken = await this.userService.refreshtoken(req.body);
     response.cookie('jwt', accesstoken, {
       httpOnly: true,
+      sameSite:'none',
+      secure:true
     });
     response.cookie('jwt1', refreshtoken, {
       data: accesstoken,
       httpOnly: true,
+      sameSite:'none',
+      secure:true
     });
     response.json({ message: 'login successfully' });
   }
@@ -76,10 +80,11 @@ export class UserController {
 
   @Get('userinfo/userdata')
   async getprofile(@Request() req, @Res() response) {
-    const userdata = await this.userService.userinfo(req);
-    delete userdata.user.password;
+    const userdata = await this.userService.userinfo(req.user);
+
+    delete userdata.password;
     response.json({
-      data: userdata.user,
+      data: userdata,
       message: 'get user info successfully',
     });
   }
@@ -142,7 +147,7 @@ export class UserController {
     }
   }
 
-  @Delete('delete-account')
+  @Post('delete-account')
   async delete_account(@Request() req, @Res() response) {
     const boolean = await this.userService.delete_account(req.body, req.user);
     if (boolean === 1) {

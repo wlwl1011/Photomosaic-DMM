@@ -78,7 +78,7 @@ function Store({match}:any) {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://localhost:4000/store/byId/${match.params.store_id}`, {
+        .get(`https://yummyseoulserver.tk/store/byId/${match.params.store_id}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -87,7 +87,7 @@ function Store({match}:any) {
         });
 
       await axios
-        .get(`https://localhost:4000/review/byStoreId/${match.params.store_id}`, {
+        .get(`https://yummyseoulserver.tk/review/byStoreId/${match.params.store_id}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -100,7 +100,7 @@ function Store({match}:any) {
 
       if(isLogin){
         await axios
-          .get(`https://localhost:4000/user/userinfo/userdata`, {
+          .get(`https://yummyseoulserver.tk/user/userinfo/userdata`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
@@ -114,7 +114,7 @@ function Store({match}:any) {
       //! 스토어별 리뷰중에 로그인한 유저가 좋아요한 리뷰리스트
       if(isLogin){
         await axios
-          .get(`https://localhost:4000/review/likelist/${match.params.store_id}`, {
+          .get(`https://yummyseoulserver.tk/review/likelist/${match.params.store_id}`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
@@ -129,7 +129,7 @@ function Store({match}:any) {
       if(isLogin){
         //console.log('store_name',StoreInfo.store_name)
         await axios
-          .get(`https://localhost:4000/favorite/check-favorite/${StoreInfo.store_name}`, {
+          .get(`https://yummyseoulserver.tk/favorite/check-favorite/${StoreInfo.store_name}`, {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
           })
@@ -145,7 +145,7 @@ function Store({match}:any) {
   const  favoriteHandler = async() =>{
     await axios
       .post(
-        `https://localhost:4000/favorite/add-favorite`,
+        `https://yummyseoulserver.tk/favorite/add-favorite`,
         {
           store_address: StoreInfo.address,
           store_name: StoreInfo.store_name,
@@ -163,7 +163,7 @@ function Store({match}:any) {
 
   const deleteFavoriteHandler = async () => {
     await axios
-      .delete(`https://localhost:4000/favorite/${StoreInfo.store_name}`, {
+      .delete(`https://yummyseoulserver.tk/favorite/${StoreInfo.store_name}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       })
@@ -173,7 +173,7 @@ function Store({match}:any) {
   };
 
   const addReviewHandler = async(store_id:number,comment:string,rating:number)=>{
-    await axios.post(`https://localhost:4000/review/add-review/`, 
+    await axios.post(`https://yummyseoulserver.tk/review/add-review/`, 
     {
       store_id:store_id,
       comment:comment,
@@ -189,7 +189,7 @@ function Store({match}:any) {
   }
 
   const deleteReviewHandler = async()=>{
-    await axios.delete(`https://localhost:4000/review/${StoreInfo.id}`, {
+    await axios.delete(`https://yummyseoulserver.tk/review/${StoreInfo.id}`, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
@@ -198,7 +198,7 @@ function Store({match}:any) {
   }
 
   const reviewLikeHandler = async(review_id:number)=>{
-    await axios.post(`https://localhost:4000/review/like/${review_id}`, {},{
+    await axios.post(`https://yummyseoulserver.tk/review/like/${review_id}`, {},{
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
@@ -207,7 +207,7 @@ function Store({match}:any) {
   }
 
   const DeletereviewLikeHandler = async(review_id:number)=>{
-    await axios.delete(`https://localhost:4000/review/like/${review_id}`,{
+    await axios.delete(`https://yummyseoulserver.tk/review/like/${review_id}`,{
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) =>{ 
@@ -231,13 +231,13 @@ function Store({match}:any) {
   console.log(coords);
   return (
     <>
-      <Header handleImg={handleImg} isLogin={isLogin}/>
+      <Header handleImg={handleImg} isLogin={isLogin} />
       <div className="store_container">
         <section className="store_info_container">
           <div className="store_info_box">
             <div className="store_info_box-line">
               <aside className="store_map-box">
-                <Kakao_map coordsHandler={coordsHandler}/>
+                <Kakao_map coordsHandler={coordsHandler} address={StoreInfo.address}/>
               </aside>
               <div className="store_text-box">
                 <div className="store_tx-title-box">

@@ -9,6 +9,7 @@ declare global {
 
 interface Iprops {
   coordsHandler: (x :number,y:number) =>void
+  address:string
 }
 
 function Kakao_map(props:Iprops) {
@@ -38,7 +39,7 @@ function Kakao_map(props:Iprops) {
 
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch(
-      "제주특별자치도 제주시 첨단로 242",
+      props.address,
       function (result: any, status: string) {
         var imageSrc = "/maker.png", // 마커이미지의 주소입니다
           imageSize = new window.kakao.maps.Size(70, 70), // 마커이미지의 크기입니다
@@ -67,7 +68,7 @@ function Kakao_map(props:Iprops) {
         }
       }
     );
-  }, []);
+  }, [props.address]);
 
   return (
     <>

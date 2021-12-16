@@ -48,6 +48,7 @@ import { SearchWordModule } from './search-word/search-word.module';
       secret: jwtConstants.accesssecret,
       signOptions: { expiresIn: '3600s' },
     }),
+ 
   ],
   
   controllers: [AppController, StoreController,FavoriteController, MenuByAreaController, ReviewController,SearchWordController,UserController],

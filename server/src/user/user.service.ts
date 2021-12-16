@@ -62,9 +62,10 @@ export class UserService {
         return false
     }
     
-  async userinfo(data: string): Promise<any> {
-    return data;
-  }
+    async userinfo(data: any): Promise<any> {
+      const userdata = await this.userRepository.findOne({ where: { id: data.id }});
+      return userdata;
+    }
 
   async changepassword(data: any, user: any): Promise<any> {
     const { password } = data;

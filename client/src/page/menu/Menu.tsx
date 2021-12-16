@@ -40,10 +40,30 @@ function Menu({match}:any) {
     }
   };
   // ******************************************************
+
+  const [isLogin,setIsLogin]=useState<boolean>(true)
+
+  useEffect(() => {
+    (async () => {
+      await axios.get(`https://yummyseoulserver.tk/user/userinfo/userdata`,
+    {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true
+    })
+    .then((res)=>{
+      setIsLogin(true)
+    })
+    .catch((err)=>setIsLogin(false))
+      
+    })();
+  }, [isLogin]);
+
+
+
   useEffect(() => {
     (async () => {
       const data = await axios.get(
-        `https://localhost:4000/store/byMenu/${match.params.menu_name}`,
+        `https://yummyseoulserver.tk/store/byMenu/${match.params.menu_name}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -74,7 +94,7 @@ function Menu({match}:any) {
 
   return (
     <>
-      <Header handleImg={handleImg} isLogin={true}/>
+      <Header handleImg={handleImg} isLogin={isLogin}/>
       <section className="menu_container">
         <div className="menu_box">
           <div className="menu_infor-box">
@@ -89,7 +109,7 @@ function Menu({match}:any) {
             </aside>
             <div className="menu_infor-map-box">
               <div className="menu_infor-map">
-                <Kakao_map coordsHandler={(x,y)=>{}}/>
+                <Kakao_map coordsHandler={(x,y)=>{}} address={""}/>
               </div>
             </div>
           </div>

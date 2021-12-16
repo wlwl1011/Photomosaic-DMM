@@ -99,7 +99,7 @@ export class ReviewService {
         const data = await entityManager.query(
         `SELECT review_like.id,review_like.user_id,review_like.review_id 
         from review_like 
-        INNER JOIN Review ON review_like.review_id = review.id 
+        INNER JOIN review ON review_like.review_id = review.id 
         WHERE review_like.user_id=${userId} AND store_id=${storeId}`)
 
         if(data.length===0){

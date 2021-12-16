@@ -121,7 +121,7 @@ function Search(props: Iprops) {
   
   useEffect(() => {
     (async () => {
-      await axios.get(`https://localhost:4000/search-word/`,
+      await axios.get(`https://localhost:4000/search-word/list`,
     {
       headers: { "Content-Type": "application/json" },
       withCredentials: true
