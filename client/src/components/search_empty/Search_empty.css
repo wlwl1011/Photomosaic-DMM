@@ -17,3 +17,14 @@
   width: 100%;
   font-size: 23px;
 }
+
+@media screen and (max-width: 600px) {
+  .search_result-empty-box {
+    width: 190px;
+    height: 190px;
+  }
+  .search_result-empty-text {
+    width: 100%;
+    font-size: 18px;
+  }
+}

@@ -111,7 +111,7 @@ function Signup(props: Iprops) {
     if (!blank && nickname !== "") {
       await axios
         .post(
-          "https://localhost:4000/user/check-username",
+          "https://yummyseoulserver.tk/user/check-username",
           {
             user_name: nickname,
           },
@@ -142,7 +142,7 @@ function Signup(props: Iprops) {
 
     if (pwConfirm && userCheck && !pwCheck && email.length > 7) {
       await axios
-        .post("https://localhost:4000/user/signup", formData, {
+        .post("https://yummyseoulserver.tk/user/signup", formData, {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
         })
@@ -289,7 +289,7 @@ function Signup(props: Iprops) {
                   className="signup_nickname-check"
                   onClick={handleNickname}
                 >
-                  중복 검사
+                  중복검사
                 </button>
               </div>
               <div className="signup_success-box">

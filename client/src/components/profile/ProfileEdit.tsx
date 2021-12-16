@@ -80,6 +80,8 @@ function ProfileEdit(props: Iprops) {
 
   const emptyNickname: any = useRef();
   const emptyPw: any = useRef();
+  const emptyImg: any = useRef();
+
   const handleNone = () => {
     // input text 초기화
     const inputElement: NodeListOf<Element> =
@@ -97,6 +99,7 @@ function ProfileEdit(props: Iprops) {
 
     emptyNickname.current.emptyNickname();
     emptyPw.current.emptyPw();
+    emptyImg.current.emptyImg();
 
     // 정보 수정 모달 닫기
     props.profileEdit("profile_hidden");
@@ -142,7 +145,11 @@ function ProfileEdit(props: Iprops) {
               childRef={emptyNickname}
               handleCount={props.handleCount}
             />
-            <Image_chan image_none={selectNone.image_none} />
+            <Image_chan
+              image_none={selectNone.image_none}
+              emptyImg={emptyImg}
+              handleCount={props.handleCount}
+            />
           </section>
         </div>
       </div>

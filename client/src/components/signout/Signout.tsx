@@ -34,7 +34,7 @@ function Signout(props: Iprops) {
   const handleOut = async () => {
     await axios
       .post(
-        "https://localhost:4000/user/delete-account",
+        "https://yummyseoulserver.tk/user/delete-account",
         {
           password: password,
         },

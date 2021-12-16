@@ -70,29 +70,30 @@ function Search(props: Iprops) {
 
     if (liValue === "가게") {
       await axios
-        .get(`https://localhost:4000/store/byStorename/${Search}`, {
+        .get(`https://yummyseoulserver.tk/store/byStorename/${Search}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
         .then(async (res) => {
           setdata([res.data.data]);
-          setSer_result(true);
           //setCount(count+1);
+          setSer_result(true);
           await axios
             .post(
-              `https://localhost:4000/search-word/add-search-word/${Search}`,
+              `https://yummyseoulserver.tk/search-word/add-search-word/${Search}`,
               {},
               {
                 headers: { "Content-Type": "application/json" },
                 withCredentials: true,
               }
             )
-            .then((res) => setCount(count + 1));
+            .then((res) => setCount(count + 1))
+            .catch(() => {});
         })
         .catch((err) => setSer_result(false));
     } else if (liValue === "메뉴") {
       await axios
-        .get(`https://localhost:4000/store/byMenu/${Search}`, {
+        .get(`https://yummyseoulserver.tk/store/byMenu/${Search}`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -101,7 +102,7 @@ function Search(props: Iprops) {
           setSer_result(true);
           await axios
             .post(
-              `https://localhost:4000/search-word/add-search-word/${Search}`,
+              `https://yummyseoulserver.tk/search-word/add-search-word/${Search}`,
               {},
               {
                 headers: { "Content-Type": "application/json" },
@@ -110,7 +111,8 @@ function Search(props: Iprops) {
             )
             .then((res) => {
               setCount(count + 1);
-            });
+            })
+            .catch(() => {});
         })
         .catch((err) => setSer_result(false));
     }
@@ -124,19 +126,19 @@ function Search(props: Iprops) {
 
   const deleteSearchWordHandler = async (search_word: string) => {
     await axios
-      .delete(`https://localhost:4000/search-word/${search_word}`, {
+      .delete(`https://yummyseoulserver.tk/search-word/${search_word}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       })
       .then((res) => setCount(count + 1));
   };
 
-  useEffect(() => {}, [count]);
+  // useEffect(() => {}, [count]);
 
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://localhost:4000/search-word/`, {
+        .get(`https://yummyseoulserver.tk/search-word/`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -153,6 +155,8 @@ function Search(props: Iprops) {
       setSer_default(true);
     },
   }));
+
+  console.log("data 결과:", data);
 
   return (
     <>
@@ -245,16 +249,16 @@ function Search(props: Iprops) {
                 <div className="search_result-box">
                   {ser_default ? (
                     <Search_default />
-                  ) : (
+                  ) : ser_result ? (
                     <ul className="search_result-list">
-                      {data.length !== 0 ? (
-                        data.map((el: Store) => {
-                          return <Search_result data={el} />;
-                        })
-                      ) : (
-                        <Search_empty />
-                      )}
+                      {data.length !== 0
+                        ? data.map((el: Store) => {
+                            return <Search_result data={el} />;
+                          })
+                        : null}
                     </ul>
+                  ) : (
+                    <Search_empty />
                   )}
                 </div>
               </div>

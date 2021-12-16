@@ -41,7 +41,7 @@ function Nickname_chan(props: Iprops) {
     if (!blank && nickname !== "") {
       await axios
         .post(
-          "https://localhost:4000/user/check-username",
+          "https://yummyseoulserver.tk/user/check-username",
           {
             user_name: nickname,
           },
@@ -63,7 +63,7 @@ function Nickname_chan(props: Iprops) {
       console.log("닉네임 수정 중");
       await axios
         .patch(
-          "https://localhost:4000/user/change-username",
+          "https://yummyseoulserver.tk/user/change-username",
           {
             user_name: nickname,
           },

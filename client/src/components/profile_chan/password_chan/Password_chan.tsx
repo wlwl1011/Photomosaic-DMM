@@ -50,7 +50,7 @@ function Password_chan(props: Iprops) {
       console.log("비번 수정 중");
       await axios
         .patch(
-          "https://localhost:4000/user/change-password",
+          "https://yummyseoulserver.tk/user/change-password",
           {
             password: password.password,
           },

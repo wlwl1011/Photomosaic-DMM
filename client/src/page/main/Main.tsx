@@ -12,7 +12,7 @@ function Main() {
   useEffect(() => {
     (async () => {
       await axios
-        .get("https://localhost:4000/user/userinfo/userdata", {
+        .get("https://yummyseoulserver.tk/user/userinfo/userdata", {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })

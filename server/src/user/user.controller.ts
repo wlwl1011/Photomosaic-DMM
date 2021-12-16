@@ -42,8 +42,7 @@ export class UserController {
     if (req.file === undefined) {
       // this.userService.sign_image(req.body, 'default image'); //이미지 없으면 default image 삽입
 
-      const data = await this.userService.signup(req.body, req.file.filename);
-
+      const data = await this.userService.signup(req.body, 'default.png');
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
       } else {
