@@ -20,7 +20,10 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
+
+
   async login(data): Promise<any> {
+    
     const userdata = await this.userRepository.findOne({
       where: { email: data.email, password: data.password },
     });
@@ -49,7 +52,15 @@ export class UserService {
         return token;
     }
 
-    async signup(data: any, image: string): Promise<any>{
+    async signup(data: {
+      id:number
+      email: string;
+      password: string;
+      user_name: string;
+      user_img: string;
+    },
+    image: string): Promise<any>{
+      
         const userdata = await this.userRepository.findOne({ where: { email: data.email }});
         if(!userdata){
             await this.userRepository.save({
@@ -194,7 +205,7 @@ export class UserService {
             user_name: userInfo.data.name,
             user_img: userInfo.data.picture
           })
-          return ;
+          return userInfo;
         }
     }
 

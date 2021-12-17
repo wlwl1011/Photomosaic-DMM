@@ -178,9 +178,30 @@ export class UserController {
 
   @Get('google_login')
   async google_login(@Request() req, @Res() response){
-    console.log(req)
     const google = await this.userService.google_login(req.query.code)
+    if(!google){
+      response.status(404).json({ message: 'email not exixst'})
+    }
+    if(google){
+      const accesstoken = await this.userService.login(google);
+      const refreshtoken = await this.userService.refreshtoken(google);
+      console.log(google)
+      response.cookie('jwt', accesstoken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
+      response.cookie('jwt1', refreshtoken, {
+        data: accesstoken,
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
+
+
       response.json({ message: 'login successfully'})
+    }
+      
   }
 
   @Get('kakao_login')
