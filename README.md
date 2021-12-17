@@ -13,14 +13,25 @@
 
 ## Stack
 
-### FRONTEND
-![](https://camo.githubusercontent.com/90b62c81e46fcf6cc575e245a12710398913155822556ee1c6d1d09a4deede93/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d547970655363726970742d3030376163633f7374796c653d666c6174266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465)
+### Front-End
 
-## DB SCHEMA
-https://dbdiagram.io/d/619c467f02cf5d186b632b7b
+<div>
+ <img src="https://img.shields.io/badge/typescript-0769AD?style=for-the-badge&logo=typescript&logoColor=white"> 
+ <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/react router-6DB33F?style=for-the-badge&logo=react-router&logoColor=white">
+ <img src="https://img.shields.io/badge/css-007396?style=for-the-badge&logo=css3&logoColor=white">
+ <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+</div>
 
-## API 
-https://undefined-46.gitbook.io/yummy-seoul-api/reference/yummy-seoul-api/yummy-seoul
+### Back-End
+
+<div>
+ <img src="https://img.shields.io/badge/typescript-0769AD?style=for-the-badge&logo=typescript&logoColor=white"> 
+ <img src="https://img.shields.io/badge/express-181717?style=for-the-badge&logo=express&logoColor=white">
+ <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+ <img src="https://img.shields.io/badge/nestjs-white?style=for-the-badge&logo=nestjs&logoColor=red">
+ <img src="https://img.shields.io/badge/jwt-7952B3?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white">
+</div>
 
 ## 배포 링크
 ### Client
