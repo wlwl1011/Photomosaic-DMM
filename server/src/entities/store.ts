@@ -10,6 +10,9 @@ export class Store {
   menu_name: string
 
   @Column()
+  area_name: string
+
+  @Column()
   store_name: string;
 
   @Column()

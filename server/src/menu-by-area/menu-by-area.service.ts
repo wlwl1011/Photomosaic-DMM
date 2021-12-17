@@ -17,7 +17,6 @@ export class MenuByAreaService {
       where: { area_name: area_name },
     });
 
-    console.log(data);
 
     if (data.length === 0) {
       throw new HttpException(
@@ -31,4 +30,23 @@ export class MenuByAreaService {
     }
     return { data: data, message: 'get menu list successfully' };
   }
+
+  async getMenuImage(menu_name : string){
+    const data = await this.MenuByAreaRepository.find({
+      where: { menu_name:menu_name },
+    });
+
+    if (data.length === 0) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          data: null,
+          message: 'NO image',
+        },
+        404,
+      );
+    }
+    return { data: data[0].menu_img, message: 'get menu list successfully' };
+  }
+  
 }

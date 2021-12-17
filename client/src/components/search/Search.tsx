@@ -88,7 +88,7 @@ function Search(props: Iprops) {
               }
             )
             .then((res) => setCount(count + 1))
-            .catch(() => {});
+            .catch(() => {setCount(count + 1);});
         })
         .catch((err) => setSer_result(false));
     } else if (liValue === "메뉴") {
@@ -112,7 +112,7 @@ function Search(props: Iprops) {
             .then((res) => {
               setCount(count + 1);
             })
-            .catch(() => {});
+            .catch(() => {setCount(count + 1);});
         })
         .catch((err) => setSer_result(false));
     }
@@ -156,7 +156,7 @@ function Search(props: Iprops) {
     },
   }));
 
-  console.log("data 결과:", data);
+  console.log(searchWord)
 
   return (
     <>
