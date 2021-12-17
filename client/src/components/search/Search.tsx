@@ -138,7 +138,7 @@ function Search(props: Iprops) {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://yummyseoulserver.tk/search-word/`, {
+        .get(`https://yummyseoulserver.tk/search-word/list`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })

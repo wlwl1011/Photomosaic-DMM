@@ -72,7 +72,7 @@ function Menu({ match }: any) {
       setMenuData(data.data.data);
     })();
   }, []);
-  console.log(match.params.menu_name);
+  //console.log(match);
   console.log("API 결과123", menuData);
 
   useEffect(() => {}, [starBool, reviewBool]);
@@ -114,7 +114,7 @@ function Menu({ match }: any) {
           <div className="menu_infor-box">
             <aside className="menu_infor-box1">
               <div className="menu_infor-container-img">
-                <img className="menu_infor-img" src="/jonglo_gui.gif" />
+                <img className="menu_infor-img" src={""} />
               </div>
               <div className="menu_infor-container-text">
                 <h4 className="menu_infor-text">

@@ -8,7 +8,7 @@ interface Iprops {
   imageBox: string;
   starNone: string;
   store_list: {
-    id:number;
+    id: number;
     address: string;
     avg_rating: number;
     menu_name: string;
@@ -22,31 +22,34 @@ interface Iprops {
 function Menu_result(props: Iprops) {
   return (
     <>
-     <Link to={ {pathname:`/store/${props.store_list.id}` }} style={{textDecoration: 'none', color:"black"}} >
-      <li className="menu_result-list">
-        <div className={`menu_result-img-box ${props.imageBox}`}>
-          <div className={`menu_result-star-box ${props.starNone}`}>
-            <Star_avg avg_rating={props.store_list.avg_rating} />
+      <Link
+        to={{ pathname: `/store/${props.store_list.id}` }}
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <li className="menu_result-list">
+          <div className={`menu_result-img-box ${props.imageBox}`}>
+            <div className={`menu_result-star-box ${props.starNone}`}>
+              <Star_avg avg_rating={props.store_list.avg_rating} />
+            </div>
+            <img className="menu_result-img" src={props.store_list.store_img} />
           </div>
-          <img className="menu_result-img" src="/jongro.jpeg" />
-        </div>
-        <div className="menu_result-text-box">
-          <h1>{props.store_list.store_name}</h1>
-          <div className="menu_result-text-info-box">
-            <h3 className="menu_result-text-info">
-              {props.store_list.address}
-            </h3>
-            <h3 className="menu_result-text-info">
-              영업시간: {props.store_list.open_time}
-            </h3>
-            <h3 className="menu_result-text-info">
-              연락처: 02) {props.store_list.phone_number}
-            </h3>
+          <div className="menu_result-text-box">
+            <h1>{props.store_list.store_name}</h1>
+            <div className="menu_result-text-info-box">
+              <h3 className="menu_result-text-info">
+                {props.store_list.address}
+              </h3>
+              <h3 className="menu_result-text-info">
+                영업시간: {props.store_list.open_time}
+              </h3>
+              <h3 className="menu_result-text-info">
+                연락처: 02) {props.store_list.phone_number}
+              </h3>
+            </div>
           </div>
-        </div>
-      </li>
+        </li>
       </Link>
-    </> 
+    </>
   );
 }
 

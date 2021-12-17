@@ -6,6 +6,7 @@ import Store_list from "../../components/store_list/Store_list";
 import Kakao_map from "../../components/kakao_map/Kakao_map";
 import ReviewEdit from "../../components/reviewedit/ReviewEdit";
 import Review_already from "../../components/review_already/Review_already";
+import Store_empty from "../../components/store_empty/Store_empty";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
@@ -381,27 +382,31 @@ function Store({ match }: any) {
             </div>
 
             <ul className="store_review_ul-box">
-              {ReviewInfo.map((el: Review) => {
-                let flag = false;
-                for (let i = 0; i < likeList.length; i++) {
-                  if (likeList[i].review_id === el.id) {
-                    flag = true;
-                    break;
+              {ReviewInfo.length > 0 ? (
+                ReviewInfo.map((el: Review) => {
+                  let flag = false;
+                  for (let i = 0; i < likeList.length; i++) {
+                    if (likeList[i].review_id === el.id) {
+                      flag = true;
+                      break;
+                    }
                   }
-                }
 
-                return (
-                  <Store_list
-                    mesNone={mesNone}
-                    ReviewInfo={el}
-                    UserId={UserId}
-                    deleteReviewHandler={deleteReviewHandler}
-                    reviewLikeHandler={reviewLikeHandler}
-                    deletereviewLikeHandler={DeletereviewLikeHandler}
-                    isLike={flag}
-                  />
-                );
-              })}
+                  return (
+                    <Store_list
+                      mesNone={mesNone}
+                      ReviewInfo={el}
+                      UserId={UserId}
+                      deleteReviewHandler={deleteReviewHandler}
+                      reviewLikeHandler={reviewLikeHandler}
+                      deletereviewLikeHandler={DeletereviewLikeHandler}
+                      isLike={flag}
+                    />
+                  );
+                })
+              ) : (
+                <Store_empty />
+              )}
             </ul>
           </div>
         </section>
