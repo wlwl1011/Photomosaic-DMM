@@ -86,6 +86,7 @@ function Menu({ match }: any) {
     })();
   }, []);
 
+
   useEffect(() => {}, [starBool, reviewBool,]);
 
   const star_filter = () => {
@@ -126,7 +127,9 @@ function Menu({ match }: any) {
           <div className="menu_infor-box">
             <aside className="menu_infor-box1">
               <div className="menu_infor-container-img">
+
                 <img className="menu_infor-img" src={menuImage} />
+
               </div>
               <div className="menu_infor-container-text">
                 <h4 className="menu_infor-text">
