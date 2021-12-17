@@ -127,7 +127,7 @@ function Menu({ match }: any) {
             </aside>
             <div className="menu_infor-map-box">
               <div className="menu_infor-map">
-                <Kakao_map coordsHandler={(x, y) => {}} address={""} />
+                <Kakao_map coordsHandler={(x, y) => {}} />
               </div>
             </div>
           </div>
