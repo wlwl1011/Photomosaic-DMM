@@ -28,6 +28,6 @@ https://www.yummyseoul.com
 
 ## Team Member
 
-| [손승우](https://github.com/godyuo) | [안도운](https://github.com/DowoonAhn) | [이상현](https://github.com/sanghyun94) | [이진성](https://github.com/CaliforniaLuv) |
+| [손승우](https://github.com/godyuo) | [안도운](https://github.com/DowoonAhn) | 팀장 [이상현](https://github.com/sanghyun94) | [이진성](https://github.com/CaliforniaLuv) |
 |:----------:|:----------:|:----------:|:----------:|
 | 📡 BackEnd | 🎨 FrontEnd | 📡 BackEnd | 🎨 FrontEnd |
