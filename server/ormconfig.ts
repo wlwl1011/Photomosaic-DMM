@@ -13,7 +13,7 @@ dotenv.config();
 const config: TypeOrmModuleOptions = {
   type: "mysql",
     host: 'localhost',
-    port: 13306,
+    port: 3306,
     username: process.env.USERNAME,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
