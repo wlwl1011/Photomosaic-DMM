@@ -47,3 +47,10 @@
 | [손승우](https://github.com/godyuo) | [안도운](https://github.com/DowoonAhn) | 팀장 [이상현](https://github.com/sanghyun94) | [이진성](https://github.com/CaliforniaLuv) |
 |:----------:|:----------:|:----------:|:----------:|
 | BackEnd | FrontEnd | BackEnd | FrontEnd |
+
+<br></br>
+
+## About Project
+
+### 📄  [wiki](https://github.com/codestates/YUMMY-SEOUL/wiki) 
+### 📄  [notion](https://github.com/codestates/YUMMY-SEOUL/wiki) 
