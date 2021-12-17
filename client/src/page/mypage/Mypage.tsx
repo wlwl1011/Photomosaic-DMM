@@ -6,7 +6,7 @@ import Mypage_fav from "../../components/mypage_fav/Mypage_fav";
 import Mypage_empty from "../../components/mypage_empty/Mypage_empty";
 import ProfileEdit from "../../components/profile/ProfileEdit";
 import Signout from "../../components/signout/Signout";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 interface user_info {
@@ -44,6 +44,7 @@ function Mypage() {
 
   const [profilewNone, setProfilewNone] = useState<string>("profile_hidden");
   const [signoutNone, setSignoutNone] = useState<string>("signout_hidden");
+  const [count, setCount] = useState<number>(0);
 
   // 유저 정보
   const [userInfo, setUserInfo] = useState<user_info>({
@@ -54,6 +55,8 @@ function Mypage() {
 
   const [reviewInfo, setReviewInfo] = useState<review_info[]>([]);
   const [favInfo, setFavInfo] = useState<fav_info[]>([]);
+
+  const accessLogin: any = useRef();
 
   const handleFav = () => {
     setReviewNone("review_none");
@@ -88,36 +91,36 @@ function Mypage() {
     setSignoutNone(e);
   };
 
+  const handleCount = () => {
+    setCount(count + 1);
+  };
+
   useEffect(() => {
     (async () => {
-      const userData = await axios.get(
-        `https://localhost:4000/user/userinfo/userdata`,
-        {
+      await axios
+        .get(`https://yummyseoulserver.tk/user/userinfo/userdata`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
-      );
+        })
+        .then((res) => setUserInfo(res.data.data));
 
-      const reviewData = await axios.get(
-        `https://localhost:4000/review/myreview`,
-        {
+      await axios
+        .get(`https://yummyseoulserver.tk/review/myreview`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
-      );
+        })
+        .then((res) => setReviewInfo(res.data.data));
 
-      const favData = await axios.get(`https://localhost:4000/favorite/list`, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-
-      setUserInfo(userData.data.data);
-      setReviewInfo(reviewData.data.data);
-      setFavInfo(favData.data.data);
+      await axios
+        .get(`https://yummyseoulserver.tk/favorite/list`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
+        .then((res) => setFavInfo(res.data.data));
     })();
-  }, []);
+  }, [count]);
 
-  // console.log("유저 정보", userInfo);
+  console.log("유저 정보", userInfo);
   // console.log("리뷰", reviewInfo);
 
   // 초기 렌더링 상태에 찜하기 목록이 먼저 주어지므로 있는지 없는지 판별
@@ -131,10 +134,10 @@ function Mypage() {
 
   return (
     <>
-      <Header handleImg={handleImg} isLogin={true} />
+      <Header handleImg={handleImg} isLogin={true} accessLogin={accessLogin} />
       <section className="mypage_info_container">
         <div className="mypage_info_box">
-          <img className="mypage_info_img" src="/store/model.jpeg" />
+          <img className="mypage_info_img" src={userInfo.user_img} />
           <div className="mypage_info_text-box">
             <h1 className="mypage_info_title">{userInfo.user_name}</h1>
             <span className="mypage_info_sign">가입일자</span>
@@ -174,7 +177,11 @@ function Mypage() {
 
         {empty ? <Mypage_empty /> : null}
       </ul>
-      <ProfileEdit profilewNone={profilewNone} profileEdit={profileEdit} />
+      <ProfileEdit
+        profilewNone={profilewNone}
+        profileEdit={profileEdit}
+        handleCount={handleCount}
+      />
       <Signout signoutNone={signoutNone} signoutEdit={signoutEdit} />
       <Footer />
     </>

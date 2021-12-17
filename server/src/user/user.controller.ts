@@ -18,7 +18,6 @@ import { multerOptions } from '../middleware/multeroption';
 import { createReadStream } from 'graceful-fs';
 import { join } from 'path';
 
-
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
@@ -55,7 +54,6 @@ export class UserController {
     }
     if (req.file !== undefined) {
       const uploadedFiles: string[] = this.userService.uploadFiles(file);
-      console.log(req.file.path)
       const data = await this.userService.signup(req.body, req.file.filename);
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
@@ -85,7 +83,6 @@ export class UserController {
   @Get('userinfo/userdata')
   async getprofile(@Request() req, @Res() response) {
     const userdata = await this.userService.userinfo(req.user);
-    
     delete userdata.password;
     response.json({
       data: userdata,
@@ -96,6 +93,7 @@ export class UserController {
   @Patch('change-password')
   async change_password(@Request() req, @Res() response) {
     const boolean = await this.userService.changepassword(req.body, req.user);
+    console.log('비밀번호 검사 결과:', boolean);
     if (!boolean) {
       response.status(409).json({ message: 'this password alredy exist' });
     }
@@ -205,10 +203,8 @@ export class UserController {
   }
 
   @Get('kakao_login')
-  async kakao_login(@Request() req, @Res() response){
-    const kakao = await this.userService.kakao_login(req.query.code)
-      response.json({ message: 'login successfully'})
-
+  async kakao_login(@Request() req, @Res() response) {
+    const kakao = await this.userService.kakao_login(req.query.code);
+    response.json({ message: 'login successfully' });
   }
-
 }

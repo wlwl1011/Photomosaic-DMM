@@ -63,6 +63,8 @@
   display: flex;
   width: 100%;
   height: 100%;
+  flex-direction: column;
+  align-items: start;
 }
 
 .store_tx-icon-box {
@@ -78,17 +80,17 @@
 
 .store_tx-info-box {
   font-size: 18px;
-  margin: 70px 0 50px 0;
+  margin: 40px 0;
 }
 
 .store-btn {
   width: 135px;
   height: 40px;
   background-color: black;
-  color: #fff;
   border-radius: 15px;
   font-size: 17px;
   font-weight: 250;
+  color: #fff;
   margin-right: 10px;
   cursor: pointer;
 }
@@ -148,10 +150,6 @@
 @media screen and (max-width: 1380px) {
   .store_text-box {
     padding: 50px 20px 50px 50px;
-  }
-  .store_tx-box {
-    flex-direction: column;
-    align-items: start;
   }
 }
 

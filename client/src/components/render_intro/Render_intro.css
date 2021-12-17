@@ -3,14 +3,14 @@
   flex-direction: column;
   width: 100%;
   justify-content: end;
-  height: 650px;
+  height: 850px;
   padding-bottom: 100px;
   align-items: center;
   background-color: #febe54;
 }
 
 .render_intro_title-box {
-  padding-bottom: 150px;
+  padding-bottom: 300px;
   text-align: center;
 }
 

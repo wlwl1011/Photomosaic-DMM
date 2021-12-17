@@ -21,6 +21,7 @@
 .image_chan-label-box {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .image_chan_label {
@@ -29,7 +30,20 @@
   margin-top: 15px;
 }
 
-#chooseFile {
+.image_chan_delete {
+  cursor: pointer;
+  font-size: 13px;
+  margin: 15px auto 0 auto;
+  width: 60px;
+  text-align: center;
+  color: rgb(236, 14, 14);
+}
+
+.image_chan_delete:hover {
+  color: rgb(241, 164, 164);
+}
+
+#input_chan_img {
   visibility: hidden;
 }
 
@@ -38,7 +52,7 @@
   justify-content: center;
   align-items: center;
   height: 130px;
-  margin-top: 30px;
+  margin-top: 1px;
   flex-direction: column;
 }
 

@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./ProfileEdit.css";
 import React from "react";
 import Password_chan from "../profile_chan/password_chan/Password_chan";
@@ -20,6 +20,7 @@ interface Select_none {
 interface Iprops {
   profilewNone: string;
   profileEdit: (e: string) => void;
+  handleCount: () => void;
 }
 
 function ProfileEdit(props: Iprops) {
@@ -77,7 +78,30 @@ function ProfileEdit(props: Iprops) {
     });
   };
 
+  const emptyNickname: any = useRef();
+  const emptyPw: any = useRef();
+  const emptyImg: any = useRef();
+
   const handleNone = () => {
+    // input text 초기화
+    const inputElement: NodeListOf<Element> =
+      document.querySelectorAll(".input_chan");
+    inputElement.forEach((el) => {
+      let data = el as HTMLInputElement;
+      data.value = "";
+    });
+
+    // input 이미지 초기화
+    const inputImg = document.getElementById(
+      "input_chan_img"
+    ) as HTMLInputElement;
+    inputImg.value = "";
+
+    emptyNickname.current.emptyNickname();
+    emptyPw.current.emptyPw();
+    emptyImg.current.emptyImg();
+
+    // 정보 수정 모달 닫기
     props.profileEdit("profile_hidden");
   };
 
@@ -112,9 +136,20 @@ function ProfileEdit(props: Iprops) {
               </h4>
             </nav>
 
-            <Password_chan password_none={selectNone.password_none} />
-            <Nickname_chan nickname_none={selectNone.nickname_none} />
-            <Image_chan image_none={selectNone.image_none} />
+            <Password_chan
+              password_none={selectNone.password_none}
+              childRef={emptyPw}
+            />
+            <Nickname_chan
+              nickname_none={selectNone.nickname_none}
+              childRef={emptyNickname}
+              handleCount={props.handleCount}
+            />
+            <Image_chan
+              image_none={selectNone.image_none}
+              emptyImg={emptyImg}
+              handleCount={props.handleCount}
+            />
           </section>
         </div>
       </div>

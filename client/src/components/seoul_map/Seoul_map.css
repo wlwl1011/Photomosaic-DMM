@@ -1,6 +1,6 @@
 .main_wrap {
-  width: 65%;
-  margin: 170px 0 200px 0;
+  width: 100%;
+  margin: 170px 0;
 }
 
 .main_wrap,
@@ -14,7 +14,7 @@
 
 .main_svg-map {
   overflow: visible;
-  width: 65%;
+  width: 60%;
   height: 65%;
   padding: 0 0 0 150px;
 }
@@ -63,6 +63,7 @@
 
 .map_info {
   font-size: 25px;
+  user-select: none;
   font-weight: 600;
 }
 
@@ -213,17 +214,9 @@
   .map_modal-content {
     top: 35px;
   }
-  .main_wrap {
-    width: 65%;
-    margin: 170px 0;
-  }
 }
 
 @media (max-height: 700px) {
-  .main_wrap,
-  .main_container {
-    height: 400px;
-  }
   .map_modal-content {
     width: 650px;
     height: 450px;
@@ -237,10 +230,10 @@
 }
 
 @media (max-width: 1440px) {
-  /* .main_container {
+  .main_container {
     width: 80%;
     height: 500px;
-  } */
+  }
   .main_svg-map {
     overflow: visible;
     width: 80%;
@@ -249,31 +242,22 @@
 }
 
 @media (max-width: 1240px) {
-  /* .main_container {
+  .main_container {
     width: 70%;
     height: 500px;
-  } */
-}
-
-@media (max-width: 1100px) {
-  .main_container {
-    width: 80%;
-    height: 500px;
-  }
-  .main_wrap {
-    width: 65%;
   }
 }
 
 @media (max-width: 1000px) {
-  .main_wrap {
-    width: 55%;
+  .main_container {
+    width: 50%;
+    height: 500px;
   }
 }
 
 @media (max-width: 770px) {
   .main_wrap {
-    margin-top: 0px;
+    margin-top: 90px;
   }
 
   .map_modal {

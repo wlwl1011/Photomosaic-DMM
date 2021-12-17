@@ -29,6 +29,7 @@
   bottom: 0;
   left: 0;
   z-index: 1;
+  user-select: none;
   /* 메인 화면보다 앞에 나와 가리는 효과 부여 */
   background-color: #febe54;
 }
@@ -47,6 +48,7 @@
   font-size: 30px;
   color: #fff;
   font-family: "Ubuntu";
+  cursor: pointer;
 }
 
 .header__toggle {
@@ -91,6 +93,18 @@
 
 .show-menu {
   bottom: 0;
+}
+
+.header_icon-logout-text {
+  cursor: pointer;
+}
+
+.header_icon-signup-text {
+  cursor: pointer;
+}
+
+.header_icon-mypage-text {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 770px) {

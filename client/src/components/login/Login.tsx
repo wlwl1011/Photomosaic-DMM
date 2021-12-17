@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 
-
 //내가 바꾼 함수
-const scope = "https://www.googleapis.com/auth/userinfo.email " + "https://www.googleapis.com/auth/userinfo.profile";
+const scope =
+  "https://www.googleapis.com/auth/userinfo.email " +
+  "https://www.googleapis.com/auth/userinfo.profile";
 
 const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://yummyseoulserver.tk/user/google_login&response_type=code&scope=${scope}`;
 const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=52454432a0f6a96cf545b328c12811ae&redirect_uri=https://yummyseoulserver.tk/user/kakao_login`;
@@ -27,6 +28,30 @@ function Login(props: Iprops) {
 
   const [empty, setEmpty] = useState<boolean>(false);
   const [logFail, setLogFail] = useState<boolean>(false);
+
+  const popupX = document.body.offsetWidth / 2 - 500 / 2;
+  const popupY = window.screen.height / 2 - 500 / 2;
+
+  const handelKakao = () => {
+    window.open(
+      KAKAO_LOGIN_URL,
+      "",
+      "status=no, height=500, width=500 _blank, left=" +
+        popupX +
+        ", top=" +
+        popupY
+    );
+  };
+  const handelGoogle = () => {
+    window.open(
+      GOOGLE_LOGIN_URL,
+      "",
+      "status=no, height=500, width=500 _blank, left=" +
+        popupX +
+        ", top=" +
+        popupY
+    );
+  };
 
   // 로그인 모달창 on/off 함수
   const handleNone = () => {
@@ -65,7 +90,7 @@ function Login(props: Iprops) {
   const handleLogin = async () => {
     const loginData = await axios
       .post(
-        "https://localhost:4000/user/login",
+        "https://yummyseoulserver.tk/user/login",
         {
           email: email,
           password: password,
@@ -81,7 +106,6 @@ function Login(props: Iprops) {
       });
 
     if (loginData) {
-      console.log("===============");
       setLogFail(false);
       // window.location.href: 현 url 주소
       window.location.replace(window.location.href);
@@ -124,15 +148,17 @@ function Login(props: Iprops) {
               로그인
             </button>
             <div className="login_OAuth-box">
+              <img
+                className="login_OAuth"
+                src="/oauth/google.jpeg"
+                onClick={handelGoogle}
+              />
 
-              <a href={`${GOOGLE_LOGIN_URL}`} target="_blank">
-                <img className="login_OAuth" src="/oauth/google.jpeg" />
-
-              </a>
-              <a href= {`${KAKAO_LOGIN_URL}`} target="_blank">
-              <img className="login_OAuth" src="/oauth/kakao.svg" />
-              </a>
-              <img className="login_OAuth" src="/oauth/naver.png" />
+              <img
+                className="login_OAuth"
+                src="/oauth/kakao.svg"
+                onClick={handelKakao}
+              />
             </div>
           </section>
         </div>

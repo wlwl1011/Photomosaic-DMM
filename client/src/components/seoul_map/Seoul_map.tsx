@@ -4,7 +4,7 @@ import Menu_list from "../menu_list/Menu_list";
 import axios from "axios";
 
 interface menu_list {
-  id:number;
+  id: number;
   area_name: string;
   comment: string;
   menu_img: string;
@@ -34,7 +34,7 @@ function Seoul_map() {
     setLocal(data.getAttribute("values"));
 
     const menu = await axios.get(
-      `https://localhost:4000/menu-by-area/${data.getAttribute("values")}`,
+      `https://yummyseoulserver.tk/menu-by-area/${data.getAttribute("values")}`,
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
