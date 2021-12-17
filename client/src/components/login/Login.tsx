@@ -29,6 +29,30 @@ function Login(props: Iprops) {
   const [empty, setEmpty] = useState<boolean>(false);
   const [logFail, setLogFail] = useState<boolean>(false);
 
+  const popupX = document.body.offsetWidth / 2 - 500 / 2;
+  const popupY = window.screen.height / 2 - 500 / 2;
+
+  const handelKakao = () => {
+    window.open(
+      KAKAO_LOGIN_URL,
+      "",
+      "status=no, height=500, width=500 _blank, left=" +
+        popupX +
+        ", top=" +
+        popupY
+    );
+  };
+  const handelGoogle = () => {
+    window.open(
+      GOOGLE_LOGIN_URL,
+      "",
+      "status=no, height=500, width=500 _blank, left=" +
+        popupX +
+        ", top=" +
+        popupY
+    );
+  };
+
   // 로그인 모달창 on/off 함수
   const handleNone = () => {
     const inputElement: NodeListOf<Element> =
@@ -124,13 +148,17 @@ function Login(props: Iprops) {
               로그인
             </button>
             <div className="login_OAuth-box">
-              <a href={`${GOOGLE_LOGIN_URL}`} target="_blank">
-                <img className="login_OAuth" src="/oauth/google.jpeg" />
-              </a>
-              <a href={`${KAKAO_LOGIN_URL}`} target="_blank">
-                <img className="login_OAuth" src="/oauth/kakao.svg" />
-              </a>
-              <img className="login_OAuth" src="/oauth/naver.png" />
+              <img
+                className="login_OAuth"
+                src="/oauth/google.jpeg"
+                onClick={handelGoogle}
+              />
+
+              <img
+                className="login_OAuth"
+                src="/oauth/kakao.svg"
+                onClick={handelKakao}
+              />
             </div>
           </section>
         </div>

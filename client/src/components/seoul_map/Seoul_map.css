@@ -14,7 +14,7 @@
 
 .main_svg-map {
   overflow: visible;
-  width: 65%;
+  width: 60%;
   height: 65%;
   padding: 0 0 0 150px;
 }
@@ -217,10 +217,6 @@
 }
 
 @media (max-height: 700px) {
-  .main_wrap,
-  .main_container {
-    height: 500px;
-  }
   .map_modal-content {
     width: 650px;
     height: 450px;
