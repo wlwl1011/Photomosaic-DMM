@@ -53,4 +53,4 @@
 ## About Project
 
 ### 📄  [wiki](https://github.com/codestates/YUMMY-SEOUL/wiki) 
-### 📄  [notion](https://github.com/codestates/YUMMY-SEOUL/wiki) 
+### 👨🏻‍🏫  [notion](https://github.com/codestates/YUMMY-SEOUL/wiki) 
