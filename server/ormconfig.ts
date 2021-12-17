@@ -12,11 +12,11 @@ dotenv.config();
 
 const config: TypeOrmModuleOptions = {
   type: "mysql",
-    host: process.env.DATABASE_HOST,
+    host: 'localhost',
     port: 13306,
-    username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
     entities: [Favorite,MenuByArea,ReviewLike,Review,SearchWord,Store,User],
     synchronize: false,
     autoLoadEntities:true,

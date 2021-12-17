@@ -28,7 +28,7 @@ function Menu_result(props: Iprops) {
           <div className={`menu_result-star-box ${props.starNone}`}>
             <Star_avg avg_rating={props.store_list.avg_rating} />
           </div>
-          <img className="menu_result-img" src="/jongro.jpeg" />
+          <img className="menu_result-img" src={props.store_list.store_img} />
         </div>
         <div className="menu_result-text-box">
           <h1>{props.store_list.store_name}</h1>

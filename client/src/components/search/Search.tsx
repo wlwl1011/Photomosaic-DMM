@@ -88,7 +88,7 @@ function Search(props: Iprops) {
               }
             )
             .then((res) => setCount(count + 1))
-            .catch(() => {});
+            .catch(() => {setCount(count + 1);});
         })
         .catch((err) => setSer_result(false));
     } else if (liValue === "메뉴") {
@@ -112,7 +112,7 @@ function Search(props: Iprops) {
             .then((res) => {
               setCount(count + 1);
             })
-            .catch(() => {});
+            .catch(() => {setCount(count + 1);});
         })
         .catch((err) => setSer_result(false));
     }
@@ -138,7 +138,7 @@ function Search(props: Iprops) {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`https://yummyseoulserver.tk/search-word/`, {
+        .get(`https://yummyseoulserver.tk/search-word/list`, {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -156,7 +156,7 @@ function Search(props: Iprops) {
     },
   }));
 
-  console.log("data 결과:", data);
+  console.log(searchWord)
 
   return (
     <>

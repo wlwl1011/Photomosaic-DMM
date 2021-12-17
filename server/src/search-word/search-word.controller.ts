@@ -6,7 +6,7 @@ import { SearchWordService } from './search-word.service';
 export class SearchWordController {
     constructor(private readonly SearchWordService:SearchWordService){}
 
-    @Get()
+    @Get('/list')
     getSearchWord(@Request() req){
         return this.SearchWordService.getSearchWord(req.user.id)
     }
