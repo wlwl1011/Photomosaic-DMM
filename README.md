@@ -1,5 +1,4 @@
 # YUMMY SEOUL
-# 프로젝트 소개 (Introduce Project):
 ## 프로젝트 소개 (Introduce Project):
 
 ![스크린샷 2021-11-22 오후 10 17 21](https://user-images.githubusercontent.com/78064720/143517274-a192bff1-ff1e-401f-ac7d-db911c0f3bc1.png)
