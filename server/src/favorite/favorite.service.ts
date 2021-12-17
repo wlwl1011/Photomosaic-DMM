@@ -1,9 +1,11 @@
 import { Favorite } from 'src/entities/favorite';
 import { User } from 'src/entities/user';
 import { Injectable } from '@nestjs/common';
-import { getConnection, Repository } from 'typeorm';
+import { getConnection, getManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpException,HttpStatus } from '@nestjs/common';
+import { Store } from 'src/entities/store';
+
 
 
 @Injectable()
@@ -11,17 +13,40 @@ export class FavoriteService {
     constructor(
         @InjectRepository(Favorite)
         private FavoriteRepostory: Repository<Favorite>,
+        @InjectRepository(Store)
+        private StoreRepository: Repository<Store>,
+
     ){}
 
     async getList(user_id : number){
-        console.log(user_id)
-        const data= await this.FavoriteRepostory.find({where:{user_id:user_id}})
-        if(data.length===0){
+        const favorite= await this.FavoriteRepostory.find({where:{user_id:user_id}})
+        if(favorite.length===0){
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
                 data : null,
                 message: "Empty favorite list",
             }, 404);
+        }
+        let data=[];
+
+        for(let i=0;i<favorite.length;i++){
+            const store=await this.StoreRepository.findOne({where:{store_name:favorite[i].store_name}})
+            const entityManager = getManager();
+            const avg_rating = await entityManager.query(`SELECT ROUND(AVG(rating)) as avg_rating FROM review WHERE store_id=${store.id}`) 
+            if(!avg_rating[0].avg_rating){
+                const data2={
+                    ...favorite[i],
+                    avg_rating:0
+                }
+                data.push(data2);
+            }
+            else{
+                const data2={
+                    ...favorite[i],
+                    avg_rating:Number(avg_rating[0].avg_rating)
+                }
+                data.push(data2);
+            }
         }
         return {"data":data, "message":"get favorite list successfully"}
     }

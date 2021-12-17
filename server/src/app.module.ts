@@ -51,6 +51,7 @@ import { join } from 'path';
       secret: jwtConstants.accesssecret,
       signOptions: { expiresIn: '3600s' },
     }),
+ 
   ],
   
   controllers: [AppController, StoreController,FavoriteController, MenuByAreaController, ReviewController,SearchWordController,UserController],

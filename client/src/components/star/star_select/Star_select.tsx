@@ -29,7 +29,7 @@ function Star_select(props: Iprops) {
     setImAni("star_select_imoge-none");
     const data = e.target.getAttribute("value");
     setStar(data);
-    props.ratingHandler(Number(star));
+    props.ratingHandler(Number(data));
     setTimeout(() => {
       setImAni("");
     }, 100);

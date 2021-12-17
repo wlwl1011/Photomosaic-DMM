@@ -23,6 +23,8 @@ interface Iprops {
 }
 
 function Store_list(props: Iprops) {
+  console.log("isLike=",props.isLike)
+
   return (
     <>
       <li className="store_review_li-box">

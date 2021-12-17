@@ -16,10 +16,12 @@ function App() {
         <div className="wrap">
           <Switch>
             <Route exact path="/" render={() => <Render />} />
-            <Route path="/main" component={Main} />
-            <Route path="/menu/:area_name/:menu_name" component={Menu} />
-            <Route path="/store/:store_id" component={Store} />
-            <Route path="/mypage" component={Mypage} />
+
+            <Route  path="/main" component={Main} />
+            <Route  path="/menu/:area_name/:menu_name" component={Menu} />
+            <Route  path="/store/:store_id" component={Store} />
+            <Route  path="/mypage" component={Mypage} />
+
             <Route path="*" component={Not_found} />
           </Switch>
         </div>

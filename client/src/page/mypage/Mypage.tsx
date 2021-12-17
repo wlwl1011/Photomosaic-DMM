@@ -28,6 +28,7 @@ interface fav_info {
   store_address: string;
   store_img: string;
   store_name: string;
+  avg_rating:number;
 }
 
 function Mypage() {

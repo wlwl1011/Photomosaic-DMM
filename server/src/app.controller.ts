@@ -16,5 +16,6 @@ export class AppController {
   sendFile(@Res() res ,@Param('file_name') file_name:string){
     res.sendFile(join(__dirname,`../../public/${file_name}`))
   }
-
 }
+
+

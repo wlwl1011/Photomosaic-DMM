@@ -6,8 +6,13 @@ export class StoreController {
     constructor(private readonly StoreService: StoreService ){}
 
     @Get('byMenu/:menu_name')
-    getAll(@Param('menu_name') menu_name:string) :{} {
-        return this.StoreService.getAll(menu_name)
+    getByMenu(@Param('menu_name') menu_name:string) :{} {
+        return this.StoreService.getByMenu(menu_name)
+    }
+
+    @Get('byMenuAndArea/:menu_name/:area_name')
+    getByMenuAndArea(@Param('menu_name') menu_name:string ,@Param('area_name') area_name:string) :{} {
+        return this.StoreService.getByMenuAndArea(menu_name,area_name)
     }
 
     @Get('byId/:id')
@@ -20,3 +25,4 @@ export class StoreController {
         return this.StoreService.getByStoreName(storeName);
     }
 }
+

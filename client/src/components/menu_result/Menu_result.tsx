@@ -33,20 +33,23 @@ function Menu_result(props: Iprops) {
             </div>
             <img className="menu_result-img" src={props.store_list.store_img} />
           </div>
-          <div className="menu_result-text-box">
-            <h1>{props.store_list.store_name}</h1>
-            <div className="menu_result-text-info-box">
-              <h3 className="menu_result-text-info">
-                {props.store_list.address}
-              </h3>
-              <h3 className="menu_result-text-info">
-                영업시간: {props.store_list.open_time}
-              </h3>
-              <h3 className="menu_result-text-info">
-                연락처: 02) {props.store_list.phone_number}
-              </h3>
+          
+        <div className="menu_result-text-box">
+          <h1>{props.store_list.store_name}</h1>
+          <div className="menu_result-text-info-box">
+            <h3 className="menu_result-text-info">
+              {props.store_list.address}
+            </h3>
+            <h3 className="menu_result-text-info">
+              영업시간: {props.store_list.open_time}
+            </h3>
+            <h3 className="menu_result-text-info">
+              연락처: 02) {props.store_list.phone_number}
+            </h3>
+            
             </div>
           </div>
+          
         </li>
       </Link>
     </>
