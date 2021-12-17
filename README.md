@@ -9,7 +9,13 @@
  - 정성 담긴 리뷰에 좋아요를 다른 유저가 누를 수 있어요.
  - 카카오맵을 통해 맛집의 위치와 길찾기를 할 수 있어요.
 
----
+<br></br>
+
+## [배포 링크 ](https://www.yummyseoul.com)
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/78064720/146587861-fe7cca58-d76e-4745-b4c0-c4349dc31b47.gif)
+
+<br></br>
 
 ## Stack
 
@@ -33,12 +39,10 @@
  <img src="https://img.shields.io/badge/jwt-7952B3?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white">
 </div>
 
-## 배포 링크
-### Client
-https://www.yummyseoul.com
+<br></br>
 
 ## Team Member
 
 | [손승우](https://github.com/godyuo) | [안도운](https://github.com/DowoonAhn) | 팀장 [이상현](https://github.com/sanghyun94) | [이진성](https://github.com/CaliforniaLuv) |
 |:----------:|:----------:|:----------:|:----------:|
-| 📡 BackEnd | 🎨 FrontEnd | 📡 BackEnd | 🎨 FrontEnd |
+| BackEnd | FrontEnd | BackEnd | FrontEnd |
