@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
-
+import { useHistory } from 'react-router-dom'
+/* eslint no-restricted-globals: ["off"] */
 //내가 바꾼 함수
 const scope =
   "https://www.googleapis.com/auth/userinfo.email " +
   "https://www.googleapis.com/auth/userinfo.profile";
 
-const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://yummyseoulserver.tk/user/google_login&response_type=code&scope=${scope}`;
-const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=52454432a0f6a96cf545b328c12811ae&redirect_uri=https://yummyseoulserver.tk/user/kakao_login`;
+const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://localhost:3000/login&response_type=code&scope=${scope}`;
+const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=52454432a0f6a96cf545b328c12811ae&redirect_uri=https://localhost:3000/login`;
 
 interface Iprops {
   loginNone: string;
@@ -28,31 +29,94 @@ function Login(props: Iprops) {
 
   const [empty, setEmpty] = useState<boolean>(false);
   const [logFail, setLogFail] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const popupX = document.body.offsetWidth / 2 - 500 / 2;
   const popupY = window.screen.height / 2 - 500 / 2;
 
-  const handelKakao = () => {
-    window.open(
+  const handelKakao = async () => {
+    await window.open(
       KAKAO_LOGIN_URL,
       "",
-      "status=no, height=500, width=500 _blank, left=" +
+      "status=no, height=500, width=500, left=" +
         popupX +
         ", top=" +
         popupY
-    );
-  };
-  const handelGoogle = () => {
-    window.open(
-      GOOGLE_LOGIN_URL,
-      "",
-      "status=no, height=500, width=500 _blank, left=" +
-        popupX +
-        ", top=" +
-        popupY
-    );
+    )
   };
 
+  useEffect( () => {
+    
+    const url = new URL(window.location.href);
+    const code = url.searchParams.get("code")
+    //axios
+    if(code){
+      //axios
+     axios.post('https://localhost:4000/user/kakao_login',
+    { authorizationCode: code,
+      url: url.href.split('?')[0]}
+    ,
+    {
+      headers: {accept: `application/json`},
+      withCredentials: true,
+    }).
+    then(() => {
+      setIsLogin(true)
+      opener.parent.location.reload();
+      window.close()
+      })
+    };
+},[])
+
+  useEffect( () => {
+    
+    const url = new URL(window.location.href);
+    const code = url.searchParams.get("code")
+    //axios
+    if(code){
+      //axios
+     axios.post('https://localhost:4000/user/google_login',
+    { authorizationCode: code,
+      url: url.href.split('?')[0]}
+    ,
+    {
+      headers: {accept: `application/json`},
+      withCredentials: true,
+    }).
+    then(() => {
+      setIsLogin(true)
+      opener.parent.location.reload();
+      window.close()
+      })
+    };
+},[])
+
+  const handelGoogle = async () => {
+
+    await window.open(
+      GOOGLE_LOGIN_URL,
+      "",
+      "status=no, height=500, width=500, left=" +
+        popupX +
+        ", top=" +
+        popupY
+    )
+    
+    // if(isLogin){
+    //   await axios.get('https://localhost:4000/user/userinfo/userdata',
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //       withCredentials: true,
+    //     }).then((res) => 
+    //     {
+    //       console.log(res)
+    //       window.location.replace(window.location.href)
+    //     })
+    // }
+    
+  };
+
+  
   // 로그인 모달창 on/off 함수
   const handleNone = () => {
     const inputElement: NodeListOf<Element> =
@@ -153,12 +217,12 @@ function Login(props: Iprops) {
                 src="/oauth/google.jpeg"
                 onClick={handelGoogle}
               />
-
               <img
                 className="login_OAuth"
                 src="/oauth/kakao.svg"
                 onClick={handelKakao}
               />
+              
             </div>
           </section>
         </div>

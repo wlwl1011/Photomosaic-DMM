@@ -8,6 +8,7 @@ import Store from "./page/store/Store";
 import Mypage from "./page/mypage/Mypage";
 import Not_found from "./components/not_found/Not_found";
 import Render from "./page/render/Render";
+import Login from "./components/login/Login";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/menu/:area_name/:menu_name" component={Menu} />
             <Route path="/store/:store_id" component={Store} />
             <Route path="/mypage" component={Mypage} />
+            <Route path="/login" component={Login} />
             <Route path="*" component={Not_found} />
           </Switch>
         </div>

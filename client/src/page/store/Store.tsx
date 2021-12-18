@@ -3,7 +3,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Star_avg from "../../components/star/star_avg/Star_avg";
 import Store_list from "../../components/store_list/Store_list";
-import Kakao_map from "../../components/kakao_map/Kakao_map";
+import Kakao_map_store from "../../components/kakao_map_store/Kakao_map_store";
 import ReviewEdit from "../../components/reviewedit/ReviewEdit";
 import Review_already from "../../components/review_already/Review_already";
 import Store_empty from "../../components/store_empty/Store_empty";
@@ -78,6 +78,8 @@ function Store({ match }: any) {
     }
   };
 
+
+
   useEffect(() => {
     (async () => {
       await axios
@@ -93,20 +95,16 @@ function Store({ match }: any) {
         });
 
       await axios
-        .get(
-          `https://yummyseoulserver.tk/review/byStoreId/${match.params.store_id}`,
-          {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          }
-        )
+        .get(`https://yummyseoulserver.tk/review/byStoreId/${match.params.store_id}`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
         .then((res) => {
           setReviewInfo(res.data.data);
         })
-        .catch((err) => {});
+        .catch((err) => {setReviewInfo([])});
 
       //!userdata 맨처음에 호출 ??? => 로그인안되있으면 불가능
-
       if (isLogin) {
         await axios
           .get(`https://yummyseoulserver.tk/user/userinfo/userdata`, {
@@ -124,16 +122,10 @@ function Store({ match }: any) {
       //! 스토어별 리뷰중에 로그인한 유저가 좋아요한 리뷰리스트
       if (isLogin) {
         await axios
-          .get(
-            `https://yummyseoulserver.tk/review/likelist/${match.params.store_id}`,
-            {
-              headers: { "Content-Type": "application/json" },
-              withCredentials: true,
-            }
-          )
-          .then((res) => {
-            setLikelist(res.data.data);
-          })
+          .get(`https://yummyseoulserver.tk/review/likelist/${match.params.store_id}`, {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }).then((res)=>setLikelist(res.data.data))
           .catch((err) => {
             setLikelist([]);
             //이거안하면 오류남ㅇㅇ
@@ -230,7 +222,7 @@ function Store({ match }: any) {
         withCredentials: true,
       })
       .then((res) => {
-        setCount(count - 1);
+        setCount(count+1);
       });
   };
 
@@ -247,7 +239,8 @@ function Store({ match }: any) {
         )
         .then((res) => {
           setReviewLike(reviewlike + 1);
-        });
+        })
+        .catch((err)=>{})
     } else {
       accessLogin.current.accessLogin();
     }
@@ -262,7 +255,8 @@ function Store({ match }: any) {
         })
         .then((res) => {
           setReviewLike(reviewlike - 1);
-        });
+        })
+        .catch((err)=>{})
     } else {
       accessLogin.current.accessLogin();
     }
@@ -299,6 +293,8 @@ function Store({ match }: any) {
     setCoords([x, y]);
   };
 
+  //console.log('reviewlike',reviewlike);
+
   return (
     <>
       <Header
@@ -311,9 +307,9 @@ function Store({ match }: any) {
           <div className="store_info_box">
             <div className="store_info_box-line">
               <aside className="store_map-box">
-                <Kakao_map
+                <Kakao_map_store
                   coordsHandler={coordsHandler}
-                  address={StoreInfo.address}
+                  address={StoreInfo.address}       
                 />
               </aside>
               <div className="store_text-box">
@@ -382,6 +378,7 @@ function Store({ match }: any) {
             </div>
 
             <ul className="store_review_ul-box">
+
               {ReviewInfo.length > 0 ? (
                 ReviewInfo.map((el: Review) => {
                   let flag = false;
@@ -390,6 +387,7 @@ function Store({ match }: any) {
                       flag = true;
                       break;
                     }
+
                   }
 
                   return (

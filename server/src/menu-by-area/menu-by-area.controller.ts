@@ -9,4 +9,9 @@ export class MenuByAreaController {
     menuByArea(@Param('area_name') area_name : string){
         return this.MenuByAreaService.menuByArea(area_name)
     }
+
+    @Get('/image/:menu_name')
+    getMenuImage(@Param('menu_name') menu_name : string){
+        return this.MenuByAreaService.getMenuImage(menu_name);
+    }
 }

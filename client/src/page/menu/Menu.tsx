@@ -3,8 +3,9 @@ import React, { useEffect, useState, useRef } from "react";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Menu_result from "../../components/menu_result/Menu_result";
-import Kakao_map from "../../components/kakao_map/Kakao_map";
+import Kakao_map_menu from "../../components/kakao_map_menu/kakao_map_menu";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 interface store_list {
   id: number;
@@ -28,16 +29,18 @@ function Menu({ match }: any) {
 
   const [menuData, setMenuData] = useState<store_list[]>([]);
   const [starBool, setStarBool] = useState<boolean>(true);
+  const history = useHistory();
 
   const [reviewBool, setReviewBool] = useState<boolean>(true);
-
+  const [isLogin,setIsLogin]=useState<boolean>(true)
   const accessLogin: any = useRef();
-  const [isLogin, setIsLogin] = useState<boolean>(true);
+  
 
+  
   useEffect(() => {
     (async () => {
       await axios
-        .get("https://yummyseoulserver.tk/user/userinfo/userdata", {
+        .get("https://localhost:4000/user/userinfo/userdata", {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -59,23 +62,35 @@ function Menu({ match }: any) {
     }
   };
   // ******************************************************
+
+
+  const [menuImage,setMenuImage]=useState<string>("")
+
   useEffect(() => {
     (async () => {
       const data = await axios.get(
-        `https://yummyseoulserver.tk/store/byMenu/${match.params.menu_name}`,
+        `https://yummyseoulserver.tk/store/byMenuAndArea/${match.params.menu_name}/${match.params.area_name}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
-
       setMenuData(data.data.data);
+
+      const menu_img = await axios.get(
+        `https://yummyseoulserver.tk/menu-by-area/image/${match.params.menu_name}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      setMenuImage(menu_img.data.data);
+      
     })();
   }, []);
-  //console.log(match);
-  console.log("API 결과123", menuData);
 
-  useEffect(() => {}, [starBool, reviewBool]);
+
+  useEffect(() => {}, [starBool, reviewBool,]);
 
   const star_filter = () => {
     setStarBool(!starBool);
@@ -83,11 +98,11 @@ function Menu({ match }: any) {
     if (starBool) {
       let data = menuData.sort((a, b) => a.avg_rating - b.avg_rating);
       setMenuData(data);
-      console.log("최소값", data);
+      //console.log("최소값", data);
     } else {
       let data = menuData.sort((a, b) => b.avg_rating - a.avg_rating);
       setMenuData(data);
-      console.log("최댓값", data);
+      //console.log("최댓값", data);
     }
   };
 
@@ -102,6 +117,7 @@ function Menu({ match }: any) {
       setMenuData(data);
     }
   };
+
   return (
     <>
       <Header
@@ -114,7 +130,8 @@ function Menu({ match }: any) {
           <div className="menu_infor-box">
             <aside className="menu_infor-box1">
               <div className="menu_infor-container-img">
-                <img className="menu_infor-img" src={""} />
+                <img className="menu_infor-img" src={menuImage} />
+
               </div>
               <div className="menu_infor-container-text">
                 <h4 className="menu_infor-text">
@@ -127,7 +144,7 @@ function Menu({ match }: any) {
             </aside>
             <div className="menu_infor-map-box">
               <div className="menu_infor-map">
-                <Kakao_map coordsHandler={(x, y) => {}} />
+                <Kakao_map_menu store_list={menuData} />
               </div>
             </div>
           </div>

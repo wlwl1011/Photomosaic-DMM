@@ -28,14 +28,14 @@ export class UserController {
     const refreshtoken = await this.userService.refreshtoken(req.body);
     response.cookie('jwt', accesstoken, {
       httpOnly: true,
-      sameSite: 'none',
-      secure: true
+      sameSite:'none',
+      secure:true
     });
     response.cookie('jwt1', refreshtoken, {
       data: accesstoken,
       httpOnly: true,
-      sameSite: 'none',
-      secure: true
+      sameSite:'none',
+      secure:true
     });
     response.json({ message: 'login successfully' });
   }
@@ -68,6 +68,7 @@ export class UserController {
     response
       .status(205)
       .clearCookie('jwt')
+      .clearCookie('jwt1')
       .json({ message: 'sign out successfully' });
   }
 
@@ -174,16 +175,17 @@ export class UserController {
     }
   }
 
-  @Get('google_login')
+  @Post('google_login')
   async google_login(@Request() req, @Res() response){
-    const google = await this.userService.google_login(req.query.code)
+    const google = await this.userService.google_login(req.body.authorizationCode)
+    
     if(!google){
       response.status(404).json({ message: 'email not exixst'})
     }
     if(google){
-      const accesstoken = await this.userService.login(google);
-      const refreshtoken = await this.userService.refreshtoken(google);
-      console.log(google)
+      const accesstoken = await this.userService.googlelogin(google.data);
+      const refreshtoken = await this.userService.refreshtoken(google.data);
+      
       response.cookie('jwt', accesstoken, {
         httpOnly: true,
         sameSite: 'none',
@@ -202,9 +204,28 @@ export class UserController {
       
   }
 
-  @Get('kakao_login')
+  @Post('kakao_login')
   async kakao_login(@Request() req, @Res() response) {
-    const kakao = await this.userService.kakao_login(req.query.code);
+    const kakao = await this.userService.kakao_login(req.body.authorizationCode);
+    if(!kakao){
+      response.status(404).json({ message: 'email not exixst'})
+    }
+    if(kakao){
+      const accesstoken = await this.userService.kakaologin(kakao);
+      kakao.email = kakao.id;
+      const refreshtoken = await this.userService.refreshtoken(kakao);
+      
+      response.cookie('jwt', accesstoken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
+      response.cookie('jwt1', refreshtoken, {
+        data: accesstoken,
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
     response.json({ message: 'login successfully' });
-  }
+  }}
 }

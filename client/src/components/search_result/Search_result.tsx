@@ -23,7 +23,7 @@ function Search_result(props: Iprops) {
             to={{ pathname: `/store/${props.data.id}` }}
             style={{ textDecoration: "none", color: "black" }}
           >
-            <img className="search_list-img" src="/jongro.jpeg" />
+            <img className="search_list-img" src={props.data.store_img} />
             <h3 className="search_list-text">{props.data.store_name}</h3>
           </Link>
         </div>

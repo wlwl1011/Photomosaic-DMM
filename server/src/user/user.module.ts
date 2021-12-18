@@ -30,8 +30,9 @@ import { join } from 'path';
         { path: 'user/login', method: RequestMethod.POST },
         { path: 'user/signup', method: RequestMethod.POST },
         { path: 'user/check-username', method: RequestMethod.POST },
-        { path: 'user/google_login', method: RequestMethod.GET },
-        { path: 'user/kakao_login', method: RequestMethod.GET })
+        { path: 'user/google_login', method: RequestMethod.POST },
+        { path: 'user/kakao_login', method: RequestMethod.POST },
+        { path: 'user/signout', method: RequestMethod.POST })
         .forRoutes(UserController);
     }
   }
