@@ -13,6 +13,9 @@ export class Store {
   store_name: string;
 
   @Column()
+  area_name: string;
+
+  @Column()
   address: string;
   
   @Column()

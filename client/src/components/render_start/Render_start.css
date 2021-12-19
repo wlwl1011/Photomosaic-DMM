@@ -12,6 +12,10 @@
   font-size: 35px;
 }
 
+.render_start_title {
+  font-family: "Ubuntu";
+}
+
 .render_start_intro-box {
   margin-top: 80px;
   font-size: 25px;

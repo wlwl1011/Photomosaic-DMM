@@ -6,14 +6,14 @@ import { SearchWordService } from './search-word.service';
 export class SearchWordController {
     constructor(private readonly SearchWordService:SearchWordService){}
 
-    @Get()
+    @Get('/list')
     getSearchWord(@Request() req){
         return this.SearchWordService.getSearchWord(req.user.id)
     }
 
     @Post('/add-search-word/:search_word')
     addSearchWord(@Request() req, @Param('search_word') searchWord:string){
-        return this.SearchWordService.addSearchWord(req.user.id,searchWord)
+        
     } 
 
     @Delete(':search_word')
