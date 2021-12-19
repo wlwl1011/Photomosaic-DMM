@@ -28,6 +28,7 @@ function Login(props: Iprops) {
 
   const [empty, setEmpty] = useState<boolean>(false);
   const [logFail, setLogFail] = useState<boolean>(false);
+  const [logAni, setLogAni] = useState<string>("");
 
   const popupX = document.body.offsetWidth / 2 - 500 / 2;
   const popupY = window.screen.height / 2 - 500 / 2;
@@ -79,7 +80,7 @@ function Login(props: Iprops) {
 
   useEffect(() => {
     // 입력창 공백상태 확인
-    if (email || password) {
+    if (email || password || logFail) {
       setEmpty(true);
     } else {
       setEmpty(false);
@@ -102,8 +103,14 @@ function Login(props: Iprops) {
       )
       .catch((err) => {
         setLogFail(true);
+        setEmpty(true);
         console.log("🚫 Not Found 🚫", err);
+        setLogAni("login_input_ani");
       });
+
+    setTimeout(() => {
+      setLogAni("");
+    }, 1000);
 
     if (loginData) {
       setLogFail(false);
@@ -124,14 +131,14 @@ function Login(props: Iprops) {
             <h1 className="login_title">로그인</h1>
             <div className="login_input-box">
               <input
-                className="login_input"
+                className={`login_input ${logAni}`}
                 placeholder="이메일"
                 type="email"
                 name="email"
                 onChange={handleInfor}
               />
               <input
-                className="login_input"
+                className={`login_input ${logAni}`}
                 placeholder="비밀번호"
                 type="password"
                 name="password"
