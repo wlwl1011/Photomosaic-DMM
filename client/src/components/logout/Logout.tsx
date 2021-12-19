@@ -17,7 +17,7 @@ function Logout(props: Iprops) {
   const handleLogout = async () => {
     const logoutData = await axios
       .post(
-        "https://localhost:4000/user/signout",
+        "https://yummyseoulserver.tk/user/signout",
         {},
         {
           headers: { "Content-Type": "application/json" },
