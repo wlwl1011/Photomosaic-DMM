@@ -7,7 +7,7 @@ const scope =
   "https://www.googleapis.com/auth/userinfo.email " +
   "https://www.googleapis.com/auth/userinfo.profile";
 
-const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=https://localhost:4000/user/google_login&response_type=code&scope=${scope}`;
+const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=371793436066-atj1j4im1v6a2a0nkvhvvi1jmgi3rjqr.apps.googleusercontent.com&redirect_uri=${window.location.href}&response_type=code&scope=${scope}`;
 const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=52454432a0f6a96cf545b328c12811ae&redirect_uri=https://localhost:4000/user/kakao_login`;
 
 interface Iprops {
@@ -43,14 +43,8 @@ function Login(props: Iprops) {
     );
   };
   const handelGoogle = () => {
-    window.open(
-      GOOGLE_LOGIN_URL,
-      "",
-      "status=no, height=500, width=500 _blank, left=" +
-        popupX +
-        ", top=" +
-        popupY
-    );
+    // 
+    window.location.assign(GOOGLE_LOGIN_URL);
   };
 
   // 로그인 모달창 on/off 함수
@@ -112,6 +106,7 @@ function Login(props: Iprops) {
     }
   };
 
+  
   return (
     <>
       <div id="demo-modal" className={`login_modal ${props.loginNone}`}>

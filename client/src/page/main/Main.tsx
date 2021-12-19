@@ -23,6 +23,17 @@ function Main() {
     })();
   }, [isLogin]);
 
+  useEffect(()=>{
+    
+    const url = new URL(window.location.href);
+    if(url.href.split('?')[1]){
+
+      const code = url.href.split('?')[1].split('=')[1].split('&')[0]    
+      console.log('code',code)
+    }
+  },[])
+
+
   return (
     <>
       <Header
