@@ -5,6 +5,7 @@ import Header from "../../components/header/Header";
 import Menu_result from "../../components/menu_result/Menu_result";
 import Kakao_map_menu from "../../components/kakao_map_menu/kakao_map_menu";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 interface store_list {
   id: number;
@@ -28,16 +29,18 @@ function Menu({ match }: any) {
 
   const [menuData, setMenuData] = useState<store_list[]>([]);
   const [starBool, setStarBool] = useState<boolean>(true);
+  const history = useHistory();
 
   const [reviewBool, setReviewBool] = useState<boolean>(true);
   const [isLogin,setIsLogin]=useState<boolean>(true)
   const accessLogin: any = useRef();
   
 
+  
   useEffect(() => {
     (async () => {
       await axios
-        .get("https://yummyseoulserver.tk/user/userinfo/userdata", {
+        .get("https://localhost:4000/user/userinfo/userdata", {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -127,7 +130,6 @@ function Menu({ match }: any) {
           <div className="menu_infor-box">
             <aside className="menu_infor-box1">
               <div className="menu_infor-container-img">
-
                 <img className="menu_infor-img" src={menuImage} />
 
               </div>

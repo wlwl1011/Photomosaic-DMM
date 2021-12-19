@@ -17,7 +17,7 @@ function Logout(props: Iprops) {
   const handleLogout = async () => {
     const logoutData = await axios
       .post(
-        "https://yummyseoulserver.tk/user/signout",
+        "https://localhost:4000/user/signout",
         {},
         {
           headers: { "Content-Type": "application/json" },
@@ -29,8 +29,8 @@ function Logout(props: Iprops) {
       });
 
     if (logoutData) {
-      if (window.location.href === "https://www.yummyseoul.com/mypage") {
-        history.push("/main");
+      if (window.location.href === "https://yummyseoul.com/mypage") {
+        history.push("https://yummyseoul.com/main");
       } else {
         window.location.replace(window.location.href);
       }

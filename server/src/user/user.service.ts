@@ -25,7 +25,10 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
+
+
   async login(data): Promise<any> {
+    
     const userdata = await this.userRepository.findOne({
       where: { email: data.email, password: data.password },
     });
@@ -45,7 +48,7 @@ export class UserService {
 
   async refreshtoken(data): Promise<any> {
     const userdata = await this.userRepository.findOne({
-      where: { email: data.email, password: data.password },
+      where: { email: data.email },
     });
     const payload = {
       id: userdata.id,
@@ -188,7 +191,8 @@ export class UserService {
     }
   }
 
-  async google_login(data: any) {
+  async google_login(data: string) {
+
     const url = `https://oauth2.googleapis.com/token?code=${data}&client_id=${process.env.GOOGLE_CLIENT_ID}&client_secret=${process.env.GOOGLE_CLIENT_SECRET}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`;
     const access_token = await axios.post(url, {
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -200,29 +204,31 @@ export class UserService {
       },
     });
     const userdata = await this.userRepository.findOne({
-      where: { id: userInfo.data.id },
+      where: { email: userInfo.data.email },
     });
-    if (userInfo && !userdata) {
+    if (!userInfo && !userdata) {
       return;
     }
-    if (!userInfo || userdata) {
+    if(userInfo && userdata){
+      return userInfo
+    }
+
+    if (userInfo && !userdata) {
       await this.userRepository.save({
-        id: userInfo.data.id,
         email: userInfo.data.email,
         password: 'admin',
         user_name: userInfo.data.name,
         user_img: userInfo.data.picture,
       });
-      return;
+      return userInfo
     }
   }
 
-  async kakao_login(data: any) {
+  async kakao_login(data: string) {
     const url = `https://kauth.kakao.com/oauth/token?code=${data}&client_id=${process.env.KAKAO_CLIENT_ID}&client_secret=${process.env.KAKAO_CLIENT_SECRET}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}&grant_type=authorization_code`;
     const access_token = await axios.post(url, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     });
-
     const kakaoAPI = `https://kapi.kakao.com/v2/user/me`;
     const userInfo = await axios.get(kakaoAPI, {
       headers: {
@@ -231,13 +237,15 @@ export class UserService {
       },
     });
     const userdata = await this.userRepository.findOne({
-      where: { id: userInfo.data.id },
+      where: { email: userInfo.data.id },
     });
-
-    if (userInfo && !userdata) {
-      return false;
+    if (!userInfo && !userdata) {
+      return;
     }
-    if (!userInfo || userdata) {
+    if (userInfo && userdata) {
+      return userInfo.data;
+    }
+    if (userInfo && !userdata) {
       await this.userRepository.save({
         id: userInfo.data.properties.id,
         email: userInfo.data.properties.account_email || userInfo.data.id,
@@ -245,7 +253,44 @@ export class UserService {
         user_name: userInfo.data.properties.nickname,
         user_img: userInfo.data.properties.profile_image,
       });
-      return true;
+      return userInfo.data;
     }
+  }
+
+  async googlelogin(data): Promise<any> {
+    const userdata = await this.userRepository.findOne({
+      where: { email: data.email },
+    });
+    if (userdata) {
+      const payload = {
+        id: userdata.id,
+        user_name: userdata.user_name,
+        email: userdata.email,
+        user_img: userdata.user_img,
+        created_at: userdata.created_at,
+      };
+      
+      return this.jwtService.sign(payload);
+    }
+    throw new NotFoundException('login fail');
+  }
+
+  async kakaologin(data): Promise<any> {
+    const userdata = await this.userRepository.findOne({
+      where: { email: data.id },
+    });
+    console.log(userdata)
+    if (userdata) {
+      const payload = {
+        id: userdata.id,
+        user_name: userdata.user_name,
+        email: userdata.email,
+        user_img: userdata.user_img,
+        created_at: userdata.created_at,
+      };
+      
+      return this.jwtService.sign(payload);
+    }
+    throw new NotFoundException('login fail');
   }
 }
