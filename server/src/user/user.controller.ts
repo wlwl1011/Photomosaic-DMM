@@ -45,7 +45,6 @@ export class UserController {
   async signup(@Request() req, @Res() response, @UploadedFile() file: File[]) {
     if (req.file === undefined) {
       // this.userService.sign_image(req.body, 'default image'); //이미지 없으면 default image 삽입
-
       const data = await this.userService.signup(req.body, 'default.png');
       if (data) {
         response.status(201).json({ message: 'sign up successfully' });
@@ -69,6 +68,7 @@ export class UserController {
     response
       .status(205)
       .clearCookie('jwt')
+      .clearCookie('jwt1')
       .json({ message: 'sign out successfully' });
   }
 
@@ -175,16 +175,57 @@ export class UserController {
     }
   }
 
-  @Get('google_login')
-  async google_login(@Request() req, @Res() response) {
-    console.log(req);
-    const google = await this.userService.google_login(req.query.code);
-    response.json({ message: 'login successfully' });
+  @Post('google_login')
+  async google_login(@Request() req, @Res() response){
+    const google = await this.userService.google_login(req.body.authorizationCode)
+    
+    if(!google){
+      response.status(404).json({ message: 'email not exixst'})
+    }
+    if(google){
+      const accesstoken = await this.userService.googlelogin(google.data);
+      const refreshtoken = await this.userService.refreshtoken(google.data);
+      
+      response.cookie('jwt', accesstoken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
+      response.cookie('jwt1', refreshtoken, {
+        data: accesstoken,
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
+
+
+      response.json({ message: 'login successfully'})
+    }
+      
   }
 
-  @Get('kakao_login')
+  @Post('kakao_login')
   async kakao_login(@Request() req, @Res() response) {
-    const kakao = await this.userService.kakao_login(req.query.code);
+    const kakao = await this.userService.kakao_login(req.body.authorizationCode);
+    if(!kakao){
+      response.status(404).json({ message: 'email not exixst'})
+    }
+    if(kakao){
+      const accesstoken = await this.userService.kakaologin(kakao);
+      kakao.email = kakao.id;
+      const refreshtoken = await this.userService.refreshtoken(kakao);
+      
+      response.cookie('jwt', accesstoken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
+      response.cookie('jwt1', refreshtoken, {
+        data: accesstoken,
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
+      });
     response.json({ message: 'login successfully' });
-  }
+  }}
 }

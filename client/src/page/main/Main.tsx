@@ -3,21 +3,25 @@ import Header from "../../components/header/Header";
 import Seoul_map from "../../components/seoul_map/Seoul_map";
 import Footer from "../../components/footer/Footer";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-function Main() {
+function Main({ match }: any) {
   const handleImg = () => {};
   const accessLogin: any = useRef();
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const history = useHistory();
+
 
   useEffect(() => {
     (async () => {
       await axios
-        .get("https://yummyseoulserver.tk/user/userinfo/userdata", {
+        .get("https://localhost:4000/user/userinfo/userdata", {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
         .then((res) => {
           setIsLogin(true);
+          
         })
         .catch((err) => setIsLogin(false));
     })();
