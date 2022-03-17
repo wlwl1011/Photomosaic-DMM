@@ -1,6 +1,6 @@
 {
-    "name": "imgsample",
-    "short_name": "imgsample",
+    "name": "dmm_front",
+    "short_name": "dmm_front",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
