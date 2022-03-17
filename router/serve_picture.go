@@ -3,6 +3,7 @@ package router
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"path/filepath"
 
@@ -11,8 +12,9 @@ import (
 
 func postPicture(c *gin.Context) {
 	form, _ := c.MultipartForm()
+	log.Println("upload file")
 	files := form.File["files"]
-
+	log.Println(len(files))
 	for _, file := range files {
 		reader, err := file.Open()
 		if err != nil {
@@ -27,7 +29,6 @@ func postPicture(c *gin.Context) {
 }
 
 func getList(c *gin.Context) {
-	fmt.Println("^^")
 	uid := c.GetHeader("uid")
 	if len(uid) == 0 {
 		c.Status(http.StatusOK)

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dmm_front/constatns.dart';
 import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -7,9 +8,10 @@ class MainController extends GetxController {
 
   void loadList() async {
     var dio = Dio();
-    print("http://${Uri.base.host}:${Uri.base.port}/api/v1/objectList");
+    print("http://$serverAdr/api/v1/objectList");
+
     var resp = await dio.get(
-      "http://${Uri.base.host}:${Uri.base.port}/api/v1/objectList",
+      "http://$serverAdr/api/v1/objectList",
       options: Options(
         headers: {"uid": "tmpuid"},
       ),
@@ -25,10 +27,11 @@ class MainController extends GetxController {
   }
 
   Upload(PickedFile imageFile) async {
+    print(imageFile.path);
     String fileName = imageFile.path.split('/').last;
 
     FormData data = FormData.fromMap({
-      "file": await MultipartFile.fromFile(
+      "files": await MultipartFile.fromFile(
         imageFile.path,
         filename: fileName,
       ),
@@ -37,8 +40,7 @@ class MainController extends GetxController {
     Dio dio = new Dio();
 
     dio
-        .post("http://${Uri.base.host}:${Uri.base.port}/api/v1/upload",
-            data: data)
+        .post("http://$serverAdr/api/v1/upload", data: data)
         .then((response) => print(response))
         .catchError((error) => print(error));
   }

@@ -6,14 +6,8 @@ import 'package:dmm_front/binder/main_binder.dart';
 import 'package:dmm_front/components/card_layout_grid.dart';
 import 'package:dmm_front/controller/main_controller.dart';
 import 'package:image_picker/image_picker.dart';
-import '''
-dart:js''';
-import 'package:js/js.dart';
 
-@JS('console.log')
-external void log(String msg);
 void main() {
-  log("Hello js");
   runApp(MyApp());
 }
 

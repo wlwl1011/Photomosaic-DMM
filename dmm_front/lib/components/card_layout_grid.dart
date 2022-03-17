@@ -1,3 +1,4 @@
+import 'package:dmm_front/constatns.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -32,7 +33,7 @@ class CardLayoutGrid extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         child: Image.network(
-          'http://${Uri.base.host}:${Uri.base.port}/api/v1/object?pid=${items[idx]["pid"]}',
+          'http://$serverAdr/api/v1/object?pid=${items[idx]["pid"]}',
           headers: {
             "uid": "tmpuid",
           },
