@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    hostname: outline-db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    restart: unless-stopped
+    volumes:
+      - ./.data/db/data-14:/var/lib/postgresql/data
+      - ./.data/db/dump:/home
+      - /etc/localtime:/etc/localtime:ro
+  minio:
+    image: minio/minio:latest
+    hostname: minio
+    restart: unless-stopped
+    volumes:
+      - ./.data/minio/data:/data
+    expose:
+      - "9000"
+    ports:
+      - 9000:9000
+    environment:
+      MINIO_ROOT_USER: user
+      MINIO_ROOT_PASSWORD: password
+      MINIO_BROWSER_REDIRECT_URL: http://minioui.localhost
+    command: server /data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:9000/minio/health/live"
+        ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+  minioui:
+    image: minio/console:latest
+    hostname: minioui
+    environment:
+      CONSOLE_MINIO_SERVER: http://minio:9000
+    expose:
+      - "9000"
+    ports:
+      - 9001:9000
+    depends_on:
+      - minio
+    command: server --port "9000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:9000/minio/health/live"
+        ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
