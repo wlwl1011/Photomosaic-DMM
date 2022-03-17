@@ -39,9 +39,9 @@ class MainController extends GetxController {
 
     Dio dio = new Dio();
 
-    dio
-        .post("http://$serverAdr/api/v1/upload", data: data)
-        .then((response) => print(response))
-        .catchError((error) => print(error));
+    dio.post("http://$serverAdr/api/v1/upload", data: data).then((response) {
+      print(response);
+      loadList();
+    }).catchError((error) => print(error));
   }
 }

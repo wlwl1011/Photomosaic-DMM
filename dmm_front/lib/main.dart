@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.all(8.0),
         child: GetBuilder<MainController>(
           builder: (controller) {
+            print("Build!!");
             return CardLayoutGrid(crossAxisCount: 2, items: controller.list);
           },
         ),
