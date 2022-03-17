@@ -20,3 +20,7 @@ docker-compose up -d
   ```zsh
   bash dmm_front/deploy.sh
   ```
+## How to run
+```zsh
+go run main.go
+```
