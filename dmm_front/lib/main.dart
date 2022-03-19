@@ -1,14 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:dmm_front/binder/main_binder.dart';
-import 'package:dmm_front/components/card_layout_grid.dart';
-import 'package:dmm_front/controller/main_controller.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:dmm_front/constants/color_constant.dart';
+import 'package:dmm_front/screens/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,17 +12,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialBinding: MainPageBinder(),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: kMainColor)),
+      home: const HomeScreen(),
+      routes: {"/homeScreen": (_) => const HomeScreen()},
     );
   }
 }
 
+/*
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -96,3 +94,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
