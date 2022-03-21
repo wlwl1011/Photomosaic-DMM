@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./dmm_photomosaic/photomosaic/Photomosaic-generator",
+        "./dmm_photomosaic/photomosaic/Photomosaic-generator"
+    ]
+}
