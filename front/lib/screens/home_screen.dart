@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: kBlackColor),
               ),
             ),
-            Container(
+            /*Container(
               height: 150, //향후 사진을 resize하여 해당 크기로 맞추면 좋을 듯함.
               margin: const EdgeInsets.only(left: 25, right: 25, top: 18),
               decoration: BoxDecoration(
@@ -104,11 +104,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisCount: 2, items: controller.list);
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),
-      floatingActionButton: GetBuilder(
+      /*floatingActionButton: GetBuilder(
         builder: (MainController controller) {
           return FloatingActionButton(
             onPressed: () => {getImageFromGallery(controller)},
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: const Icon(Icons.add),
           );
         },
-      ),
+      ),*/
     );
   }
 }
