@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
           colorScheme:
               ColorScheme.fromSwatch().copyWith(secondary: kMainColor)),
       home: const HomeScreen(),
-      routes: {"/homeScreen": (_) => const HomeScreen()},
+      routes: {
+        "/homeScreen": (_) => const HomeScreen()
+      }, // 너희 코드로 이거 바꾸면 될 것 같오
     );
   }
 }

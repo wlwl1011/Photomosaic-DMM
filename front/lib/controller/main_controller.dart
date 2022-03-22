@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:front/constatns.dart';
+import 'package:front/constants/constatns.dart';
 import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
