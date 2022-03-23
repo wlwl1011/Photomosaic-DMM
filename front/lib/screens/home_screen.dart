@@ -1,12 +1,8 @@
-import 'package:front/components/card_layout_grid.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../controller/main_controller.dart';
-import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -62,6 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: kLightGreyColor),
               child: Stack(
                 children: <Widget>[
+                  Hero(
+                      tag: 'logo',
+                      child: Image.asset('assets/images/logo.jpg')),
                   TextField(
                     maxLengthEnforced: true,
                     style: GoogleFonts.openSans(
