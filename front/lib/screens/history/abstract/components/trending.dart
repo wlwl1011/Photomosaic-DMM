@@ -103,7 +103,7 @@ class TrendingPhoto extends StatelessWidget {
               ],
             ),
             child: Column(
-              children: <Widget>[
+              children: [
                 Row(
                   children: [
                     IconButton(
@@ -126,6 +126,8 @@ class TrendingPhoto extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                         text: "$title".toUpperCase(),
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
