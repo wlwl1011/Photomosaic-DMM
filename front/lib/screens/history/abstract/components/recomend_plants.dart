@@ -27,8 +27,8 @@ class RecomendsPlants extends StatelessWidget {
             },
           ),
           RecomendPlantCard(
-            image: "assets/images/image_2.png",
-            title: "Angelica",
+            image: "assets/images/image_2.jpg",
+            title: "My favorite",
             press: () {
               Navigator.push(
                 context,
@@ -39,8 +39,8 @@ class RecomendsPlants extends StatelessWidget {
             },
           ),
           RecomendPlantCard(
-            image: "assets/images/image_3.png",
-            title: "Samantha",
+            image: "assets/images/image_3.jpg",
+            title: "Daily life",
             press: () {},
           ),
         ],
