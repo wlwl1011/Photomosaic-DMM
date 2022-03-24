@@ -58,12 +58,12 @@ class TrendingPhoto extends StatelessWidget {
   }) : super(key: key);
 
   final String image, title;
-
   final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Container(
       margin: const EdgeInsets.only(
         left: kDefaultPadding,

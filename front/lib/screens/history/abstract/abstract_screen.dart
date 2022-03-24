@@ -17,11 +17,14 @@ class AbstractScreen extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      elevation: 0,
-      leading: IconButton(
-        icon: SvgPicture.asset("asets/icons/menu.svg"),
-        onPressed: () {},
-      ),
-    );
+        title: const Text('History'),
+        centerTitle: true,
+        elevation: 0,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {},
+          ),
+        ]);
   }
 }
