@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/controller/trending_controller.dart';
+import 'package:front/screens/history/abstract/components/image_data.dart';
 import 'package:front/screens/history/details/details_screen.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:get/get.dart';
@@ -46,6 +47,16 @@ class Trending extends StatelessWidget {
             title: "Daily life",
             press: () {},
           ),
+          Container(
+            margin: const EdgeInsets.only(
+              right: kDefaultPadding,
+            ),
+            child: TrendingPhoto(
+              image: "assets/images/image_4.jpeg",
+              title: "Daily life",
+              press: () {},
+            ),
+          ),
         ],
       ),
     );
@@ -65,8 +76,6 @@ class TrendingPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool IsHeart = false;
-
     return Container(
       margin: const EdgeInsets.only(
         left: kDefaultPadding,
@@ -80,7 +89,7 @@ class TrendingPhoto extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(kDefaultPadding / 2),
             decoration: BoxDecoration(
-              color: kMainColor,
+              color: Colors.white,
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
@@ -94,7 +103,23 @@ class TrendingPhoto extends StatelessWidget {
               ],
             ),
             child: Column(
-              children: [
+              children: <Widget>[
+                Row(
+                  children: [
+                    IconButton(
+                      icon: ImageData(IconPath.likeOff),
+                      onPressed: () {
+                        //controller.changePage(0);
+                      },
+                    ),
+                    IconButton(
+                      icon: ImageData(IconPath.reply),
+                      onPressed: () {
+                        //controller.changePage(0);
+                      },
+                    ),
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
