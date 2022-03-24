@@ -74,34 +74,32 @@ class RecomendPlantCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Image.asset(image),
-          GestureDetector(
-            onTap: press,
-            child: Container(
-              padding: const EdgeInsets.all(kDefaultPadding / 2),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+          Container(
+            padding: const EdgeInsets.all(kDefaultPadding / 2),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 10),
+                  blurRadius: 50,
+                  color: kMainColor.withOpacity(0.23),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 10),
-                    blurRadius: 50,
-                    color: kMainColor.withOpacity(0.23),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                        text: "$title\n".toUpperCase(),
-                        style: Theme.of(context).textTheme.button),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RichText(
+                  textAlign: TextAlign.end,
+                  text: TextSpan(
+                      text: "$title".toUpperCase(),
+                      style: Theme.of(context).textTheme.button),
+                ),
+              ],
             ),
           )
         ],
