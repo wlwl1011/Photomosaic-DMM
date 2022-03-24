@@ -85,7 +85,7 @@ class TrendingPhoto extends StatelessWidget {
       width: Get.width * 0.4,
       child: Column(
         children: <Widget>[
-          Image.asset(image),
+          GestureDetector(onTap: press, child: Image.asset(image)),
           Container(
             // padding: const EdgeInsets.only(left: kDefaultPadding, top: ),
             decoration: BoxDecoration(
