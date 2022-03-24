@@ -6,7 +6,6 @@ import 'package:front/screens/history/abstract/components/header_with_seachbox.d
 import 'package:front/screens/history/abstract/components/title_with_more_bbtn.dart';
 import 'package:front/screens/history/abstract/components/trending.dart';
 import 'package:front/screens/history/abstract/components/user_photos.dart';
-import 'package:front/screens/history/components/my_bottom_nav_bar.dart';
 import 'package:get/get.dart';
 
 class AbstractScreen extends StatelessWidget {
@@ -53,11 +52,12 @@ class AbstractScreen extends StatelessWidget {
   Widget buildBottomNav(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(
+        top: kDefaultPadding,
         left: kDefaultPadding * 2,
         right: kDefaultPadding * 2,
         bottom: kDefaultPadding,
       ),
-      height: 80,
+      height: Get.height * 0.1,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -76,7 +76,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/flower.svg",
                 color:
-                    controller.pageIdx.value == 0 ? Colors.black : Colors.blue,
+                    controller.pageIdx.value == 0 ? kMainColor : Colors.black,
               ),
               onPressed: () {
                 controller.changePage(0);
@@ -88,7 +88,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/flower.svg",
                 color:
-                    controller.pageIdx.value == 1 ? Colors.black : Colors.blue,
+                    controller.pageIdx.value == 1 ? kMainColor : Colors.black,
               ),
               onPressed: () {
                 controller.changePage(1);
@@ -98,9 +98,9 @@ class AbstractScreen extends StatelessWidget {
           GetBuilder<HistoryPageController>(builder: (controller) {
             return IconButton(
               icon: SvgPicture.asset(
-                "assets/icons/flower.svg",
+                "assets/icons/user-icon.svg",
                 color:
-                    controller.pageIdx.value == 2 ? Colors.black : Colors.blue,
+                    controller.pageIdx.value == 2 ? kMainColor : Colors.black,
               ),
               onPressed: () {
                 controller.changePage(2);

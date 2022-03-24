@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:front/screens/history/details/details_screen.dart';
 
 import 'package:front/constants/color_constant.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 
 class Trending extends StatelessWidget {
   const Trending({
@@ -63,7 +65,6 @@ class TrendingPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     bool isPressed = false;
     return Container(
       margin: const EdgeInsets.only(
@@ -71,7 +72,7 @@ class TrendingPhoto extends StatelessWidget {
         top: kDefaultPadding / 2,
         bottom: kDefaultPadding * 2.5,
       ),
-      width: size.width * 0.4,
+      width: Get.width * 0.4,
       child: Column(
         children: <Widget>[
           Image.asset(image),
