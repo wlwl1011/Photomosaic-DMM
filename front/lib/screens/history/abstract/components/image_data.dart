@@ -23,4 +23,5 @@ class IconPath {
   static String get likeOn => 'assets/icons/like_on_icon.jpeg';
   static String get likeOff => 'assets/icons/like_off_icon.jpeg';
   static String get reply => 'assets/icons/reply_icon.jpeg';
+  static String get more => 'assets/icons/more_icon.jpeg';
 }

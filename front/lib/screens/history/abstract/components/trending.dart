@@ -87,7 +87,7 @@ class TrendingPhoto extends StatelessWidget {
         children: <Widget>[
           Image.asset(image),
           Container(
-            padding: const EdgeInsets.all(kDefaultPadding / 2),
+            // padding: const EdgeInsets.only(left: kDefaultPadding, top: ),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(
@@ -96,39 +96,26 @@ class TrendingPhoto extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  offset: const Offset(0, 10),
-                  blurRadius: 50,
-                  color: kMainColor.withOpacity(0.23),
+                  offset: const Offset(0, 5),
+                  blurRadius: 30,
+                  color: kMainColor.withOpacity(0.3),
                 ),
               ],
             ),
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                       icon: ImageData(IconPath.likeOff),
-                      onPressed: () {
-                        //controller.changePage(0);
-                      },
+                      onPressed: () {},
                     ),
                     IconButton(
                       icon: ImageData(IconPath.reply),
                       onPressed: () {
                         //controller.changePage(0);
                       },
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    RichText(
-                      text: TextSpan(
-                        text: "$title".toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
                     ),
                   ],
                 ),
