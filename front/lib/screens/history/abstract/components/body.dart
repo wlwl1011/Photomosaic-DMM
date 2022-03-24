@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 
-import 'featurred_plants.dart';
+import 'user_photos.dart';
 import 'header_with_seachbox.dart';
-import 'recomend_plants.dart';
+import 'trending.dart';
 import 'title_with_more_bbtn.dart';
 
 class Body extends StatelessWidget {
@@ -18,9 +18,9 @@ class Body extends StatelessWidget {
         children: <Widget>[
           HeaderWithSearchBox(size: size),
           TitleWithMoreBtn(title: "Trending", press: () {}),
-          const RecomendsPlants(),
+          const Trending(),
           TitleWithMoreBtn(title: "Your Photos", press: () {}),
-          const FeaturedPlants(),
+          const UserPhotos(),
           const SizedBox(height: kDefaultPadding),
         ],
       ),

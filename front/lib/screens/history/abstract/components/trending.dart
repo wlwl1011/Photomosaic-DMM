@@ -3,8 +3,8 @@ import 'package:front/screens/history/details/details_screen.dart';
 
 import 'package:front/constants/color_constant.dart';
 
-class RecomendsPlants extends StatelessWidget {
-  const RecomendsPlants({
+class Trending extends StatelessWidget {
+  const Trending({
     Key? key,
   }) : super(key: key);
 
@@ -14,7 +14,7 @@ class RecomendsPlants extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          RecomendPlantCard(
+          TrendingPhoto(
             image: "assets/images/image_1.jpg",
             title: "Magazine Cover",
             press: () {
@@ -26,7 +26,7 @@ class RecomendsPlants extends StatelessWidget {
               );
             },
           ),
-          RecomendPlantCard(
+          TrendingPhoto(
             image: "assets/images/image_2.jpg",
             title: "My favorite",
             press: () {
@@ -38,7 +38,7 @@ class RecomendsPlants extends StatelessWidget {
               );
             },
           ),
-          RecomendPlantCard(
+          TrendingPhoto(
             image: "assets/images/image_3.jpg",
             title: "Daily life",
             press: () {},
@@ -49,8 +49,8 @@ class RecomendsPlants extends StatelessWidget {
   }
 }
 
-class RecomendPlantCard extends StatelessWidget {
-  const RecomendPlantCard({
+class TrendingPhoto extends StatelessWidget {
+  const TrendingPhoto({
     Key? key,
     required this.image,
     required this.title,
@@ -93,11 +93,15 @@ class RecomendPlantCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                RichText(
-                  textAlign: TextAlign.end,
-                  text: TextSpan(
-                      text: "$title".toUpperCase(),
-                      style: Theme.of(context).textTheme.button),
+                Column(
+                  children: [
+                    RichText(
+                      textAlign: TextAlign.end,
+                      text: TextSpan(
+                          text: "$title".toUpperCase(),
+                          style: Theme.of(context).textTheme.button),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 
-class FeaturedPlants extends StatelessWidget {
-  const FeaturedPlants({
+class UserPhotos extends StatelessWidget {
+  const UserPhotos({
     Key? key,
   }) : super(key: key);
 
