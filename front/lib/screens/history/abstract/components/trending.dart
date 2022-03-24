@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:front/screens/history/details/details_screen.dart';
 
 import 'package:front/constants/color_constant.dart';
@@ -63,7 +64,7 @@ class TrendingPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    bool isPressed = false;
     return Container(
       margin: const EdgeInsets.only(
         left: kDefaultPadding,

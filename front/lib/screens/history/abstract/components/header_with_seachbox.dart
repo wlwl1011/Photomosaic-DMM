@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:get/get.dart';
 
 class HeaderWithSearchBox extends StatelessWidget {
   const HeaderWithSearchBox({
     Key? key,
-    required this.size,
   }) : super(key: key);
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return Container(
       margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.2),
       // It will cover 20% of our total height
@@ -26,8 +22,8 @@ class HeaderWithSearchBox extends StatelessWidget {
               right: kDefaultPadding,
               bottom: kDefaultPadding,
             ),
-            height: size.height * 0.1,
-            width: size.width,
+            height: Get.height * 0.08,
+            width: Get.width,
             decoration: const BoxDecoration(
               color: kMainColor,
               borderRadius: BorderRadius.only(
@@ -36,7 +32,7 @@ class HeaderWithSearchBox extends StatelessWidget {
               ),
             ),
             child: Text(
-              'Hello Minji :)',
+              '',
               style: Theme.of(context)
                   .textTheme
                   .headline5
@@ -51,7 +47,7 @@ class HeaderWithSearchBox extends StatelessWidget {
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
               padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-              height: size.height * 0.05,
+              height: Get.height * 0.05,
               decoration: BoxDecoration(
                 color: kLightGreyColor,
                 borderRadius: BorderRadius.circular(20),

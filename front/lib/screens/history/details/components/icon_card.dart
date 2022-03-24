@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:front/constants/color_constant.dart';
+import 'package:get/get.dart';
 
 class IconCard extends StatelessWidget {
   const IconCard({
@@ -13,9 +14,8 @@ class IconCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: size.height * 0.03),
+      margin: EdgeInsets.symmetric(vertical: Get.height * 0.03),
       padding: const EdgeInsets.all(kDefaultPadding / 2),
       height: 62,
       width: 62,
