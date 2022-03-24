@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:front/controller/trending_controller.dart';
 import 'package:front/screens/history/details/details_screen.dart';
-
 import 'package:front/constants/color_constant.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Trending extends StatelessWidget {
   const Trending({
@@ -65,7 +65,8 @@ class TrendingPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isPressed = false;
+    bool IsHeart = false;
+
     return Container(
       margin: const EdgeInsets.only(
         left: kDefaultPadding,
@@ -95,15 +96,10 @@ class TrendingPhoto extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Column(
-                  children: [
-                    RichText(
-                      textAlign: TextAlign.end,
-                      text: TextSpan(
-                          text: "$title".toUpperCase(),
-                          style: Theme.of(context).textTheme.button),
-                    ),
-                  ],
+                RichText(
+                  text: TextSpan(
+                      text: "$title".toUpperCase(),
+                      style: Theme.of(context).textTheme.button),
                 ),
               ],
             ),

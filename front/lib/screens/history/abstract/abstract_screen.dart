@@ -86,7 +86,7 @@ class AbstractScreen extends StatelessWidget {
           GetBuilder<HistoryPageController>(builder: (controller) {
             return IconButton(
               icon: SvgPicture.asset(
-                "assets/icons/flower.svg",
+                "assets/icons/add.svg",
                 color:
                     controller.pageIdx.value == 1 ? kMainColor : Colors.black,
               ),
@@ -118,10 +118,6 @@ class AbstractScreen extends StatelessWidget {
       centerTitle: true,
       elevation: 0,
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.add_box_outlined),
-          onPressed: () {},
-        ),
         IconButton(
           icon: const Icon(Icons.favorite),
           onPressed: () {},
