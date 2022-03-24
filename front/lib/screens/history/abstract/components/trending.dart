@@ -80,7 +80,7 @@ class TrendingPhoto extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(kDefaultPadding / 2),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: kMainColor,
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
@@ -93,13 +93,17 @@ class TrendingPhoto extends StatelessWidget {
                 ),
               ],
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RichText(
-                  text: TextSpan(
-                      text: "$title".toUpperCase(),
-                      style: Theme.of(context).textTheme.button),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        text: "$title".toUpperCase(),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
