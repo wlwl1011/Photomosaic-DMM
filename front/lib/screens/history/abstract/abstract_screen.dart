@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
@@ -16,6 +17,12 @@ class AbstractScreen extends StatelessWidget {
     Get.put(HistoryPageController());
   }
 
+  final Images = [
+    'https://ifh.cc/g/fnQ7MR.png',
+    'https://ifh.cc/g/dfsTDy.png',
+    'https://ifh.cc/g/gkj6Jt.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +40,25 @@ class AbstractScreen extends StatelessWidget {
     return GetBuilder<HistoryPageController>(builder: (controller) {
       switch (controller.pageIdx.value) {
         case 0:
-          return SingleChildScrollView(
+          return Center(
+              child: CarouselSlider.builder(
+            options: CarouselOptions(
+              height: 300,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 2),
+            ),
+            itemCount: Images.length,
+            itemBuilder: (context, index, realIndex) {
+              final urlImage = Images[index];
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                color: Colors.grey,
+                child: Image.network(urlImage, fit: BoxFit.cover),
+              );
+            },
+          ));
+
+        /*SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -49,7 +74,7 @@ class AbstractScreen extends StatelessWidget {
                 const SizedBox(height: kDefaultPadding),
               ],
             ),
-          );
+          );*/
 
         case 2:
           return ProfilePage();
