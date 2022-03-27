@@ -3,10 +3,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/history_controller.dart';
 import 'package:front/screens/history/abstract/components/header_with_seachbox.dart';
+import 'package:front/screens/history/abstract/profile.dart';
 import 'package:front/screens/history/abstract/components/title_with_more_bbtn.dart';
 import 'package:front/screens/history/abstract/components/trending.dart';
 import 'package:front/screens/history/abstract/components/user_photos.dart';
 import 'package:get/get.dart';
+
+import 'components/user_photos_more.dart';
 
 class AbstractScreen extends StatelessWidget {
   AbstractScreen({Key? key}) : super(key: key) {
@@ -37,12 +40,20 @@ class AbstractScreen extends StatelessWidget {
                 const HeaderWithSearchBox(),
                 TitleWithMoreBtn(title: "Trending", press: () {}),
                 const Trending(),
-                TitleWithMoreBtn(title: "Your Photos", press: () {}),
+                TitleWithMoreBtn(
+                    title: "Your Photos",
+                    press: () {
+                      Get.to(() => const UserPhotosMore());
+                    }),
                 const UserPhotos(),
                 const SizedBox(height: kDefaultPadding),
               ],
             ),
           );
+
+        case 2:
+          return ProfilePage();
+
         default:
           return const Placeholder();
       }
@@ -52,22 +63,12 @@ class AbstractScreen extends StatelessWidget {
   Widget buildBottomNav(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(
-        top: kDefaultPadding,
+        top: kDefaultPadding / 1.5,
         left: kDefaultPadding * 2,
         right: kDefaultPadding * 2,
-        bottom: kDefaultPadding,
+        bottom: kDefaultPadding / 1.5,
       ),
-      height: Get.height * 0.1,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, -10),
-            blurRadius: 35,
-            color: kMainColor.withOpacity(0.38),
-          ),
-        ],
-      ),
+      height: Get.height * 0.08,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

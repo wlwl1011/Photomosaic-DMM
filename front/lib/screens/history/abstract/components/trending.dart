@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/controller/trending_controller.dart';
 import 'package:front/screens/history/abstract/components/image_data.dart';
-import 'package:front/screens/history/details/details_screen.dart';
+//import 'package:front/screens/history/details/details_screen.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
@@ -22,24 +22,24 @@ class Trending extends StatelessWidget {
             image: "assets/images/image_1.jpg",
             title: "Magazine Cover",
             press: () {
-              Navigator.push(
+              /* Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const DetailsScreen(),
                 ),
-              );
+              );*/
             },
           ),
           TrendingPhoto(
             image: "assets/images/image_2.jpg",
             title: "My favorite",
             press: () {
-              Navigator.push(
+              /*Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const DetailsScreen(),
                 ),
-              );
+              );*/
             },
           ),
           TrendingPhoto(
