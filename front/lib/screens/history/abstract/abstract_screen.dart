@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/history_controller.dart';
 import 'package:front/screens/history/abstract/components/header_with_seachbox.dart';
-import 'package:front/screens/history/abstract/new_project/new_project_home.dart';
+import 'package:front/screens/history/abstract/new_project/new_project_screen.dart';
+import 'package:front/screens/history/abstract/new_project/user_image_explain.dart';
 import 'package:front/screens/history/abstract/profile.dart';
 import 'package:front/screens/history/abstract/components/title_with_more_bbtn.dart';
 import 'package:front/screens/history/abstract/components/trending.dart';
@@ -21,6 +22,8 @@ class AbstractScreen extends StatelessWidget {
     'https://ifh.cc/g/dfsTDy.png',
     'https://ifh.cc/g/gkj6Jt.jpg',
   ];
+
+  get animationController => null;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +92,8 @@ class AbstractScreen extends StatelessWidget {
           );*/
 
         case 1:
-          return NewProjectHome(); //새 프로젝트 만들기 홈으로 이동
+          return NewProjectScreen();
+        //return NewProjectScreen(); //새 프로젝트 만들기 홈으로 이동
 
         case 2:
           return ProfilePage();
