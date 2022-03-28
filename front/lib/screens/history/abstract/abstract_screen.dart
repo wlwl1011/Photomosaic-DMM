@@ -158,6 +158,7 @@ class AbstractScreen extends StatelessWidget {
             "assets/icons/heart_off.svg",
             color: Colors.white,
           ),
+          padding: EdgeInsets.all(15.0),
           onPressed: () {},
         )
       ],
