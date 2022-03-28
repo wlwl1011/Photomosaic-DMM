@@ -41,26 +41,31 @@ class AbstractScreen extends StatelessWidget {
     return GetBuilder<HistoryPageController>(builder: (controller) {
       switch (controller.pageIdx.value) {
         case 0:
-          return Column(
-            children: [
-              const HeaderWithSearchBox(),
-              CarouselSlider.builder(
-                options: CarouselOptions(
-                  height: 300,
-                  autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 2),
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                const HeaderWithSearchBox(),
+                CarouselSlider.builder(
+                  options: CarouselOptions(
+                    height: Get.height * 0.4,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 5),
+                  ),
+                  itemCount: Images.length,
+                  itemBuilder: (context, index, realIndex) {
+                    final urlImage = Images[index];
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 1),
+                      color: Colors.grey,
+                      child: Image.network(urlImage, fit: BoxFit.cover),
+                    );
+                  },
                 ),
-                itemCount: Images.length,
-                itemBuilder: (context, index, realIndex) {
-                  final urlImage = Images[index];
-                  return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 1),
-                    color: Colors.grey,
-                    child: Image.network(urlImage, fit: BoxFit.cover),
-                  );
-                },
-              ),
-            ],
+                SizedBox(height: Get.height * 0.07),
+                TitleWithMoreBtn(title: "Trending", press: () {}),
+                const Trending(),
+              ],
+            ),
           );
 
         /*SingleChildScrollView(
@@ -101,6 +106,7 @@ class AbstractScreen extends StatelessWidget {
         right: kDefaultPadding * 2,
         bottom: kDefaultPadding / 1.5,
       ),
+      color: kBottom,
       height: Get.height * 0.08,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,7 +116,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/flower.svg",
                 color:
-                    controller.pageIdx.value == 0 ? kMainColor : Colors.black,
+                    controller.pageIdx.value == 0 ? Colors.black : Colors.white,
               ),
               onPressed: () {
                 controller.changePage(0);
@@ -122,7 +128,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/add.svg",
                 color:
-                    controller.pageIdx.value == 1 ? kMainColor : Colors.black,
+                    controller.pageIdx.value == 1 ? Colors.black : Colors.white,
               ),
               onPressed: () {
                 controller.changePage(1);
@@ -134,7 +140,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/user-icon.svg",
                 color:
-                    controller.pageIdx.value == 2 ? kMainColor : Colors.black,
+                    controller.pageIdx.value == 2 ? Colors.black : Colors.white,
               ),
               onPressed: () {
                 controller.changePage(2);

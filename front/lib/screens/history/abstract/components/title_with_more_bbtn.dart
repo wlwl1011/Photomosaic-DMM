@@ -22,7 +22,7 @@ class TitleWithMoreBtn extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            color: kMainColor,
+            color: Colors.black,
             onPressed: press,
             child: const Text(
               "More",
@@ -63,7 +63,7 @@ class TitleWithCustomUnderline extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(right: kDefaultPadding / 4),
               height: 7,
-              color: kMainColor.withOpacity(0.2),
+              color: kGreyColor.withOpacity(0.2),
             ),
           )
         ],

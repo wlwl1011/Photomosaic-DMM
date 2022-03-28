@@ -19,7 +19,7 @@ class Trending extends StatelessWidget {
       child: Row(
         children: <Widget>[
           TrendingPhoto(
-            image: "assets/images/image_1.jpg",
+            image: "assets/images/image_1.png",
             title: "Magazine Cover",
             press: () {
               /* Navigator.push(
@@ -31,7 +31,7 @@ class Trending extends StatelessWidget {
             },
           ),
           TrendingPhoto(
-            image: "assets/images/image_2.jpg",
+            image: "assets/images/image_2.png",
             title: "My favorite",
             press: () {
               /*Navigator.push(
@@ -43,7 +43,7 @@ class Trending extends StatelessWidget {
             },
           ),
           TrendingPhoto(
-            image: "assets/images/image_3.jpg",
+            image: "assets/images/image_3.png",
             title: "Daily life",
             press: () {},
           ),
@@ -52,7 +52,7 @@ class Trending extends StatelessWidget {
               right: kDefaultPadding,
             ),
             child: TrendingPhoto(
-              image: "assets/images/image_4.jpeg",
+              image: "assets/images/image_4.png",
               title: "Daily life",
               press: () {},
             ),
@@ -86,42 +86,6 @@ class TrendingPhoto extends StatelessWidget {
       child: Column(
         children: <Widget>[
           GestureDetector(onTap: press, child: Image.asset(image)),
-          Container(
-            // padding: const EdgeInsets.only(left: kDefaultPadding, top: ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(0, 5),
-                  blurRadius: 30,
-                  color: kMainColor.withOpacity(0.3),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: ImageData(IconPath.likeOff),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: ImageData(IconPath.reply),
-                      onPressed: () {
-                        //controller.changePage(0);
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );
