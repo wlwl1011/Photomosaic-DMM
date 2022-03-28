@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
       });
     } else {
       Future.delayed(const Duration(milliseconds: 2000), () {
-        Get.to(AbstractScreen());
+        Get.offAll(AbstractScreen(), transition: null);
       });
     }
 
