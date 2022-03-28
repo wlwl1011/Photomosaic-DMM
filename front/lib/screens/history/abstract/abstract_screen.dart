@@ -45,6 +45,7 @@ class AbstractScreen extends StatelessWidget {
             child: Column(
               children: [
                 const HeaderWithSearchBox(),
+                SizedBox(height: Get.height * 0.02),
                 CarouselSlider.builder(
                   options: CarouselOptions(
                     height: Get.height * 0.4,
@@ -63,7 +64,7 @@ class AbstractScreen extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: Get.height * 0.07),
+                SizedBox(height: Get.height * 0.05),
                 TitleWithMoreBtn(title: "Trending", press: () {}),
                 const Trending(),
               ],
