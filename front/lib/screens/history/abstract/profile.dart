@@ -2,11 +2,23 @@ import 'package:front/screens/history/abstract/profile/my_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+final Item = {
+  "list": [
+    {"image": "assets/images/userImage_1.jpeg"},
+    {"image": "assets/images/userImage_2.jpeg"},
+    {"image": "assets/images/userImage_3.jpeg"},
+    {"image": "assets/images/userImage_4.jpeg"},
+    {"image": "assets/images/userImage_5.jpeg"},
+    {"image": "assets/images/userImage_6.jpeg"},
+    {"image": "assets/images/userImage_7.jpeg"},
+    {"image": "assets/images/userImage_8.jpeg"},
+    {"image": "assets/images/userImage_9.jpeg"},
+  ]
+};
+
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return SingleChildScrollView(
       child: Column(
         children: [

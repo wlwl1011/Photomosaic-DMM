@@ -13,8 +13,8 @@ class MyInfo extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(
-          height: 40,
+        SizedBox(
+          height: Get.height * 0.1,
         ),
         const RadialProgress(
           width: 4,
