@@ -41,23 +41,27 @@ class AbstractScreen extends StatelessWidget {
     return GetBuilder<HistoryPageController>(builder: (controller) {
       switch (controller.pageIdx.value) {
         case 0:
-          return Center(
-              child: CarouselSlider.builder(
-            options: CarouselOptions(
-              height: 300,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 2),
-            ),
-            itemCount: Images.length,
-            itemBuilder: (context, index, realIndex) {
-              final urlImage = Images[index];
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                color: Colors.grey,
-                child: Image.network(urlImage, fit: BoxFit.cover),
-              );
-            },
-          ));
+          return Column(
+            children: [
+              const HeaderWithSearchBox(),
+              CarouselSlider.builder(
+                options: CarouselOptions(
+                  height: 300,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 2),
+                ),
+                itemCount: Images.length,
+                itemBuilder: (context, index, realIndex) {
+                  final urlImage = Images[index];
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 1),
+                    color: Colors.grey,
+                    child: Image.network(urlImage, fit: BoxFit.cover),
+                  );
+                },
+              ),
+            ],
+          );
 
         /*SingleChildScrollView(
             child: Column(
@@ -144,14 +148,18 @@ class AbstractScreen extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      title: const Text('History'),
+      title: const Text('Photomosaic',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
       centerTitle: true,
       elevation: 0,
       actions: <Widget>[
         IconButton(
-          icon: const Icon(Icons.favorite),
+          icon: SvgPicture.asset(
+            "assets/icons/heart_off.svg",
+            color: Colors.white,
+          ),
           onPressed: () {},
-        ),
+        )
       ],
     );
   }

@@ -25,10 +25,10 @@ class HeaderWithSearchBox extends StatelessWidget {
             height: Get.height * 0.08,
             width: Get.width,
             decoration: const BoxDecoration(
-              color: kMainColor,
+              color: Colors.black,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(60),
-                bottomRight: Radius.circular(60),
+                bottomLeft: Radius.circular(80),
+                bottomRight: Radius.circular(80),
               ),
             ),
             child: Text(
@@ -51,13 +51,6 @@ class HeaderWithSearchBox extends StatelessWidget {
               decoration: BoxDecoration(
                 color: kLightGreyColor,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 10),
-                    blurRadius: 50,
-                    color: kMainColor.withOpacity(0.23),
-                  ),
-                ],
               ),
               child: Row(
                 children: <Widget>[
