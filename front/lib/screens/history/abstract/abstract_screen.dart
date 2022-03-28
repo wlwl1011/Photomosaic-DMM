@@ -117,8 +117,7 @@ class AbstractScreen extends StatelessWidget {
             return IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/flower.svg",
-                color:
-                    controller.pageIdx.value == 0 ? kBottomIcon2 : kBottomIcon,
+                color: controller.pageIdx.value == 0 ? kHotpink : kBottomIcon,
               ),
               onPressed: () {
                 controller.changePage(0);
@@ -129,8 +128,7 @@ class AbstractScreen extends StatelessWidget {
             return IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/add.svg",
-                color:
-                    controller.pageIdx.value == 1 ? kBottomIcon2 : kBottomIcon,
+                color: controller.pageIdx.value == 1 ? kHotpink : kBottomIcon,
               ),
               onPressed: () {
                 controller.changePage(1);
@@ -141,8 +139,7 @@ class AbstractScreen extends StatelessWidget {
             return IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/user-icon.svg",
-                color:
-                    controller.pageIdx.value == 2 ? kBottomIcon2 : kBottomIcon,
+                color: controller.pageIdx.value == 2 ? kHotpink : kBottomIcon,
               ),
               onPressed: () {
                 controller.changePage(2);

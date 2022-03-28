@@ -14,7 +14,7 @@ const Color hintTextColor = Color(0xFFE4E0E8);
 const Color primaryTextColor = Color(0xFF1A1316);
 const Color secondaryTextColor = Color(0xFF8391A0);
 const Color tertiaryTextColor = Color(0xFFB5ADAC);
-
+const kHotpink = Color(0xFFFF3387);
 const kBottomIcon = Color.fromARGB(255, 231, 192, 207);
 const kBottomIcon2 = Color(0xFFCF5B87);
 //padding
