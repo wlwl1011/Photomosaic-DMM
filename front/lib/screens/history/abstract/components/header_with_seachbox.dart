@@ -20,7 +20,7 @@ class HeaderWithSearchBox extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: kDefaultPadding,
               right: kDefaultPadding,
-              bottom: kDefaultPadding,
+              bottom: kDefaultPadding / 3,
             ),
             height: Get.height * 0.08,
             width: Get.width,
@@ -61,6 +61,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                           hintText: "Search",
                           hintStyle: TextStyle(
                             color: kGreyColor.withOpacity(1.0),
+                            fontWeight: FontWeight.w300,
                           ),
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,

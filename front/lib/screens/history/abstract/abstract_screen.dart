@@ -64,7 +64,7 @@ class AbstractScreen extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: Get.height * 0.05),
+                SizedBox(height: Get.height * 0.045),
                 TitleWithMoreBtn(title: "Trending", press: () {}),
                 const Trending(),
               ],
