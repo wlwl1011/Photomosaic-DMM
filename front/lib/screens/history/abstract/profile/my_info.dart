@@ -1,9 +1,8 @@
 import 'package:front/screens/history/abstract/profile/radial_progress.dart';
 import 'package:front/screens/history/abstract/profile/rounded_image.dart';
-import 'package:front/constants/text_style.dart';
+
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class MyInfo extends StatelessWidget {
   @override
@@ -16,8 +15,8 @@ class MyInfo extends StatelessWidget {
             width: 4,
             goalCompleted: 0.9,
             child: RoundedImage(
-              imagePath: "assets/images/anne.jpeg",
-              size: Size.fromWidth(80.0),
+              imagePath: "assets/images/profile.jpeg",
+              size: Size.fromWidth(70.0),
             ),
           ),
           const SizedBox(
@@ -25,10 +24,9 @@ class MyInfo extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: const <Widget>[
               Text(
                 "Anne Grethe",
-                style: blackNameTextStyle,
               ),
             ],
           ),
