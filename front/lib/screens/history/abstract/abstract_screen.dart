@@ -8,10 +8,8 @@ import 'package:front/screens/history/abstract/new_project/new_project_home.dart
 import 'package:front/screens/history/abstract/profile.dart';
 import 'package:front/screens/history/abstract/components/title_with_more_bbtn.dart';
 import 'package:front/screens/history/abstract/components/trending.dart';
-import 'package:front/screens/history/abstract/components/user_photos.dart';
-import 'package:get/get.dart';
 
-import 'components/user_photos_more.dart';
+import 'package:get/get.dart';
 
 class AbstractScreen extends StatelessWidget {
   AbstractScreen({Key? key}) : super(key: key) {
