@@ -108,7 +108,7 @@ class AbstractScreen extends StatelessWidget {
         right: kDefaultPadding * 2,
         bottom: kDefaultPadding / 1.5,
       ),
-      color: kBottom,
+      color: kLightGreyColor,
       height: Get.height * 0.08,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,7 +118,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/flower.svg",
                 color:
-                    controller.pageIdx.value == 0 ? Colors.black : Colors.white,
+                    controller.pageIdx.value == 0 ? kBottomIcon2 : kBottomIcon,
               ),
               onPressed: () {
                 controller.changePage(0);
@@ -130,7 +130,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/add.svg",
                 color:
-                    controller.pageIdx.value == 1 ? Colors.black : Colors.white,
+                    controller.pageIdx.value == 1 ? kBottomIcon2 : kBottomIcon,
               ),
               onPressed: () {
                 controller.changePage(1);
@@ -142,7 +142,7 @@ class AbstractScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/user-icon.svg",
                 color:
-                    controller.pageIdx.value == 2 ? Colors.black : Colors.white,
+                    controller.pageIdx.value == 2 ? kBottomIcon2 : kBottomIcon,
               ),
               onPressed: () {
                 controller.changePage(2);
