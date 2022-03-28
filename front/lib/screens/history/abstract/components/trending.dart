@@ -16,7 +16,6 @@ class Trending extends StatelessWidget {
         children: <Widget>[
           TrendingPhoto(
             image: "assets/images/image_1.png",
-            title: "Magazine Cover",
             press: () {
               /* Navigator.push(
                 context,
@@ -28,7 +27,6 @@ class Trending extends StatelessWidget {
           ),
           TrendingPhoto(
             image: "assets/images/image_2.png",
-            title: "My favorite",
             press: () {
               /*Navigator.push(
                 context,
@@ -40,7 +38,6 @@ class Trending extends StatelessWidget {
           ),
           TrendingPhoto(
             image: "assets/images/image_3.png",
-            title: "Daily life",
             press: () {},
           ),
           Container(
@@ -49,7 +46,6 @@ class Trending extends StatelessWidget {
             ),
             child: TrendingPhoto(
               image: "assets/images/image_4.png",
-              title: "Daily life",
               press: () {},
             ),
           ),
@@ -63,11 +59,10 @@ class TrendingPhoto extends StatelessWidget {
   const TrendingPhoto({
     Key? key,
     required this.image,
-    required this.title,
     required this.press,
   }) : super(key: key);
 
-  final String image, title;
+  final String image;
   final VoidCallback press;
 
   @override

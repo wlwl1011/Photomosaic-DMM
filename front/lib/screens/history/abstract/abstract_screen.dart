@@ -48,6 +48,8 @@ class AbstractScreen extends StatelessWidget {
                 CarouselSlider.builder(
                   options: CarouselOptions(
                     height: Get.height * 0.4,
+                    // viewportFraction: 1.0,
+
                     autoPlay: true,
                     autoPlayInterval: Duration(seconds: 5),
                   ),
