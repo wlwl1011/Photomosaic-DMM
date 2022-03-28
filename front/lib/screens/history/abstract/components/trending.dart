@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:front/controller/trending_controller.dart';
-import 'package:front/screens/history/abstract/components/image_data.dart';
 //import 'package:front/screens/history/details/details_screen.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
-import 'package:flutter_svg/svg.dart';
 
 class Trending extends StatelessWidget {
   const Trending({
