@@ -1,4 +1,4 @@
-import 'package:front/screens/history/main/profile/my_info.dart';
+import 'package:front/screens/history/userHistory/components/my_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
