@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:front/screens/home_screen.dart';
 import 'package:get/get.dart';
 
-import 'history/abstract/abstract_screen.dart';
+import 'history/main/main_screen.dart';
 
 class Splash extends StatefulWidget {
   Splash({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
       });
     } else {
       Future.delayed(const Duration(milliseconds: 2000), () {
-        Get.offAll(AbstractScreen(), transition: null);
+        Get.offAll(mainScreen(), transition: null);
       });
     }
 

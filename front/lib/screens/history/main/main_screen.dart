@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/history_controller.dart';
-import 'package:front/screens/history/abstract/components/header_with_seachbox.dart';
+import 'package:front/screens/history/main/components/header_with_seachbox.dart';
 import 'package:front/screens/newProject/new_project_screen.dart';
 import 'package:front/screens/newProject/user_image_explain.dart';
-import 'package:front/screens/history/abstract/profile.dart';
-import 'package:front/screens/history/abstract/components/title_with_more_bbtn.dart';
-import 'package:front/screens/history/abstract/components/trending.dart';
+import 'package:front/screens/history/main/profile.dart';
+import 'package:front/screens/history/main/components/title_with_more_bbtn.dart';
+import 'package:front/screens/history/main/components/trending.dart';
 
 import 'package:get/get.dart';
 
-class AbstractScreen extends StatelessWidget {
-  AbstractScreen({Key? key}) : super(key: key) {
+class mainScreen extends StatelessWidget {
+  mainScreen({Key? key}) : super(key: key) {
     Get.put(HistoryPageController());
   }
 
