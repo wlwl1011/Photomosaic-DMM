@@ -62,6 +62,13 @@ class _PrologNewProjectState extends State<PrologNewProject> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Container(
+            constraints: BoxConstraints(maxHeight: 180, maxWidth: 180),
+            child: Image.asset(
+              'assets/images/server_ex_image.png',
+              fit: BoxFit.contain,
+            ),
+          ),
           Text(
             "Using Photos on the Server",
             style: TextStyle(
@@ -73,13 +80,6 @@ class _PrologNewProjectState extends State<PrologNewProject> {
               "You can create a photomosaic image by using photos on the server",
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            constraints: BoxConstraints(maxHeight: 180, maxWidth: 180),
-            child: Image.asset(
-              'assets/images/server_ex_image.png',
-              fit: BoxFit.contain,
             ),
           ),
         ],
