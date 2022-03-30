@@ -101,7 +101,7 @@ class _UserImageExplainState extends State<UserImageExplain> {
               child: Container(
                   constraints: BoxConstraints(maxWidth: 350, maxHeight: 350),
                   child: Image.asset(
-                    "assets/images/userImageExplain.png",
+                    "assets/images/user_ex_image.png",
                     fit: BoxFit.contain,
                   )),
             ),
