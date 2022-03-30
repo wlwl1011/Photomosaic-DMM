@@ -1,5 +1,5 @@
-import 'package:front/screens/history/profile/components/radial_progress.dart';
-import 'package:front/screens/history/profile/components/rounded_image.dart';
+import 'package:front/screens/history/userHistory/components/radial_progress.dart';
+import 'package:front/screens/history/userHistory/components/rounded_image.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

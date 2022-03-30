@@ -14,7 +14,7 @@ final item = [
   "assets/images/userImage_9.jpeg",
 ];
 
-class ProfilePage extends StatelessWidget {
+class UserHistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
