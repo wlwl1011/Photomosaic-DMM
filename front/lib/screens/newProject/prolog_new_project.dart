@@ -172,13 +172,15 @@ class _PrologNewProjectState extends State<PrologNewProject> {
               }).toList(),
             ),
           ),
-          // ElevatedButton.icon(
-          //   onPressed: () {
-          //     Get.to(CreateNewProject());
-          //   },
-          //   icon: Icon(Icon.arrow),
-          //   label: Text("Create Photomosaic"),
-          // ),
+          ElevatedButton.icon(
+            onPressed: () {
+              Get.to(CreateNewProject());
+            },
+            icon: Icon(
+              Icons.photo,
+            ),
+            label: Text("Create Photomosaic"),
+          ),
         ],
       ),
     );
