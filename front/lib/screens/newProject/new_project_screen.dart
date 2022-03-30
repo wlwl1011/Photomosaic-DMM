@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
-import 'package:front/screens/history/abstract/new_project/center_next_button.dart';
-import 'package:front/screens/history/abstract/new_project/create_project_explain.dart';
-import 'package:front/screens/history/abstract/new_project/server_image_explain.dart';
-import 'package:front/screens/history/abstract/new_project/top_back_skip_view.dart';
-import 'package:front/screens/history/abstract/new_project/user_image_explain.dart';
+import 'package:front/screens/newProject/center_next_button.dart';
+import 'package:front/screens/newProject/create_project_explain.dart';
+import 'package:front/screens/newProject/server_image_explain.dart';
+import 'package:front/screens/newProject/top_back_skip_view.dart';
+import 'package:front/screens/newProject/user_image_explain.dart';
 import 'package:get/get.dart';
 
 class NewProjectScreen extends StatefulWidget {
