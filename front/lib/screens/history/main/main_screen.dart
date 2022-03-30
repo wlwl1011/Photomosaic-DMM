@@ -6,6 +6,7 @@ import 'package:front/controller/history_controller.dart';
 import 'package:front/screens/history/main/components/header_with_seachbox.dart';
 import 'package:front/screens/history/otherHistory/other_history_screen.dart';
 import 'package:front/screens/newProject/new_project_screen.dart';
+import 'package:front/screens/newProject/prolog_new_project.dart';
 import 'package:front/screens/newProject/user_image_explain.dart';
 import 'package:front/screens/history/userHistory/user_history_screen.dart';
 import 'package:front/screens/history/main/components/title_with_more_bbtn.dart';
@@ -97,7 +98,7 @@ class mainScreen extends StatelessWidget {
           );*/
 
         case 1:
-          return NewProjectScreen();
+          return PrologNewProject();
         //return NewProjectScreen(); //새 프로젝트 만들기 홈으로 이동
 
         case 2:
