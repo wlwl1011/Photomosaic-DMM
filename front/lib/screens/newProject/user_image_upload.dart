@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:get/get.dart';
 
-class CreateNewProject extends StatelessWidget {
-  const CreateNewProject({Key? key}) : super(key: key);
+class UserImageUpload extends StatefulWidget {
+  UserImageUpload({Key? key}) : super(key: key);
 
   @override
-  Widget _createNewProjectBodyWidget() {
-    return Text("포토모자이크 생성 화면");
+  State<UserImageUpload> createState() => _UserImageUploadState();
+}
+
+class _UserImageUploadState extends State<UserImageUpload> {
+  var targetImage = Get.arguments;
+
+  Widget _userImageUploadBodyWidget() {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Text("유저 이미지 업로드 화면"),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: FileImage(targetImage), fit: BoxFit.contain)),
+    );
   }
 
   @override
@@ -31,7 +44,7 @@ class CreateNewProject extends StatelessWidget {
           )
         ],
       ),
-      body: _createNewProjectBodyWidget(),
+      body: _userImageUploadBodyWidget(),
     );
   }
 }

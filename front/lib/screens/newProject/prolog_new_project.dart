@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/screens/newProject/create_new_project.dart';
+import 'package:front/screens/newProject/target_image_upload.dart';
 import 'package:get/get.dart';
 
 class PrologNewProject extends StatefulWidget {
@@ -174,10 +175,10 @@ class _PrologNewProjectState extends State<PrologNewProject> {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              Get.to(CreateNewProject());
+              Get.to(TargetImageUpload());
             },
             icon: Icon(
-              Icons.photo,
+              Icons.color_lens,
             ),
             label: Text("Create Photomosaic"),
           ),
