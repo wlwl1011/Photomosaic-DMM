@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/screens/history/main/main_screen.dart';
+import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
 import 'package:front/constants/color_constant.dart';
 
@@ -11,7 +12,10 @@ class ServerImageUpload extends StatefulWidget {
 }
 
 class _ServerImageUploadState extends State<ServerImageUpload> {
-  var targetImage = Get.arguments;  
+  var targetImage = Get.arguments;
+  var photomosaicImage;
+  String keyword = '';
+  final TextEditingController _textdelete = TextEditingController();
 
   Widget _serverImageUploadBodyWidget() {
     return Container(
@@ -23,46 +27,128 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 65,
-              width: MediaQuery.of(context).size.width,
-            ),
-            Text(
-              "Enter Keyword For Tile Image",
-              style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Container(
-              height: 250,
-              width: MediaQuery.of(context).size.width - 100,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: FileImage(targetImage), fit: BoxFit.contain)),
-            ),
-            SizedBox(
-              height: 55,
-            ),
-            ElevatedButton.icon(
-              onPressed: () {
-                
-              },
-              icon: Icon(
-                Icons.photo_library,
+      child: SingleChildScrollView(
+        child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 65,
+                width: MediaQuery.of(context).size.width,
               ),
-              style: ElevatedButton.styleFrom(primary: kHotpink),
-              label: Text("Using User Image"),
-            ),
-          ]),
+              Text(
+                "Enter Keyword For Tile Image",
+                style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                height: 250,
+                width: MediaQuery.of(context).size.width - 100,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: FileImage(targetImage), fit: BoxFit.contain)),
+              ),
+              SizedBox(
+                height: 45,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50, 0, 50, 20),
+                child: Text(
+                  "If you want random image,\n don't type and press the button",
+                  style: TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width - 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      child: TextField(
+                        style: TextStyle(color: Colors.white),
+                        controller: _textdelete,
+                        decoration: InputDecoration(
+                          labelText: 'Keyword',
+                          hintText: 'Enter a Keyword',
+                          labelStyle: TextStyle(color: Colors.white),
+                          hintStyle: TextStyle(
+                            color: Colors.white.withOpacity(0.5),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.white),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.white),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          suffixIcon: GestureDetector(
+                            child: const Icon(
+                              Icons.cancel,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                            onTap: () {
+                              _textdelete.clear();
+                            },
+                          ),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (text) {
+                          setState(() {
+                            keyword = text;
+                          });
+                        },
+                      ),
+                    ),
+                    // SizedBox(
+                    //   width: 15,
+                    // ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          //포토모자이크 생성하는 함수
+                          //생성한 포토모자이크 전달
+                          photomosaicImage = targetImage;
+                          Get.to(CreateNewProject(),
+                              arguments: photomosaicImage);
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                        ),
+                        style: ElevatedButton.styleFrom(primary: kHotpink),
+                        label: Text("Create"),
+                      ),
+                    ),
+                    // IconButton(
+                    //   icon: Icon(Icons.arrow_circle_right),
+                    //   onPressed: () {
+                    //     //포토모자이크 생성하는 함수
+                    //     //생성한 포토모자이크 전달
+                    //     Get.to(CreateNewProject(), arguments: targetImage);
+                    //   },
+                    //   color: kHotpink,
+                    //   iconSize: 35,
+                    // ),
+                  ],
+                ),
+              ),
+            ]),
+      ),
     );
   }
 
