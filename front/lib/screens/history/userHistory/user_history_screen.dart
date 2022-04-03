@@ -27,7 +27,10 @@ class UserHistoryPage extends StatelessWidget {
           ),
           const MyInfo(),
           SizedBox(
-            height: Get.height * 0.05,
+            height: Get.height * 0.04,
+          ),
+          SizedBox(
+            height: Get.height * 0.04,
           ),
           Expanded(
             child: Container(
