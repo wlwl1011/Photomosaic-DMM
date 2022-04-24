@@ -54,13 +54,13 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                //Get.to();
+                Get.to(mainScreen());
               },
               icon: Icon(
-                Icons.photo_library,
+                Icons.add_circle,
               ),
               style: ElevatedButton.styleFrom(primary: kHotpink),
-              label: Text("Using User Image"),
+              label: Text("Create New Project"),
             ),
           ]),
     );
