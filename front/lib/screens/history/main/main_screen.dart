@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/history_controller.dart';
 import 'package:front/screens/history/activity/activity_screen.dart';
+import 'package:front/screens/history/event/event_screen.dart';
 
 import 'package:front/screens/history/main/components/header_with_seachbox.dart';
 import 'package:front/screens/history/otherHistory/other_history_screen.dart';
@@ -60,10 +61,15 @@ class mainScreen extends StatelessWidget {
                   itemCount: Images.length,
                   itemBuilder: (context, index, realIndex) {
                     final urlImage = Images[index];
-                    return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 1),
-                      color: Colors.grey,
-                      child: Image.network(urlImage, fit: BoxFit.cover),
+                    return GestureDetector(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 1),
+                        color: Colors.grey,
+                        child: Image.network(urlImage, fit: BoxFit.cover),
+                      ),
+                      onTap: () {
+                        Get.to(() => const eventScreen());
+                      },
                     );
                   },
                 ),
