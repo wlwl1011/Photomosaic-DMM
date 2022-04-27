@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/history_controller.dart';
+import 'package:front/screens/history/activity/activity_screen.dart';
+
 import 'package:front/screens/history/main/components/header_with_seachbox.dart';
 import 'package:front/screens/history/otherHistory/other_history_screen.dart';
 import 'package:front/screens/newProject/prolog_new_project.dart';
@@ -173,7 +175,9 @@ class mainScreen extends StatelessWidget {
             color: Colors.white,
           ),
           padding: EdgeInsets.all(16.5),
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => const ActivityScreen());
+          },
         )
       ],
     );
