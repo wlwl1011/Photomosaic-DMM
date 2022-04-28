@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-docker/.data
-=======
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
@@ -29,4 +27,3 @@ node_modules
 localhost*
 *package-lock.json
 *.pem
->>>>>>> 9904ba932afb21e11cdf0dc80ed70b0981d71beb
