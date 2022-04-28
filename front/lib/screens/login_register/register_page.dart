@@ -1,4 +1,3 @@
-
 // import 'dart:html';
 // ignore_for_file: prefer_const_constructors
 
@@ -63,6 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           SizedBox(
                             height: 20,
+                          ),
                           Text(
                             "Create new account to get started.",
                             style: kBodyText2,
