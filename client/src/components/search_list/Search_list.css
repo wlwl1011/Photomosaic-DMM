@@ -1,0 +1,18 @@
+.search_lately-list {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.search_lately-list-box {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_list-close {
+  width: 24px;
+  height: 17px;
+  cursor: pointer;
+}

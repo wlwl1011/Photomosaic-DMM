@@ -1,0 +1,86 @@
+.image_chan-container {
+  margin: 50px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.image_chan_img-container {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto;
+}
+
+.image_chan-box {
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.image_chan-label-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.image_chan_label {
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 15px;
+}
+
+.image_chan_delete {
+  cursor: pointer;
+  font-size: 13px;
+  margin: 15px auto 0 auto;
+  width: 60px;
+  text-align: center;
+  color: rgb(236, 14, 14);
+}
+
+.image_chan_delete:hover {
+  color: rgb(241, 164, 164);
+}
+
+#input_chan_img {
+  visibility: hidden;
+}
+
+.image_chan_btn-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130px;
+  margin-top: 1px;
+  flex-direction: column;
+}
+
+.image_chan_btn-text-box {
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.image_chan_btn-text-success {
+  color: rgb(33 137 32);
+}
+
+.image_chan_btn {
+  all: unset;
+  color: white;
+  font-size: 25px;
+  background-color: black;
+  width: 120px;
+  height: 50px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.image_chan_btn:hover {
+  color: rgb(207, 206, 206);
+}
+
+.image_chan_none {
+  display: none;
+}

@@ -1,0 +1,242 @@
+.render_start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 1000px;
+}
+
+.render_start_title-box {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 35px;
+}
+
+.render_start_title {
+  font-family: "Ubuntu";
+}
+
+.render_start_intro-box {
+  margin-top: 80px;
+  font-size: 25px;
+  text-align: center;
+  color: #32b41b;
+}
+
+.render_start_img-box {
+  display: flex;
+  margin-top: 140px;
+}
+
+.render_start_char-img {
+  width: 270px;
+  height: 300px;
+}
+
+.render_start_food-box {
+  position: relative;
+  width: 500px;
+}
+
+.render_start_buger_img {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: 240px;
+  bottom: 85px;
+}
+
+.render_start_chicken_img {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: 100px;
+  top: -20px;
+}
+
+.render_start_hot_dog_img {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: 131px;
+  bottom: 0px;
+}
+
+.render_start_btn-box {
+  margin-top: 75px;
+}
+
+.render_start_btn {
+  width: 230px;
+  height: 78px;
+  background-color: #febe54;
+  color: #fff;
+  border-radius: 30px;
+  font-size: 28px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+  .render_start-container {
+    height: 930px;
+  }
+  .render_start_title-box {
+    font-size: 30px;
+  }
+
+  .render_start_intro-box {
+    font-size: 20px;
+  }
+  .render_start_food-box {
+    width: 290px;
+  }
+
+  .render_start_char-img {
+    width: 200px;
+    height: 250px;
+  }
+
+  .render_start_buger_img {
+    width: 120px;
+    height: 120px;
+    left: 129px;
+  }
+
+  .render_start_chicken_img {
+    width: 120px;
+    height: 120px;
+    left: 25px;
+  }
+
+  .render_start_hot_dog_img {
+    width: 120px;
+    height: 120px;
+    left: 55px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .render_start_food-box {
+    width: 250px;
+  }
+
+  .render_start_buger_img {
+    width: 100px;
+    height: 100px;
+    left: 107px;
+  }
+
+  .render_start_chicken_img {
+    width: 100px;
+    height: 100px;
+    top: -10px;
+    left: 36px;
+  }
+
+  .render_start_hot_dog_img {
+    width: 100px;
+    height: 100px;
+    left: 35px;
+    bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .render_start_food-box {
+    width: 180px;
+  }
+
+  .render_start_buger_img {
+    width: 90px;
+    height: 90px;
+    left: 75px;
+  }
+
+  .render_start_chicken_img {
+    width: 90px;
+    height: 90px;
+    top: 0px;
+    left: 10px;
+  }
+
+  .render_start_hot_dog_img {
+    width: 90px;
+    height: 90px;
+    left: 18px;
+    bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .render_start_img-box {
+    justify-content: space-between;
+
+    width: 100%;
+  }
+  .render_start_char-img {
+    width: 176px;
+    height: 225px;
+  }
+
+  .render_start_food-box {
+    width: 120px;
+  }
+
+  .render_start_buger_img {
+    left: 55px;
+  }
+
+  .render_start_chicken_img {
+    left: -15px;
+  }
+
+  .render_start_hot_dog_img {
+    left: -8px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .render_start-container {
+    height: 815px;
+  }
+  .render_start_char-img {
+    width: 125px;
+    height: 175px;
+  }
+
+  .render_start_food-box {
+    width: 110px;
+  }
+
+  .render_start_buger_img {
+    width: 60px;
+    height: 60px;
+    left: 50px;
+    bottom: 70px;
+  }
+
+  .render_start_chicken_img {
+    width: 60px;
+    height: 60px;
+    left: 0px;
+    bottom: 75px;
+  }
+
+  .render_start_hot_dog_img {
+    width: 60px;
+    height: 60px;
+    left: 11px;
+    bottom: 20px;
+  }
+
+  .render_start_btn-box {
+    margin-top: 60px;
+  }
+  .render_start_btn {
+    width: 190px;
+    height: 70px;
+    font-size: 23px;
+  }
+}
