@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Photomosaic-DMM
 
 ## pre-requirements
@@ -30,5 +30,3 @@ docker-compose up -d
 ```zsh
 go run main.go
 ```
-=======
-
