@@ -35,19 +35,18 @@ class _SplashState extends State<Splash> {
         top: false,
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: Center(
             child: AnimatedPadding(
               duration: const Duration(milliseconds: 2000),
               padding: isLoading
-                  ? const EdgeInsets.only(top: 50)
+                  ? const EdgeInsets.only(top: 20)
                   : const EdgeInsets.all(0),
               child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 2000),
                   opacity: isLoading ? 1 : 0,
                   child: Hero(
-                      tag: 'logo',
-                      child: Image.asset('assets/images/logo.jpg'))),
+                      tag: 'logo', child: Image.asset('assets/images/1.jpg'))),
             ),
           ),
         ),
