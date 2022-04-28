@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AvartarWidget extends StatelessWidget {
+class SmallStoryWidget extends StatelessWidget {
   final String imagePath;
   String nickName;
   Size size;
 
-  AvartarWidget(
+  SmallStoryWidget(
       {Key? key,
       required this.imagePath,
       required this.nickName,
@@ -17,7 +17,7 @@ class AvartarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ClipOval(
+        SizedBox(
           child: Image.asset(
             imagePath,
             width: size.width,

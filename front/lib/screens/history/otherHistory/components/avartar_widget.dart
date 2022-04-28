@@ -17,7 +17,7 @@ class AvartarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        ClipOval(
           child: Image.asset(
             imagePath,
             width: size.width,
