@@ -1,13 +1,14 @@
 
 // ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/color_constant.dart';
 import './screen_login.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import './widgets/widget.dart';
-
 import '../../../constants/color_constant.dart';
+
 
 class SignInPage extends StatefulWidget {
   @override
@@ -66,6 +67,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           SizedBox(
                             height: 20,
+                          ),
                           Text(
                             "You've been missed!",
                             style: kBodyText2,
