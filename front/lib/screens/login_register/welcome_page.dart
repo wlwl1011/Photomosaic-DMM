@@ -10,6 +10,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor_l,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -23,7 +24,7 @@ class WelcomePage extends StatelessWidget {
                         margin: const EdgeInsets.only(top: 50),
                         width: MediaQuery.of(context).size.width,
                         child: Image(
-                          image: AssetImage('front/assets/images/title1.png'),
+                          image: AssetImage('assets/images/title1.png'),
                         ),
                       ),
                     ),
@@ -58,7 +59,7 @@ class WelcomePage extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 20),
                         height: 50,
                         child: Image(
-                          image: AssetImage('front/assets/images/facebook.png'),
+                          image: AssetImage('assets/images/facebook.png'),
                         ),
                       ),
                     ),
@@ -67,8 +68,7 @@ class WelcomePage extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 20),
                         height: 50,
                         child: Image(
-                          image:
-                              AssetImage('front/assets/images/kakao-talk.png'),
+                          image: AssetImage('assets/images/kakao-talk.png'),
                         ),
                       ),
                     ),
@@ -77,7 +77,7 @@ class WelcomePage extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 20),
                         height: 50,
                         child: Image(
-                          image: AssetImage('front/assets/images/google.png'),
+                          image: AssetImage('assets/images/google.png'),
                         ),
                       ),
                     ),

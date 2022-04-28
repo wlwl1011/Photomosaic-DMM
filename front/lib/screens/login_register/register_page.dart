@@ -20,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor_l,
       appBar: AppBar(
         backgroundColor: kBackgroundColor_l,
         elevation: 0,
@@ -30,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
           icon: Image(
             width: 24,
             color: Colors.white,
-            image: Svg('front/assets/images/back_arrow_l.svg'),
+            image: Svg('assets/images/back_arrow_l.svg'),
           ),
         ),
       ),
@@ -110,8 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               margin: const EdgeInsets.only(bottom: 20),
                               height: 50,
                               child: Image(
-                                image: AssetImage(
-                                    'front/assets/images/facebook.png'),
+                                image: AssetImage('assets/images/facebook.png'),
                               ),
                             ),
                           ),
@@ -120,8 +120,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               margin: const EdgeInsets.only(bottom: 20),
                               height: 50,
                               child: Image(
-                                image: AssetImage(
-                                    'front/assets/images/kakao-talk.png'),
+                                image:
+                                    AssetImage('assets/images/kakao-talk.png'),
                               ),
                             ),
                           ),
@@ -130,8 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               margin: const EdgeInsets.only(bottom: 20),
                               height: 50,
                               child: Image(
-                                image: AssetImage(
-                                    'front/assets/images/google.png'),
+                                image: AssetImage('assets/images/google.png'),
                               ),
                             ),
                           ),

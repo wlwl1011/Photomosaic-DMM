@@ -21,6 +21,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor_l,
       appBar: AppBar(
         backgroundColor: kBackgroundColor_l,
         elevation: 0,
@@ -31,7 +32,7 @@ class _SignInPageState extends State<SignInPage> {
           icon: Image(
             width: 24,
             color: Colors.white,
-            image: Svg('front/assets/images/back_arrow_l.svg'),
+            image: Svg('assets/images/back_arrow_l.svg'),
           ),
         ),
       ),
