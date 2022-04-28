@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/screens/history/activity/components/small_story.dart';
 
 import 'package:front/screens/history/otherHistory/components/avartar_widget.dart';
 import 'package:front/screens/history/otherHistory/components/post_widget.dart';
@@ -43,7 +44,7 @@ class ActivityScreen extends StatelessWidget {
                 ]),
           ),
         ),
-        AvartarWidget(
+        SmallStoryWidget(
           nickName: '',
           imagePath: "assets/images/image_1.png",
           size: const Size.fromWidth(40.0),
