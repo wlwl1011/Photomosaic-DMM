@@ -22,7 +22,6 @@ const kBottomIcon = Color.fromARGB(255, 231, 192, 207);
 const kBottomIcon2 = Color(0xFFCF5B87);
 //padding
 const double kDefaultPadding = 20.0;
-
 // TextStyles
 const kHeadline = TextStyle(
   color: Colors.white,
