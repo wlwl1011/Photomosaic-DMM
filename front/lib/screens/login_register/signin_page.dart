@@ -1,14 +1,15 @@
-
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front/screens/history/event/event_screen.dart';
+import 'package:front/screens/history/main/main_screen.dart';
+import 'package:get/get.dart';
 import '../../../constants/color_constant.dart';
 import './screen_login.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import './widgets/widget.dart';
 import '../../../constants/color_constant.dart';
-
 
 class SignInPage extends StatefulWidget {
   @override
@@ -120,7 +121,9 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     MyTextButton(
                       buttonName: 'Sign In',
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => mainScreen());
+                      },
                       bgColor: Colors.white,
                       textColor: Colors.black87,
                     ),
