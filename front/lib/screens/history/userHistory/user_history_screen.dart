@@ -1,5 +1,6 @@
 import 'package:front/screens/history/userHistory/components/my_info.dart';
 import 'package:flutter/material.dart';
+import 'package:front/screens/history/userHistory/components/my_info_edit.dart';
 import 'package:get/get.dart';
 
 final item = [
@@ -12,7 +13,49 @@ final item = [
   "assets/images/userImage_7.jpeg",
   "assets/images/userImage_8.jpeg",
   "assets/images/userImage_9.jpeg",
+  "assets/images/userImage_1.jpeg",
+  "assets/images/userImage_2.jpeg",
+  "assets/images/userImage_3.jpeg",
+  "assets/images/userImage_4.jpeg",
+  "assets/images/userImage_5.jpeg",
+  "assets/images/userImage_6.jpeg",
+  "assets/images/userImage_7.jpeg",
+  "assets/images/userImage_8.jpeg",
+  "assets/images/userImage_9.jpeg",
 ];
+
+Widget _menu() {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        Expanded(
+            child: GestureDetector(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3),
+                border: Border.all(
+                  color: const Color(0xffdedede),
+                )),
+            child: const Text(
+              'Edit profile',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          onTap: () {
+            Get.to(() => const MyInfoEdit());
+          },
+        ))
+      ],
+    ),
+  );
+}
 
 class UserHistoryPage extends StatelessWidget {
   @override
@@ -29,6 +72,7 @@ class UserHistoryPage extends StatelessWidget {
           SizedBox(
             height: Get.height * 0.04,
           ),
+          _menu(),
           SizedBox(
             height: Get.height * 0.04,
           ),

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:front/screens/history/otherHistory/components/avartar_widget.dart';
+import 'package:front/screens/history/otherHistory/components/comment.dart';
 import 'package:get/get.dart';
 
 class PostWidget extends StatelessWidget {
@@ -40,14 +41,22 @@ class PostWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                'assets/icons/like_off_icon.jpeg',
-                width: Get.width * 0.06,
+              GestureDetector(
+                child: Image.asset(
+                  'assets/icons/like_off_icon.jpeg',
+                  width: Get.width * 0.06,
+                ),
+                onTap: () {},
               ),
               SizedBox(width: Get.width * 0.02),
-              Image.asset(
-                'assets/icons/reply_icon.jpeg',
-                width: Get.width * 0.06,
+              GestureDetector(
+                child: Image.asset(
+                  'assets/icons/reply_icon.jpeg',
+                  width: Get.width * 0.06,
+                ),
+                onTap: () {
+                  Get.to(() => const CommentScreen());
+                },
               )
             ],
           )
