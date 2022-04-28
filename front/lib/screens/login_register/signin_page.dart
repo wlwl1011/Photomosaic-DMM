@@ -1,12 +1,18 @@
+<<<<<<< HEAD
 // ignore_for_file: prefer_const_constructors
 
+=======
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/color_constant.dart';
 import './screen_login.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import './widgets/widget.dart';
+<<<<<<< HEAD
 import '../../../constants/color_constant.dart';
+=======
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
 
 class SignInPage extends StatefulWidget {
   @override
@@ -28,7 +34,11 @@ class _SignInPageState extends State<SignInPage> {
           icon: Image(
             width: 24,
             color: Colors.white,
+<<<<<<< HEAD
             image: Svg('front/assets/images/back_arrow_l.svg'),
+=======
+            image: Svg('assets/images/back_arrow.svg'),
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
           ),
         ),
       ),
@@ -56,6 +66,7 @@ class _SignInPageState extends State<SignInPage> {
                           SizedBox(
                             height: 10,
                           ),
+<<<<<<< HEAD
                           Container(
                             width: MediaQuery.of(context).size.width,
                             child: Text(
@@ -65,6 +76,14 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           SizedBox(
                             height: 20,
+=======
+                          Text(
+                            "You've been missed!",
+                            style: kBodyText2,
+                          ),
+                          SizedBox(
+                            height: 60,
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
                           ),
                           MyTextField(
                             hintText: 'Phone, email or username',

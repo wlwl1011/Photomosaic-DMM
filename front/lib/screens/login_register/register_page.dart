@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import 'dart:html';
 // ignore_for_file: prefer_const_constructors
 
@@ -5,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+=======
+import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
 import './widgets/widget.dart';
 import '../../../constants/color_constant.dart';
 
@@ -28,7 +33,11 @@ class _RegisterPageState extends State<RegisterPage> {
           icon: Image(
             width: 24,
             color: Colors.white,
+<<<<<<< HEAD
             image: Svg('front/assets/images/back_arrow_l.svg'),
+=======
+            image: Svg('assets/images/back_arrow.svg'),
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
           ),
         ),
       ),
@@ -51,6 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             "Register",
                             style: kHeadline,
                           ),
+<<<<<<< HEAD
                           Container(
                             width: MediaQuery.of(context).size.width,
                             child: Text(
@@ -60,6 +70,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           SizedBox(
                             height: 20,
+=======
+                          Text(
+                            "Create new account to get started.",
+                            style: kBodyText2,
+                          ),
+                          SizedBox(
+                            height: 50,
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
                           ),
                           MyTextField(
                             hintText: 'Name',
@@ -84,6 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                     ),
+<<<<<<< HEAD
                     Container(
                       margin: const EdgeInsets.only(bottom: 30),
                       child: Text(
@@ -129,6 +148,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                     ),
+=======
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

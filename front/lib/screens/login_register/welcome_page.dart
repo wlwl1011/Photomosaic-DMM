@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 // ignore_for_file: prefer_const_constructors
 
+=======
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/color_constant.dart';
 import './screen_login.dart';
 import './widgets/widget.dart';
+<<<<<<< HEAD
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+=======
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -24,7 +30,11 @@ class WelcomePage extends StatelessWidget {
                         margin: const EdgeInsets.only(top: 50),
                         width: MediaQuery.of(context).size.width,
                         child: Image(
+<<<<<<< HEAD
                           image: AssetImage('front/assets/images/title1.png'),
+=======
+                          image: AssetImage('assets/images/title1.png'),
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
                         ),
                       ),
                     ),
@@ -46,11 +56,16 @@ class WelcomePage extends StatelessWidget {
                         style: kBodyText,
                         textAlign: TextAlign.center,
                       ),
+<<<<<<< HEAD
                     ),
+=======
+                    )
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
                   ],
                 ),
               ),
               Container(
+<<<<<<< HEAD
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: Row(
                   children: [
@@ -94,6 +109,8 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
               Container(
+=======
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
                 // margin: const EdgeInsets.only(bottom: 50),
                 height: 60,
                 decoration: BoxDecoration(

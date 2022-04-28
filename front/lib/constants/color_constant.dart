@@ -22,6 +22,10 @@ const kBottomIcon = Color.fromARGB(255, 231, 192, 207);
 const kBottomIcon2 = Color(0xFFCF5B87);
 //padding
 const double kDefaultPadding = 20.0;
+<<<<<<< HEAD
+=======
+// TextStyles
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
 const kHeadline = TextStyle(
   color: Colors.white,
   fontSize: 34,
@@ -41,8 +45,11 @@ const kButtonText = TextStyle(
 
 const kBodyText2 =
     TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: Colors.white);
+<<<<<<< HEAD
 
 const kBodyText3 = TextStyle(
   color: Colors.grey,
   fontSize: 20,
 );
+=======
+>>>>>>> ca0e1c46fa92eaab96b9aab33eae6ec5ed4d7a0b
