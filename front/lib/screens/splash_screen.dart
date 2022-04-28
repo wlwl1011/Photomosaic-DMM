@@ -1,5 +1,6 @@
 import 'package:front/constants/color_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:front/screens/login_register/welcome_page.dart';
 import 'package:get/get.dart';
 
 import 'history/main/main_screen.dart';
@@ -25,7 +26,7 @@ class _SplashState extends State<Splash> {
       });
     } else {
       Future.delayed(const Duration(milliseconds: 2000), () {
-        Get.offAll(mainScreen(), transition: null);
+        Get.offAll(WelcomePage(), transition: null);
       });
     }
 
@@ -53,13 +54,4 @@ class _SplashState extends State<Splash> {
       ),
     );
   }
-}
-
-Future initialize() async {
-  await Future.delayed(const Duration(seconds: 3));
-}
-
-class Init {
-  Init._();
-  static final instance = Init._();
 }
