@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/controller/select_theme_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
   var targetImage = Get.arguments;
   var photomosaicImage;
   String keyword = '';
+  //var themeColor = Color(0xFFFF3387);
   final TextEditingController _textdelete = TextEditingController();
 
   Widget _serverImageUploadBodyWidget() {
@@ -172,20 +174,56 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
       barrierColor: Color.fromARGB(120, 0, 0, 0),
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text('제목'),
+          backgroundColor: kBlackColor,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          title: Text(
+            'Select Theme',
+            style: TextStyle(
+              color: kWhiteColor,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
           content: SingleChildScrollView(
-            child: Column(),
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {},
+                  child: Column(
+                    children: [
+                      Image.asset('assets/flower_theme.png'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Flower',
+                        style: TextStyle(
+                          color: kWhiteColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                //포토모자이크 생성하는 함수
-                //생성한 포토모자이크 전달
-                photomosaicImage = targetImage;
-                Get.to(CreateNewProject(), arguments: photomosaicImage);
-              },
-              child: Text('확인'),
+            Center(
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    //포토모자이크 생성하는 함수
+                    //생성한 포토모자이크 전달
+                    photomosaicImage = targetImage;
+                    Get.to(CreateNewProject(), arguments: photomosaicImage);
+                  },
+                  child: Text('Create Photomosaic'),
+                  style: ElevatedButton.styleFrom(primary: kHotpink),
+                ),
+              ),
             ),
           ],
         );
