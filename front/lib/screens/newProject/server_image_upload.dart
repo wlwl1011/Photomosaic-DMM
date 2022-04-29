@@ -61,10 +61,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                 padding: EdgeInsets.only(left: 0),
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    //포토모자이크 생성하는 함수
-                    //생성한 포토모자이크 전달
-                    photomosaicImage = targetImage;
-                    Get.to(CreateNewProject(), arguments: photomosaicImage);
+                    showThemeDialogPop();
                   },
                   icon: Icon(
                     Icons.fact_check,
@@ -171,12 +168,26 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
   void showThemeDialogPop() {
     showDialog(
       context: context,
+      barrierDismissible: true,
+      barrierColor: Color.fromARGB(120, 0, 0, 0),
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           title: Text('제목'),
           content: SingleChildScrollView(
             child: Column(),
           ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                //포토모자이크 생성하는 함수
+                //생성한 포토모자이크 전달
+                photomosaicImage = targetImage;
+                Get.to(CreateNewProject(), arguments: photomosaicImage);
+              },
+              child: Text('확인'),
+            ),
+          ],
         );
       },
     );
