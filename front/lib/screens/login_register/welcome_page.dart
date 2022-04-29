@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/color_constant.dart';
 import './screen_login.dart';
 import './widgets/widget.dart';
+import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -106,10 +107,7 @@ class WelcomePage extends StatelessWidget {
                         bgColor: Colors.white,
                         buttonName: 'Register',
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => RegisterPage()));
+                          Get.to(() => RegisterPage());
                         },
                         textColor: Colors.black87,
                       ),
@@ -119,11 +117,7 @@ class WelcomePage extends StatelessWidget {
                         bgColor: Colors.transparent,
                         buttonName: 'Sign In',
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => SignInPage(),
-                              ));
+                          Get.to(() => SignInPage());
                         },
                         textColor: Colors.white,
                       ),
