@@ -69,9 +69,43 @@ Widget _tabView() {
         crossAxisSpacing: 1,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          color: Colors.grey,
-        );
+        return
+            //  GestureDetector(onTap: () {
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(builder: (context) {
+            //         return Scaffold(
+            //           appBar: AppBar(
+            //             backgroundColor: Colors.white,
+            //           ),
+            //           backgroundColor: Colors.white,
+            //         );
+            //       }),
+            //     );
+            //   })
+            GestureDetector(
+                child: Container(
+                  color: Colors.grey,
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          backgroundColor: Colors.white,
+                        ),
+                        backgroundColor: Colors.white,
+                        body: const Text(
+                          'Image',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    }),
+                  );
+                });
       });
 }
 
@@ -93,20 +127,6 @@ class UserHistoryPage extends StatelessWidget {
               height: Get.height * 0.1,
             ),
             _tabView(),
-            /*GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-              ),
-              //itemCount: item.length,
-              itemBuilder: (context, i) {
-                final urlImage = item[i];
-                return Container(
-                  child: Image.asset(urlImage),
-                );
-              },
-            ),*/
           ],
         ),
       ),
