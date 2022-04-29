@@ -33,18 +33,21 @@ class _PrologNewProjectState extends State<PrologNewProject> {
               textAlign: TextAlign.center,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 16),
-            child: Text(
-              "but you must need at least 1000 photos", //사진 개수는 차후 수정
-              style: TextStyle(
-                fontSize: 11,
-                color: kBottomIcon,
-                //color: Colors.white,
-                decoration: TextDecoration.underline,
-                decorationStyle: TextDecorationStyle.double,
-              ),
-            ),
+          // Padding(
+          //   padding: EdgeInsets.only(bottom: 16),
+          //   child: Text(
+          //     "but you must need at least 1000 photos", //사진 개수는 차후 수정
+          //     style: TextStyle(
+          //       fontSize: 11,
+          //       color: kBottomIcon,
+          //       //color: Colors.white,
+          //       decoration: TextDecoration.underline,
+          //       decorationStyle: TextDecorationStyle.double,
+          //     ),
+          //   ),
+          // ),
+          SizedBox(
+            height: 16,
           ),
           Container(
             constraints: BoxConstraints(maxHeight: 180, maxWidth: 180),
