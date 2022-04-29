@@ -30,9 +30,9 @@ class _MyInfoEditState extends State<MyInfoEdit> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: const Text('Edit profile',
+          title: const Text('EDIT PROFILE',
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
           actions: <Widget>[
             IconButton(
               icon: SvgPicture.asset(

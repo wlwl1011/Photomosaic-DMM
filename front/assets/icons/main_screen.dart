@@ -170,8 +170,8 @@ class mainScreen extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      title: const Text('Photomosaic',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
+      title: const Text('PHOTOMOSAIC',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
       centerTitle: true,
       elevation: 0,
       actions: <Widget>[
