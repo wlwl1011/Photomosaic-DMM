@@ -89,7 +89,7 @@ class _UserImageUploadState extends State<UserImageUpload> {
       appBar: AppBar(
         elevation: 0,
         title: const Text('Create Photomosaic',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
         centerTitle: true,
         actions: [
           IconButton(

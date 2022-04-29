@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/history/otherHistory/components/post_widget.dart';
 import 'package:front/screens/history/userHistory/components/radial_progress.dart';
 import 'package:front/screens/history/userHistory/components/rounded_image.dart';
+import 'package:front/screens/login_register/widgets/my_text_field.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -29,9 +30,9 @@ class _MyInfoEditState extends State<MyInfoEdit> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: const Text('Edit profile',
+          title: const Text('EDIT PROFILE',
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
           actions: <Widget>[
             IconButton(
               icon: SvgPicture.asset(
@@ -50,7 +51,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: Get.height * 0.1,
+              height: Get.height * 0.15,
             ),
             const RoundedImage(
               imagePath: "assets/images/profile.jpeg",
@@ -73,6 +74,30 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                   },
                 ),
               ],
+            ),
+            SizedBox(
+              height: Get.height * 0.1,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: MyTextField(
+                hintText: 'Name',
+                inputType: TextInputType.name,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: MyTextField(
+                hintText: 'Email',
+                inputType: TextInputType.emailAddress,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: MyTextField(
+                hintText: 'Phone',
+                inputType: TextInputType.phone,
+              ),
             ),
           ],
         ));

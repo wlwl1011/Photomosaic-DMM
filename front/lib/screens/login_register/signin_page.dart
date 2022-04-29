@@ -70,10 +70,6 @@ class _SignInPageState extends State<SignInPage> {
                           SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            "You've been missed!",
-                            style: kBodyText2,
-                          ),
                           SizedBox(
                             height: 60,
                           ),
@@ -99,22 +95,18 @@ class _SignInPageState extends State<SignInPage> {
                           "Dont't have an account? ",
                           style: kBodyText,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => RegisterPage(),
-                              ),
-                            );
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              textStyle:
+                                  TextStyle(fontSize: 15, color: Colors.white)),
+                          onPressed: () {
+                            Get.to(() => RegisterPage());
                           },
                           child: Text(
                             'Register',
-                            style: kBodyText.copyWith(
-                              color: Colors.white,
-                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(

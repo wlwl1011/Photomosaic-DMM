@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:front/screens/login_register/screen_login.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:flutter/material.dart';
@@ -63,10 +64,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           SizedBox(
                             height: 20,
-                          ),
-                          Text(
-                            "Create new account to get started.",
-                            style: kBodyText2,
                           ),
                           SizedBox(
                             height: 50,
@@ -144,10 +141,16 @@ class _RegisterPageState extends State<RegisterPage> {
                           "Already have an account? ",
                           style: kBodyText,
                         ),
-                        Text(
-                          "Sign In",
-                          style: kBodyText.copyWith(
-                            color: Colors.white,
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              textStyle:
+                                  TextStyle(fontSize: 15, color: Colors.white)),
+                          onPressed: () {
+                            Get.to(() => SignInPage());
+                          },
+                          child: Text(
+                            'Sign In',
                           ),
                         ),
                       ],

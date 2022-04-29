@@ -16,9 +16,9 @@ class otherHistoryScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: const Text('Hot Posts',
+          title: const Text('HOT POSTS',
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
           centerTitle: true,
         ),
         body: ListView(

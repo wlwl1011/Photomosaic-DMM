@@ -24,9 +24,9 @@ final item = [
   "assets/images/userImage_9.jpeg",
 ];
 
-Widget _menu() {
+Widget _editButton() {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.symmetric(horizontal: 30.0),
     child: Row(
       children: [
         Expanded(
@@ -57,121 +57,78 @@ Widget _menu() {
   );
 }
 
+Widget _tabView() {
+  return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: 100,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 1,
+        mainAxisSpacing: 1,
+        crossAxisSpacing: 1,
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        return
+            //  GestureDetector(onTap: () {
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(builder: (context) {
+            //         return Scaffold(
+            //           appBar: AppBar(
+            //             backgroundColor: Colors.white,
+            //           ),
+            //           backgroundColor: Colors.white,
+            //         );
+            //       }),
+            //     );
+            //   })
+            GestureDetector(
+                child: Container(
+                  color: Colors.grey,
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          backgroundColor: Colors.white,
+                        ),
+                        backgroundColor: Colors.white,
+                        body: const Text(
+                          'Image',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    }),
+                  );
+                });
+      });
+}
+
 class UserHistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: Get.height * 0.03,
-          ),
-          const MyInfo(),
-          SizedBox(
-            height: Get.height * 0.04,
-          ),
-          _menu(),
-          SizedBox(
-            height: Get.height * 0.04,
-          ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 30,
-              ),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(),
-              ),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                ),
-                //itemCount: item.length,
-                itemBuilder: (context, i) {
-                  final urlImage = item[i];
-                  return Container(
-                    child: Image.asset(urlImage),
-                  );
-                },
-              ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const MyInfo(),
+            SizedBox(
+              height: Get.height * 0.04,
             ),
-          )
-          /*Row(
-            children: [
-              SizedBox(width: Get.width * 0.02),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_1.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.03),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_2.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.03),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_3.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.02),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: Get.width * 0.02),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_4.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.03),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_5.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.03),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_6.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.02),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: Get.width * 0.02),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_7.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.03),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_8.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.03),
-              SizedBox(
-                width: Get.width * 0.3,
-                height: Get.height * 0.3,
-                child: Image.asset("assets/images/userImage_9.jpeg"),
-              ),
-              SizedBox(width: Get.width * 0.02),
-            ],
-          ),*/
-        ],
+            _editButton(),
+            SizedBox(
+              height: Get.height * 0.1,
+            ),
+            _tabView(),
+          ],
+        ),
       ),
     );
   }

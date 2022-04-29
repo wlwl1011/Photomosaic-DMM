@@ -176,9 +176,9 @@ class ActivityScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: const Text('Activity',
+          title: const Text('ACTIVITY',
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
           centerTitle: true,
         ),
         body: SingleChildScrollView(

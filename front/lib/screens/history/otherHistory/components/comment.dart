@@ -98,8 +98,8 @@ class _CommentScreenState extends State<CommentScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Comments',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
+        title: const Text('COMMENTS',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
         centerTitle: true,
       ),
       body: Container(
