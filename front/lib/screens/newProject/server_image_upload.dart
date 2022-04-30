@@ -16,7 +16,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
   var targetImage = Get.arguments;
   var photomosaicImage;
   String keyword = '';
-  //var themeColor = Color(0xFFFF3387);
+  final color_controller = Get.put(SelectThemeController());
   final TextEditingController _textdelete = TextEditingController();
 
   Widget _serverImageUploadBodyWidget() {
@@ -72,96 +72,6 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                   label: Text("Select Theme"),
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.fromLTRB(50, 0, 50, 20),
-              //   child: Text(
-              //     "If you want random image,\n don't type and press the button",
-              //     style: TextStyle(color: Colors.white),
-              //     textAlign: TextAlign.center,
-              //   ),
-              // ),
-              // Container(
-              //   width: MediaQuery.of(context).size.width - 100,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     crossAxisAlignment: CrossAxisAlignment.center,
-              //     children: <Widget>[
-              //       Flexible(
-              //         child: TextField(
-              //           style: TextStyle(color: Colors.white),
-              //           controller: _textdelete,
-              //           decoration: InputDecoration(
-              //             labelText: 'Keyword',
-              //             hintText: 'Enter a Keyword',
-              //             labelStyle: TextStyle(color: Colors.white),
-              //             hintStyle: TextStyle(
-              //               color: Colors.white.withOpacity(0.5),
-              //             ),
-              //             focusedBorder: OutlineInputBorder(
-              //               borderRadius: BorderRadius.all(Radius.circular(10)),
-              //               borderSide:
-              //                   BorderSide(width: 1, color: Colors.white),
-              //             ),
-              //             enabledBorder: OutlineInputBorder(
-              //               borderRadius: BorderRadius.all(Radius.circular(10)),
-              //               borderSide:
-              //                   BorderSide(width: 1, color: Colors.white),
-              //             ),
-              //             border: OutlineInputBorder(
-              //               borderRadius: BorderRadius.all(Radius.circular(10)),
-              //             ),
-              //             suffixIcon: GestureDetector(
-              //               child: const Icon(
-              //                 Icons.cancel,
-              //                 color: Colors.white,
-              //                 size: 20,
-              //               ),
-              //               onTap: () {
-              //                 _textdelete.clear();
-              //               },
-              //             ),
-              //           ),
-              //           keyboardType: TextInputType.emailAddress,
-              //           onChanged: (text) {
-              //             setState(() {
-              //               keyword = text;
-              //             });
-              //           },
-              //         ),
-              //       ),
-              //       // SizedBox(
-              //       //   width: 15,
-              //       // ),
-              //       Padding(
-              //         padding: EdgeInsets.only(left: 10),
-              //         child: ElevatedButton.icon(
-              //           onPressed: () {
-              //             //포토모자이크 생성하는 함수
-              //             //생성한 포토모자이크 전달
-              //             photomosaicImage = targetImage;
-              //             Get.to(CreateNewProject(),
-              //                 arguments: photomosaicImage);
-              //           },
-              //           icon: Icon(
-              //             Icons.edit,
-              //           ),
-              //           style: ElevatedButton.styleFrom(primary: kHotpink),
-              //           label: Text("Create"),
-              //         ),
-              //       ),
-              //       // IconButton(
-              //       //   icon: Icon(Icons.arrow_circle_right),
-              //       //   onPressed: () {
-              //       //     //포토모자이크 생성하는 함수
-              //       //     //생성한 포토모자이크 전달
-              //       //     Get.to(CreateNewProject(), arguments: targetImage);
-              //       //   },
-              //       //   color: kHotpink,
-              //       //   iconSize: 35,
-              //       // ),
-              //     ],
-              //   ),
-              // ),
             ]),
       ),
     );
@@ -173,62 +83,145 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
       barrierDismissible: true,
       barrierColor: Color.fromARGB(120, 0, 0, 0),
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: kBlackColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          title: Text(
-            'Select Theme',
-            style: TextStyle(
-              color: kWhiteColor,
-              fontWeight: FontWeight.bold,
+        return StatefulBuilder(builder: ((context, setState) {
+          return AlertDialog(
+            backgroundColor: kBlackColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: Text(
+              'Select Theme',
+              style: TextStyle(
+                color: kWhiteColor,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          content: SingleChildScrollView(
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Column(
-                    children: [
-                      Image.asset('assets/flower_theme.png'),
-                      SizedBox(
-                        height: 5,
+            content: SingleChildScrollView(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          print('flower click');
+                          color_controller.ChangeButtonColor(2);
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            constraints:
+                                BoxConstraints(maxHeight: 80, maxWidth: 80),
+                            child: Image.asset(
+                              'assets/images/flower_theme.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Text(
+                            'Flower',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: kWhiteColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Flower',
-                        style: TextStyle(
-                          color: kWhiteColor,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            Center(
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    //포토모자이크 생성하는 함수
-                    //생성한 포토모자이크 전달
-                    photomosaicImage = targetImage;
-                    Get.to(CreateNewProject(), arguments: photomosaicImage);
-                  },
-                  child: Text('Create Photomosaic'),
-                  style: ElevatedButton.styleFrom(primary: kHotpink),
-                ),
+                  Flexible(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          print('tree click');
+                          color_controller.ChangeButtonColor(3);
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            constraints:
+                                BoxConstraints(maxHeight: 80, maxWidth: 80),
+                            child: Image.asset(
+                              'assets/images/tree_theme.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Text(
+                            'Tree',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: kWhiteColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          print('ocean click');
+                          color_controller.ChangeButtonColor(4);
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            constraints:
+                                BoxConstraints(maxHeight: 80, maxWidth: 80),
+                            child: Image.asset(
+                              'assets/images/ocean_theme.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Text(
+                            'Ocean',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: kWhiteColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        );
+            actions: [
+              Center(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      //포토모자이크 생성하는 함수
+                      //생성한 포토모자이크 전달
+                      photomosaicImage = targetImage;
+                      Get.to(CreateNewProject(), arguments: photomosaicImage);
+                    },
+                    child: Text('Create Photomosaic'),
+                    style: ElevatedButton.styleFrom(
+                        primary: color_controller.themecolor),
+                  ),
+                ),
+              ),
+            ],
+          );
+        }));
       },
-    );
+    ).then((value) {
+      setState(() {
+        color_controller.ChangeButtonColor(1);
+      });
+    });
   }
 
   @override
