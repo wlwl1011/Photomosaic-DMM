@@ -115,63 +115,6 @@ class _CreateNewProjectState extends State<CreateNewProject> {
     );
   }
 
-  void showAdDialogPop() {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      barrierColor: Color.fromARGB(120, 0, 0, 0),
-      builder: (BuildContext context) {
-        return StatefulBuilder(builder: ((context, setState) {
-          return AlertDialog(
-            backgroundColor: kBlackColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(Icons.clear),
-                      color: kWhiteColor,
-                    ),
-                  ]),
-                  Text(
-                    'Too Cool For School',
-                    style: TextStyle(
-                      color: kWhiteColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    constraints: BoxConstraints(maxHeight: 200, maxWidth: 200),
-                    child: Image.asset(
-                      'assets/images/too_cool.jpeg',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              ),
-            ),
-          );
-        }));
-      },
-    ).then((value) {
-      setState(() {});
-    });
-  }
-
   void showShareDialogPop() {
     showDialog(
       context: context,
@@ -200,10 +143,13 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                     child: Container(
                       width: double.infinity,
                       color: kTextColor,
-                      child: Text(
-                        'URL',
-                        style: TextStyle(
-                          color: kWhiteColor,
+                      child: Padding(
+                        padding: const EdgeInsets.all(7.0),
+                        child: Text(
+                          'URL',
+                          style: TextStyle(
+                            color: kWhiteColor,
+                          ),
                         ),
                       ),
                     ),
