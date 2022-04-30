@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/screens/history/main/main_screen.dart';
+import 'package:front/screens/newProject/Ad_screen.dart';
 import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -70,7 +71,7 @@ class _UserImageUploadState extends State<UserImageUpload> {
                   //포토모자이크 생성
                   //생성한 포토모자이크 전달
                   photomosaicImage = targetImage;
-                  Get.to(CreateNewProject(), arguments: photomosaicImage);
+                  Get.to(AdScreen(), arguments: photomosaicImage);
                 }
               },
               icon: Icon(
@@ -88,7 +89,7 @@ class _UserImageUploadState extends State<UserImageUpload> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Create Photomosaic',
+        title: const Text('MAKING',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
         centerTitle: true,
         actions: [

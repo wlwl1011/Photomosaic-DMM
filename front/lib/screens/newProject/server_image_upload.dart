@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/controller/select_theme_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
+import 'package:front/screens/newProject/Ad_screen.dart';
 import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
 import 'package:front/constants/color_constant.dart';
@@ -205,7 +206,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                       //포토모자이크 생성하는 함수
                       //생성한 포토모자이크 전달
                       photomosaicImage = targetImage;
-                      Get.to(CreateNewProject(), arguments: photomosaicImage);
+                      Get.to(AdScreen(), arguments: photomosaicImage);
                     },
                     child: Text('Create Photomosaic'),
                     style: ElevatedButton.styleFrom(
@@ -229,7 +230,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('MAKER',
+        title: const Text('MAKING',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
         centerTitle: true,
         actions: [

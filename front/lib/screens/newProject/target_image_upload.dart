@@ -108,7 +108,7 @@ class _TargetImageUploadState extends State<TargetImageUpload> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('MAKER',
+        title: const Text('MAKING',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
         centerTitle: true,
         actions: [
