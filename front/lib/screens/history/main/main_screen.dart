@@ -77,31 +77,13 @@ class mainScreen extends StatelessWidget {
                 TitleWithMoreBtn(
                     title: "Trending",
                     press: () {
-                      Get.to(() => const otherHistoryScreen());
+                      Get.to(() => otherHistoryScreen());
                     }),
                 SizedBox(height: Get.height * 0.01),
                 const Trending(),
               ],
             ),
           );
-
-        /*SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const HeaderWithSearchBox(),
-                TitleWithMoreBtn(title: "Trending", press: () {}),
-                const Trending(),
-                TitleWithMoreBtn(
-                    title: "Your Photos",
-                    press: () {
-                      Get.to(() => const UserPhotosMore());
-                    }),
-                const UserPhotos(),
-                const SizedBox(height: kDefaultPadding),
-              ],
-            ),
-          );*/
 
         case 1:
           //Get.to(PrologNewProject());

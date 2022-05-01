@@ -77,7 +77,7 @@ class mainScreen extends StatelessWidget {
                 TitleWithMoreBtn(
                     title: "Trending",
                     press: () {
-                      Get.to(() => const otherHistoryScreen());
+                      Get.to(() => otherHistoryScreen());
                     }),
                 SizedBox(height: Get.height * 0.01),
                 const Trending(),

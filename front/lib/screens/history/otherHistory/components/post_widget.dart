@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:front/constants/color_constant.dart';
+import 'package:front/controller/heart_controller.dart';
 import 'package:front/screens/history/otherHistory/components/avartar_widget.dart';
 import 'package:front/screens/history/otherHistory/components/comment.dart';
 import 'package:get/get.dart';
@@ -36,19 +39,24 @@ class PostWidget extends StatelessWidget {
 
   Widget _infoCount() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: Row(
         children: [
           Row(
             children: [
-              GestureDetector(
-                child: Image.asset(
-                  'assets/icons/like_off_icon.jpeg',
-                  width: Get.width * 0.06,
-                ),
-                onTap: () {},
-              ),
-              SizedBox(width: Get.width * 0.02),
+              GetBuilder<HeartController>(builder: (controller) {
+                return IconButton(
+                  icon: SvgPicture.asset('assets/icons/heart_on.svg',
+                      width: Get.width * 0.06,
+                      color: controller.pageIdx.value == 1
+                          ? Colors.red
+                          : Colors.black),
+                  onPressed: () {
+                    controller.changeColor(1);
+                  },
+                );
+              }),
+              //SizedBox(width: Get.width * 0.01),
               GestureDetector(
                 child: Image.asset(
                   'assets/icons/reply_icon.jpeg',

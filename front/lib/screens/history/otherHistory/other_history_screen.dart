@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:front/controller/heart_controller.dart';
 import 'package:front/screens/history/otherHistory/components/post_widget.dart';
+import 'package:get/get.dart';
 
 class otherHistoryScreen extends StatelessWidget {
-  const otherHistoryScreen({Key? key}) : super(key: key);
+  otherHistoryScreen({Key? key}) : super(key: key) {
+    Get.put(HeartController());
+  }
 
   Widget _postList() {
     return Column(
