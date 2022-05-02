@@ -24,7 +24,11 @@ class PostWidget extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {},
-            child: Image.asset("assets/icons/more_icon.jpeg", width: 20),
+            child: SvgPicture.asset(
+              "assets/icons/more.svg",
+              width: Get.width * 0.05,
+              color: Colors.black,
+            ),
           )
         ],
       ),
@@ -45,22 +49,30 @@ class PostWidget extends StatelessWidget {
           Row(
             children: [
               GetBuilder<HeartController>(builder: (controller) {
-                return IconButton(
-                  icon: SvgPicture.asset('assets/icons/heart_on.svg',
-                      width: Get.width * 0.06,
-                      color: controller.pageIdx.value == 1
-                          ? Colors.red
-                          : Colors.black),
-                  onPressed: () {
-                    controller.changeColor(1);
-                  },
-                );
+                if (controller.pageIdx.value == 1) {
+                  return IconButton(
+                    icon: SvgPicture.asset('assets/icons/heart_on.svg',
+                        width: Get.width * 0.06, color: Colors.red),
+                    onPressed: () {
+                      controller.changeColor(1);
+                    },
+                  );
+                } else {
+                  return IconButton(
+                    icon: SvgPicture.asset('assets/icons/heart_off.svg',
+                        width: Get.width * 0.06, color: Colors.black),
+                    onPressed: () {
+                      controller.changeColor(1);
+                    },
+                  );
+                }
               }),
               //SizedBox(width: Get.width * 0.01),
               GestureDetector(
-                child: Image.asset(
-                  'assets/icons/reply_icon.jpeg',
+                child: SvgPicture.asset(
+                  'assets/icons/reply_icon.svg',
                   width: Get.width * 0.06,
+                  color: Colors.black,
                 ),
                 onTap: () {
                   Get.to(() => const CommentScreen());
@@ -108,7 +120,7 @@ class PostWidget extends StatelessWidget {
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.0),
         child: Text(
-          'vieew all 287 comments',
+          'view all 287 comments',
           style: TextStyle(color: Colors.grey, fontSize: 13),
         ),
       ),
@@ -136,12 +148,12 @@ class PostWidget extends StatelessWidget {
             ),
             _image(),
             SizedBox(
-              height: Get.height * 0.02,
+              height: Get.height * 0.005,
             ),
             _infoCount(),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
+            // SizedBox(
+            //   height: Get.height * 0.005,
+            // ),
             _infoDiscription(),
             SizedBox(
               height: Get.height * 0.01,

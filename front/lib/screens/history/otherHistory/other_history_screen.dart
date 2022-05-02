@@ -18,17 +18,18 @@ class otherHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: const Text('HOT POSTS',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
-          centerTitle: true,
-        ),
-        body: ListView(
-          children: [
-            _postList(),
-          ],
-        ));
+      appBar: AppBar(
+        elevation: 0,
+        title: const Text('HOT POSTS',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
+        centerTitle: true,
+      ),
+      body: ListView(
+        children: [
+          _postList(),
+        ],
+      ),
+      backgroundColor: Colors.white,
+    );
   }
 }
