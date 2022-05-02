@@ -6,6 +6,7 @@ import './screen_login.dart';
 import './widgets/widget.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -17,7 +18,7 @@ class WelcomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              Flexible(
+              Container(
                 child: Column(
                   children: [
                     Center(
@@ -35,74 +36,63 @@ class WelcomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SignInButton(
+                        Buttons.Facebook,
+                        text: "Login with Facebook",
+                        onPressed: () {},
+                      ),
+                      Divider(),
+                      SignInButton(
+                        Buttons.Google,
+                        text: "Login with Google",
+                        onPressed: () {},
+                      ),
+                      Divider(),
+                      SignInButton(
+                        Buttons.Twitter,
+                        text: "Login with Twitter",
+                        onPressed: () {},
+                      ),
+                      Divider(),
+                    ]),
+              ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.6,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        height: 50,
-                        child: Image(
-                          image: AssetImage('assets/images/facebook.png'),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: Colors.grey[850],
+                            textStyle:
+                                TextStyle(fontSize: 12, color: Colors.white)),
+                        onPressed: () {
+                          Get.to(() => RegisterPage());
+                        },
+                        child: Text(
+                          'Register',
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        height: 50,
-                        child: Image(
-                          image: AssetImage('assets/images/kakao-talk.png'),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: Colors.grey[850],
+                            textStyle:
+                                TextStyle(fontSize: 12, color: Colors.white)),
+                        onPressed: () {
+                          Get.to(() => SignInPage());
+                        },
+                        child: Text(
+                          'Sign In',
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        height: 50,
-                        child: Image(
-                          image: AssetImage('assets/images/google.png'),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: Text(
-                  "Or",
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: MyTextButton(
-                      bgColor: kHotpink,
-                      buttonName: 'Register',
-                      onTap: () {
-                        Get.to(() => RegisterPage());
-                      },
-                      textColor: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: MyTextButton(
-                      bgColor: Colors.black,
-                      buttonName: 'Sign In',
-                      onTap: () {
-                        Get.to(() => SignInPage());
-                      },
-                      textColor: Colors.white,
-                    ),
-                  ),
-                ],
               ),
             ],
           ),

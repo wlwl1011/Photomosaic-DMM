@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg_provider: ^1.0.3 # to use svg images
+  flutter_signin_button: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -42,7 +43,7 @@ dependencies:
   http: ^0.13.4
   google_fonts: ^2.3.1
   flutter_svg: ^1.0.3
-  font_awesome_flutter: ^10.0.0
+  font_awesome_flutter: ^9.0.0
   carousel_slider: ^4.0.0
 
   flutter_rating_bar: ^4.0.0
