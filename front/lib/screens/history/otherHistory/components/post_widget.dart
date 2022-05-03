@@ -67,7 +67,6 @@ class PostWidget extends StatelessWidget {
                   );
                 }
               }),
-              //SizedBox(width: Get.width * 0.01),
               GestureDetector(
                 child: SvgPicture.asset(
                   'assets/icons/reply_icon.svg',

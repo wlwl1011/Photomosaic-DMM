@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/controller/heart_controller.dart';
 import 'package:front/controller/main_controller.dart';
 import 'package:front/controller/shake_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
@@ -104,19 +106,19 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             const SizedBox(
               height: 3,
             ),
-            GetBuilder<MainController>(builder: (controller) {
-              return ElevatedButton.icon(
-                onPressed: () => {getImageFromGallery(controller)},
-                icon: const Icon(
-                  Icons.save_alt,
-                ),
-                style: ElevatedButton.styleFrom(
-                    primary: kHotpink,
-                    fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
-                        MediaQuery.of(context).size.height * 0.01)),
-                label: const Text("Save Image in history"),
-              );
-            }),
+            ElevatedButton.icon(
+              onPressed: () => {
+                //getImageFromGallery(controller)
+              },
+              icon: const Icon(
+                Icons.save_alt,
+              ),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
+                      MediaQuery.of(context).size.height * 0.01)),
+              label: const Text("Save Image in history"),
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -149,14 +151,14 @@ class _CreateNewProjectState extends State<CreateNewProject> {
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Color.fromARGB(120, 0, 0, 0),
+      barrierColor: const Color.fromARGB(120, 0, 0, 0),
       builder: (BuildContext context) {
         return StatefulBuilder(builder: ((context, setState) {
           return AlertDialog(
             backgroundColor: kBlackColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            title: Text(
+            title: const Text(
               'Share your Photomosaic',
               style: TextStyle(
                 color: kWhiteColor,
@@ -173,8 +175,8 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                     child: Container(
                       width: double.infinity,
                       color: kTextColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(7.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(7.0),
                         child: Text(
                           'URL',
                           style: TextStyle(
@@ -184,7 +186,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Flexible(
@@ -221,7 +223,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               Icons.home,
               color: Colors.white,
             ),
-            padding: EdgeInsets.all(16.5),
+            padding: const EdgeInsets.all(16.5),
             onPressed: () {
               Get.to(mainScreen());
             },
