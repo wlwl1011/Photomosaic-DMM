@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/controller/main_controller.dart';
 import 'package:front/controller/shake_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:get/get.dart';
 import 'package:shake/shake.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateNewProject extends StatefulWidget {
   CreateNewProject({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
   late ShakeDetector shakeaction;
   var blank = Image.asset('assets/images/empty_image.png');
   bool _isVisible = false;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -32,6 +35,13 @@ class _CreateNewProjectState extends State<CreateNewProject> {
       // });
     });
     super.initState();
+  }
+
+  Future getImageFromGallery(MainController controller) async {
+    var image =
+        await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+    if (image == null || image.path == null) return null;
+    controller.Upload(image);
   }
 
   Widget _createNewProjectBodyWidget() {
