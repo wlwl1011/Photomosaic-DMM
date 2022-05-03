@@ -37,7 +37,8 @@ class _CreateNewProjectState extends State<CreateNewProject> {
   Widget _createNewProjectBodyWidget() {
     return Container(
       //height: MediaQuery.of(context).size.height - 50,
-      decoration: BoxDecoration(
+
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
               'assets/images/prolog_new_project_background_image.jpg'),
@@ -49,10 +50,10 @@ class _CreateNewProjectState extends State<CreateNewProject> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 65,
+              height: MediaQuery.of(context).size.height * 0.12,
               width: MediaQuery.of(context).size.width,
             ),
-            Text(
+            const Text(
               "Shake to Watch \nNew Photomasaic!",
               style: TextStyle(
                   fontSize: 26,
@@ -60,7 +61,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                   color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Visibility(
@@ -74,26 +75,45 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                         fit: BoxFit.contain)),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             ElevatedButton.icon(
               onPressed: () {
                 Get.to(mainScreen());
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add_circle,
               ),
-              style: ElevatedButton.styleFrom(primary: kHotpink),
-              label: Text("Create New Project"),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
+                      MediaQuery.of(context).size.height * 0.01)),
+              label: const Text("Create New Project"),
             ),
-            SizedBox(
+            const SizedBox(
+              height: 3,
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                //
+              },
+              icon: const Icon(
+                Icons.save_alt,
+              ),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
+                      MediaQuery.of(context).size.height * 0.01)),
+              label: const Text("Save Image in history"),
+            ),
+            const SizedBox(
               height: 5,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Do you want to Share?',
                   style: TextStyle(
                     color: kWhiteColor,

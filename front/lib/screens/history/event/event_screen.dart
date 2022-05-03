@@ -68,6 +68,10 @@ class eventScreen extends StatelessWidget {
               'assets/images/too_cool.jpeg',
               fit: BoxFit.contain,
             ),
+            Image.asset(
+              'assets/images/too_cool_logo.jpg',
+              fit: BoxFit.contain,
+            ),
             SizedBox(
               height: Get.height * 0.05,
             ),
@@ -186,7 +190,7 @@ class eventScreen extends StatelessWidget {
               height: Get.height * 0.05,
             ),
             Image.asset(
-              'assets/images/too_cool_logo.png',
+              'assets/images/too_cool_.jpg',
               fit: BoxFit.contain,
             ),
             SizedBox(
