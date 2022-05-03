@@ -20,10 +20,12 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
         elevation: 0,
+        title: Text('Register'),
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -46,27 +48,26 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 child: Column(
                   children: [
-                    Flexible(
+                    Container(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            "Register",
-                            style: kHeadline,
-                          ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Text(
-                              "Please sign in to continue",
-                              style: kBodyText3,
-                            ),
+                            height: 50,
                           ),
-                          SizedBox(
-                            height: 20,
+                          Image(
+                            image: AssetImage('assets/images/register.png'),
+                            width: MediaQuery.of(context).size.width * 0.3,
                           ),
                           SizedBox(
                             height: 50,
                           ),
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
+                          // SizedBox(
+                          //   height: 50,
+                          // ),
                           MyTextField(
                             hintText: 'Name',
                             inputType: TextInputType.name,
@@ -90,49 +91,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 30),
-                      child: Text(
-                        "Or",
-                        style: TextStyle(fontSize: 15, color: Colors.white60),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              height: 50,
-                              child: Image(
-                                image: AssetImage('assets/images/facebook.png'),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              height: 50,
-                              child: Image(
-                                image:
-                                    AssetImage('assets/images/kakao-talk.png'),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              height: 50,
-                              child: Image(
-                                image: AssetImage('assets/images/google.png'),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -142,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         TextButton(
                           style: TextButton.styleFrom(
-                              primary: Colors.white,
+                              primary: Colors.black87,
                               textStyle:
                                   TextStyle(fontSize: 15, color: Colors.white)),
                           onPressed: () {
@@ -160,9 +118,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     MyTextButton(
                       buttonName: 'Register',
                       onTap: () {},
-                      bgColor: Colors.white,
-                      textColor: Colors.black87,
-                    )
+                      bgColor: Colors.black87,
+                      textColor: Colors.white,
+                    ),
                   ],
                 ),
               ),

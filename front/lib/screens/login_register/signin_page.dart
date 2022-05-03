@@ -21,10 +21,12 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
         elevation: 0,
+        title: Text('Sign In'),
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -39,39 +41,26 @@ class _SignInPageState extends State<SignInPage> {
       body: SafeArea(
         //to make page scrollable
         child: CustomScrollView(
-          reverse: true,
           slivers: [
             SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      fit: FlexFit.loose,
+                    Container(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            "Welcome back.",
-                            style: kHeadline,
+                          Image(
+                            image: AssetImage('assets/images/login.png'),
+                            width: MediaQuery.of(context).size.width * 0.3,
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Text(
-                              "Please login to continue",
-                              style: kBodyText3,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                            height: 60,
+                            height: 50,
                           ),
                           MyTextField(
                             hintText: 'Phone, email or username',
@@ -97,7 +86,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         TextButton(
                           style: TextButton.styleFrom(
-                              primary: Colors.white,
+                              primary: Colors.black87,
                               textStyle:
                                   TextStyle(fontSize: 15, color: Colors.white)),
                           onPressed: () {
@@ -110,15 +99,15 @@ class _SignInPageState extends State<SignInPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                     MyTextButton(
                       buttonName: 'Sign In',
                       onTap: () {
                         Get.to(() => mainScreen());
                       },
-                      bgColor: Colors.white,
-                      textColor: Colors.black87,
+                      bgColor: Colors.black87,
+                      textColor: Colors.white,
                     ),
                   ],
                 ),

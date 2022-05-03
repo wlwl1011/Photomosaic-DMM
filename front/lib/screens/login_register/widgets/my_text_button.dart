@@ -17,8 +17,8 @@ class MyTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      width: double.infinity,
+      height: 50,
+      width: MediaQuery.of(context).size.width * 0.5,
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(18),

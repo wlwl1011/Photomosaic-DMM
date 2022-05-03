@@ -36,7 +36,7 @@ const kHeadline = TextStyle(
 );
 
 const kBodyText = TextStyle(
-  color: Colors.grey,
+  color: Colors.black54,
   fontSize: 15,
 );
 
