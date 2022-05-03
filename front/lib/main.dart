@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/controller/main_controller.dart';
 // import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/splash_screen.dart';
 import 'package:get/get.dart';

@@ -69,43 +69,30 @@ Widget _tabView() {
         crossAxisSpacing: 1,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return
-            //  GestureDetector(onTap: () {
-            //     Navigator.of(context).push(
-            //       MaterialPageRoute(builder: (context) {
-            //         return Scaffold(
-            //           appBar: AppBar(
-            //             backgroundColor: Colors.white,
-            //           ),
-            //           backgroundColor: Colors.white,
-            //         );
-            //       }),
-            //     );
-            //   })
-            GestureDetector(
-                child: Container(
-                  color: Colors.grey,
-                ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          backgroundColor: Colors.white,
-                        ),
-                        backgroundColor: Colors.white,
-                        body: const Text(
-                          'Image',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      );
-                    }),
+        return GestureDetector(
+            child: Container(
+              color: Colors.grey,
+            ),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      backgroundColor: Colors.white,
+                    ),
+                    backgroundColor: Colors.white,
+                    body: const Text(
+                      'Image',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   );
-                });
+                }),
+              );
+            });
       });
 }
 
