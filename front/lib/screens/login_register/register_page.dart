@@ -60,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             width: MediaQuery.of(context).size.width * 0.3,
                           ),
                           SizedBox(
-                            height: 50,
+                            height: 30,
                           ),
                           // SizedBox(
                           //   height: 20,
@@ -113,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     MyTextButton(
                       buttonName: 'Register',
