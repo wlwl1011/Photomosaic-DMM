@@ -63,7 +63,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
           children: <Widget>[
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.12,
-              width: MediaQuery.of(context).size.width,
+              // width: MediaQuery.of(context).size.width,
             ),
             const Text(
               "Shake to Watch \nNew Photomasaic!",
@@ -73,8 +73,9 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                   color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(
-              height: 25,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+              // width: MediaQuery.of(context).size.width,
             ),
             Visibility(
               visible: true, //_isVisible,
@@ -87,8 +88,9 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                         fit: BoxFit.contain)),
               ),
             ),
-            const SizedBox(
-              height: 25,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+              // width: MediaQuery.of(context).size.width,
             ),
             ElevatedButton.icon(
               onPressed: () {
