@@ -56,7 +56,7 @@ class mainScreen extends StatelessWidget {
                     // viewportFraction: 1.0,
 
                     autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 5),
+                    autoPlayInterval: const Duration(seconds: 5),
                   ),
                   itemCount: Images.length,
                   itemBuilder: (context, index, realIndex) {
@@ -162,7 +162,7 @@ class mainScreen extends StatelessWidget {
             "assets/icons/heart_off.svg",
             color: Colors.white,
           ),
-          padding: EdgeInsets.all(16.5),
+          padding: const EdgeInsets.all(16.5),
           onPressed: () {
             Get.to(() => const ActivityScreen());
           },
