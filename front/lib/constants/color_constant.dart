@@ -53,3 +53,8 @@ const kBodyText3 = TextStyle(
   color: Colors.grey,
   fontSize: 20,
 );
+
+const kBodyText4 = TextStyle(
+  color: Colors.black54,
+  fontSize: 13,
+);

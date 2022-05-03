@@ -35,22 +35,22 @@ class MyPasswordField extends StatelessWidget {
               ),
             ),
           ),
-          contentPadding: EdgeInsets.all(20),
+          contentPadding: EdgeInsets.all(10),
           hintText: 'Password',
-          hintStyle: kBodyText,
+          hintStyle: kBodyText4,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.white,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),

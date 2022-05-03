@@ -20,22 +20,22 @@ class MyTextField extends StatelessWidget {
         keyboardType: inputType,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(20),
+          contentPadding: EdgeInsets.all(10),
           hintText: hintText,
-          hintStyle: kBodyText,
+          hintStyle: kBodyText4,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.white,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),
