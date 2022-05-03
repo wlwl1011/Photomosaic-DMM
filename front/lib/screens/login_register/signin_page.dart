@@ -21,9 +21,9 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor_l,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: kBackgroundColor_l,
+        backgroundColor: kBackgroundColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {

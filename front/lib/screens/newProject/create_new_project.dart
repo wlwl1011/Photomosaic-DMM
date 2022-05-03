@@ -58,7 +58,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
       child: Column(
           //crossAxisAlignment: CrossAxisAlignment.stretch,
           //mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.12,
               width: MediaQuery.of(context).size.width,
@@ -104,19 +104,19 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             const SizedBox(
               height: 3,
             ),
-            ElevatedButton.icon(
-              onPressed: () {
-                //
-              },
-              icon: const Icon(
-                Icons.save_alt,
-              ),
-              style: ElevatedButton.styleFrom(
-                  primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
-                      MediaQuery.of(context).size.height * 0.01)),
-              label: const Text("Save Image in history"),
-            ),
+            GetBuilder<MainController>(builder: (controller) {
+              return ElevatedButton.icon(
+                onPressed: () => {getImageFromGallery(controller)},
+                icon: const Icon(
+                  Icons.save_alt,
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: kHotpink,
+                    fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
+                        MediaQuery.of(context).size.height * 0.01)),
+                label: const Text("Save Image in history"),
+              );
+            }),
             const SizedBox(
               height: 5,
             ),
@@ -134,7 +134,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                   onPressed: () {
                     showShareDialogPop();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.share,
                   ),
                   color: kWhiteColor,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class eventScreen extends StatelessWidget {
-  const eventScreen({Key? key}) : super(key: key);
+class EventScreen extends StatelessWidget {
+  const EventScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,8 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 //color
-const kBackgroundColor_l = Color(0xff191720);
-const kTextFieldFill_l = Color(0xff1E1C24);
+const kBackgroundColor = Color(0xff191720);
+const kTextFieldFill = Color(0xff1E1C24);
 const kMainColor = Color(0xFFFDE174);
 const kBackgroundColorDeep = Color(0xFFF5EC9D);
 const kBackgroundColorLight = Color(0xFFFFF7D2);
@@ -20,13 +19,13 @@ const Color tertiaryTextColor = Color(0xFFB5ADAC);
 const kHotpink = Color(0xFFFF3387);
 const kBottomIcon = Color.fromARGB(255, 231, 192, 207);
 const kBottomIcon2 = Color(0xFFCF5B87);
-const Color facebookColor = const Color(0xff39579A);
-const Color twitterColor = const Color(0xff00ABEA);
-const Color instaColor = const Color(0xffBE2289);
-const Color whatsappColor = const Color(0xff075E54);
-const Color linkedinColor = const Color(0xff0085E0);
-const Color githubColor = const Color(0xff202020);
-const Color googleColor = const Color(0xffDF4A32);
+const Color facebookColor = Color(0xff39579A);
+const Color twitterColor = Color(0xff00ABEA);
+const Color instaColor = Color(0xffBE2289);
+const Color whatsappColor = Color(0xff075E54);
+const Color linkedinColor = Color(0xff0085E0);
+const Color githubColor = Color(0xff202020);
+const Color googleColor = Color(0xffDF4A32);
 //padding
 const double kDefaultPadding = 20.0;
 // TextStyles
@@ -54,4 +53,3 @@ const kBodyText3 = TextStyle(
   color: Colors.grey,
   fontSize: 20,
 );
-

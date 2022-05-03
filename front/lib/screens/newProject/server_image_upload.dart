@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:front/constants/color_constant.dart';
 
 class ServerImageUpload extends StatefulWidget {
-  ServerImageUpload({Key? key}) : super(key: key);
+  const ServerImageUpload({Key? key}) : super(key: key);
 
   @override
   State<ServerImageUpload> createState() => _ServerImageUploadState();
@@ -23,7 +23,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
   Widget _serverImageUploadBodyWidget() {
     return Container(
       height: MediaQuery.of(context).size.height - 50,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
               'assets/images/prolog_new_project_background_image.jpg'),
@@ -39,7 +39,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                 height: MediaQuery.of(context).size.height / 9,
                 width: MediaQuery.of(context).size.width,
               ),
-              Text(
+              const Text(
                 "Enter Keyword For Tile Image",
                 style: TextStyle(
                     fontSize: 26,
@@ -61,16 +61,16 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                 height: MediaQuery.of(context).size.height / 11,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 0),
+                padding: const EdgeInsets.only(left: 0),
                 child: ElevatedButton.icon(
                   onPressed: () {
                     showThemeDialogPop();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.fact_check,
                   ),
                   style: ElevatedButton.styleFrom(primary: kHotpink),
-                  label: Text("Select Theme"),
+                  label: const Text("Select Theme"),
                 ),
               ),
             ]),
@@ -82,14 +82,14 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Color.fromARGB(120, 0, 0, 0),
+      barrierColor: const Color.fromARGB(120, 0, 0, 0),
       builder: (BuildContext context) {
         return StatefulBuilder(builder: ((context, setState) {
           return AlertDialog(
             backgroundColor: kBlackColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            title: Text(
+            title: const Text(
               'Select Theme',
               style: TextStyle(
                 color: kWhiteColor,
@@ -113,14 +113,14 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                       child: Column(
                         children: [
                           Container(
-                            constraints:
-                                BoxConstraints(maxHeight: 80, maxWidth: 80),
+                            constraints: const BoxConstraints(
+                                maxHeight: 80, maxWidth: 80),
                             child: Image.asset(
                               'assets/images/flower_theme.png',
                               fit: BoxFit.contain,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Flower',
                             style: TextStyle(
                               fontSize: 13,
@@ -144,14 +144,14 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                       child: Column(
                         children: [
                           Container(
-                            constraints:
-                                BoxConstraints(maxHeight: 80, maxWidth: 80),
+                            constraints: const BoxConstraints(
+                                maxHeight: 80, maxWidth: 80),
                             child: Image.asset(
                               'assets/images/tree_theme.png',
                               fit: BoxFit.contain,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Tree',
                             style: TextStyle(
                               fontSize: 13,
@@ -175,14 +175,14 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                       child: Column(
                         children: [
                           Container(
-                            constraints:
-                                BoxConstraints(maxHeight: 80, maxWidth: 80),
+                            constraints: const BoxConstraints(
+                                maxHeight: 80, maxWidth: 80),
                             child: Image.asset(
                               'assets/images/ocean_theme.png',
                               fit: BoxFit.contain,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Ocean',
                             style: TextStyle(
                               fontSize: 13,
@@ -208,7 +208,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                       photomosaicImage = targetImage;
                       Get.to(AdScreen(), arguments: photomosaicImage);
                     },
-                    child: Text('Create Photomosaic'),
+                    child: const Text('Create Photomosaic'),
                     style: ElevatedButton.styleFrom(
                         primary: color_controller.themecolor),
                   ),
@@ -235,7 +235,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.home,
               color: Colors.white,
             ),

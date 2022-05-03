@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/newProject/Ad_screen.dart';
-import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:async';
 
 class UserImageUpload extends StatefulWidget {
-  UserImageUpload({Key? key}) : super(key: key);
+  const UserImageUpload({Key? key}) : super(key: key);
 
   @override
   State<UserImageUpload> createState() => _UserImageUploadState();
@@ -16,13 +14,13 @@ class UserImageUpload extends StatefulWidget {
 
 class _UserImageUploadState extends State<UserImageUpload> {
   var targetImage = Get.arguments;
-  var photomosaicImage;
+  var photomosaicImage = 0;
   List userImages = [];
 
   Widget _userImageUploadBodyWidget() {
     return Container(
       height: MediaQuery.of(context).size.height - 50,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
               'assets/images/prolog_new_project_background_image.jpg'),
@@ -37,7 +35,7 @@ class _UserImageUploadState extends State<UserImageUpload> {
               height: 65,
               width: MediaQuery.of(context).size.width,
             ),
-            Text(
+            const Text(
               "Upload Your Photos For \nTile Image",
               style: TextStyle(
                   fontSize: 26,
@@ -45,7 +43,7 @@ class _UserImageUploadState extends State<UserImageUpload> {
                   color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Container(
@@ -55,7 +53,7 @@ class _UserImageUploadState extends State<UserImageUpload> {
                   image: DecorationImage(
                       image: FileImage(targetImage), fit: BoxFit.contain)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 55,
             ),
             ElevatedButton.icon(
@@ -74,11 +72,11 @@ class _UserImageUploadState extends State<UserImageUpload> {
                   Get.to(AdScreen(), arguments: photomosaicImage);
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.photo_library,
               ),
               style: ElevatedButton.styleFrom(primary: kHotpink),
-              label: Text("Upload Images"),
+              label: const Text("Upload Images"),
             ),
           ]),
     );
@@ -94,11 +92,11 @@ class _UserImageUploadState extends State<UserImageUpload> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.home,
               color: Colors.white,
             ),
-            padding: EdgeInsets.all(16.5),
+            padding: const EdgeInsets.all(16.5),
             onPressed: () {
               Get.to(mainScreen());
             },

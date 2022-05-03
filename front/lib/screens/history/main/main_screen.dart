@@ -68,7 +68,7 @@ class mainScreen extends StatelessWidget {
                         child: Image.network(urlImage, fit: BoxFit.cover),
                       ),
                       onTap: () {
-                        Get.to(() => const eventScreen());
+                        Get.to(() => const EventScreen());
                       },
                     );
                   },

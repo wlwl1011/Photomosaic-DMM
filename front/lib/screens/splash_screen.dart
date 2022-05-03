@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:front/screens/login_register/welcome_page.dart';
 import 'package:get/get.dart';
 
-import 'history/main/main_screen.dart';
-
 class Splash extends StatefulWidget {
-  Splash({Key? key}) : super(key: key);
+  const Splash({Key? key}) : super(key: key);
 
   @override
   State<Splash> createState() => _SplashState();
