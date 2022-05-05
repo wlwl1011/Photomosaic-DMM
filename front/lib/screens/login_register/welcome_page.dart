@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front/screens/history/event/event_screen.dart';
+import 'package:front/screens/history/main/main_screen.dart';
 import '../../../constants/color_constant.dart';
 import './screen_login.dart';
 import './widgets/widget.dart';
@@ -43,7 +45,9 @@ class WelcomePage extends StatelessWidget {
                         child: SignInButton(
                           Buttons.Facebook,
                           text: "Login with Facebook",
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => mainScreen());
+                          },
                         ),
                       ),
                       SizedBox(
@@ -52,10 +56,18 @@ class WelcomePage extends StatelessWidget {
                       Container(
                         width: Get.width * 0.7,
                         height: Get.height * 0.05,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black12,
+                            width: 1,
+                          ),
+                        ),
                         child: SignInButton(
                           Buttons.Google,
                           text: "Login with Google",
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => mainScreen());
+                          },
                         ),
                       ),
                       SizedBox(
@@ -67,7 +79,9 @@ class WelcomePage extends StatelessWidget {
                         child: SignInButton(
                           Buttons.Twitter,
                           text: "Login with Twitter",
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => mainScreen());
+                          },
                         ),
                       ),
                     ]),
