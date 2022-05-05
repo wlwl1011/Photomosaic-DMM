@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_launcher_icons/constants.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/heart_controller.dart';
 import 'package:front/controller/main_controller.dart';
 import 'package:front/controller/shake_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
+import 'package:front/screens/newProject/prolog_new_project.dart';
 import 'package:get/get.dart';
 import 'package:shake/shake.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:gallery_saver/gallery_saver.dart';
+import 'dart:io';
 
 class CreateNewProject extends StatefulWidget {
   CreateNewProject({Key? key}) : super(key: key);
@@ -124,8 +128,15 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               height: 3,
             ),
             ElevatedButton.icon(
-              onPressed: () => {
-                //getImageFromGallery(controller)
+              onPressed: () {
+                String photo_path = photomosaicImage.path;
+                print('phtomosaic path > $photo_path');
+
+                GallerySaver.saveImage(photo_path).then((value) {
+                  print('>>>> save value = $value');
+                }).catchError((err) {
+                  print('error :$err');
+                });
               },
               icon: const Icon(
                 Icons.save_alt,
@@ -134,7 +145,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                   primary: kHotpink,
                   fixedSize: Size(MediaQuery.of(context).size.width * 0.48,
                       MediaQuery.of(context).size.height * 0.01)),
-              label: const Text("Download Image in Gallery"),
+              label: const Text("Download in Gallery"),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
