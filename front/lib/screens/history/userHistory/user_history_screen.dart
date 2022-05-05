@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:front/screens/history/userHistory/components/my_info_edit.dart';
 import 'package:get/get.dart';
 
-final item = [
+final items = [
   "assets/images/userImage_1.jpeg",
   "assets/images/userImage_2.jpeg",
   "assets/images/userImage_3.jpeg",
@@ -61,7 +61,7 @@ Widget _tabView() {
   return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 100,
+      itemCount: items.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 1,
@@ -69,10 +69,9 @@ Widget _tabView() {
         crossAxisSpacing: 1,
       ),
       itemBuilder: (BuildContext context, int index) {
+        final item = items[index];
         return GestureDetector(
-            child: Container(
-              color: Colors.grey,
-            ),
+            child: Image.asset(item, fit: BoxFit.fill),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
