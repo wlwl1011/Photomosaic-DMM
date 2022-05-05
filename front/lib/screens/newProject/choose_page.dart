@@ -61,7 +61,10 @@ class _ChoosePageState extends State<ChoosePage> {
               icon: Icon(
                 Icons.photo_library,
               ),
-              style: ElevatedButton.styleFrom(primary: kHotpink),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.45,
+                      MediaQuery.of(context).size.height * 0.01)),
               label: Text("Using User Image"),
             ),
             SizedBox(
@@ -74,7 +77,10 @@ class _ChoosePageState extends State<ChoosePage> {
               icon: Icon(
                 Icons.backup,
               ),
-              style: ElevatedButton.styleFrom(primary: kHotpink),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.45,
+                      MediaQuery.of(context).size.height * 0.01)),
               label: Text("Using Server Image"),
             ),
           ]),

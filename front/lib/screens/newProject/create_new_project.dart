@@ -49,6 +49,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
   Widget _createNewProjectBodyWidget() {
     return Container(
       //height: MediaQuery.of(context).size.height - 50,
+      width: double.infinity,
 
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -62,7 +63,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.12,
+              height: MediaQuery.of(context).size.height * 0.09,
               // width: MediaQuery.of(context).size.width,
             ),
             const Text(
@@ -101,9 +102,23 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               ),
               style: ElevatedButton.styleFrom(
                   primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.48,
                       MediaQuery.of(context).size.height * 0.01)),
               label: const Text("Create New Project"),
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+            ElevatedButton.icon(
+              onPressed: () => {
+                //getImageFromGallery(controller)
+              },
+              icon: const Icon(Icons.history),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.48,
+                      MediaQuery.of(context).size.height * 0.01)),
+              label: const Text("Save Image in history"),
             ),
             const SizedBox(
               height: 3,
@@ -117,34 +132,31 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               ),
               style: ElevatedButton.styleFrom(
                   primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.42,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.48,
                       MediaQuery.of(context).size.height * 0.01)),
-              label: const Text("Save Image in history"),
+              label: const Text("Download Image"),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Do you want to Share?',
-                  style: TextStyle(
-                    color: kWhiteColor,
-                    fontSize: 14,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    showShareDialogPop();
-                  },
-                  icon: const Icon(
-                    Icons.share,
-                  ),
-                  color: kWhiteColor,
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     const Text(
+            //       'Do you want to Share?',
+            //       style: TextStyle(
+            //         color: kWhiteColor,
+            //         fontSize: 14,
+            //       ),
+            //     ),
+            //     IconButton(
+            //       onPressed: () {
+            //         showShareDialogPop();
+            //       },
+            //       icon: const Icon(
+            //         Icons.share,
+            //       ),
+            //       color: kWhiteColor,
+            //     )
+            //   ],
+            // ),
           ]),
     );
   }

@@ -56,7 +56,8 @@ class _SignInPageState extends State<SignInPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image(
-                            image: AssetImage('assets/images/login.png'),
+                            //image: AssetImage('assets/images/login.png'),
+                            image: AssetImage('assets/images/login_color.png'),
                             width: MediaQuery.of(context).size.width * 0.3,
                           ),
                           SizedBox(

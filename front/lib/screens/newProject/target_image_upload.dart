@@ -71,7 +71,10 @@ class _TargetImageUploadState extends State<TargetImageUpload> {
               icon: const Icon(
                 Icons.crop_original,
               ),
-              style: ElevatedButton.styleFrom(primary: kHotpink),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.27,
+                      MediaQuery.of(context).size.height * 0.01)),
               label: const Text("Album"),
             ),
             const SizedBox(
@@ -91,7 +94,10 @@ class _TargetImageUploadState extends State<TargetImageUpload> {
               icon: const Icon(
                 Icons.add_a_photo,
               ),
-              style: ElevatedButton.styleFrom(primary: kHotpink),
+              style: ElevatedButton.styleFrom(
+                  primary: kHotpink,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.27,
+                      MediaQuery.of(context).size.height * 0.01)),
               label: const Text("Camera"),
             ),
           ]),
