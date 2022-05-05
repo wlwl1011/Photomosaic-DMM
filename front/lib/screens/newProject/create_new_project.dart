@@ -141,7 +141,6 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                     ),
                     duration: Duration(seconds: 3),
                   ));
-                  //showDownloadCheckDialogPop();
                 }).catchError((err) {
                   print('error :$err');
                 });
@@ -178,48 +177,6 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
           ]),
     );
-  }
-
-  void showDownloadCheckDialogPop() {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      barrierColor: const Color.fromARGB(120, 0, 0, 0),
-      builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 4), () {
-          Get.back();
-        });
-        return StatefulBuilder(builder: ((context, setState) {
-          return AlertDialog(
-              backgroundColor: kBlackColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              // title: const Text(
-              //   'Download Success!',
-              //   style: TextStyle(
-              //     color: kWhiteColor,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              //   //textAlign: TextAlign.center,
-              // ),
-              content: SizedBox(
-                height: 20,
-                width: 20,
-                child: Center(
-                    child: SizedBox(
-                  child: new CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation(kHotpink),
-                    strokeWidth: 2.0,
-                  ),
-                  height: 15,
-                  width: 15,
-                )),
-              ));
-        }));
-      },
-    ).then((value) {
-      setState(() {});
-    });
   }
 
   void showShareDialogPop() {
