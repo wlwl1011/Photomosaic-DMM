@@ -45,19 +45,16 @@ class WelcomePage extends StatelessWidget {
                         text: "Login with Facebook",
                         onPressed: () {},
                       ),
-                      Divider(),
                       SignInButton(
                         Buttons.Google,
                         text: "Login with Google",
                         onPressed: () {},
                       ),
-                      Divider(),
                       SignInButton(
                         Buttons.Twitter,
                         text: "Login with Twitter",
                         onPressed: () {},
                       ),
-                      Divider(),
                     ]),
               ),
               Container(
