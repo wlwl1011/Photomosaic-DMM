@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../constants/color_constant.dart';
 
 class MyTextButton extends StatelessWidget {
@@ -17,8 +18,8 @@ class MyTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width * 0.5,
+      width: Get.width * 0.7,
+      height: Get.height * 0.06,
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(18),

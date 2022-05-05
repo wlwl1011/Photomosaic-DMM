@@ -23,15 +23,12 @@ class WelcomePage extends StatelessWidget {
                   children: [
                     Center(
                       child: Container(
-                        margin: const EdgeInsets.only(top: 50),
-                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.only(top: 90),
+                        width: MediaQuery.of(context).size.width * 0.8,
                         child: Image(
                           image: AssetImage('assets/images/1.jpg'),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
                     ),
                   ],
                 ),
@@ -40,22 +37,43 @@ class WelcomePage extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SignInButton(
-                        Buttons.Facebook,
-                        text: "Login with Facebook",
-                        onPressed: () {},
+                      Container(
+                        width: Get.width * 0.7,
+                        height: Get.height * 0.05,
+                        child: SignInButton(
+                          Buttons.Facebook,
+                          text: "Login with Facebook",
+                          onPressed: () {},
+                        ),
                       ),
-                      SignInButton(
-                        Buttons.Google,
-                        text: "Login with Google",
-                        onPressed: () {},
+                      SizedBox(
+                        height: Get.height * 0.03,
                       ),
-                      SignInButton(
-                        Buttons.Twitter,
-                        text: "Login with Twitter",
-                        onPressed: () {},
+                      Container(
+                        width: Get.width * 0.7,
+                        height: Get.height * 0.05,
+                        child: SignInButton(
+                          Buttons.Google,
+                          text: "Login with Google",
+                          onPressed: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: Get.height * 0.03,
+                      ),
+                      Container(
+                        width: Get.width * 0.7,
+                        height: Get.height * 0.05,
+                        child: SignInButton(
+                          Buttons.Twitter,
+                          text: "Login with Twitter",
+                          onPressed: () {},
+                        ),
                       ),
                     ]),
+              ),
+              SizedBox(
+                height: Get.height * 0.01,
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.6,
@@ -67,24 +85,30 @@ class WelcomePage extends StatelessWidget {
                         style: TextButton.styleFrom(
                             primary: Colors.grey[850],
                             textStyle:
-                                TextStyle(fontSize: 12, color: Colors.white)),
+                                TextStyle(fontSize: 15, color: Colors.white)),
                         onPressed: () {
                           Get.to(() => RegisterPage());
                         },
                         child: Text(
                           'Register',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
                             primary: Colors.grey[850],
                             textStyle:
-                                TextStyle(fontSize: 12, color: Colors.white)),
+                                TextStyle(fontSize: 15, color: Colors.white)),
                         onPressed: () {
                           Get.to(() => SignInPage());
                         },
                         child: Text(
                           'Sign In',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

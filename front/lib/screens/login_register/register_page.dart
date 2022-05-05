@@ -93,6 +93,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    MyTextButton(
+                      buttonName: 'Register',
+                      onTap: () {},
+                      bgColor: Colors.black87,
+                      textColor: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -113,15 +125,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    MyTextButton(
-                      buttonName: 'Register',
-                      onTap: () {},
-                      bgColor: Colors.black87,
-                      textColor: Colors.white,
                     ),
                   ],
                 ),

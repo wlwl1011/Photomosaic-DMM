@@ -78,6 +78,20 @@ class _SignInPageState extends State<SignInPage> {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: Get.height * 0.05,
+                    ),
+                    MyTextButton(
+                      buttonName: 'Sign In',
+                      onTap: () {
+                        Get.to(() => mainScreen());
+                      },
+                      bgColor: Colors.black87,
+                      textColor: Colors.white,
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.1,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -98,17 +112,6 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    MyTextButton(
-                      buttonName: 'Sign In',
-                      onTap: () {
-                        Get.to(() => mainScreen());
-                      },
-                      bgColor: Colors.black87,
-                      textColor: Colors.white,
                     ),
                   ],
                 ),
