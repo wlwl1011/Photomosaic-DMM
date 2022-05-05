@@ -59,24 +59,9 @@ class _UserHistoryPageState extends State<UserHistoryPage>
   }
 
   final items = [
-    "assets/images/userImage_1.jpeg",
-    "assets/images/userImage_2.jpeg",
-    "assets/images/userImage_3.jpeg",
-    "assets/images/userImage_4.jpeg",
-    "assets/images/userImage_5.jpeg",
-    "assets/images/userImage_6.jpeg",
-    "assets/images/userImage_7.jpeg",
-    "assets/images/userImage_8.jpeg",
-    "assets/images/userImage_9.jpeg",
-    "assets/images/userImage_1.jpeg",
-    "assets/images/userImage_2.jpeg",
-    "assets/images/userImage_3.jpeg",
-    "assets/images/userImage_4.jpeg",
-    "assets/images/userImage_5.jpeg",
-    "assets/images/userImage_6.jpeg",
-    "assets/images/userImage_7.jpeg",
-    "assets/images/userImage_8.jpeg",
-    "assets/images/userImage_9.jpeg",
+    'https://ifh.cc/g/fnQ7MR.png',
+    'https://ifh.cc/g/dfsTDy.png',
+    'https://ifh.cc/g/gkj6Jt.jpg',
   ];
 
   Widget _editButton() {
@@ -126,7 +111,7 @@ class _UserHistoryPageState extends State<UserHistoryPage>
         itemBuilder: (BuildContext context, int index) {
           final item = items[index];
           return GestureDetector(
-            child: Image.asset(item, fit: BoxFit.fill),
+            child: Image.network(item, fit: BoxFit.fill),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
@@ -157,7 +142,7 @@ class _UserHistoryPageState extends State<UserHistoryPage>
                               scaleEnabled: false,
                               child: AspectRatio(
                                   aspectRatio: 1,
-                                  child: Image.asset(item, fit: BoxFit.fill)),
+                                  child: Image.network(item, fit: BoxFit.fill)),
                             ),
                             onDoubleTapDown: (details) =>
                                 tapDownDetails = details,
