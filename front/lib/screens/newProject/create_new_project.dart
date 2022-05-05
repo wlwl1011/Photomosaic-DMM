@@ -134,7 +134,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                   primary: kHotpink,
                   fixedSize: Size(MediaQuery.of(context).size.width * 0.48,
                       MediaQuery.of(context).size.height * 0.01)),
-              label: const Text("Download Image"),
+              label: const Text("Download Image in Gallery"),
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
