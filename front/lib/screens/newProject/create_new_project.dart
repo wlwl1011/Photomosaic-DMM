@@ -67,11 +67,11 @@ class _CreateNewProjectState extends State<CreateNewProject> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.09,
+              height: MediaQuery.of(context).size.height * 0.05,
               // width: MediaQuery.of(context).size.width,
             ),
             const Text(
-              "Shake to Watch \nNew Photomasaic!",
+              "New Photomasaic!",
               style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -79,7 +79,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.03,
               // width: MediaQuery.of(context).size.width,
             ),
             Visibility(
@@ -111,7 +111,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               label: const Text("Create New Project"),
             ),
             const SizedBox(
-              height: 3,
+              height: 2,
             ),
             ElevatedButton.icon(
               onPressed: () => {
@@ -125,7 +125,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               label: const Text("Save Image in history"),
             ),
             const SizedBox(
-              height: 3,
+              height: 2,
             ),
             ElevatedButton.icon(
               onPressed: () {
@@ -147,27 +147,27 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                       MediaQuery.of(context).size.height * 0.01)),
               label: const Text("Download in Gallery"),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     const Text(
-            //       'Do you want to Share?',
-            //       style: TextStyle(
-            //         color: kWhiteColor,
-            //         fontSize: 14,
-            //       ),
-            //     ),
-            //     IconButton(
-            //       onPressed: () {
-            //         showShareDialogPop();
-            //       },
-            //       icon: const Icon(
-            //         Icons.share,
-            //       ),
-            //       color: kWhiteColor,
-            //     )
-            //   ],
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Do you want to Share?',
+                  style: TextStyle(
+                    color: kWhiteColor,
+                    fontSize: 14,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showShareDialogPop();
+                  },
+                  icon: const Icon(
+                    Icons.share,
+                  ),
+                  color: kWhiteColor,
+                )
+              ],
+            ),
           ]),
     );
   }
