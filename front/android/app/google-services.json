@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "248936994992",
+    "project_id": "photomosaic-dmm",
+    "storage_bucket": "photomosaic-dmm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248936994992:android:b6d1b804452931eb1fc375",
+        "android_client_info": {
+          "package_name": "com.example.front"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248936994992-5833t6nsr2ss8odrcehshre6cimtlivg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfQUArxm8nd71HgS-LQjh_NJswzZozick"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248936994992-5833t6nsr2ss8odrcehshre6cimtlivg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
