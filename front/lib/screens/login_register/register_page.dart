@@ -1,8 +1,11 @@
 // import 'dart:html';
 // ignore_for_file: prefer_const_constructors
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/login_register/screen_login.dart';
 import 'package:get/get.dart';
 import './widgets/widget.dart';
@@ -17,6 +20,13 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   bool passwordVisibility = true;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _userEmailCtrl = TextEditingController();
+  TextEditingController _userPasswordCtrl = TextEditingController();
+  TextEditingController _userNameCtrl = TextEditingController();
+  TextEditingController _userPhoneCtrl = TextEditingController();
+  bool _loading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +59,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   children: [
                     Container(
+                        child: Form(
+                      key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -73,17 +85,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           MyTextField(
                             hintText: 'Name',
                             inputType: TextInputType.name,
+                            controller: _userNameCtrl,
                           ),
                           MyTextField(
                             hintText: 'Email',
                             inputType: TextInputType.emailAddress,
+                            controller: _userEmailCtrl,
                           ),
                           MyTextField(
                             hintText: 'Phone',
                             inputType: TextInputType.phone,
+                            controller: _userPhoneCtrl,
                           ),
                           MyPasswordField(
                             isPasswordVisible: passwordVisibility,
+                            controller: _userPasswordCtrl,
                             onTap: () {
                               setState(() {
                                 passwordVisibility = !passwordVisibility;
@@ -92,13 +108,37 @@ class _RegisterPageState extends State<RegisterPage> {
                           )
                         ],
                       ),
-                    ),
+                    )),
                     SizedBox(
                       height: 30,
                     ),
                     MyTextButton(
                       buttonName: 'Register',
-                      onTap: () {},
+                      onPressed: () async {
+                        // Get.to(() => mainScreen());
+                        if (!_formKey.currentState!.validate()) return;
+                        try {
+                          setState(() => _loading = true);
+                          final r = await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                            email: _userEmailCtrl.text,
+                            password: _userPasswordCtrl.text,
+                          );
+                          // ignore: deprecated_member_use
+                          // final userInfo = await FirebaseAuth.instance.currentUser!.updateProfile(displayName: user.diplayName);
+                          FirebaseAuth.instance.currentUser!
+                              .updateDisplayName(_userNameCtrl.text);
+                          FirebaseAuth.instance.currentUser!.updatePhotoURL(
+                              'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x.png');
+                          await r.user!.reload();
+                          await r.user!.sendEmailVerification();
+                          Get.to(() => WelcomePage());
+                        } catch (e) {
+                          print(e);
+                        } finally {
+                          if (mounted) setState(() => _loading = false);
+                        }
+                      },
                       bgColor: Colors.black87,
                       textColor: Colors.white,
                     ),
