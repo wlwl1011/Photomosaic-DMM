@@ -6,6 +6,8 @@ import 'package:front/screens/history/userHistory/components/my_info_edit.dart';
 import 'package:get/get.dart';
 import 'package:front/constants/constatns.dart';
 
+import '../../../controller/main_controller.dart';
+
 class UserHistoryPage extends StatefulWidget {
   @override
   State<UserHistoryPage> createState() => _UserHistoryPageState();
@@ -112,12 +114,17 @@ class _UserHistoryPageState extends State<UserHistoryPage>
         itemBuilder: (BuildContext context, int index) {
           final item = items[index];
           return GestureDetector(
-            child: Image.network(
-                'http://$serverAdr/api/v1/object?pid=${items[index][0]}',
-                headers: const {
-                  "uid": "tmpuid",
-                },
-                fit: BoxFit.fill),
+            child: GetBuilder<MainController>(
+              builder: (controller) {
+                print("Build!!");
+                return Image.network(
+                    'http://$serverAdr/api/v1/object?pid=${items[index]["pid"]}',
+                    headers: const {
+                      "uid": "tmpuid",
+                    },
+                    fit: BoxFit.fill);
+              },
+            ),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
