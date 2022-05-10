@@ -13,6 +13,7 @@ cd docker
 docker-compose up -d
 ```
 
+
 - you can access `minioui.localhost:9001` at admin dashboard
   - Please modify the `docker-compose.yaml` in docker directory for custom configuration
 
