@@ -25,20 +25,12 @@ class CardLayoutGrid extends StatelessWidget {
   }
 
   Widget getImage(int idx) {
-    return Container(
-      decoration: const BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(15)),
-        child: Image.network(
-          'http://$serverAdr/api/v1/object?pid=${items[idx]["pid"]}',
-          headers: const {
-            "uid": "tmpuid",
-          },
-          // headers: {"uid": items[idx]["uid"]!},
-        ),
-      ),
+    return Image.network(
+      'http://$serverAdr/api/v1/object?pid=${items[idx]["pid"]}',
+      headers: const {
+        "uid": "tmpuid",
+      },
+      // headers: {"uid": items[idx]["uid"]!},
     );
   }
 }
