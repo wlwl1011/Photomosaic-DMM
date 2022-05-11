@@ -37,15 +37,7 @@ class UserHistoryPage extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.1,
             ),
-            Container(
-              child: GetBuilder<MainController>(
-                builder: (controller) {
-                  print("Build!!");
-                  return CardLayoutGrid(
-                      crossAxisCount: 3, items: controller.list);
-                },
-              ),
-            ),
+            // buildAlbum(context),
           ],
         ),
       ),
@@ -83,5 +75,14 @@ Widget _editButton() {
         ))
       ],
     ),
+  );
+}
+
+Widget buildAlbum(BuildContext context) {
+  return GetBuilder<MainController>(
+    builder: (controller) {
+      print("Build!!");
+      return CardLayoutGrid(crossAxisCount: 3, items: controller.list);
+    },
   );
 }

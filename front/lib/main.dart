@@ -4,6 +4,9 @@ import 'package:front/controller/main_controller.dart';
 // import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/splash_screen.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:front/constants/constatns.dart';
 
 void main() {
   runApp(const MyApp());
