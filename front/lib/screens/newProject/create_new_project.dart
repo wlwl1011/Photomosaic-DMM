@@ -43,9 +43,10 @@ class _CreateNewProjectState extends State<CreateNewProject> {
     super.initState();
   }
 
-  Future getImageFromGallery(MainController controller) async {
-    var image =
-        await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+  Future getImageFromGallery(MainController controller, var image) async {
+    final ImagePicker _picker = ImagePicker();
+    print("upload image");
+    print(image);
     if (image == null || image.path == null) return null;
     controller.Upload(image);
   }
@@ -55,7 +56,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
       builder: (controller) {
         print("Build!!");
         return ElevatedButton.icon(
-          onPressed: () => {getImageFromGallery(controller)},
+          onPressed: () => {getImageFromGallery(controller, photomosaicImage)},
           icon: const Icon(Icons.history),
           style: ElevatedButton.styleFrom(
               primary: kHotpink,
