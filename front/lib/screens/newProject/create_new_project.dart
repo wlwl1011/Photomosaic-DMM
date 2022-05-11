@@ -50,6 +50,23 @@ class _CreateNewProjectState extends State<CreateNewProject> {
     controller.Upload(image);
   }
 
+  Widget uploadImage(BuildContext context) {
+    return GetBuilder<MainController>(
+      builder: (controller) {
+        print("Build!!");
+        return ElevatedButton.icon(
+          onPressed: () => {getImageFromGallery(controller)},
+          icon: const Icon(Icons.history),
+          style: ElevatedButton.styleFrom(
+              primary: kHotpink,
+              fixedSize: Size(MediaQuery.of(context).size.width * 0.48,
+                  MediaQuery.of(context).size.height * 0.01)),
+          label: const Text("Save Image in history"),
+        );
+      },
+    );
+  }
+
   Widget _createNewProjectBodyWidget() {
     return Container(
       //height: MediaQuery.of(context).size.height - 50,
@@ -113,17 +130,9 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             const SizedBox(
               height: 2,
             ),
-            ElevatedButton.icon(
-              onPressed: () => {
-                //getImageFromGallery(controller)
-              },
-              icon: const Icon(Icons.history),
-              style: ElevatedButton.styleFrom(
-                  primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.48,
-                      MediaQuery.of(context).size.height * 0.01)),
-              label: const Text("Save Image in history"),
-            ),
+
+            ///////
+            uploadImage(context),
             const SizedBox(
               height: 2,
             ),
