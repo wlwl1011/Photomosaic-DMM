@@ -79,27 +79,27 @@ class _MyInfoEditState extends State<MyInfoEdit> {
               SizedBox(
                 height: Get.height * 0.1,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: MyTextField(
-                  hintText: 'Name',
-                  inputType: TextInputType.name,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: MyTextField(
-                  hintText: 'Email',
-                  inputType: TextInputType.emailAddress,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: MyTextField(
-                  hintText: 'Phone',
-                  inputType: TextInputType.phone,
-                ),
-              ),
+              // const Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 20.0),
+              //   child: MyTextField(
+              //     hintText: 'Name',
+              //     inputType: TextInputType.name,
+              //   ),
+              // ),
+              // const Padding(
+              //   padding: EdgeInsets.all(20.0),
+              //   child: MyTextField(
+              //     hintText: 'Email',
+              //     inputType: TextInputType.emailAddress,
+              //   ),
+              // ),
+              // const Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 20.0),
+              //   child: MyTextField(
+              //     hintText: 'Phone',
+              //     inputType: TextInputType.phone,
+              //   ),
+              // ),
             ],
           ),
         ));

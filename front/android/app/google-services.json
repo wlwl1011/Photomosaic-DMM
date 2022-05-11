@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248936994992:android:b6d1b804452931eb1fc375",
+        "mobilesdk_app_id": "1:248936994992:android:44cda000858614f21fc375",
         "android_client_info": {
-          "package_name": "com.example.front"
+          "package_name": "com.photomosaic.dmm"
         }
       },
       "oauth_client": [

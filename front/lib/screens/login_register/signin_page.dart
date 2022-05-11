@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/screens/history/event/event_screen.dart';
@@ -18,6 +20,10 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   bool isPasswordVisible = true;
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _userEmailCtrl = TextEditingController();
+  TextEditingController _userPasswordCtrl = TextEditingController();
+  bool _loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,30 +58,35 @@ class _SignInPageState extends State<SignInPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image(
-                            //image: AssetImage('assets/images/login.png'),
-                            image: AssetImage('assets/images/login_color.png'),
-                            width: MediaQuery.of(context).size.width * 0.3,
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          MyTextField(
-                            hintText: 'Phone, email or username',
-                            inputType: TextInputType.text,
-                          ),
-                          MyPasswordField(
-                            isPasswordVisible: isPasswordVisible,
-                            onTap: () {
-                              setState(() {
-                                isPasswordVisible = !isPasswordVisible;
-                              });
-                            },
-                          ),
-                        ],
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image(
+                              //image: AssetImage('assets/images/login.png'),
+                              image:
+                                  AssetImage('assets/images/login_color.png'),
+                              width: MediaQuery.of(context).size.width * 0.3,
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            MyTextField(
+                                hintText: 'email',
+                                inputType: TextInputType.text,
+                                controller: _userEmailCtrl),
+                            MyPasswordField(
+                              isPasswordVisible: isPasswordVisible,
+                              controller: _userPasswordCtrl,
+                              onTap: () {
+                                setState(() {
+                                  isPasswordVisible = !isPasswordVisible;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -83,8 +94,22 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     MyTextButton(
                       buttonName: 'Sign In',
-                      onTap: () {
-                        Get.to(() => mainScreen());
+                      onPressed: () async {
+                        // Get.to(() => mainScreen());
+                        if (!_formKey.currentState!.validate()) return;
+                        try {
+                          setState(() => _loading = true);
+                          await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                            email: _userEmailCtrl.text,
+                            password: _userPasswordCtrl.text,
+                          );
+                          Get.to(() => mainScreen());
+                        } catch (e) {
+                          print(e);
+                        } finally {
+                          setState(() => _loading = false);
+                        }
                       },
                       bgColor: Colors.black87,
                       textColor: Colors.white,
