@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/history/otherHistory/components/post_widget.dart';
 import 'package:front/screens/history/userHistory/components/radial_progress.dart';
 import 'package:front/screens/history/userHistory/components/rounded_image.dart';
@@ -29,6 +30,15 @@ class _MyInfoEditState extends State<MyInfoEdit> {
   TextEditingController _userPhoneCtrl = TextEditingController();
   bool _loading = false;
 
+  @override
+  void dispose() {
+    _userEmailCtrl.dispose();
+    _userNameCtrl.dispose();
+    _userPasswordCtrl.dispose();
+    _userPhoneCtrl.dispose();
+    super.dispose();
+  }
+
   Widget _postList() {
     return Column(
       children: List.generate(50, (index) => PostWidget()).toList(),
@@ -56,26 +66,49 @@ class _MyInfoEditState extends State<MyInfoEdit> {
               padding: EdgeInsets.all(16.5),
               onPressed: () async {
                 if (!_formKey.currentState!.validate()) return;
-                try {
-                  final r = FirebaseAuth.instance;
-                  final user = FirebaseAuth.instance;
-                  r.currentUser!.updateDisplayName(_userNameCtrl.text);
-                  // r.currentUser!.updatePhoneNumber(_userPhoneCtrl);
-                  r.currentUser!.updatePassword(_userPasswordCtrl.text);
-                  // r.currentUser!.reload();
-                  // r.userChanges();
-                  await FirebaseAuth.instance.signOut();
-                  // r.authStateChanges();
-                  // await r.currentUser!.reauthenticateWithCredential(credential);
-
-                  Get.to(() => WelcomePage());
-                } catch (e) {
-                  await FirebaseAuth.instance.signOut();
-                  Get.to(() => WelcomePage());
-                } finally {
-                  if (mounted) setState(() => _loading = false);
-                  await FirebaseAuth.instance.signOut();
-                  Get.to(() => WelcomePage());
+                if (_userNameCtrl.text.isEmpty) {
+                  if (_userPasswordCtrl.text.isEmpty) {
+                    Get.to(() => mainScreen());
+                    return;
+                  }
+                }
+                final r = FirebaseAuth.instance;
+                if (_userNameCtrl.text.isNotEmpty) {
+                  if (_userPasswordCtrl.text.isNotEmpty) {
+                    r.currentUser!.updateDisplayName(_userNameCtrl.text);
+                    try {
+                      // r.currentUser!.updatePhoneNumber(_userPhoneCtrl);
+                      r.currentUser!.updatePassword(_userPasswordCtrl.text);
+                      // Get.to(() => WelcomePage());
+                    } catch (e) {
+                      await FirebaseAuth.instance.signOut();
+                      Get.to(() => WelcomePage());
+                    } finally {
+                      if (mounted) setState(() => _loading = false);
+                      await FirebaseAuth.instance.signOut();
+                      Get.to(() => WelcomePage());
+                    }
+                    return;
+                  } else {
+                    r.currentUser!.updateDisplayName(_userNameCtrl.text);
+                    Get.to(() => mainScreen());
+                    return;
+                  }
+                }
+                if (_userPasswordCtrl.text.isNotEmpty) {
+                  try {
+                    // r.currentUser!.updatePhoneNumber(_userPhoneCtrl);
+                    r.currentUser!.updatePassword(_userPasswordCtrl.text);
+                    // Get.to(() => WelcomePage());
+                  } catch (e) {
+                    await FirebaseAuth.instance.signOut();
+                    Get.to(() => WelcomePage());
+                  } finally {
+                    if (mounted) setState(() => _loading = false);
+                    await FirebaseAuth.instance.signOut();
+                    Get.to(() => WelcomePage());
+                  }
+                  return;
                 }
               },
             )

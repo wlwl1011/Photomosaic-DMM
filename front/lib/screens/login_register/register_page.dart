@@ -28,6 +28,15 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _loading = false;
 
   @override
+  void dispose() {
+    _userEmailCtrl.dispose();
+    _userNameCtrl.dispose();
+    _userPasswordCtrl.dispose();
+    _userPhoneCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
