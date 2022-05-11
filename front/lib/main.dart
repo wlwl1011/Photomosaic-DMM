@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/binder/main_binder.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/main_controller.dart';
 // import 'package:front/screens/history/main/main_screen.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           colorScheme:
               ColorScheme.fromSwatch().copyWith(primary: Colors.black)),
       home: Splash(),
+      initialBinding: MainPageBinder(),
     );
   }
 }

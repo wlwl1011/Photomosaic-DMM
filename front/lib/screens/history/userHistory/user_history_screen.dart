@@ -37,7 +37,7 @@ class UserHistoryPage extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.1,
             ),
-            // buildAlbum(context),
+            buildAlbum(context),
           ],
         ),
       ),
