@@ -131,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           FirebaseAuth.instance.currentUser!.updatePhotoURL(
                               'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x.png');
                           await r.user!.reload();
-                          await r.user!.sendEmailVerification();
+                          // await r.user!.sendEmailVerification();
                           Get.to(() => WelcomePage());
                         } catch (e) {
                           print(e);
