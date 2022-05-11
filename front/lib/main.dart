@@ -4,13 +4,8 @@ import 'package:front/controller/main_controller.dart';
 // import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/splash_screen.dart';
 import 'package:get/get.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
   runApp(const MyApp());
 }
 

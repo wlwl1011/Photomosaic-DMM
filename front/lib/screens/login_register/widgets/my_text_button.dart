@@ -6,12 +6,12 @@ class MyTextButton extends StatelessWidget {
   const MyTextButton({
     Key? key,
     required this.buttonName,
-    required this.onPressed,
+    required this.onTap,
     required this.bgColor,
     required this.textColor,
   }) : super(key: key);
   final String buttonName;
-  final Function onPressed;
+  final Function onTap;
   final Color bgColor;
   final Color textColor;
 
@@ -30,7 +30,7 @@ class MyTextButton extends StatelessWidget {
             (states) => Colors.black12,
           ),
         ),
-        onPressed: onPressed as void Function()?,
+        onPressed: onTap as void Function()?,
         child: Text(
           buttonName,
           style: kButtonText.copyWith(color: textColor),

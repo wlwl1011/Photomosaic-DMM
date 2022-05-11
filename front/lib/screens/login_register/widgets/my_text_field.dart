@@ -8,11 +8,9 @@ class MyTextField extends StatelessWidget {
     Key? key,
     required this.hintText,
     required this.inputType,
-    required this.controller,
   }) : super(key: key);
   final String hintText;
   final TextInputType inputType;
-  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +20,7 @@ class MyTextField extends StatelessWidget {
         width: Get.width * 0.7,
         height: Get.height * 0.06,
         child: TextField(
-          controller: controller,
-          style: TextStyle(color: Colors.black),
+          style: kBodyText.copyWith(color: Colors.white),
           keyboardType: inputType,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
@@ -39,7 +36,7 @@ class MyTextField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.black,
+                color: Colors.white,
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(10),
