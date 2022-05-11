@@ -26,7 +26,7 @@ class MainController extends GetxController {
     loadList();
   }
 
-  Upload(PickedFile imageFile) async {
+  Upload(var imageFile) async {
     print("Hiiii");
     print(imageFile.path);
     String fileName = imageFile.path.split('/').last;

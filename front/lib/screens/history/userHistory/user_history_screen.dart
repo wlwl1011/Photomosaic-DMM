@@ -13,6 +13,13 @@ class UserHistoryPage extends StatelessWidget {
   const UserHistoryPage({
     Key? key,
   }) : super(key: key);
+  // final ImagePicker _picker = ImagePicker();
+  //  Future getImageFromGallery(MainController controller) async {
+  //  var image =
+  //        await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+  //    if (image == null || image.path == null) return null;
+  //    controller.Upload(image);
+  // // }
 
   @override
   Widget build(BuildContext context) {
