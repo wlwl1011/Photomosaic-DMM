@@ -27,8 +27,30 @@ class MainController extends GetxController {
   }
 
   Upload(var imageFile) async {
-    print("Hiiii");
+    print("Upload");
+    print(imageFile);
     print(imageFile.path);
+    String fileName = imageFile.path.split('/').last;
+
+    FormData data = FormData.fromMap({
+      "files": await MultipartFile.fromFile(
+        imageFile.path,
+        filename: fileName,
+      ),
+    });
+
+    Dio dio = new Dio();
+
+    dio.post("http://$serverAdr/api/v1/upload", data: data).then((response) {
+      print(response);
+      loadList();
+    }).catchError((error) => print(error));
+  }
+
+  Delete(var imageFile) async {
+    print("Delete");
+    print(imageFile.path);
+
     String fileName = imageFile.path.split('/').last;
 
     FormData data = FormData.fromMap({

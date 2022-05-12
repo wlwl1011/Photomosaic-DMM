@@ -51,3 +51,7 @@ func putObject(objectName string, reader io.Reader, objectSize int64) error {
 func getObject(objectName string) (io.Reader, error) {
 	return minioClient.GetObject(context.TODO(), bucketName, objectName, minio.GetObjectOptions{})
 }
+
+func deleteObject(objectName string) {
+	minioClient.RemoveObject(context.TODO(), bucketName, objectName, minio.RemoveObjectOptions{})
+}

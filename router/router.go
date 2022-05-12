@@ -22,6 +22,7 @@ func NewRouter() *gin.Engine {
 	apiv1 := apiEngine.Group("api/v1")
 	{
 		apiv1.POST("/upload", postPicture)
+		apiv1.POST("/delete", deletePicture)
 		apiv1.GET("/objectList", getList)
 		apiv1.GET("/object", getPicture)
 	}

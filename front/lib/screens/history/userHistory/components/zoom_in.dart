@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/controller/main_controller.dart';
+import 'package:get/get.dart';
 
 class ZoomIn extends StatefulWidget {
-  const ZoomIn({Key? key, required this.item}) : super(key: key);
-  final String item;
+  ZoomIn({Key? key, this.item}) : super(key: key);
+  var item;
   @override
   State<ZoomIn> createState() => _ZoomInState();
 }
@@ -33,20 +37,32 @@ class _ZoomInState extends State<ZoomIn> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  Widget deleteImage(BuildContext context) {
+    //File deleteImage = widget.item;
+    return GetBuilder<MainController>(
+      builder: (controller) {
+        print("Build!!");
+        return IconButton(
+          onPressed: () => {controller.Delete(widget.item)},
+          icon: const Icon(
+            Icons.delete_rounded,
+            color: kHotpink,
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("Zoom in");
+    print(widget.item);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.black,
         actions: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.delete_rounded,
-              color: kHotpink,
-            ),
-          ),
+          deleteImage(context),
         ],
       ),
       backgroundColor: Colors.black,
