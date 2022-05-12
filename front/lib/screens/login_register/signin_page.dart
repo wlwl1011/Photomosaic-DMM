@@ -24,6 +24,16 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController _userEmailCtrl = TextEditingController();
   TextEditingController _userPasswordCtrl = TextEditingController();
   bool _loading = false;
+
+  @override
+  void dispose() {
+    _userEmailCtrl.dispose();
+    // _userNameCtrl.dispose();
+    _userPasswordCtrl.dispose();
+    // _userPhoneCtrl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
