@@ -40,17 +40,28 @@ func (h *postgresHandler) Upload(uid, ext string, reader io.Reader, objectSize i
 	return "success", nil
 }
 
-func (h *postgresHandler) Delete(uid, ext string, reader io.Reader, objectSize int64) (string, error) {
+func (h *postgresHandler) Delete(uid, pid string) error {
 
-	// var picture Picture = deleteObject(uid + "/" + pid)
+	// delete from minio
+	err := deleteObject(uid + "/" + pid)
+	if err != nil {
+		
+		return err
+	}
 
-	// tx := h.db.Delete(&picture)
-	// if tx.Error != nil {
-	// 	fmt.Println(tx.Error)
-	// 	return "", nil
-	// }
+	// delete from db
+	var picture Picture
+	tx := h.db.Model(&Picture{}).Where("uid = ? AND pid = ?", uid, pid).First(&picture)
+	if tx.Error != nil {
+		return tx.Error
+	}
 
-	return "success", nil
+	tx = h.db.Delete(&picture)
+	if tx.Error != nil {
+		return tx.Error
+	}
+
+	return nil
 }
 
 func (h *postgresHandler) RetrieveList(uid string) ([]*Picture, error) {

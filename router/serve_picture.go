@@ -29,29 +29,7 @@ func postPicture(c *gin.Context) {
 }
 
 func deletePicture(c *gin.Context) {
-
-	form, _ := c.MultipartForm()
-	log.Println("delete file")
-	files := form.File["files"]
-	log.Println(len(files))
-
-	pid, b := c.GetQuery("pid")
-	if !b {
-		c.Status(http.StatusBadRequest)
-		return
-	}
-
-	for _, file := range files {
-		reader, err := file.Open()
-		if err != nil {
-			c.Status(http.StatusBadRequest)
-		}
-
-		db.Delete("tmpuid", pid, reader, file.Size)
-		// c.SaveUploadedFile(file, dst)
-	}
-
-	c.String(http.StatusOK, fmt.Sprintf("%d files deleted!!", len(files)))
+	c.Status(http.StatusOK)
 }
 
 func getList(c *gin.Context) {

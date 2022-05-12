@@ -52,6 +52,6 @@ func getObject(objectName string) (io.Reader, error) {
 	return minioClient.GetObject(context.TODO(), bucketName, objectName, minio.GetObjectOptions{})
 }
 
-func deleteObject(objectName string) {
-	minioClient.RemoveObject(context.TODO(), bucketName, objectName, minio.RemoveObjectOptions{})
+func deleteObject(objectName string) error {
+	return minioClient.RemoveObject(context.TODO(), bucketName, objectName, minio.RemoveObjectOptions{})
 }
