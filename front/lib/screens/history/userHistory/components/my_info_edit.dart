@@ -39,6 +39,21 @@ class _MyInfoEditState extends State<MyInfoEdit> {
     super.dispose();
   }
 
+  // void openDialog(text) {
+  //   Get.dialog(
+  //     AlertDialog(
+  //       title: const Text('!'),
+  //       content: Text(text),
+  //       actions: [
+  //         TextButton(
+  //           child: const Text("Ok"),
+  //           onPressed: () => Get.back(),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   Widget _postList() {
     return Column(
       children: List.generate(50, (index) => PostWidget()).toList(),
@@ -66,12 +81,26 @@ class _MyInfoEditState extends State<MyInfoEdit> {
               padding: EdgeInsets.all(16.5),
               onPressed: () async {
                 if (!_formKey.currentState!.validate()) return;
+                //둘다 비어있을 때
                 if (_userNameCtrl.text.isEmpty) {
                   if (_userPasswordCtrl.text.isEmpty) {
-                    Get.to(() => mainScreen());
+                    await Get.dialog(
+                      AlertDialog(
+                        title: const Text('!'),
+                        content: Text("수정사항이 없습니다."),
+                        actions: [
+                          TextButton(
+                            child: const Text("Ok"),
+                            onPressed: () => Get.back(),
+                          ),
+                        ],
+                      ),
+                    );
+                    Get.back();
                     return;
                   }
                 }
+                //둘다 변경되었을 때
                 final r = FirebaseAuth.instance;
                 if (_userNameCtrl.text.isNotEmpty) {
                   if (_userPasswordCtrl.text.isNotEmpty) {
@@ -81,20 +110,45 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                       r.currentUser!.updatePassword(_userPasswordCtrl.text);
                       // Get.to(() => WelcomePage());
                     } catch (e) {
-                      await FirebaseAuth.instance.signOut();
-                      Get.to(() => WelcomePage());
+                      //
                     } finally {
                       if (mounted) setState(() => _loading = false);
+                      await Get.dialog(
+                        AlertDialog(
+                          // title: const Text('!'),
+                          content: Text("비밀번호가 수정되어 재로그인이 필요합니다."),
+                          actions: [
+                            TextButton(
+                              child: const Text("Ok"),
+                              onPressed: () => Get.back(),
+                            ),
+                          ],
+                        ),
+                      );
                       await FirebaseAuth.instance.signOut();
                       Get.to(() => WelcomePage());
                     }
                     return;
                   } else {
+                    //이름만 변경되었을 때
                     r.currentUser!.updateDisplayName(_userNameCtrl.text);
-                    Get.to(() => mainScreen());
+                    await Get.dialog(
+                      AlertDialog(
+                        // title: const Text('!'),
+                        content: Text("이름이 변경되었습니다."),
+                        actions: [
+                          TextButton(
+                            child: const Text("Ok"),
+                            onPressed: () => Get.back(),
+                          ),
+                        ],
+                      ),
+                    );
+                    Get.back();
                     return;
                   }
                 }
+                //비밀번호가 변경되었을 때
                 if (_userPasswordCtrl.text.isNotEmpty) {
                   try {
                     // r.currentUser!.updatePhoneNumber(_userPhoneCtrl);
@@ -105,6 +159,18 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                     Get.to(() => WelcomePage());
                   } finally {
                     if (mounted) setState(() => _loading = false);
+                    await Get.dialog(
+                      AlertDialog(
+                        // title: const Text('!'),
+                        content: Text("비밀번호가 수정되어 재로그인이 필요합니다.."),
+                        actions: [
+                          TextButton(
+                            child: const Text("Ok"),
+                            onPressed: () => Get.back(),
+                          ),
+                        ],
+                      ),
+                    );
                     await FirebaseAuth.instance.signOut();
                     Get.to(() => WelcomePage());
                   }
