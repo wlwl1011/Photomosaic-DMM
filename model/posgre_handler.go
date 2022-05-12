@@ -40,18 +40,16 @@ func (h *postgresHandler) Upload(uid, ext string, reader io.Reader, objectSize i
 	return "success", nil
 }
 
-func (h *postgresHandler) Delete(uid, pid, ext string, reader io.Reader, objectSize int64) (string, error) {
+func (h *postgresHandler) Delete(uid, ext string, reader io.Reader, objectSize int64) (string, error) {
 
-	var picture Picture = getObject(uid+"/"+pid)
+	// var picture Picture = deleteObject(uid + "/" + pid)
 
-	
-	tx := h.db.Delete(&picture)
-	if tx.Error != nil {
-		fmt.Println(tx.Error)
-		return "", nil
-	}
+	// tx := h.db.Delete(&picture)
+	// if tx.Error != nil {
+	// 	fmt.Println(tx.Error)
+	// 	return "", nil
+	// }
 
-	
 	return "success", nil
 }
 
