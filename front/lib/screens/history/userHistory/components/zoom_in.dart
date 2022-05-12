@@ -41,9 +41,12 @@ class _ZoomInState extends State<ZoomIn> with SingleTickerProviderStateMixin {
     //File deleteImage = widget.item;
     return GetBuilder<MainController>(
       builder: (controller) {
-        print("Build!!");
         return IconButton(
-          onPressed: () => {controller.Delete(widget.item)},
+          onPressed: () {
+            controller.Delete(widget.item, () {
+              Get.back();
+            });
+          },
           icon: const Icon(
             Icons.delete_rounded,
             color: kHotpink,

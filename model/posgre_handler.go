@@ -45,13 +45,13 @@ func (h *postgresHandler) Delete(uid, pid string) error {
 	// delete from minio
 	err := deleteObject(uid + "/" + pid)
 	if err != nil {
-		
+
 		return err
 	}
 
 	// delete from db
 	var picture Picture
-	tx := h.db.Model(&Picture{}).Where("uid = ? AND pid = ?", uid, pid).First(&picture)
+	tx := h.db.Model(&Picture{}).Where("p_id=?", pid).First(&picture)
 	if tx.Error != nil {
 		return tx.Error
 	}
