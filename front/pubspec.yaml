@@ -62,6 +62,7 @@ dependencies:
   shake: ^2.1.0
   #gallery_saver: ^2.0.1
   gallery_saver: ^2.3.2
+  cloud_firestore: ^3.1.14
   #dio: ^4.0.5
 
 dev_dependencies:

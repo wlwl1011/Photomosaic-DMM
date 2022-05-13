@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Messages extends StatelessWidget {
   const Messages({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Text("");
+    return 
 //DB 연결 후 수정
-    /*StreamBuilder(
+    StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('chat')
           .orderBy('time', descending: true)
@@ -30,6 +30,6 @@ class Messages extends StatelessWidget {
           },
         );
       },
-    );*/
+    );
   }
 }
