@@ -2,6 +2,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
@@ -133,6 +134,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             email: _userEmailCtrl.text,
                             password: _userPasswordCtrl.text,
                           );
+
+                          await FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(r.user!.uid)
+                              .set({
+                            'userId': _userNameCtrl.text,
+                            'email': _userEmailCtrl.text,
+                          });
+
                           // ignore: deprecated_member_use
                           // final userInfo = await FirebaseAuth.instance.currentUser!.updateProfile(displayName: user.diplayName);
                           FirebaseAuth.instance.currentUser!
