@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:front/screens/history/otherHistory/components/avartar_widget.dart';
 import 'package:front/screens/history/otherHistory/components/chat_list_item.dart';
+import 'package:get/get.dart';
 
 class Messages extends StatelessWidget {
   const Messages({Key? key}) : super(key: key);
@@ -26,13 +27,25 @@ class Messages extends StatelessWidget {
         final chatDocs = snapshot.data!.docs;
 
         return ListView.builder(
-          reverse: true,
+          reverse: false,
           itemCount: chatDocs.length,
           itemBuilder: (context, index) {
-            return ChatListItem(
+            print('1');
+            print(chatDocs[index]['userID'].toString());
+            print('2');
+            print(user!.uid);
+            print('3');
+            print(chatDocs[index]['time']);
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: Get.height * 0.005, horizontal: Get.width * 0.005),
+              child: ChatListItem(
                 chatDocs[index]['text'],
-                //chatDocs[index]['userID'.toString() == user!.uid],
-                chatDocs[index]['userName']);
+                //chatDocs[index]['userID'].toString() == user!.uid,
+                chatDocs[index]['userName'],
+                //chatDocs[index]['time']
+              ),
+            );
           },
         );
       },

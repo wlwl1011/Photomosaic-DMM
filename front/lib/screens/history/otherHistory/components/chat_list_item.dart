@@ -7,18 +7,17 @@ class ChatListItem extends StatelessWidget {
       this.message,
       //this.isMe,
       this.userId,
+      //this.time,
       {Key? key})
       : super(key: key);
 
   final String message;
   final String userId;
+  //final String time;
   //final bool isMe;
 
   @override
   Widget build(BuildContext context) {
-    print("Hiii");
-    print(message);
-    print(userId);
     //print(isMe);
     return Row(
       children: [
@@ -34,6 +33,15 @@ class ChatListItem extends StatelessWidget {
           userId,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          message,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
           ),
         ),
         Text(

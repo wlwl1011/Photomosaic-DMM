@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:front/screens/history/otherHistory/components/message.dart';
 import 'package:front/screens/history/otherHistory/components/new_message.dart';
+import 'package:get/get.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 class CommentScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _CommentScreenState extends State<CommentScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //getCurrentUser();
+    getCurrentUser();
   }
 
   void getCurrentUser() {
@@ -46,9 +47,11 @@ class _CommentScreenState extends State<CommentScreen> {
         centerTitle: true,
       ),
       body: Container(
+        alignment: Alignment.topLeft,
         child: Column(
           children: [
             Expanded(
+              //flex: 2,
               child: Messages(),
             ),
             NewMessage(),
