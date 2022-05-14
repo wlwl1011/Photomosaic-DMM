@@ -113,7 +113,7 @@ class _CommentScreenState extends State<CommentScreen> {
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(), //데이터 요청 전에는 아무것도 없기 때문에
               );
             }
 
