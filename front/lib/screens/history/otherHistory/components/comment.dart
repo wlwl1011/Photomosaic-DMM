@@ -107,8 +107,8 @@ class _CommentScreenState extends State<CommentScreen> {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('chats/4FdMFTzqL4z0vfCoXq69/message')
-              .snapshots(),
+              .collection('chats/mmPK8w7wnaej8SAAWOQ8/message')
+              .snapshots(), //새로운 밸류 값을 가져와준다.
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
