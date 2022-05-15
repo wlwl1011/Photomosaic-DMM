@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
@@ -16,7 +18,9 @@ import 'package:front/screens/history/main/components/trending.dart';
 import 'package:get/get.dart';
 
 class mainScreen extends StatelessWidget {
-  mainScreen({Key? key}) : super(key: key) {
+  final String nickName;
+
+  mainScreen({required this.nickName, Key? key}) : super(key: key) {
     Get.put(HistoryPageController());
   }
 
@@ -91,7 +95,7 @@ class mainScreen extends StatelessWidget {
         //return NewProjectScreen(); //새 프로젝트 만들기 홈으로 이동
 
         case 2:
-          return UserHistoryPage();
+          return UserHistoryPage(nickName: nickName);
 
         default:
           return const Placeholder();

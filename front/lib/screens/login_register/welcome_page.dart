@@ -29,7 +29,9 @@ class WelcomePage extends StatelessWidget {
       idToken: googleAuth?.idToken,
     );
 
-    Get.to(() => mainScreen());
+    Get.to(() => mainScreen(
+          nickName: ' ', // 사용자 아이디 (닉네임)전달 -구글에서는 어캐 하니?
+        ));
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
@@ -69,7 +71,9 @@ class WelcomePage extends StatelessWidget {
                           Buttons.Facebook,
                           text: "Login with Facebook",
                           onPressed: () {
-                            Get.to(() => mainScreen());
+                            Get.to(() => mainScreen(
+                                  nickName: ' ',
+                                ));
                           },
                         ),
                       ),
@@ -104,7 +108,9 @@ class WelcomePage extends StatelessWidget {
                           Buttons.Twitter,
                           text: "Login with Twitter",
                           onPressed: () {
-                            Get.to(() => mainScreen());
+                            Get.to(() => mainScreen(
+                                  nickName: ' ',
+                                ));
                           },
                         ),
                       ),

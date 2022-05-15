@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/screens/history/main/main_screen.dart';
@@ -119,8 +121,18 @@ class _TargetImageUploadState extends State<TargetImageUpload> {
               color: Colors.white,
             ),
             padding: const EdgeInsets.all(16.5),
-            onPressed: () {
-              Get.to(mainScreen());
+            onPressed: () async {
+              final user = FirebaseAuth.instance.currentUser;
+              print('hhhh');
+              print(user);
+              final userData = await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(user!.uid)
+                  .get(); //현재 모든 유저의 데이터를 담음
+
+              Get.to(() => mainScreen(
+                    nickName: userData.data()!['userId'],
+                  ));
             },
           )
         ],

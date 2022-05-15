@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -123,7 +124,19 @@ class _SignInPageState extends State<SignInPage> {
                               email: _userEmailCtrl.text,
                               password: _userPasswordCtrl.text,
                             );
-                            Get.to(() => mainScreen());
+
+                            final user = FirebaseAuth.instance.currentUser;
+                            print('hhhh');
+                            print(user);
+                            final userData = await FirebaseFirestore.instance
+                                .collection('user')
+                                .doc(user!.uid)
+                                .get(); //현재 모든 유저의 데이터를 담음
+
+                            print(userData.data()!['userId']);
+                            Get.to(() => mainScreen(
+                                  nickName: userData.data()!['userId'],
+                                ));
                             setState(() {
                               Showspinner = false;
                             });

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_launcher_icons/constants.dart';
@@ -120,8 +122,18 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               // width: MediaQuery.of(context).size.width,
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                Get.to(mainScreen());
+              onPressed: () async {
+                final user = FirebaseAuth.instance.currentUser;
+                print('hhhh');
+                print(user);
+                final userData = await FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(user!.uid)
+                    .get(); //현재 모든 유저의 데이터를 담음
+
+                Get.to(() => mainScreen(
+                      nickName: userData.data()!['userId'],
+                    ));
               },
               icon: const Icon(
                 Icons.add_circle,
@@ -334,8 +346,18 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               color: Colors.white,
             ),
             padding: const EdgeInsets.all(16.5),
-            onPressed: () {
-              Get.to(mainScreen());
+            onPressed: () async {
+              final user = FirebaseAuth.instance.currentUser;
+              print('hhhh');
+              print(user);
+              final userData = await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(user!.uid)
+                  .get(); //현재 모든 유저의 데이터를 담음
+
+              Get.to(() => mainScreen(
+                    nickName: userData.data()!['userId'],
+                  ));
             },
           )
         ],
