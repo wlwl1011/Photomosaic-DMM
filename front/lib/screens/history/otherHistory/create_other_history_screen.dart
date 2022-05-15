@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/screens/history/main/main_screen.dart';
+import 'package:front/screens/history/otherHistory/other_history_screen.dart';
+import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
+
+import 'components/avartar_widget.dart';
 
 class CreateOtherHistoryScreen extends StatefulWidget {
   CreateOtherHistoryScreen({Key? key}) : super(key: key);
@@ -13,6 +18,161 @@ class CreateOtherHistoryScreen extends StatefulWidget {
 class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
   var photomosaicImage = Get.arguments;
 
+  Widget _createOtherHistoryScreenBodyWidget() {
+    return SingleChildScrollView(
+      child: Container(
+        width: double.infinity,
+        color: kGreyColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              color: kHotpink,
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              margin: EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+              ),
+              child: AvartarWidget(
+                nickName: 'minzzl',
+                imagePath: "assets/images/profile.jpeg",
+                size: const Size.fromWidth(40.0),
+              ),
+            ),
+            //글상자
+            //사진
+          ],
+        ),
+      ),
+    );
+  }
+
+  void showPostCancelDialogPop() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: const Color.fromARGB(120, 0, 0, 0),
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: ((context, setState) {
+          return AlertDialog(
+            backgroundColor: kBlackColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: const Text(
+              'Stop writing the post?',
+              style: TextStyle(
+                color: kWhiteColor,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            contentPadding: EdgeInsets.only(
+              left: 8,
+              right: 8,
+              top: 20,
+            ),
+            content: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.only(
+                  bottom: 10,
+                ),
+                child: Text(
+                  'If you go back now, this post will disappear.',
+                  style: TextStyle(
+                    color: kWhiteColor,
+                    fontWeight: FontWeight.w300,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            actionsPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            actions: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.to(mainScreen());
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        child: Text(
+                          'Post Delete',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: kHotpink,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        padding: EdgeInsets.only(
+                          top: 12,
+                          bottom: 12,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: kGreyColor,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        child: Text(
+                          'Continue Writing',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: kWhiteColor,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        padding: EdgeInsets.only(
+                          top: 12,
+                          bottom: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: kGreyColor,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          );
+        }));
+      },
+    ).then((value) {
+      setState(() {});
+    });
+  }
+
+  SnackBar postShareSnackBar() {
+    return SnackBar(
+      content: Text(
+        'Post Success!',
+        textAlign: TextAlign.center,
+      ),
+      duration: Duration(seconds: 3),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,17 +182,20 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
         centerTitle: true,
         automaticallyImplyLeading: false,
-        leading: TextButton(
-          onPressed: () {},
-          child: Text('Cancel'),
-          style: TextButton.styleFrom(
-            primary: kWhiteColor,
-            textStyle: TextStyle(fontWeight: FontWeight.w200),
-          ),
+        leading: IconButton(
+          onPressed: () {
+            showPostCancelDialogPop();
+          },
+          icon: Icon(Icons.close),
+          color: kWhiteColor,
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              //게시글 올리기
+              ScaffoldMessenger.of(context).showSnackBar(postShareSnackBar());
+              Get.to(otherHistoryScreen());
+            },
             child: Text('Share'),
             style: TextButton.styleFrom(
               primary: kHotpink,
@@ -41,7 +204,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
           )
         ],
       ),
-      //body: ,
+      body: _createOtherHistoryScreenBodyWidget(),
       backgroundColor: Colors.white,
     );
   }

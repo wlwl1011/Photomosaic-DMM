@@ -217,6 +217,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                 'Do you want to write a post on the hot post?',
                 style: TextStyle(
                   color: kWhiteColor,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
@@ -226,7 +227,8 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Get.to(CreateOtherHistoryScreen());
+                      Get.to(CreateOtherHistoryScreen(),
+                          arguments: photomosaicImage);
                     },
                     child: Text('Yes'),
                     style: TextButton.styleFrom(
@@ -241,6 +243,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                     child: Text('No'),
                     style: TextButton.styleFrom(
                       primary: kWhiteColor,
+                      textStyle: TextStyle(fontWeight: FontWeight.w300),
                     ),
                   ),
                 ],
