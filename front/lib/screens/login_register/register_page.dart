@@ -148,8 +148,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           // final userInfo = await FirebaseAuth.instance.currentUser!.updateProfile(displayName: user.diplayName);
                           FirebaseAuth.instance.currentUser!
                               .updateDisplayName(_userNameCtrl.text);
-                          FirebaseAuth.instance.currentUser!.updatePhotoURL(
-                              'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x.png');
+                          FirebaseAuth.instance.currentUser!
+                              .updatePhotoURL('https://ifh.cc/g/YwHHSz.jpg');
                           await r.user!.reload();
                           // await r.user!.sendEmailVerification();
                           Get.to(() => WelcomePage());

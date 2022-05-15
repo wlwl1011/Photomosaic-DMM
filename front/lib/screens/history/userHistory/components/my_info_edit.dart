@@ -188,7 +188,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
               SizedBox(
                 height: Get.height * 0.15,
               ),
-              const RoundedImage(
+              RoundedImage(
                 imagePath: "assets/images/profile.jpeg",
                 size: Size.fromWidth(70.0),
               ),

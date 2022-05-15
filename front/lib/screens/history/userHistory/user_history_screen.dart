@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/main_controller.dart';
@@ -22,7 +23,7 @@ class UserHistoryPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const MyInfo(),
+            MyInfo(),
             SizedBox(
               height: Get.height * 0.04,
             ),
@@ -63,7 +64,7 @@ Widget _editButton() {
             ),
           ),
           onTap: () {
-            Get.to(() => const MyInfoEdit());
+            Get.to(() => const MyInfoEdit()); // 값 전달
           },
         ))
       ],

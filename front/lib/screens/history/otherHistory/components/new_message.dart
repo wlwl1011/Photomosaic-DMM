@@ -19,6 +19,7 @@ class _NewMessageState extends State<NewMessage> {
     print("send message");
     FocusScope.of(context).unfocus();
     final user = FirebaseAuth.instance.currentUser;
+    print('hhhh');
     print(user);
     final userData = await FirebaseFirestore.instance
         .collection('user')

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:front/screens/history/userHistory/components/radial_progress.dart';
 import 'package:front/screens/history/userHistory/components/rounded_image.dart';
 
