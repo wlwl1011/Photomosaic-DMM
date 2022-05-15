@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "248936994992-apfjm79u7ddjlhq4eo840ukji20jcd0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.photomosaic.dmm",
+            "certificate_hash": "0f9544df808a8cafe1a99a01b112741ac602ce7c"
+          }
+        },
+        {
           "client_id": "248936994992-5833t6nsr2ss8odrcehshre6cimtlivg.apps.googleusercontent.com",
           "client_type": 3
         }

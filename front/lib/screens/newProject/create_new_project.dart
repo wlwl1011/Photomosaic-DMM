@@ -7,6 +7,7 @@ import 'package:front/controller/heart_controller.dart';
 import 'package:front/controller/main_controller.dart';
 import 'package:front/controller/shake_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
+import 'package:front/screens/history/otherHistory/create_other_history_screen.dart';
 import 'package:front/screens/newProject/prolog_new_project.dart';
 import 'package:get/get.dart';
 import 'package:shake/shake.dart';
@@ -56,7 +57,10 @@ class _CreateNewProjectState extends State<CreateNewProject> {
       builder: (controller) {
         print("Build!!");
         return ElevatedButton.icon(
-          onPressed: () => {getImageFromGallery(controller, photomosaicImage)},
+          onPressed: () => {
+            getImageFromGallery(controller, photomosaicImage),
+            showHotPostCreateDialogPop()
+          },
           icon: const Icon(Icons.history),
           style: ElevatedButton.styleFrom(
               primary: kHotpink,
@@ -187,6 +191,67 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
           ]),
     );
+  }
+
+  void showHotPostCreateDialogPop() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: const Color.fromARGB(120, 0, 0, 0),
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: ((context, setState) {
+          return AlertDialog(
+            backgroundColor: kBlackColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: const Text(
+              'Saved Image in History!',
+              style: TextStyle(
+                color: kWhiteColor,
+                fontWeight: FontWeight.bold,
+              ),
+              //textAlign: TextAlign.center,
+            ),
+            content: SingleChildScrollView(
+              child: Text(
+                'Do you want to write a post on the hot post?',
+                style: TextStyle(
+                  color: kWhiteColor,
+                ),
+              ),
+            ),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Get.to(CreateOtherHistoryScreen());
+                    },
+                    child: Text('Yes'),
+                    style: TextButton.styleFrom(
+                      primary: kHotpink,
+                      textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: Text('No'),
+                    style: TextButton.styleFrom(
+                      primary: kWhiteColor,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          );
+        }));
+      },
+    ).then((value) {
+      setState(() {});
+    });
   }
 
   void showShareDialogPop() {

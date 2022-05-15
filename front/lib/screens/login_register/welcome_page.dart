@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front/main.dart';
 import 'package:front/screens/history/event/event_screen.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import '../../../constants/color_constant.dart';
@@ -9,8 +10,30 @@ import './widgets/widget.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class WelcomePage extends StatelessWidget {
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    Get.to(() => mainScreen());
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,9 +88,10 @@ class WelcomePage extends StatelessWidget {
                         child: SignInButton(
                           Buttons.Google,
                           text: "Login with Google",
-                          onPressed: () {
-                            Get.to(() => mainScreen());
-                          },
+                          onPressed: signInWithGoogle,
+                          // onPressed: () {
+                          //   // Get.to(() => mainScreen());
+                          // },
                         ),
                       ),
                       SizedBox(
