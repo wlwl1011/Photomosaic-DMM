@@ -238,7 +238,19 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      // final user = FirebaseAuth.instance.currentUser;
+                      // print('hhhh');
+                      // print(user);
+                      // final userData = await FirebaseFirestore.instance
+                      //     .collection('user')
+                      //     .doc(user!.uid)
+                      //     .get();
+                      // Get.to(
+                      //     CreateOtherHistoryScreen(
+                      //       nickName: userData.data()!['userId'],
+                      //     ),
+                      //     arguments: photomosaicImage);
                       Get.to(CreateOtherHistoryScreen(),
                           arguments: photomosaicImage);
                     },
