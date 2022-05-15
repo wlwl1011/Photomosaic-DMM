@@ -98,101 +98,204 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
               textAlign: TextAlign.center,
             ),
             content: SingleChildScrollView(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
                 children: [
-                  Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          print('flower click');
-                          color_controller.ChangeButtonColor(2);
-                        });
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            constraints: const BoxConstraints(
-                                maxHeight: 80, maxWidth: 80),
-                            child: Image.asset(
-                              'assets/images/flower_theme.png',
-                              fit: BoxFit.contain,
-                            ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              print('flower click');
+                              color_controller.ChangeButtonColor(2);
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight: 80, maxWidth: 80),
+                                child: Image.asset(
+                                  'assets/images/flower_theme.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              const Text(
+                                'Flower',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: kWhiteColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                          const Text(
-                            'Flower',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: kWhiteColor,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      Flexible(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              print('sunset click');
+                              color_controller.ChangeButtonColor(3);
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight: 80, maxWidth: 80),
+                                child: Image.asset(
+                                  'assets/images/sunset_theme.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              const Text(
+                                'Sunset',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: kWhiteColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              print('money click');
+                              color_controller.ChangeButtonColor(4);
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight: 80, maxWidth: 80),
+                                child: Image.asset(
+                                  'assets/images/money_theme.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              const Text(
+                                'Money',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: kWhiteColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          print('tree click');
-                          color_controller.ChangeButtonColor(3);
-                        });
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            constraints: const BoxConstraints(
-                                maxHeight: 80, maxWidth: 80),
-                            child: Image.asset(
-                              'assets/images/tree_theme.png',
-                              fit: BoxFit.contain,
-                            ),
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              print('tree click');
+                              color_controller.ChangeButtonColor(5);
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight: 80, maxWidth: 80),
+                                child: Image.asset(
+                                  'assets/images/tree_theme.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              const Text(
+                                'Tree',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: kWhiteColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                          const Text(
-                            'Tree',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: kWhiteColor,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          print('ocean click');
-                          color_controller.ChangeButtonColor(4);
-                        });
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            constraints: const BoxConstraints(
-                                maxHeight: 80, maxWidth: 80),
-                            child: Image.asset(
-                              'assets/images/ocean_theme.png',
-                              fit: BoxFit.contain,
-                            ),
+                      Flexible(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              print('ocean click');
+                              color_controller.ChangeButtonColor(6);
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight: 80, maxWidth: 80),
+                                child: Image.asset(
+                                  'assets/images/ocean_theme.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              const Text(
+                                'Ocean',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: kWhiteColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                          const Text(
-                            'Ocean',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: kWhiteColor,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      Flexible(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              print('space click');
+                              color_controller.ChangeButtonColor(7);
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight: 80, maxWidth: 80),
+                                child: Image.asset(
+                                  'assets/images/space_theme.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              const Text(
+                                'Space',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: kWhiteColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
