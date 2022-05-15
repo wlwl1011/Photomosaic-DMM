@@ -12,8 +12,10 @@ import 'package:image_picker/image_picker.dart';
 
 class UserHistoryPage extends StatelessWidget {
   const UserHistoryPage({
+    required this.nickName,
     Key? key,
   }) : super(key: key);
+  final String nickName;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,9 @@ class UserHistoryPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            MyInfo(),
+            MyInfo(
+              nickName: nickName,
+            ),
             SizedBox(
               height: Get.height * 0.04,
             ),
