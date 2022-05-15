@@ -65,6 +65,13 @@ class _MyInfoEditState extends State<MyInfoEdit> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final user = FirebaseAuth.instance.currentUser;
+    String image;
+    if (user!.photoURL == 'assets/images/userImageDefault.jpg') {
+      image = 'assets/images/userImageDefault.jpg';
+    } else {
+      image = user.photoURL!;
+    }
 
     return Scaffold(
         appBar: AppBar(
@@ -189,7 +196,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                 height: Get.height * 0.15,
               ),
               RoundedImage(
-                imagePath: "assets/images/profile.jpeg",
+                imagePath: image,
                 size: Size.fromWidth(70.0),
               ),
               const SizedBox(
@@ -204,8 +211,10 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                     onTap: () async {
                       var picker = ImagePicker();
-                      var image =
-                          await picker.pickImage(source: ImageSource.gallery);
+                      String image = (await picker.pickImage(
+                          source: ImageSource.gallery)) as String;
+                      final r = FirebaseAuth.instance;
+                      r.currentUser!.updatePhotoURL(image);
                     },
                   ),
                 ],

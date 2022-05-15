@@ -64,7 +64,7 @@ Widget _editButton() {
             ),
           ),
           onTap: () {
-            Get.to(() => const MyInfoEdit()); // 값 전달
+            Get.to(() => const MyInfoEdit());
           },
         ))
       ],

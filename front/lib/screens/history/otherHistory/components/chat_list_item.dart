@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'avartar_widget.dart';
@@ -19,11 +20,18 @@ class ChatListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //print(isMe);
+    final user = FirebaseAuth.instance.currentUser;
+    String image;
+    if (user!.photoURL == 'assets/images/userImageDefault.jpg') {
+      image = 'assets/images/userImageDefault.jpg';
+    } else {
+      image = user.photoURL!;
+    }
     return Row(
       children: [
         AvartarWidget(
           nickName: '',
-          imagePath: "assets/images/drawing.png",
+          imagePath: image,
           size: const Size.fromWidth(40.0),
         ),
         const SizedBox(

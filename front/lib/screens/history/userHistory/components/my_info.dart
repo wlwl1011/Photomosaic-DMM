@@ -10,17 +10,24 @@ class MyInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    String image;
+    if (user!.photoURL == 'assets/images/userImageDefault.jpg') {
+      image = 'assets/images/userImageDefault.jpg';
+    } else {
+      image = user.photoURL!;
+    }
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           height: Get.height * 0.1,
         ),
-        const RadialProgress(
+        RadialProgress(
           width: 4,
           goalCompleted: 0.9,
           child: RoundedImage(
-            imagePath: "assets/images/profile.jpeg",
+            imagePath: image,
             size: Size.fromWidth(70.0),
           ),
         ),
