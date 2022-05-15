@@ -135,7 +135,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             password: _userPasswordCtrl.text,
                           );
 
-                          await FirebaseFirestore.instance
+                          await FirebaseFirestore
+                              .instance // userID 추가하는 코드 추가함! -민지-
                               .collection('user')
                               .doc(r.user!.uid)
                               .set({
