@@ -114,7 +114,13 @@ class _SignInPageState extends State<SignInPage> {
                             Showspinner = true;
                           });
                           // Get.to(() => mainScreen());
-                          if (!_formKey.currentState!.validate()) return;
+                          if (!_formKey.currentState!.validate()) {
+                            print("validate");
+                            setState(() {
+                              Showspinner = false;
+                            });
+                            return;
+                          }
                           try {
                             setState(() {
                               _loading = true;
@@ -143,7 +149,10 @@ class _SignInPageState extends State<SignInPage> {
                           } catch (e) {
                             print(e);
                           } finally {
-                            setState(() => _loading = false);
+                            setState(() {
+                              _loading = false;
+                              Showspinner = false;
+                            });
                           }
                         },
                         bgColor: Colors.black87,
