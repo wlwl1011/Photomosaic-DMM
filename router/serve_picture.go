@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"photomosaic_dmm/common"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,7 +24,12 @@ func postPicture(c *gin.Context) {
 			panic(err)
 		}
 
-		db.Upload("tmpuid", filepath.Ext(file.Filename), reader, file.Size)
+		pid := common.GeneratePID("picture", filepath.Ext(file.Filename))
+
+		err = db.Upload("tmpuid", pid, reader, file.Size)
+		if err != nil {
+			panic(err)
+		}
 		// c.SaveUploadedFile(file, dst)
 	}
 

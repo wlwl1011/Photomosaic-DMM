@@ -25,6 +25,7 @@ func NewRouter() *gin.Engine {
 		apiv1.DELETE("/delete", deletePicture)
 		apiv1.GET("/objectList", getList)
 		apiv1.GET("/object", getPicture)
+		apiv1.POST("/photomosaic/create", postPhotomosic)
 	}
 
 	r := gin.New()

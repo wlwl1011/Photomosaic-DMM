@@ -1,10 +1,8 @@
 package model
 
 import (
-	"fmt"
 	"io"
 
-	"github.com/google/uuid"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -25,19 +23,18 @@ func NewPostgresqlHandler() (DBHandler, error) {
 	return &postgresHandler{db}, nil
 }
 
-func (h *postgresHandler) Upload(uid, ext string, reader io.Reader, objectSize int64) (string, error) {
+func (h *postgresHandler) Upload(uid, pid string, reader io.Reader, objectSize int64) error {
 	var picture Picture
 	picture.UID = uid
-	picture.PID = uuid.New().String() + ext
+	picture.PID = pid
 
 	tx := h.db.Create(&picture)
 	if tx.Error != nil {
-		fmt.Println(tx.Error)
-		return "", nil
+		return tx.Error
 	}
 
 	putObject(uid+"/"+picture.PID, reader, objectSize)
-	return "success", nil
+	return nil
 }
 
 func (h *postgresHandler) Delete(uid, pid string) error {
