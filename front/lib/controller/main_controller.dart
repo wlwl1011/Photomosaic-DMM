@@ -1,15 +1,15 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/constatns.dart';
 import 'package:get/state_manager.dart';
-import 'package:image_picker/image_picker.dart';
 
 class MainController extends GetxController {
   var list = [].obs;
 
   void loadList() async {
     var dio = Dio();
-    print("http://$serverAdr/api/v1/objectList");
 
     var resp = await dio.get(
       "http://$serverAdr/api/v1/objectList",
@@ -27,8 +27,28 @@ class MainController extends GetxController {
     loadList();
   }
 
-  Upload(var imageFile) async {
-    print("Upload");
+  Future<void> Save(String pid) async {
+    Dio dio = Dio();
+
+    var body = <String, dynamic>{
+      "pid": pid,
+      "uid": "tmpuid",
+    };
+
+    await dio
+        .put("http://$serverAdr/api/v1/photomosaic/save",
+            options: Options(
+              headers: {
+                "content-type": "application/json",
+              },
+            ),
+            data: jsonEncode(body))
+        .then((response) {
+      loadList();
+    }).catchError((error) => print(error));
+  }
+
+  Future<String> Upload(var imageFile) async {
     print(imageFile);
     print(imageFile.path);
     String fileName = imageFile.path.split('/').last;
@@ -40,12 +60,20 @@ class MainController extends GetxController {
       ),
     });
 
-    Dio dio = new Dio();
+    Dio dio = Dio();
 
-    dio.post("http://$serverAdr/api/v1/upload", data: data).then((response) {
-      print(response);
+    var resp = await dio
+        .post("http://$serverAdr/api/v1/photomosaic/create", data: data)
+        .then((response) {
       loadList();
+      return response;
     }).catchError((error) => print(error));
+
+    if (resp.statusCode == 201) {
+      return resp.data as String;
+    } else {
+      return "error";
+    }
   }
 
   Future<bool> Delete(String imageUrl, VoidCallback callback) async {
@@ -60,7 +88,7 @@ class MainController extends GetxController {
 
     var uid = "tmpuid";
 
-    Dio dio = new Dio();
+    Dio dio = Dio();
     dio.delete("http://$serverAdr/api/v1/delete",
         queryParameters: <String, dynamic>{
           "pid": pid,

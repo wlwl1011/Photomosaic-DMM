@@ -23,7 +23,7 @@ func NewPostgresqlHandler() (DBHandler, error) {
 	return &postgresHandler{db}, nil
 }
 
-func (h *postgresHandler) Upload(uid, pid string, reader io.Reader, objectSize int64) error {
+func (h *postgresHandler) Save(uid, pid string) error {
 	var picture Picture
 	picture.UID = uid
 	picture.PID = pid
@@ -33,8 +33,11 @@ func (h *postgresHandler) Upload(uid, pid string, reader io.Reader, objectSize i
 		return tx.Error
 	}
 
-	putObject(uid+"/"+picture.PID, reader, objectSize)
 	return nil
+}
+
+func (h *postgresHandler) Upload(uid, pid string, reader io.Reader, objectSize int64) error {
+	return putObject(uid+"/"+pid, reader, objectSize)
 }
 
 func (h *postgresHandler) Delete(uid, pid string) error {

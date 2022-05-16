@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:front/controller/main_controller.dart';
 import 'package:front/controller/select_theme_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/newProject/Ad_screen.dart';
-import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
 import 'package:front/constants/color_constant.dart';
 
@@ -307,11 +307,15 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       //포토모자이크 생성하는 함수
                       //생성한 포토모자이크 전달
                       photomosaicImage = targetImage;
-                      Get.to(AdScreen(), arguments: photomosaicImage);
+
+                      // send post message to create photomosaic
+                      var controller = Get.find<MainController>();
+                      Get.to(AdScreen(),
+                          arguments: await controller.Upload(photomosaicImage));
                     },
                     child: const Text('Create Photomosaic'),
                     style: ElevatedButton.styleFrom(

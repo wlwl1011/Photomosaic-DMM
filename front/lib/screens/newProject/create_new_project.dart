@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_launcher_icons/constants.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/constants/constatns.dart';
 import 'package:front/controller/heart_controller.dart';
 import 'package:front/controller/main_controller.dart';
 import 'package:front/controller/shake_controller.dart';
@@ -25,7 +26,8 @@ class CreateNewProject extends StatefulWidget {
 }
 
 class _CreateNewProjectState extends State<CreateNewProject> {
-  var photomosaicImage = Get.arguments;
+  // var photomosaicImage = Get.arguments;
+  final String pid = Get.arguments as String;
   final shake_controller = Get.put(ShakeController());
   late ShakeDetector shakeaction;
   var blank = Image.asset('assets/images/empty_image.png');
@@ -46,22 +48,15 @@ class _CreateNewProjectState extends State<CreateNewProject> {
     super.initState();
   }
 
-  Future getImageFromGallery(MainController controller, var image) async {
-    final ImagePicker _picker = ImagePicker();
-    print("upload image");
-    print(image);
-    if (image == null || image.path == null) return null;
-    controller.Upload(image);
-  }
-
   Widget uploadImage(BuildContext context) {
     return GetBuilder<MainController>(
       builder: (controller) {
         print("Build!!");
         return ElevatedButton.icon(
-          onPressed: () => {
-            getImageFromGallery(controller, photomosaicImage),
-            showHotPostCreateDialogPop()
+          onPressed: () async {
+            // getImageFromGallery(controller, photomosaicImage),
+            await controller.Save('photomosaic-$pid');
+            showHotPostCreateDialogPop();
           },
           icon: const Icon(Icons.history),
           style: ElevatedButton.styleFrom(
@@ -108,14 +103,24 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
             Visibility(
               visible: true, //_isVisible,
-              child: Container(
+              child: SizedBox(
                 height: 250,
-                width: MediaQuery.of(context).size.width - 100,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: FileImage(photomosaicImage),
-                        fit: BoxFit.contain)),
+                child: Image.network(
+                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid',
+                ),
               ),
+              // child: Container(
+              //   height: 250,
+              //   width: MediaQuery.of(context).size.width - 100,
+              //   decoration: BoxDecoration(
+              //     image: DecorationImage(
+              //       image: FileImage(photomosaicImage),
+              //       fit: BoxFit.contain,
+              //     ),
+
+              //     image: .image,
+              //   ),
+              // ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
@@ -155,21 +160,21 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                String photo_path = photomosaicImage.path;
-                print('phtomosaic path > $photo_path');
+                // String photo_path = photomosaicImage.path;
+                // print('phtomosaic path > $photo_path');
 
-                GallerySaver.saveImage(photo_path).then((value) {
-                  print('>>>> save value = $value');
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                      'Download Success!',
-                      textAlign: TextAlign.center,
-                    ),
-                    duration: Duration(seconds: 3),
-                  ));
-                }).catchError((err) {
-                  print('error :$err');
-                });
+                // GallerySaver.saveImage(photo_path).then((value) {
+                //   print('>>>> save value = $value');
+                //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                //     content: Text(
+                //       'Download Success!',
+                //       textAlign: TextAlign.center,
+                //     ),
+                //     duration: Duration(seconds: 3),
+                //   ));
+                // }).catchError((err) {
+                //   print('error :$err');
+                // });
               },
               icon: const Icon(
                 Icons.save_alt,
@@ -251,8 +256,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                       //       nickName: userData.data()!['userId'],
                       //     ),
                       //     arguments: photomosaicImage);
-                      Get.to(CreateOtherHistoryScreen(),
-                          arguments: photomosaicImage);
+                      Get.to(CreateOtherHistoryScreen(), arguments: pid);
                     },
                     child: Text('Yes'),
                     style: TextButton.styleFrom(
