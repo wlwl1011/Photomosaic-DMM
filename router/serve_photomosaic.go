@@ -45,7 +45,6 @@ func postPhotomosaic(c *gin.Context) {
 func putPhotomosaic(c *gin.Context) {
 	defer handleError(c)
 
-	print("^^")
 	body := map[string]interface{}{}
 
 	err := c.BindJSON(&body)
