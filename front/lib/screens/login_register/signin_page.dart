@@ -146,8 +146,19 @@ class _SignInPageState extends State<SignInPage> {
                             setState(() {
                               Showspinner = false;
                             });
-                          } catch (e) {
-                            print(e);
+                          } on FirebaseAuthException catch (e) {
+                            await Get.dialog(
+                              AlertDialog(
+                                title: const Text('!'),
+                                content: Text(e.code),
+                                actions: [
+                                  TextButton(
+                                    child: const Text("Ok"),
+                                    onPressed: () => Get.back(),
+                                  ),
+                                ],
+                              ),
+                            );
                           } finally {
                             setState(() {
                               _loading = false;
