@@ -48,7 +48,7 @@ class MainController extends GetxController {
     }).catchError((error) => print(error));
   }
 
-  Future<String> Upload(var imageFile) async {
+  Future<String> Upload(dynamic imageFile, String theme) async {
     print(imageFile);
     print(imageFile.path);
     String fileName = imageFile.path.split('/').last;
@@ -63,7 +63,13 @@ class MainController extends GetxController {
     Dio dio = Dio();
 
     var resp = await dio
-        .post("http://$serverAdr/api/v1/photomosaic/create", data: data)
+        .post(
+      "http://$serverAdr/api/v1/photomosaic/create",
+      queryParameters: <String, dynamic>{
+        "theme": theme,
+      },
+      data: data,
+    )
         .then((response) {
       loadList();
       return response;

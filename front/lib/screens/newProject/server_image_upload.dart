@@ -21,7 +21,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
   String keyword = '';
   final color_controller = Get.put(SelectThemeController());
   final TextEditingController _textdelete = TextEditingController();
-
+  String theme = '';
   Widget _serverImageUploadBodyWidget() {
     return Container(
       height: MediaQuery.of(context).size.height - 50,
@@ -111,6 +111,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                           onTap: () {
                             setState(() {
                               print('flower click');
+                              theme = 'Flower';
                               color_controller.ChangeButtonColor(2);
                             });
                           },
@@ -142,6 +143,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                           onTap: () {
                             setState(() {
                               print('sunset click');
+                              theme = 'Sunset';
                               color_controller.ChangeButtonColor(3);
                             });
                           },
@@ -173,6 +175,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                           onTap: () {
                             setState(() {
                               print('money click');
+                              theme = 'Money';
                               color_controller.ChangeButtonColor(4);
                             });
                           },
@@ -210,6 +213,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                           onTap: () {
                             setState(() {
                               print('tree click');
+                              theme = 'Tree';
                               color_controller.ChangeButtonColor(5);
                             });
                           },
@@ -241,6 +245,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                           onTap: () {
                             setState(() {
                               print('ocean click');
+                              theme = 'Ocean';
                               color_controller.ChangeButtonColor(6);
                             });
                           },
@@ -272,6 +277,7 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                           onTap: () {
                             setState(() {
                               print('space click');
+                              theme = 'Space';
                               color_controller.ChangeButtonColor(7);
                             });
                           },
@@ -315,7 +321,8 @@ class _ServerImageUploadState extends State<ServerImageUpload> {
                       // send post message to create photomosaic
                       var controller = Get.find<MainController>();
                       Get.to(AdScreen(),
-                          arguments: await controller.Upload(photomosaicImage));
+                          arguments:
+                              await controller.Upload(photomosaicImage, theme));
                     },
                     child: const Text('Create Photomosaic'),
                     style: ElevatedButton.styleFrom(

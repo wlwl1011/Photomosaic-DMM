@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/constants/constatns.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/history/otherHistory/other_history_screen.dart';
 import 'package:front/screens/newProject/create_new_project.dart';
@@ -18,7 +19,7 @@ class CreateOtherHistoryScreen extends StatefulWidget {
 }
 
 class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
-  var photomosaicImage = Get.arguments;
+  var pid = Get.arguments;
 
   Widget _createOtherHistoryScreenBodyWidget() {
     return SingleChildScrollView(
@@ -47,7 +48,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: TextField(
+              child: const TextField(
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 decoration: InputDecoration(
@@ -57,15 +58,18 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                 ),
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: FileImage(photomosaicImage),
-                      fit: BoxFit.fitWidth)),
+            Image.network(
+              'http://$serverAdr/api/v1/object?pid=photomosaic-$pid',
             ),
-            SizedBox(
+            // Container(
+            //   height: MediaQuery.of(context).size.height,
+            //   width: double.infinity,
+            //   decoration: BoxDecoration(
+            //       image: DecorationImage(
+            //           image: FileImage(photomosaicImage),
+            //           fit: BoxFit.fitWidth)),
+            // ),
+            const SizedBox(
               height: 20,
             ),
           ],

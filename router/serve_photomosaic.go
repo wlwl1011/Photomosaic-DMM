@@ -17,6 +17,11 @@ import (
 func postPhotomosaic(c *gin.Context) {
 	defer handleError(c)
 
+	theme := c.Query("theme")
+	if len(theme) == 0 {
+		panic(errors.New("request should include theme query parameter"))
+	}
+
 	form, _ := c.MultipartForm()
 	log.Println("upload file")
 	file := form.File["files"][0]
@@ -33,7 +38,8 @@ func postPhotomosaic(c *gin.Context) {
 	}
 
 	reader.Seek(0, 0)
-	err = makePhotomosaic(pid, "red", reader)
+	log.Println("theme is", theme)
+	err = makePhotomosaic(pid, theme, reader)
 	if err != nil {
 		panic(err)
 	}
