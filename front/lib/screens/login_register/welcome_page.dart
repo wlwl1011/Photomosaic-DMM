@@ -13,8 +13,34 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class WelcomePage extends StatelessWidget {
+  Future<UserCredential> signInWithTwitter() async {
+    // Create a TwitterLogin instance
+    // ignore: unnecessary_new
+    final twitterLogin = new TwitterLogin(
+        apiKey: 'VV0rcPEzQEioeJbd9EmZ1IGNW',
+        apiSecretKey: '7vITt9lciEIA5J5uz4wDB8pXfD6J1QFFjPhYfzRf3WUXi0DYZq',
+        redirectURI:
+            'https://photomosaic-dmm.firebaseapp.com/__/auth/handler://');
+
+    // Trigger the sign-in flow
+    final authResult = await twitterLogin.login();
+
+    // Create a credential from the access token
+    final twitterAuthCredential = TwitterAuthProvider.credential(
+      accessToken: authResult.authToken!,
+      secret: authResult.authTokenSecret!,
+    );
+    Get.to(() => mainScreen());
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance
+        .signInWithCredential(twitterAuthCredential);
+  }
+
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -34,6 +60,19 @@ class WelcomePage extends StatelessWidget {
         ));
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    Get.to(() => mainScreen());
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 
   @override
@@ -70,11 +109,15 @@ class WelcomePage extends StatelessWidget {
                         child: SignInButton(
                           Buttons.Facebook,
                           text: "Login with Facebook",
+<<<<<<< Updated upstream
                           onPressed: () {
                             Get.to(() => mainScreen(
                                   nickName: ' ',
                                 ));
                           },
+=======
+                          onPressed: signInWithFacebook,
+>>>>>>> Stashed changes
                         ),
                       ),
                       SizedBox(
@@ -107,11 +150,15 @@ class WelcomePage extends StatelessWidget {
                         child: SignInButton(
                           Buttons.Twitter,
                           text: "Login with Twitter",
+<<<<<<< Updated upstream
                           onPressed: () {
                             Get.to(() => mainScreen(
                                   nickName: ' ',
                                 ));
                           },
+=======
+                          onPressed: signInWithTwitter,
+>>>>>>> Stashed changes
                         ),
                       ),
                     ]),
