@@ -34,7 +34,9 @@ class WelcomePage extends StatelessWidget {
       accessToken: authResult.authToken!,
       secret: authResult.authTokenSecret!,
     );
-    Get.to(() => mainScreen());
+    Get.to(() => mainScreen(
+          nickName: ' ',
+        ));
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance
@@ -70,7 +72,9 @@ class WelcomePage extends StatelessWidget {
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-    Get.to(() => mainScreen());
+    Get.to(() => mainScreen(
+          nickName: ' ',
+        ));
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
@@ -109,15 +113,7 @@ class WelcomePage extends StatelessWidget {
                         child: SignInButton(
                           Buttons.Facebook,
                           text: "Login with Facebook",
-<<<<<<< Updated upstream
-                          onPressed: () {
-                            Get.to(() => mainScreen(
-                                  nickName: ' ',
-                                ));
-                          },
-=======
                           onPressed: signInWithFacebook,
->>>>>>> Stashed changes
                         ),
                       ),
                       SizedBox(
@@ -150,15 +146,7 @@ class WelcomePage extends StatelessWidget {
                         child: SignInButton(
                           Buttons.Twitter,
                           text: "Login with Twitter",
-<<<<<<< Updated upstream
-                          onPressed: () {
-                            Get.to(() => mainScreen(
-                                  nickName: ' ',
-                                ));
-                          },
-=======
                           onPressed: signInWithTwitter,
->>>>>>> Stashed changes
                         ),
                       ),
                     ]),
