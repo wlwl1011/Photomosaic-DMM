@@ -127,8 +127,29 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () async {
                         // Get.to(() => mainScreen());
                         if (!_formKey.currentState!.validate()) return;
+                        // if (_userPasswordCtrl.text.length < 6) {
+                        //   //비밀번호가 6자 미만일 때
+                        //   await Get.dialog(
+                        //     AlertDialog(
+                        //       title: const Text('!'),
+                        //       content: Text("비밀번호는 6자 이상이어야 합니다."),
+                        //       actions: [
+                        //         TextButton(
+                        //           child: const Text("Ok"),
+                        //           onPressed: () => Get.back(),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   );
+                        // }
+                        // else if {
+                        //   // 이메일 형식이 맞지 않을 때
+
+                        // }
+                        // else {
                         try {
                           setState(() => _loading = true);
+
                           final r = await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                             email: _userEmailCtrl.text,
@@ -153,11 +174,24 @@ class _RegisterPageState extends State<RegisterPage> {
                           await r.user!.reload();
                           // await r.user!.sendEmailVerification();
                           Get.to(() => WelcomePage());
-                        } catch (e) {
-                          print(e);
+                        } on FirebaseAuthException catch (e) {
+                          await Get.dialog(
+                            AlertDialog(
+                              title: const Text('!'),
+                              content: Text(e.code),
+                              actions: [
+                                TextButton(
+                                  child: const Text("Ok"),
+                                  onPressed: () => Get.back(),
+                                ),
+                              ],
+                            ),
+                          );
+                          // print(e);
                         } finally {
                           if (mounted) setState(() => _loading = false);
                         }
+                        // }
                       },
                       bgColor: Colors.black87,
                       textColor: Colors.white,
