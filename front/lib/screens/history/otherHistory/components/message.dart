@@ -38,7 +38,7 @@ class Messages extends StatelessWidget {
             print(chatDocs[index]['time']);
             return Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: Get.height * 0.005, horizontal: Get.width * 0.005),
+                  vertical: Get.height * 0.01, horizontal: Get.width * 0.015),
               child: ChatListItem(
                 chatDocs[index]['text'],
                 //chatDocs[index]['userID'].toString() == user!.uid,
