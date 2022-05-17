@@ -1,7 +1,10 @@
 import 'package:front/constants/color_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/login_register/welcome_page.dart';
 import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -12,6 +15,19 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   var isLoading = false;
+  bool isLoggedIn = false;
+  @override
+  void initState() {
+    isLoggedIn = false;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    if (auth.currentUser != null) {
+      setState(() {
+        isLoggedIn = true;
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!isLoading) {
@@ -23,8 +39,18 @@ class _SplashState extends State<Splash> {
         );
       });
     } else {
-      Future.delayed(const Duration(milliseconds: 2000), () {
-        Get.offAll(WelcomePage(), transition: null);
+      Future.delayed(const Duration(milliseconds: 2000), () async {
+        if (isLoggedIn == true) {
+          final user = FirebaseAuth.instance.currentUser;
+          final userData = await FirebaseFirestore.instance
+              .collection('user')
+              .doc(user!.uid)
+              .get(); //현재 모든 유저의 데이터를 담음
+          Get.offAll(mainScreen(nickName: userData.data()!['userId']),
+              transition: null);
+        } else {
+          Get.offAll(WelcomePage(), transition: null);
+        }
       });
     }
 

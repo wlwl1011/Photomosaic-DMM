@@ -2,8 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/screens/history/event/event_screen.dart';
 import 'package:front/screens/history/main/main_screen.dart';
@@ -27,6 +25,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController _userEmailCtrl = TextEditingController();
   TextEditingController _userPasswordCtrl = TextEditingController();
   bool _loading = false;
+  String userInfo = " ";
 
   @override
   void dispose() {
