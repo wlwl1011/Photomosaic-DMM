@@ -126,15 +126,16 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                   children: [
                     InkWell(
                       onTap: () async {
-                        final userinfo = FirebaseAuth.instance.currentUser;
-                        final userData = await FirebaseFirestore.instance
-                            .collection('user')
-                            .doc(userinfo!.uid)
-                            .get();
+                        // final userinfo = FirebaseAuth.instance.currentUser;
+                        // final userData = await FirebaseFirestore.instance
+                        //     .collection('user')
+                        //     .doc(userinfo!.uid)
+                        //     .get();
 
-                        Get.to(mainScreen(
-                          nickName: userData.data()!['userId'],
-                        ));
+                        // Get.to(mainScreen(
+                        //   nickName: userData.data()!['userId'],
+                        // ));
+                        Get.to(mainScreen(nickName: pid));
                       },
                       child: Container(
                         width: double.infinity,

@@ -128,17 +128,18 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
             ElevatedButton.icon(
               onPressed: () async {
-                final user = FirebaseAuth.instance.currentUser;
-                print('hhhh');
-                print(user);
-                final userData = await FirebaseFirestore.instance
-                    .collection('user')
-                    .doc(user!.uid)
-                    .get(); //현재 모든 유저의 데이터를 담음
+                // final user = FirebaseAuth.instance.currentUser;
+                // print('hhhh');
+                // print(user);
+                // final userData = await FirebaseFirestore.instance
+                //     .collection('user')
+                //     .doc(user!.uid)
+                //     .get(); //현재 모든 유저의 데이터를 담음
 
-                Get.to(() => mainScreen(
-                      nickName: userData.data()!['userId'],
-                    ));
+                // Get.to(() => mainScreen(
+                //       nickName: userData.data()!['userId'],
+                //     ));
+                Get.to(mainScreen(nickName: pid));
               },
               icon: const Icon(
                 Icons.add_circle,
