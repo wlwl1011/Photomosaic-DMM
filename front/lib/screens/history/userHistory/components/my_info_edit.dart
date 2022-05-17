@@ -210,11 +210,13 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                     onTap: () async {
-                      var picker = ImagePicker();
-                      String image = (await picker.pickImage(
-                          source: ImageSource.gallery)) as String;
+                      // var picker = ImagePicker();
+                      // String image = (await picker.pickImage(
+                      //     source: ImageSource.gallery)) as String;
                       final r = FirebaseAuth.instance;
-                      r.currentUser!.updatePhotoURL(image);
+                      print(r.currentUser);
+                      r.currentUser!
+                          .updatePhotoURL('assets/images/profile.jpeg');
                     },
                   ),
                 ],
