@@ -55,7 +55,7 @@ def main(opt):
         blank_image[j * opt.stride: (j + 1) * opt.stride, i *
                     opt.stride: (i + 1) * opt.stride, :] = images[idx]
         img = cv2.addWeighted(input_image, float(
-            60/100), blank_image, float(40/100), 0)
+            70/100), blank_image, float(30/100), 0)
     cv2.imwrite(opt.output, img)
 
 
