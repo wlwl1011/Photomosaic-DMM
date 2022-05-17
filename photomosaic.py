@@ -2,23 +2,28 @@
 @author: Thang Nguyen <nhthang1009@gmail.com>
 """
 import argparse
+from importlib.resources import path
 import cv2
 import numpy as np
 import glob
 from itertools import product
+import sys
 
 
 def get_args():
+
     parser = argparse.ArgumentParser("Viet Nguyen Photomosaic")
     parser.add_argument("--input", type=str,
                         default="data/input.jpg", help="Path to input image")
     parser.add_argument("--output", type=str,
                         default="data/output.jpg", help="Path to output image")
-    parser.add_argument("--pool", type=str, default="image_pool",
+    parser.add_argument("--pool", type=str, default="image_pool/Flower",
                         help="Path to directory containing component images")
     parser.add_argument("--stride", type=int, default=30,
                         help="size of each component image")
+
     args = parser.parse_args()
+
     return args
 
 
@@ -34,6 +39,7 @@ def get_component_images(path, size):
 
 
 def main(opt):
+
     input_image = cv2.imread(opt.input, cv2.IMREAD_COLOR)
     height, width, num_channels = input_image.shape
     blank_image = np.zeros((height, width, 3), np.uint8)
@@ -48,11 +54,12 @@ def main(opt):
         idx = np.argmin(distance_matrix)
         blank_image[j * opt.stride: (j + 1) * opt.stride, i *
                     opt.stride: (i + 1) * opt.stride, :] = images[idx]
-    img = cv2.addWeighted(input_image, float(
-            60/100), blank_image, float(40/100), 0)                
-    cv2.imwrite(opt.output, blank_image)
+        img = cv2.addWeighted(input_image, float(
+            60/100), blank_image, float(40/100), 0)
+    cv2.imwrite(opt.output, img)
 
 
 if __name__ == '__main__':
+
     opt = get_args()
     main(opt)
