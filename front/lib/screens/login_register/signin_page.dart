@@ -147,13 +147,28 @@ class _SignInPageState extends State<SignInPage> {
                               Showspinner = false;
                             });
                           } on FirebaseAuthException catch (e) {
+                            var error_message = "!";
+                            switch (e.code) {
+                              case 'wrong-password':
+                                error_message = "비밀번호가 틀렸습니다.";
+                                break;
+                              case 'user-not-found':
+                                error_message = '회원 정보를 찾을 수 없습니다.';
+                                break;
+                              case 'unknown':
+                                error_message = '아이디 또는 비밀번호를 입력해주세요';
+                                break;
+                              case 'invalid-mail':
+                                error_message = '이메일 형식이 잘못되었습니다.';
+                                break;
+                            }
                             await Get.dialog(
                               AlertDialog(
                                 title: const Text('!'),
-                                content: Text(e.code),
+                                content: Text(error_message),
                                 actions: [
                                   TextButton(
-                                    child: const Text("Ok"),
+                                    child: Text("Ok"),
                                     onPressed: () => Get.back(),
                                   ),
                                 ],
