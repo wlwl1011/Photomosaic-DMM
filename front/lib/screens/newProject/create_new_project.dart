@@ -160,21 +160,19 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                // String photo_path = photomosaicImage.path;
-                // print('phtomosaic path > $photo_path');
-
-                // GallerySaver.saveImage(photo_path).then((value) {
-                //   print('>>>> save value = $value');
-                //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //     content: Text(
-                //       'Download Success!',
-                //       textAlign: TextAlign.center,
-                //     ),
-                //     duration: Duration(seconds: 3),
-                //   ));
-                // }).catchError((err) {
-                //   print('error :$err');
-                // });
+                String photo_path =
+                    'http://$serverAdr/api/v1/object?pid=photomosaic-$pid';
+                GallerySaver.saveImage(photo_path).then((value) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                      'Download Success!',
+                      textAlign: TextAlign.center,
+                    ),
+                    duration: Duration(seconds: 3),
+                  ));
+                }).catchError((err) {
+                  print('error : $err');
+                });
               },
               icon: const Icon(
                 Icons.save_alt,
