@@ -232,7 +232,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
             onPressed: () {
               //게시글 올리기
               ScaffoldMessenger.of(context).showSnackBar(postShareSnackBar());
-              Get.to(otherHistoryScreen());
+              Get.to(otherHistoryScreen(), arguments: pid);
             },
             child: Text('Post'),
             style: TextButton.styleFrom(
