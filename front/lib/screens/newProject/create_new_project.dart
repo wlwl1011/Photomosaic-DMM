@@ -11,15 +11,38 @@ import 'package:front/controller/main_controller.dart';
 import 'package:front/controller/shake_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/history/otherHistory/create_other_history_screen.dart';
+import 'package:front/screens/newProject/kakao_share_manager.dart';
 import 'package:front/screens/newProject/prolog_new_project.dart';
 import 'package:get/get.dart';
 import 'package:shake/shake.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'dart:io';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:kakao_flutter_sdk/common.dart';
+import 'package:kakao_flutter_sdk/user.dart';
+import 'package:kakao_flutter_sdk/link.dart';
+// import 'package:kakao_flutter_sdk/all.dart';
+// import 'package:kakao_flutter_sdk/auth.dart';
+// import 'package:kakao_flutter_sdk/common.dart';
+// import 'package:kakao_flutter_sdk/kakao_flutter_sdk_plugin.dart';
+// import 'package:kakao_flutter_sdk/link.dart';
+// import 'package:kakao_flutter_sdk/local.dart';
+// import 'package:kakao_flutter_sdk/push.dart';
+// import 'package:kakao_flutter_sdk/search.dart';
+// import 'package:kakao_flutter_sdk/story.dart';
+// import 'package:kakao_flutter_sdk/talk.dart';
+// import 'package:kakao_flutter_sdk/template.dart';
+// import 'package:kakao_flutter_sdk/user.dart';
+// import 'package:json_serializable/json_serializable.dart';
+import 'package:platform/platform.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:crypto/crypto.dart';
+// import 'package:encrypt/encrypt.dart';
 
 class CreateNewProject extends StatefulWidget {
-  CreateNewProject({Key? key}) : super(key: key);
+  const CreateNewProject({Key? key}) : super(key: key);
 
   @override
   State<CreateNewProject> createState() => _CreateNewProjectState();
@@ -329,8 +352,30 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                   Flexible(
                       flex: 1,
                       child: IconButton(
-                        onPressed: () {
+                        onPressed: () async {
                           //URL 카피
+                          // String link = await KakaoLinkWithDynamicLink().buildDynamicLink('CreatePhotomosaic',widget.detailNotice.id);
+                          // KakaoLinkWithDynamicLink().isKakaotalkInstalled().then((installed) {
+                          //   if (installed) {
+                          //     KakaoLinkWithDynamicLink().shareMyCode(widget.detialNoice, link);
+                          //   }
+                          //   else {
+                          //     Share.share(link);
+                          //   }
+                          // });
+                          KakaoShareManager()
+                              .isKakaotalkInstalled()
+                              .then((installed) {
+                            if (installed) {
+                              String photo_path =
+                                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid';
+                              KakaoShareManager().shareMyCode(
+                                  photo_path, 'create_new_project');
+                            } else {
+                              print('fail to kakaoinstalled');
+                              //show alert
+                            }
+                          });
                         },
                         color: kWhiteColor,
                         icon: Icon(Icons.content_copy),
