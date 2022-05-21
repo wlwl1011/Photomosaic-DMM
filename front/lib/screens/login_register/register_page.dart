@@ -86,12 +86,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(
                             height: 30,
                           ),
-                          // SizedBox(
-                          //   height: 20,
-                          // ),
-                          // SizedBox(
-                          //   height: 50,
-                          // ),
                           MyTextField(
                             hintText: 'Name',
                             inputType: TextInputType.name,
@@ -125,28 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     MyTextButton(
                       buttonName: 'Register',
                       onPressed: () async {
-                        // Get.to(() => mainScreen());
                         if (!_formKey.currentState!.validate()) return;
-                        // if (_userPasswordCtrl.text.length < 6) {
-                        //   //비밀번호가 6자 미만일 때
-                        //   await Get.dialog(
-                        //     AlertDialog(
-                        //       title: const Text('!'),
-                        //       content: Text("비밀번호는 6자 이상이어야 합니다."),
-                        //       actions: [
-                        //         TextButton(
-                        //           child: const Text("Ok"),
-                        //           onPressed: () => Get.back(),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   );
-                        // }
-                        // else if {
-                        //   // 이메일 형식이 맞지 않을 때
-
-                        // }
-                        // else {
                         try {
                           setState(() => _loading = true);
 

@@ -15,11 +15,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:twitter_login/twitter_login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WelcomePage extends StatelessWidget {
   Future<UserCredential> signInWithTwitter() async {
     // Create a TwitterLogin instance
-    // ignore: unnecessary_new
     final twitterLogin = new TwitterLogin(
         apiKey: 'gNbb1xq8e6tQ4I2rX94b0Xoof',
         apiSecretKey: '839YCSgH7B7fVYHwZb3sKxIf7P8oKUEjSIov7hQHT7aWRNJVlz',
