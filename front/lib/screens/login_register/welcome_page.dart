@@ -21,10 +21,9 @@ class WelcomePage extends StatelessWidget {
     // Create a TwitterLogin instance
     // ignore: unnecessary_new
     final twitterLogin = new TwitterLogin(
-        apiKey: 'VV0rcPEzQEioeJbd9EmZ1IGNW',
-        apiSecretKey: '7vITt9lciEIA5J5uz4wDB8pXfD6J1QFFjPhYfzRf3WUXi0DYZq',
-        redirectURI:
-            'https://photomosaic-dmm.firebaseapp.com/__/auth/handler://');
+        apiKey: 'gNbb1xq8e6tQ4I2rX94b0Xoof',
+        apiSecretKey: '839YCSgH7B7fVYHwZb3sKxIf7P8oKUEjSIov7hQHT7aWRNJVlz',
+        redirectURI: 'https://photomosaic-dmm.firebaseapp.com/__/auth/handler');
 
     // Trigger the sign-in flow
     final authResult = await twitterLogin.login();
