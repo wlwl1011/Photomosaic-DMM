@@ -119,7 +119,7 @@ class PostWidget extends StatelessWidget {
           ),
           ExpandableText(
             text,
-            prefixText: 'minzzl',
+            prefixText: userId,
             prefixStyle: const TextStyle(fontWeight: FontWeight.bold),
             expandText: 'more',
             collapseText: 'briefly',
