@@ -2,8 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/screens/history/event/event_screen.dart';
 import 'package:front/screens/history/main/main_screen.dart';
@@ -27,6 +25,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController _userEmailCtrl = TextEditingController();
   TextEditingController _userPasswordCtrl = TextEditingController();
   bool _loading = false;
+  String userInfo = " ";
 
   @override
   void dispose() {
@@ -147,13 +146,28 @@ class _SignInPageState extends State<SignInPage> {
                               Showspinner = false;
                             });
                           } on FirebaseAuthException catch (e) {
+                            var error_message = "!";
+                            switch (e.code) {
+                              case 'wrong-password':
+                                error_message = "비밀번호가 틀렸습니다.";
+                                break;
+                              case 'user-not-found':
+                                error_message = '회원 정보를 찾을 수 없습니다.';
+                                break;
+                              case 'unknown':
+                                error_message = '아이디 또는 비밀번호를 입력해주세요';
+                                break;
+                              case 'invalid-mail':
+                                error_message = '이메일 형식이 잘못되었습니다.';
+                                break;
+                            }
                             await Get.dialog(
                               AlertDialog(
                                 title: const Text('!'),
-                                content: Text(e.code),
+                                content: Text(error_message),
                                 actions: [
                                   TextButton(
-                                    child: const Text("Ok"),
+                                    child: Text("Ok"),
                                     onPressed: () => Get.back(),
                                   ),
                                 ],

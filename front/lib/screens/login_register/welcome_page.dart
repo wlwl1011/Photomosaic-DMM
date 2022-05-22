@@ -15,16 +15,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:twitter_login/twitter_login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WelcomePage extends StatelessWidget {
   Future<UserCredential> signInWithTwitter() async {
     // Create a TwitterLogin instance
-    // ignore: unnecessary_new
     final twitterLogin = new TwitterLogin(
-        apiKey: 'VV0rcPEzQEioeJbd9EmZ1IGNW',
-        apiSecretKey: '7vITt9lciEIA5J5uz4wDB8pXfD6J1QFFjPhYfzRf3WUXi0DYZq',
-        redirectURI:
-            'https://photomosaic-dmm.firebaseapp.com/__/auth/handler://');
+        apiKey: 'gNbb1xq8e6tQ4I2rX94b0Xoof',
+        apiSecretKey: '839YCSgH7B7fVYHwZb3sKxIf7P8oKUEjSIov7hQHT7aWRNJVlz',
+        redirectURI: 'https://photomosaic-dmm.firebaseapp.com/__/auth/handler');
 
     // Trigger the sign-in flow
     final authResult = await twitterLogin.login();

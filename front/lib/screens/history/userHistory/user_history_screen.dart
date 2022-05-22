@@ -6,6 +6,7 @@ import 'package:front/screens/history/userHistory/components/card_layout_grid.da
 import 'package:front/screens/history/userHistory/components/my_info.dart';
 import 'package:flutter/material.dart';
 import 'package:front/screens/history/userHistory/components/my_info_edit.dart';
+import 'package:front/screens/login_register/screen_login.dart';
 import 'package:get/get.dart';
 import 'package:front/constants/constatns.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,6 +33,7 @@ class UserHistoryPage extends StatelessWidget {
               height: Get.height * 0.04,
             ),
             _editButton(),
+            // _logoutButton(),
             SizedBox(
               height: Get.height * 0.1,
             ),
@@ -41,6 +43,45 @@ class UserHistoryPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _logoutButton() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+    child: Row(
+      children: [
+        Expanded(
+            child: GestureDetector(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3),
+                border: Border.all(
+                  color: const Color(0xffdedede),
+                )),
+            child: const Text(
+              '로그아웃',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          onTap: () async {
+            try {
+              await FirebaseAuth.instance.signOut();
+              print("Success");
+              Get.to(() => WelcomePage());
+            } catch (e) {
+              print(e.toString());
+            }
+          },
+        ))
+      ],
+    ),
+  );
 }
 
 Widget _editButton() {
