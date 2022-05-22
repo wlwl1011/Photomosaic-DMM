@@ -163,6 +163,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               .set({
                             'userId': _userNameCtrl.text,
                             'email': _userEmailCtrl.text,
+                            'photoUrl': 'assets/images/userImageDefault.jpg',
                           });
 
                           // ignore: deprecated_member_use

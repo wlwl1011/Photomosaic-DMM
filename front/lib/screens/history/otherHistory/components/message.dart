@@ -19,6 +19,9 @@ class Messages extends StatelessWidget {
           .snapshots(),
       builder: (context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+        print('00');
+        print(snapshot);
+        print('11');
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -30,8 +33,12 @@ class Messages extends StatelessWidget {
           reverse: false,
           itemCount: chatDocs.length,
           itemBuilder: (context, index) {
+            print('....');
+
             print('1');
+            print(chatDocs[index]['photoUrl'].toString());
             print(chatDocs[index]['userID'].toString());
+            print(chatDocs[index]['userName'].toString());
             print('2');
             print(user!.uid);
             print('3');
@@ -40,6 +47,9 @@ class Messages extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: Get.height * 0.01, horizontal: Get.width * 0.015),
               child: ChatListItem(
+                //user.photoURL!,
+                chatDocs[index]['photoUrl'],
+                //'assets/images/userImageDefault.jpg',
                 chatDocs[index]['text'],
                 //chatDocs[index]['userID'].toString() == user!.uid,
                 chatDocs[index]['userName'],

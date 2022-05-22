@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/history/main/main_screen.dart';
@@ -66,12 +67,6 @@ class _MyInfoEditState extends State<MyInfoEdit> {
   Widget build(BuildContext context) {
     // TODO: implement build
     final user = FirebaseAuth.instance.currentUser;
-    String image;
-    if (user!.photoURL == 'assets/images/userImageDefault.jpg') {
-      image = 'assets/images/userImageDefault.jpg';
-    } else {
-      image = user.photoURL!;
-    }
 
     return Scaffold(
         appBar: AppBar(
@@ -196,7 +191,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                 height: Get.height * 0.15,
               ),
               RoundedImage(
-                imagePath: image,
+                imagePath: user!.photoURL!,
                 size: Size.fromWidth(70.0),
               ),
               const SizedBox(
@@ -206,7 +201,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   GestureDetector(
-                    child: const Text("Chanege profile photo",
+                    child: const Text("Change profile photo",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                     onTap: () async {
@@ -215,6 +210,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                       //     source: ImageSource.gallery)) as String;
                       final r = FirebaseAuth.instance;
                       print(r.currentUser);
+
                       r.currentUser!
                           .updatePhotoURL('assets/images/profile.jpeg');
                     },

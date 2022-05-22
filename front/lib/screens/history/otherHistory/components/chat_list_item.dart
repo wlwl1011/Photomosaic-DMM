@@ -5,13 +5,14 @@ import 'avartar_widget.dart';
 
 class ChatListItem extends StatelessWidget {
   const ChatListItem(
+      this.photoUrl,
       this.message,
       //this.isMe,
       this.userId,
       //this.time,
       {Key? key})
       : super(key: key);
-
+  final String photoUrl;
   final String message;
   final String userId;
   //final String time;
@@ -19,23 +20,16 @@ class ChatListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print(isMe);
-    final user = FirebaseAuth.instance.currentUser;
-    String image;
-    if (user!.photoURL == 'assets/images/userImageDefault.jpg') {
-      image = 'assets/images/userImageDefault.jpg';
-    } else {
-      image = user.photoURL!;
-    }
+    print(photoUrl);
     return Row(
       children: [
         AvartarWidget(
           nickName: '',
-          imagePath: image,
+          imagePath: photoUrl,
           size: const Size.fromWidth(40.0),
         ),
         const SizedBox(
-          width: 10,
+          width: 3,
         ),
         Text(
           userId,
@@ -45,12 +39,6 @@ class ChatListItem extends StatelessWidget {
         ),
         const SizedBox(
           width: 10,
-        ),
-        Text(
-          message,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-          ),
         ),
         Text(
           message,

@@ -29,6 +29,7 @@ class _NewMessageState extends State<NewMessage> {
     print(user.uid);
     print(userData.data());
     FirebaseFirestore.instance.collection('chat').add({
+      'photoUrl': user.photoURL,
       'text': _userEnterMessage,
       'time': Timestamp.now(),
       'userID': user.uid,

@@ -13,13 +13,6 @@ class MyInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    String image;
-    if (user!.photoURL == 'assets/images/userImageDefault.jpg') {
-      image = 'assets/images/userImageDefault.jpg';
-    } else {
-      image = user.photoURL!;
-    }
-    //
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +24,7 @@ class MyInfo extends StatelessWidget {
           width: 4,
           goalCompleted: 0.9,
           child: RoundedImage(
-            imagePath: image,
+            imagePath: user!.photoURL!,
             size: Size.fromWidth(70.0),
           ),
         ),
