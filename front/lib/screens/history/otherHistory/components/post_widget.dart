@@ -78,14 +78,28 @@ class PostWidget extends StatelessWidget {
                         width: Get.width * 0.06, color: Colors.red),
                     onPressed: () async {
                       controller.changeColor(1);
+                      print("1");
                     },
                   );
                 } else {
                   return IconButton(
                     icon: SvgPicture.asset('assets/icons/heart_off.svg',
                         width: Get.width * 0.06, color: Colors.black),
-                    onPressed: () {
+                    onPressed: () async {
                       controller.changeColor(1);
+                      final user = FirebaseAuth.instance.currentUser;
+
+                      final userData = await FirebaseFirestore.instance
+                          .collection('user')
+                          .doc(user!.uid)
+                          .get();
+
+                      final postData = await FirebaseFirestore.instance
+                          .collection('post')
+                          .doc(userData.data()!['userId'])
+                          .get();
+
+                      print(postData.data());
                     },
                   );
                 }
@@ -113,13 +127,13 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            heart.toString() + " likes",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: Get.height * 0.005,
-          ),
+          // Text(
+          //   heart.toString() + " likes",
+          //   style: TextStyle(fontWeight: FontWeight.bold),
+          // ),
+          // SizedBox(
+          //   height: Get.height * 0.005,
+          // ),
           ExpandableText(
             text,
             prefixText: userId,
