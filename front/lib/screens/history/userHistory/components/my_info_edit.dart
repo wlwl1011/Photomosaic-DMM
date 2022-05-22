@@ -213,6 +213,19 @@ class _MyInfoEditState extends State<MyInfoEdit> {
 
                       r.currentUser!
                           .updatePhotoURL('assets/images/profile.jpeg');
+
+                      final userData = await FirebaseFirestore.instance
+                          .collection('user')
+                          .doc(user.uid)
+                          .get();
+
+                      print(userData);
+                      FirebaseFirestore.instance
+                          .collection('user')
+                          .doc(user.uid)
+                          .update({'photoUrl': 'assets/images/profile.jpeg'});
+
+                      print(userData);
                     },
                   ),
                 ],

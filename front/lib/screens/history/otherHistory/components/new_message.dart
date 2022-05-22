@@ -19,6 +19,7 @@ class _NewMessageState extends State<NewMessage> {
     print("send message");
     FocusScope.of(context).unfocus();
     final user = FirebaseAuth.instance.currentUser;
+
     print('hhhh');
     print(user);
     final userData = await FirebaseFirestore.instance
@@ -29,7 +30,7 @@ class _NewMessageState extends State<NewMessage> {
     print(user.uid);
     print(userData.data());
     FirebaseFirestore.instance.collection('chat').add({
-      'photoUrl': user.photoURL,
+      'photoUrl': userData.data()!['photoUrl'],
       'text': _userEnterMessage,
       'time': Timestamp.now(),
       'userID': user.uid,
