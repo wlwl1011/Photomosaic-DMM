@@ -74,11 +74,14 @@ class _CreateNewProjectState extends State<CreateNewProject> {
   Widget uploadImage(BuildContext context) {
     return GetBuilder<MainController>(
       builder: (controller) {
-        print("Build!!");
+        print("Build!!!!");
+        print("hihi");
+        print(pid);
         return ElevatedButton.icon(
           onPressed: () async {
             // getImageFromGallery(controller, photomosaicImage),
             await controller.Save('photomosaic-$pid');
+
             showHotPostCreateDialogPop();
           },
           icon: const Icon(Icons.history),
@@ -151,18 +154,17 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ),
             ElevatedButton.icon(
               onPressed: () async {
-                // final user = FirebaseAuth.instance.currentUser;
-                // print('hhhh');
-                // print(user);
-                // final userData = await FirebaseFirestore.instance
-                //     .collection('user')
-                //     .doc(user!.uid)
-                //     .get(); //현재 모든 유저의 데이터를 담음
+                final user = FirebaseAuth.instance.currentUser;
+                print('hhhh');
+                print(user);
+                final userData = await FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(user!.uid)
+                    .get(); //현재 모든 유저의 데이터를 담음
 
-                // Get.to(() => mainScreen(
-                //       nickName: userData.data()!['userId'],
-                //     ));
-                Get.to(mainScreen(nickName: pid));
+                Get.to(() => mainScreen(
+                      nickName: userData.data()!['userId'],
+                    ));
               },
               icon: const Icon(
                 Icons.add_circle,
@@ -251,7 +253,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               ),
               //textAlign: TextAlign.center,
             ),
-            content: SingleChildScrollView(
+            content: const SingleChildScrollView(
               child: Text(
                 'Do you want to write a post on the hot post?',
                 style: TextStyle(
@@ -266,19 +268,18 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                 children: [
                   TextButton(
                     onPressed: () async {
-                      // final user = FirebaseAuth.instance.currentUser;
-                      // print('hhhh');
-                      // print(user);
-                      // final userData = await FirebaseFirestore.instance
-                      //     .collection('user')
-                      //     .doc(user!.uid)
-                      //     .get();
-                      // Get.to(
-                      //     CreateOtherHistoryScreen(
-                      //       nickName: userData.data()!['userId'],
-                      //     ),
-                      //     arguments: photomosaicImage);
-                      Get.to(CreateOtherHistoryScreen(), arguments: pid);
+                      final user = FirebaseAuth.instance.currentUser;
+                      print('hhhh');
+                      print(user);
+                      final userData = await FirebaseFirestore.instance
+                          .collection('user')
+                          .doc(user!.uid)
+                          .get();
+                      print(pid);
+                      Get.to(CreateOtherHistoryScreen(
+                          pid: pid,
+                          nickName: userData.data()!['userId'],
+                          imagePath: userData.data()!['photoUrl']));
                     },
                     child: Text('Yes'),
                     style: TextButton.styleFrom(

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/heart_controller.dart';
@@ -12,8 +13,6 @@ class otherHistoryScreen extends StatelessWidget {
   otherHistoryScreen({Key? key}) : super(key: key) {
     Get.put(HeartController());
   }
-
-  var pid = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +26,16 @@ class otherHistoryScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {
-              Get.to(mainScreen(nickName: pid));
+            onPressed: () async {
+              final userinfo = FirebaseAuth.instance.currentUser;
+              final userData = await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(userinfo!.uid)
+                  .get();
+
+              Get.to(mainScreen(
+                nickName: userData.data()!['userId'],
+              ));
             },
             icon: const Icon(
               Icons.home,
@@ -62,7 +69,7 @@ class otherHistoryScreen extends StatelessWidget {
                 postDocs[index]['text'],
                 //postDocs[index]['time'],
                 postDocs[index]['heart'],
-                postDocs[index]['postUid'],
+
                 //'assets/images/userImageDefault.jpg',
                 postDocs[index]['userId'],
                 //chatDocs[index]['userID'].toString() == user!.uid,

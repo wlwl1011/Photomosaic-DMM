@@ -4,13 +4,17 @@ import 'package:front/constants/color_constant.dart';
 import 'package:front/constants/constatns.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/history/otherHistory/other_history_screen.dart';
-import 'package:front/screens/newProject/create_new_project.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'components/avartar_widget.dart';
 
 class CreateOtherHistoryScreen extends StatefulWidget {
-  CreateOtherHistoryScreen({Key? key}) : super(key: key);
+  var pid;
+  String nickName;
+  String imagePath;
+  CreateOtherHistoryScreen(
+      {this.pid, required this.nickName, required this.imagePath, Key? key})
+      : super(key: key);
   //final String nickName;
 
   @override
@@ -19,9 +23,41 @@ class CreateOtherHistoryScreen extends StatefulWidget {
 }
 
 class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
-  var pid = Get.arguments;
+  final _controller = TextEditingController();
+  var _userEnterText = '';
+
+  void _createPost() async {
+    final user = FirebaseAuth.instance.currentUser;
+    print('hhhh........');
+    print(user);
+    final userData = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(user!.uid)
+        .get(); //현재 모든 유저의 데이터를 담음
+
+    print(user.uid);
+    print(userData.data());
+    var pid = widget.pid;
+    print('kingking');
+    print(pid);
+    FirebaseFirestore.instance.collection('post').add({
+      'heart': 0,
+      'photoUrl': 'http://$serverAdr/api/v1/object?pid=photomosaic-$pid',
+      'text': _userEnterText,
+      'time': Timestamp.now(),
+      'userPhotoUrl': userData.data()!['photoUrl'],
+      'userId': userData.data()!['userId'],
+    });
+    print('done');
+    _controller.clear();
+    ScaffoldMessenger.of(context).showSnackBar(postShareSnackBar());
+    Get.to(otherHistoryScreen());
+  }
 
   Widget _createOtherHistoryScreenBodyWidget() {
+    print('........');
+    var pid = widget.pid;
+    print('http://$serverAdr/api/v1/object?pid=photomosaic-$pid');
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
@@ -29,46 +65,44 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 10,
                 bottom: 10,
               ),
               child: AvartarWidget(
-                nickName: 'minzzl',
+                nickName: widget.nickName,
                 //nickName: Text(widget.nickName),
-                imagePath: "assets/images/profile.jpeg",
+                imagePath: widget.imagePath,
                 size: const Size.fromWidth(40.0),
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: const TextField(
+              child: TextField(
                 keyboardType: TextInputType.multiline,
+                controller: _controller,
                 maxLines: null,
                 decoration: InputDecoration(
                   focusedBorder: InputBorder.none,
                   hintText: 'Tell us about this picture...',
                   border: InputBorder.none,
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    _userEnterText = value;
+                  });
+                },
               ),
             ),
             Image.network(
               'http://$serverAdr/api/v1/object?pid=photomosaic-$pid',
             ),
-            // Container(
-            //   height: MediaQuery.of(context).size.height,
-            //   width: double.infinity,
-            //   decoration: BoxDecoration(
-            //       image: DecorationImage(
-            //           image: FileImage(photomosaicImage),
-            //           fit: BoxFit.fitWidth)),
-            // ),
             const SizedBox(
               height: 20,
             ),
@@ -97,17 +131,17 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            contentPadding: EdgeInsets.only(
+            contentPadding: const EdgeInsets.only(
               left: 8,
               right: 8,
               top: 20,
             ),
             content: SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   bottom: 10,
                 ),
-                child: Text(
+                child: const Text(
                   'If you go back now, this post will disappear.',
                   style: TextStyle(
                     color: kWhiteColor,
@@ -117,7 +151,8 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                 ),
               ),
             ),
-            actionsPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            actionsPadding:
+                const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             actions: [
               Center(
                 child: Column(
@@ -126,20 +161,19 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                   children: [
                     InkWell(
                       onTap: () async {
-                        // final userinfo = FirebaseAuth.instance.currentUser;
-                        // final userData = await FirebaseFirestore.instance
-                        //     .collection('user')
-                        //     .doc(userinfo!.uid)
-                        //     .get();
+                        final userinfo = FirebaseAuth.instance.currentUser;
+                        final userData = await FirebaseFirestore.instance
+                            .collection('user')
+                            .doc(userinfo!.uid)
+                            .get();
 
-                        // Get.to(mainScreen(
-                        //   nickName: userData.data()!['userId'],
-                        // ));
-                        Get.to(mainScreen(nickName: pid));
+                        Get.to(mainScreen(
+                          nickName: userData.data()!['userId'],
+                        ));
                       },
                       child: Container(
                         width: double.infinity,
-                        child: Text(
+                        child: const Text(
                           'Post Delete',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -147,11 +181,11 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 12,
                           bottom: 12,
                         ),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(
                             top: BorderSide(
                               color: kGreyColor,
@@ -167,7 +201,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                       },
                       child: Container(
                         width: double.infinity,
-                        child: Text(
+                        child: const Text(
                           'Continue Writing',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -175,11 +209,11 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                             fontWeight: FontWeight.w300,
                           ),
                         ),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 12,
                           bottom: 8,
                         ),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(
                             top: BorderSide(
                               color: kGreyColor,
@@ -202,7 +236,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
   }
 
   SnackBar postShareSnackBar() {
-    return SnackBar(
+    return const SnackBar(
       content: Text(
         'Post Success!',
         textAlign: TextAlign.center,
@@ -224,20 +258,16 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
           onPressed: () {
             showPostCancelDialogPop();
           },
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
           color: kWhiteColor,
         ),
         actions: [
           TextButton(
-            onPressed: () {
-              //게시글 올리기
-              ScaffoldMessenger.of(context).showSnackBar(postShareSnackBar());
-              Get.to(otherHistoryScreen(), arguments: pid);
-            },
-            child: Text('Post'),
+            onPressed: _userEnterText.trim().isEmpty ? null : _createPost,
+            child: const Text('Post'),
             style: TextButton.styleFrom(
               primary: kHotpink,
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontWeight: FontWeight.bold),
             ),
           )
         ],

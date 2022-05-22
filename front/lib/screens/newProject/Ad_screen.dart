@@ -46,6 +46,8 @@ class _AdScreenState extends State<AdScreen> {
                   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     IconButton(
                       onPressed: () {
+                        print("........");
+                        print(photomosaicImage);
                         Get.to(() => CreateNewProject(),
                             arguments: photomosaicImage);
                       },

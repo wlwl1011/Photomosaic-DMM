@@ -14,7 +14,7 @@ class PostWidget extends StatelessWidget {
   final String photoUrl;
   final String text;
   //final String time;
-  final String postUid;
+
   final int heart;
   final String userId;
   final String userPhotoUrl;
@@ -24,7 +24,7 @@ class PostWidget extends StatelessWidget {
       this.text,
       //this.time,
       this.heart,
-      this.postUid,
+
       //this.isMe,
       this.userId,
       this.userPhotoUrl,
