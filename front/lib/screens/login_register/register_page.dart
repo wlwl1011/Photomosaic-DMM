@@ -134,6 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               .collection('user')
                               .doc(r.user!.uid)
                               .set({
+                            'uid': r.user!.uid,
                             'userId': _userNameCtrl.text,
                             'email': _userEmailCtrl.text,
                             'photoUrl': 'assets/images/userImageDefault.jpg',
