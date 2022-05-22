@@ -111,7 +111,7 @@ class PostWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            heart.toString(),
+            heart.toString() + " likes",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(
