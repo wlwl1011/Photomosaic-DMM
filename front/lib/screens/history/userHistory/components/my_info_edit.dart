@@ -55,12 +55,6 @@ class _MyInfoEditState extends State<MyInfoEdit> {
   //   );
   // }
 
-  Widget _postList() {
-    return Column(
-      children: List.generate(50, (index) => PostWidget()).toList(),
-    );
-  }
-
   var albumImage;
 
   @override

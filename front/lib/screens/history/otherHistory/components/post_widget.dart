@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable_text/expandable_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:front/constants/color_constant.dart';
@@ -9,7 +11,25 @@ import 'package:front/screens/history/otherHistory/components/comment.dart';
 import 'package:get/get.dart';
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({Key? key}) : super(key: key);
+  final String photoUrl;
+  final String text;
+  //final String time;
+  final String postUid;
+  final int heart;
+  final String userId;
+  final String userPhotoUrl;
+
+  const PostWidget(
+      this.photoUrl,
+      this.text,
+      //this.time,
+      this.heart,
+      this.postUid,
+      //this.isMe,
+      this.userId,
+      this.userPhotoUrl,
+      {Key? key})
+      : super(key: key);
 
   Widget _header() {
     return Padding(
@@ -18,8 +38,8 @@ class PostWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           AvartarWidget(
-            nickName: 'minzzl',
-            imagePath: "assets/images/profile.jpeg",
+            nickName: userId,
+            imagePath: userPhotoUrl,
             size: const Size.fromWidth(40.0),
           ),
           GestureDetector(
@@ -37,7 +57,7 @@ class PostWidget extends StatelessWidget {
 
   Widget _image() {
     return CachedNetworkImage(
-      imageUrl: 'https://thumb.mt.co.kr/06/2022/03/2022031414200531127_1.jpg',
+      imageUrl: photoUrl,
     );
   }
 
@@ -90,17 +110,17 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            '9,345 likes',
+          Text(
+            heart.toString(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: Get.height * 0.005,
           ),
-          const ExpandableText(
-            'Hi guys\nThis photo is my favorite Idol\n Ha Ha \n',
+          ExpandableText(
+            text,
             prefixText: 'minzzl',
-            prefixStyle: TextStyle(fontWeight: FontWeight.bold),
+            prefixStyle: const TextStyle(fontWeight: FontWeight.bold),
             expandText: 'more',
             collapseText: 'briefly',
             maxLines: 3,
