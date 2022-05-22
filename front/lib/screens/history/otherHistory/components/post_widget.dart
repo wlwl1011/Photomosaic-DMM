@@ -56,9 +56,12 @@ class PostWidget extends StatelessWidget {
   }
 
   Widget _image() {
-    return CachedNetworkImage(
-      imageUrl: photoUrl,
-    );
+    return Container(
+        child: CachedNetworkImage(
+          imageUrl: photoUrl,
+          fit: BoxFit.cover,
+        ),
+        height: Get.width);
   }
 
   Widget _infoCount() {
@@ -73,7 +76,7 @@ class PostWidget extends StatelessWidget {
                   return IconButton(
                     icon: SvgPicture.asset('assets/icons/heart_on.svg',
                         width: Get.width * 0.06, color: Colors.red),
-                    onPressed: () {
+                    onPressed: () async {
                       controller.changeColor(1);
                     },
                   );
