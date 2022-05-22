@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/controller/main_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/newProject/Ad_screen.dart';
+import 'package:front/screens/newProject/user_image_test.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class UserImageUpload extends StatefulWidget {
   const UserImageUpload({Key? key}) : super(key: key);
@@ -16,8 +19,43 @@ class UserImageUpload extends StatefulWidget {
 
 class _UserImageUploadState extends State<UserImageUpload> {
   var targetImage = Get.arguments;
-  var photomosaicImage = 0;
-  List userImages = [];
+  var photomosaicImage;
+  List<Asset> resultList = <Asset>[];
+  List<Asset> imageList = <Asset>[];
+
+  Future selectImage() async {
+    resultList = await MultiImagePicker.pickImages(maxImages: 1000);
+    if (resultList != null) {
+      var controller = Get.find<MainController>();
+      Get.to(AdScreen(),
+          arguments: await controller.Upload(photomosaicImage, 'Ocean'));
+      setState(() {
+        imageList = resultList;
+      });
+    }
+    // if (imageList != null) {
+    //   imageList.clear();
+    // }
+    // try {
+    //   resultList = await MultiImagePicker.pickImages(maxImages: 1000);
+    //   var controller = Get.find<MainController>();
+    //   Get.to(AdScreen(),
+    //       arguments: await controller.Upload(photomosaicImage, 'Ocean'));
+    //   setState(() async {
+    //     if (resultList.isNotEmpty) {
+    //       imageList = resultList;
+    //       var controller = Get.find<MainController>();
+    //       Get.to(AdScreen(),
+    //           arguments: await controller.Upload(photomosaicImage, 'Ocean'));
+    //     } else {
+    //       print('no image select');
+    //       //200장 안되면 경고창 띄우기
+    //     }
+    //   });
+    // } catch (e) {
+    //   print(e);
+    // }
+  }
 
   Widget _userImageUploadBodyWidget() {
     return Container(
@@ -60,19 +98,19 @@ class _UserImageUploadState extends State<UserImageUpload> {
             ),
             ElevatedButton.icon(
               onPressed: () async {
-                var picker = ImagePicker();
-                List<XFile>? images = await picker.pickMultiImage();
-
-                if (images != null) {
-                  setState(() {
-                    userImages = images;
-                  });
-
-                  //포토모자이크 생성
-                  //생성한 포토모자이크 전달
+                resultList = await MultiImagePicker.pickImages(maxImages: 1000);
+                if (resultList != null) {
                   photomosaicImage = targetImage;
-                  Get.to(AdScreen(), arguments: photomosaicImage);
+                  var controller = Get.find<MainController>();
+                  Get.to(AdScreen(),
+                      arguments:
+                          await controller.Upload(photomosaicImage, 'Ocean'));
+                  setState(() {
+                    imageList = resultList;
+                  });
                 }
+                //포토모자이크 생성
+                //생성한 포토모자이크 전달
               },
               icon: const Icon(
                 Icons.photo_library,
