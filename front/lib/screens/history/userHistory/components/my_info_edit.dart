@@ -206,7 +206,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                       print(r.currentUser);
 
                       r.currentUser!
-                          .updatePhotoURL('assets/images/profile.jpeg');
+                          .updatePhotoURL('assets/images/drawing.png');
 
                       final userData = await FirebaseFirestore.instance
                           .collection('user')
@@ -218,6 +218,8 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                           .collection('user')
                           .doc(user.uid)
                           .update({'photoUrl': 'assets/images/drawing.png'});
+                      print('update url');
+                      print(userData);
 
                       print(userData);
                     },
