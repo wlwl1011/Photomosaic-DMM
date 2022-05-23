@@ -339,7 +339,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                       child: const Padding(
                         padding: EdgeInsets.all(7.0),
                         child: Text(
-                          'URL',
+                          'https://photomosaic.page.link',
                           style: TextStyle(
                             color: kWhiteColor,
                           ),
@@ -379,7 +379,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                           });
                         },
                         color: kWhiteColor,
-                        icon: Icon(Icons.content_copy),
+                        icon: Icon(Icons.share),
                       )),
                 ],
               ),

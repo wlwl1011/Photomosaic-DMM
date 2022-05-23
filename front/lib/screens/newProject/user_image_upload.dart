@@ -23,38 +23,53 @@ class _UserImageUploadState extends State<UserImageUpload> {
   List<Asset> resultList = <Asset>[];
   List<Asset> imageList = <Asset>[];
 
-  Future selectImage() async {
-    resultList = await MultiImagePicker.pickImages(maxImages: 1000);
-    if (resultList != null) {
-      var controller = Get.find<MainController>();
-      Get.to(AdScreen(),
-          arguments: await controller.Upload(photomosaicImage, 'Ocean'));
-      setState(() {
-        imageList = resultList;
-      });
-    }
-    // if (imageList != null) {
-    //   imageList.clear();
-    // }
-    // try {
-    //   resultList = await MultiImagePicker.pickImages(maxImages: 1000);
-    //   var controller = Get.find<MainController>();
-    //   Get.to(AdScreen(),
-    //       arguments: await controller.Upload(photomosaicImage, 'Ocean'));
-    //   setState(() async {
-    //     if (resultList.isNotEmpty) {
-    //       imageList = resultList;
-    //       var controller = Get.find<MainController>();
-    //       Get.to(AdScreen(),
-    //           arguments: await controller.Upload(photomosaicImage, 'Ocean'));
-    //     } else {
-    //       print('no image select');
-    //       //200장 안되면 경고창 띄우기
-    //     }
-    //   });
-    // } catch (e) {
-    //   print(e);
-    // }
+  void showImageLimitDialogPop() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: const Color.fromARGB(120, 0, 0, 0),
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: ((context, setState) {
+          return AlertDialog(
+            backgroundColor: kBlackColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: const Text(
+              'Count Error!',
+              style: TextStyle(
+                color: kWhiteColor,
+                fontWeight: FontWeight.bold,
+              ),
+              //textAlign: TextAlign.center,
+            ),
+            content: const SingleChildScrollView(
+              child: Text(
+                'You must choose at least 200 pictures for tile images.',
+                style: TextStyle(
+                  color: kWhiteColor,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  //화면으로 돌아가기
+                  Get.back();
+                },
+                child: Text('OK'),
+                style: TextButton.styleFrom(
+                  primary: kHotpink,
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          );
+        }));
+      },
+    ).then((value) {
+      setState(() {});
+    });
   }
 
   Widget _userImageUploadBodyWidget() {
@@ -99,24 +114,39 @@ class _UserImageUploadState extends State<UserImageUpload> {
             ElevatedButton.icon(
               onPressed: () async {
                 resultList = await MultiImagePicker.pickImages(maxImages: 1000);
-                if (resultList != null) {
-                  photomosaicImage = targetImage;
-                  var controller = Get.find<MainController>();
-                  Get.to(AdScreen(),
-                      arguments:
-                          await controller.Upload(photomosaicImage, 'Ocean'));
-                  setState(() {
-                    imageList = resultList;
-                  });
+                if (resultList.length < 200) {
+                  showImageLimitDialogPop();
+                } else {
+                  if (resultList != null) {
+                    photomosaicImage = targetImage;
+                    var controller = Get.find<MainController>();
+                    Get.to(AdScreen(),
+                        arguments:
+                            await controller.Upload(photomosaicImage, 'Ocean'));
+                    setState(() {
+                      imageList = resultList;
+                    });
+                  }
+                  //포토모자이크 생성
+                  //생성한 포토모자이크 전달
                 }
-                //포토모자이크 생성
-                //생성한 포토모자이크 전달
               },
               icon: const Icon(
                 Icons.photo_library,
               ),
               style: ElevatedButton.styleFrom(primary: kHotpink),
               label: const Text("Upload Images"),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              '※Choose at least 200 pictures ※',
+              style: TextStyle(
+                color: kBottomIcon,
+                fontWeight: FontWeight.w400,
+                fontSize: 10,
+              ),
             ),
           ]),
     );
