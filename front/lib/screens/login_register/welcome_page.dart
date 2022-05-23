@@ -59,6 +59,8 @@ class WelcomePage extends StatelessWidget {
     );
 
     final r = await FirebaseAuth.instance.signInWithCredential(credential);
+    FirebaseAuth.instance.currentUser!
+        .updatePhotoURL('assets/images/userImageDefault.jpg');
     await FirebaseFirestore.instance // userID 추가하는 코드 추가함! -민지-
         .collection('user')
         .doc(r.user!.uid)
