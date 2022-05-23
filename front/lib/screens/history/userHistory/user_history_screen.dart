@@ -16,7 +16,7 @@ class UserHistoryPage extends StatelessWidget {
     required this.nickName,
     Key? key,
   }) : super(key: key);
-  final String nickName;
+  final String? nickName;
 
   @override
   Widget build(BuildContext context) {

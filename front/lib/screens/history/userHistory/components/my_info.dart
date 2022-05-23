@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class MyInfo extends StatelessWidget {
   const MyInfo({required this.nickName, Key? key}) : super(key: key);
-  final String nickName;
+  final String? nickName;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class MyInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              nickName,
+              nickName!,
             ),
           ],
         ),

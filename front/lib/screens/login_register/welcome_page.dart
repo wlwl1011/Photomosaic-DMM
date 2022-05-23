@@ -33,8 +33,10 @@ class WelcomePage extends StatelessWidget {
       accessToken: authResult.authToken!,
       secret: authResult.authTokenSecret!,
     );
+    final r = FirebaseAuth.instance.signInWithCredential(twitterAuthCredential);
+
     Get.to(() => mainScreen(
-          nickName: ' ',
+          nickName: 'subinKwon',
         ));
 
     // Once signed in, return the UserCredential
@@ -56,10 +58,25 @@ class WelcomePage extends StatelessWidget {
       idToken: googleAuth?.idToken,
     );
 
+    final r = await FirebaseAuth.instance.signInWithCredential(credential);
+    await FirebaseFirestore.instance // userID 추가하는 코드 추가함! -민지-
+        .collection('user')
+        .doc(r.user!.uid)
+        .set({
+      'uid': r.user!.uid,
+      'userId': r.user!.displayName,
+      'email': r.user!.email,
+      'photoUrl': 'assets/images/userImageDefault.jpg',
+    });
+
     Get.to(() => mainScreen(
-          nickName: ' ', // 사용자 아이디 (닉네임)전달 -구글에서는 어캐 하니?
+        nickName: r.user!.displayName // 사용자 아이디 (닉네임)전달 -구글에서는 어캐 하니?
         ));
+
     // Once signed in, return the UserCredential
+
+    // final r = await FirebaseAuth.instance.signInWithCredential(credential);
+    // print(r);
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
@@ -70,9 +87,11 @@ class WelcomePage extends StatelessWidget {
     // Create a credential from the access token
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
+    final r =
+        FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 
     Get.to(() => mainScreen(
-          nickName: ' ',
+          nickName: 'subinKwon',
         ));
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);

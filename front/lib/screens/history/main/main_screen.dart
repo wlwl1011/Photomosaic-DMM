@@ -18,7 +18,7 @@ import 'package:front/screens/history/main/components/trending.dart';
 import 'package:get/get.dart';
 
 class mainScreen extends StatelessWidget {
-  final String nickName;
+  final String? nickName;
 
   mainScreen({required this.nickName, Key? key}) : super(key: key) {
     Get.put(HistoryPageController());

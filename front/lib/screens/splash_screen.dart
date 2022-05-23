@@ -19,17 +19,17 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     isLoggedIn = false;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
     if (auth.currentUser != null) {
       setState(() {
         isLoggedIn = true;
       });
     }
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     if (!isLoading) {
       Future.delayed(const Duration(milliseconds: 200), () {
         setState(
