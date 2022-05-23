@@ -153,21 +153,25 @@ class _RegisterPageState extends State<RegisterPage> {
                           var error_message = "!";
                           switch (e.code) {
                             case 'weak-password':
-                              error_message = "비밀번호는 6자 이상으로 입력해주세요.";
+                              error_message =
+                                  "Password must be at least 6 characters long.";
                               break;
                             case 'unknown':
-                              error_message = '빈칸을 입력해주세요';
+                              error_message =
+                                  'Please check again to see if there is an blank.';
                               break;
                             case 'invalid-email':
-                              error_message = '이메일 형식이 잘못되었습니다.';
+                              error_message =
+                                  'Please enter the correct email format.';
                               break;
                             case 'email-already-in-use':
-                              error_message = '이미 가입된 이메일입니다.';
+                              error_message =
+                                  'This mail has already been subscribed.';
                               break;
                           }
                           await Get.dialog(
                             AlertDialog(
-                              title: const Text('!'),
+                              title: Text(e.code + "!"),
                               content: Text(error_message),
                               actions: [
                                 TextButton(

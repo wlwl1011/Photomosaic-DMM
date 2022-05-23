@@ -149,21 +149,25 @@ class _SignInPageState extends State<SignInPage> {
                             var error_message = "!";
                             switch (e.code) {
                               case 'wrong-password':
-                                error_message = "비밀번호가 틀렸습니다.";
+                                error_message =
+                                    "Please re-enter your password.";
                                 break;
                               case 'user-not-found':
-                                error_message = '회원 정보를 찾을 수 없습니다.';
+                                error_message =
+                                    'Please check your ID or try again after registering as a member.';
                                 break;
                               case 'unknown':
-                                error_message = '아이디 또는 비밀번호를 입력해주세요';
+                                error_message =
+                                    'Please check again to see if there is an blank.';
                                 break;
                               case 'invalid-mail':
-                                error_message = '이메일 형식이 잘못되었습니다.';
+                                error_message =
+                                    'Please enter the correct email format.';
                                 break;
                             }
                             await Get.dialog(
                               AlertDialog(
-                                title: const Text('!'),
+                                title: Text(e.code + "!"),
                                 content: Text(error_message),
                                 actions: [
                                   TextButton(

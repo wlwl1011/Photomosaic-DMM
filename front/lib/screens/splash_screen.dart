@@ -16,6 +16,7 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   var isLoading = false;
   bool isLoggedIn = false;
+
   @override
   void initState() {
     isLoggedIn = false;
@@ -23,13 +24,12 @@ class _SplashState extends State<Splash> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    if (auth.currentUser != null) {
-      setState(() {
-        isLoggedIn = true;
-      });
-    }
     if (!isLoading) {
       Future.delayed(const Duration(milliseconds: 200), () {
         setState(
@@ -51,6 +51,7 @@ class _SplashState extends State<Splash> {
         } else {
           Get.offAll(WelcomePage(), transition: null);
         }
+        // Get.offAll(mainScreen(nickName: " "), transition: null);
       });
     }
 

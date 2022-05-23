@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
+import 'package:front/controller/main_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/newProject/Ad_screen.dart';
+import 'package:front/screens/newProject/user_image_test.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class UserImageUpload extends StatefulWidget {
   const UserImageUpload({Key? key}) : super(key: key);
@@ -16,8 +19,58 @@ class UserImageUpload extends StatefulWidget {
 
 class _UserImageUploadState extends State<UserImageUpload> {
   var targetImage = Get.arguments;
-  var photomosaicImage = 0;
-  List userImages = [];
+  var photomosaicImage;
+  List<Asset> resultList = <Asset>[];
+  List<Asset> imageList = <Asset>[];
+
+  void showImageLimitDialogPop() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: const Color.fromARGB(120, 0, 0, 0),
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: ((context, setState) {
+          return AlertDialog(
+            backgroundColor: kBlackColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: const Text(
+              'Count Error!',
+              style: TextStyle(
+                color: kWhiteColor,
+                fontWeight: FontWeight.bold,
+              ),
+              //textAlign: TextAlign.center,
+            ),
+            content: const SingleChildScrollView(
+              child: Text(
+                'You must choose at least 200 pictures for tile images.',
+                style: TextStyle(
+                  color: kWhiteColor,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  //화면으로 돌아가기
+                  Get.back();
+                },
+                child: Text('OK'),
+                style: TextButton.styleFrom(
+                  primary: kHotpink,
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          );
+        }));
+      },
+    ).then((value) {
+      setState(() {});
+    });
+  }
 
   Widget _userImageUploadBodyWidget() {
     return Container(
@@ -60,18 +113,22 @@ class _UserImageUploadState extends State<UserImageUpload> {
             ),
             ElevatedButton.icon(
               onPressed: () async {
-                var picker = ImagePicker();
-                List<XFile>? images = await picker.pickMultiImage();
-
-                if (images != null) {
-                  setState(() {
-                    userImages = images;
-                  });
-
+                resultList = await MultiImagePicker.pickImages(maxImages: 1000);
+                if (resultList.length < 200) {
+                  showImageLimitDialogPop();
+                } else {
+                  if (resultList != null) {
+                    photomosaicImage = targetImage;
+                    var controller = Get.find<MainController>();
+                    Get.to(AdScreen(),
+                        arguments:
+                            await controller.Upload(photomosaicImage, 'Ocean'));
+                    setState(() {
+                      imageList = resultList;
+                    });
+                  }
                   //포토모자이크 생성
                   //생성한 포토모자이크 전달
-                  photomosaicImage = targetImage;
-                  Get.to(AdScreen(), arguments: photomosaicImage);
                 }
               },
               icon: const Icon(
@@ -79,6 +136,17 @@ class _UserImageUploadState extends State<UserImageUpload> {
               ),
               style: ElevatedButton.styleFrom(primary: kHotpink),
               label: const Text("Upload Images"),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              '※Choose at least 200 pictures ※',
+              style: TextStyle(
+                color: kBottomIcon,
+                fontWeight: FontWeight.w400,
+                fontSize: 10,
+              ),
             ),
           ]),
     );
