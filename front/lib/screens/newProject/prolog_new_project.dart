@@ -74,7 +74,7 @@ class _PrologNewProjectState extends State<PrologNewProject> {
             ),
           ),
           Text(
-            "Using Photos on the Server",
+            "Using Photos\non the Server",
             style: TextStyle(
                 fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white),
           ),
