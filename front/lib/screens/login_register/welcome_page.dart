@@ -112,11 +112,14 @@ class WelcomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 90),
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Image(
-                          image: AssetImage('assets/images/1.jpg'),
+                      child: Padding(
+                        padding: const EdgeInsets.all(40.0),
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 90),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Image(
+                            image: AssetImage('assets/images/1.jpg'),
+                          ),
                         ),
                       ),
                     ),

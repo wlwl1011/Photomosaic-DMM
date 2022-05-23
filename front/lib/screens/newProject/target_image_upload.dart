@@ -75,7 +75,7 @@ class _TargetImageUploadState extends State<TargetImageUpload> {
               ),
               style: ElevatedButton.styleFrom(
                   primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.27,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.30,
                       MediaQuery.of(context).size.height * 0.01)),
               label: const Text("Album"),
             ),
@@ -98,7 +98,7 @@ class _TargetImageUploadState extends State<TargetImageUpload> {
               ),
               style: ElevatedButton.styleFrom(
                   primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.27,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.30,
                       MediaQuery.of(context).size.height * 0.01)),
               label: const Text("Camera"),
             ),

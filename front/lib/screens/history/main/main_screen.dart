@@ -160,6 +160,7 @@ class mainScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
       centerTitle: true,
       elevation: 0,
+      automaticallyImplyLeading: false,
       actions: <Widget>[
         IconButton(
           icon: SvgPicture.asset(
