@@ -65,7 +65,7 @@ class _ChoosePageState extends State<ChoosePage> {
               ),
               style: ElevatedButton.styleFrom(
                   primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.45,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.50,
                       MediaQuery.of(context).size.height * 0.01)),
               label: Text("Using User Image"),
             ),
@@ -81,7 +81,7 @@ class _ChoosePageState extends State<ChoosePage> {
               ),
               style: ElevatedButton.styleFrom(
                   primary: kHotpink,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.45,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.50,
                       MediaQuery.of(context).size.height * 0.01)),
               label: Text("Using Server Image"),
             ),
