@@ -40,21 +40,6 @@ class _MyInfoEditState extends State<MyInfoEdit> {
     super.dispose();
   }
 
-  // void openDialog(text) {
-  //   Get.dialog(
-  //     AlertDialog(
-  //       title: const Text('!'),
-  //       content: Text(text),
-  //       actions: [
-  //         TextButton(
-  //           child: const Text("Ok"),
-  //           onPressed: () => Get.back(),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   var albumImage;
 
   @override
@@ -82,8 +67,8 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                   if (_userPasswordCtrl.text.isEmpty) {
                     await Get.dialog(
                       AlertDialog(
-                        title: const Text('!'),
-                        content: Text("수정사항이 없습니다."),
+                        title: const Text('Notification'),
+                        content: Text("There are no modifications."),
                         actions: [
                           TextButton(
                             child: const Text("Ok"),
@@ -101,6 +86,20 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                 if (_userNameCtrl.text.isNotEmpty) {
                   if (_userPasswordCtrl.text.isNotEmpty) {
                     r.currentUser!.updateDisplayName(_userNameCtrl.text);
+                    print(r.currentUser);
+
+                    r.currentUser!.updatePhotoURL('assets/images/profile.jpeg');
+
+                    final userData = await FirebaseFirestore.instance
+                        .collection('user')
+                        .doc(user!.uid)
+                        .get();
+
+                    print(userData);
+                    FirebaseFirestore.instance
+                        .collection('user')
+                        .doc(user.uid)
+                        .update({'userID': _userNameCtrl.text});
                     try {
                       // r.currentUser!.updatePhoneNumber(_userPhoneCtrl);
                       r.currentUser!.updatePassword(_userPasswordCtrl.text);
@@ -111,8 +110,9 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                       if (mounted) setState(() => _loading = false);
                       await Get.dialog(
                         AlertDialog(
-                          // title: const Text('!'),
-                          content: Text("비밀번호가 수정되어 재로그인이 필요합니다."),
+                          title: const Text('Success!'),
+                          content: Text(
+                              "The password has been modified and requires re-login."),
                           actions: [
                             TextButton(
                               child: const Text("Ok"),
@@ -128,10 +128,25 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                   } else {
                     //이름만 변경되었을 때
                     r.currentUser!.updateDisplayName(_userNameCtrl.text);
+
+                    print(r.currentUser);
+
+                    r.currentUser!.updatePhotoURL('assets/images/profile.jpeg');
+
+                    final userData = await FirebaseFirestore.instance
+                        .collection('user')
+                        .doc(user!.uid)
+                        .get();
+
+                    print(userData);
+                    FirebaseFirestore.instance
+                        .collection('user')
+                        .doc(user.uid)
+                        .update({'userID': _userNameCtrl.text});
                     await Get.dialog(
                       AlertDialog(
-                        // title: const Text('!'),
-                        content: Text("이름이 변경되었습니다."),
+                        title: const Text('Success!'),
+                        content: Text("The name has been changed."),
                         actions: [
                           TextButton(
                             child: const Text("Ok"),
@@ -157,8 +172,9 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                     if (mounted) setState(() => _loading = false);
                     await Get.dialog(
                       AlertDialog(
-                        // title: const Text('!'),
-                        content: Text("비밀번호가 수정되어 재로그인이 필요합니다.."),
+                        title: const Text('Success!'),
+                        content: Text(
+                            "The password has been modified and requires re-login."),
                         actions: [
                           TextButton(
                             child: const Text("Ok"),
