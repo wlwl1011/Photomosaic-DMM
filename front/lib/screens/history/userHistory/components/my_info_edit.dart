@@ -99,7 +99,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                     FirebaseFirestore.instance
                         .collection('user')
                         .doc(user.uid)
-                        .update({'userID': _userNameCtrl.text});
+                        .update({'userId': _userNameCtrl.text});
                     try {
                       // r.currentUser!.updatePhoneNumber(_userPhoneCtrl);
                       r.currentUser!.updatePassword(_userPasswordCtrl.text);
@@ -142,7 +142,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                     FirebaseFirestore.instance
                         .collection('user')
                         .doc(user.uid)
-                        .update({'userID': _userNameCtrl.text});
+                        .update({'userId': _userNameCtrl.text});
                     await Get.dialog(
                       AlertDialog(
                         title: const Text('Success!'),
