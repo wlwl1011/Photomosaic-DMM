@@ -150,25 +150,25 @@ class PostWidget extends StatelessWidget {
     );
   }
 
-  Widget _replyTextBtn() {
-    return GestureDetector(
-      onTap: () {},
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0),
-        child: Text(
-          'view all 287 comments',
-          style: TextStyle(color: Colors.grey, fontSize: 13),
-        ),
-      ),
-    );
-  }
+  // Widget _replyTextBtn() {
+  //   return GestureDetector(
+  //     onTap: () {},
+  //     child: const Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: 15.0),
+  //       child: Text(
+  //         'view all 287 comments',
+  //         style: TextStyle(color: Colors.grey, fontSize: 13),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget _dateAgo() {
-    return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0),
-        child: Text('1 day ago',
-            style: TextStyle(color: Colors.grey, fontSize: 13)));
-  }
+  // Widget _dateAgo() {
+  //   return const Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: 15.0),
+  //       child: Text('1 day ago',
+  //           style: TextStyle(color: Colors.grey, fontSize: 13)));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -194,11 +194,11 @@ class PostWidget extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.01,
             ),
-            _replyTextBtn(),
+            //_replyTextBtn(),
             SizedBox(
               height: Get.height * 0.01,
             ),
-            _dateAgo(),
+            //_dateAgo(),
           ],
         ));
   }
