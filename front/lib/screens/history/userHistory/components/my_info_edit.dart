@@ -112,7 +112,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                         AlertDialog(
                           title: const Text('Success!'),
                           content: Text(
-                              "The password has been modified and requires re-login."),
+                              "The password has been modified \nand requires re-login."),
                           actions: [
                             TextButton(
                               child: const Text("Ok"),
@@ -174,7 +174,7 @@ class _MyInfoEditState extends State<MyInfoEdit> {
                       AlertDialog(
                         title: const Text('Success!'),
                         content: Text(
-                            "The password has been modified and requires re-login."),
+                            "The password has been modified \nand requires re-login."),
                         actions: [
                           TextButton(
                             child: const Text("Ok"),

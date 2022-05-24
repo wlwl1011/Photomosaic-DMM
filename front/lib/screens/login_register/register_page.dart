@@ -154,15 +154,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           switch (e.code) {
                             case 'weak-password':
                               error_message =
-                                  "Password must be at least 6 characters long.";
+                                  "Password must be \nat least 6 characters long.";
                               break;
                             case 'unknown':
                               error_message =
-                                  'Please check again to see if there is an blank.';
+                                  'Please check again \nto see if there is an blank.';
                               break;
                             case 'invalid-email':
                               error_message =
-                                  'Please enter the correct email format.';
+                                  'Please enter \nthe correct email format.';
                               break;
                             case 'email-already-in-use':
                               error_message =

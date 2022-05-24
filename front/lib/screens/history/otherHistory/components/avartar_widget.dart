@@ -22,7 +22,7 @@ class AvartarWidget extends StatelessWidget {
             imagePath,
             width: size.width,
             height: size.width,
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fill,
           ),
         ),
         SizedBox(
