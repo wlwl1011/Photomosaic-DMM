@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:front/controller/main_controller.dart';
 import 'package:front/screens/history/event/event_screen.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:get/get.dart';
@@ -131,11 +132,14 @@ class _SignInPageState extends State<SignInPage> {
                             );
 
                             final user = FirebaseAuth.instance.currentUser;
+
+                            Get.find<MainController>().uid = user!.uid;
+
                             print('hhhh');
                             print(user);
                             final userData = await FirebaseFirestore.instance
                                 .collection('user')
-                                .doc(user!.uid)
+                                .doc(user.uid)
                                 .get(); //현재 모든 유저의 데이터를 담음
 
                             print(userData.data()!['userId']);

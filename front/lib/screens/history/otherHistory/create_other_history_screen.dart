@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/constants/constatns.dart';
+import 'package:front/controller/main_controller.dart';
 import 'package:front/screens/history/main/main_screen.dart';
 import 'package:front/screens/history/otherHistory/other_history_screen.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
 
   void _createPost() async {
     final user = FirebaseAuth.instance.currentUser;
-    print('hhhh........');
+
     print(user);
     final userData = await FirebaseFirestore.instance
         .collection('user')
@@ -38,7 +39,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
     print(user.uid);
     print(userData.data());
     var pid = widget.pid;
-    print('kingking');
+
     print(pid);
     FirebaseFirestore.instance.collection('post').add({
       'heart': 0,
@@ -100,9 +101,11 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
                 },
               ),
             ),
-            Image.network(
-              'http://$serverAdr/api/v1/object?pid=photomosaic-$pid',
-            ),
+            GetBuilder<MainController>(builder: (ctrl) {
+              return Image.network(
+                "http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${ctrl.uid}",
+              );
+            }),
             const SizedBox(
               height: 20,
             ),

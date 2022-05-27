@@ -42,6 +42,7 @@ class _SplashState extends State<Splash> {
       Future.delayed(const Duration(milliseconds: 2000), () async {
         if (isLoggedIn == true) {
           final user = FirebaseAuth.instance.currentUser;
+
           final userData = await FirebaseFirestore.instance
               .collection('user')
               .doc(user!.uid)

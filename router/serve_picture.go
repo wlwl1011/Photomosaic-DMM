@@ -38,11 +38,14 @@ func postPicture(c *gin.Context) {
 
 func getList(c *gin.Context) {
 	defer handleError(c)
-	uid := c.GetHeader("uid")
-	if len(uid) == 0 {
-		c.Status(http.StatusOK)
-		return
+
+	uid, b := c.GetQuery("uid")
+	if !b {
+		c.Status(http.StatusBadRequest)
+		panic(errors.New("request should include uid"))
 	}
+
+	log.Println(uid)
 
 	list, err := db.RetrieveList(uid)
 	if err != nil {
@@ -57,13 +60,13 @@ func getList(c *gin.Context) {
 // }
 func getPicture(c *gin.Context) {
 	defer handleError(c)
-	uid := c.GetHeader("uid")
-	// fmt.Println(uid)
-	if len(uid) == 0 {
-		// c.Status(http.StatusOK)
-		uid = "tmpuid"
-		// return
+	uid, b := c.GetQuery("uid")
+	if !b {
+		c.Status(http.StatusBadRequest)
+		panic(errors.New("request should include uid"))
 	}
+
+	log.Println(uid)
 
 	pid, b := c.GetQuery("pid")
 	if !b {

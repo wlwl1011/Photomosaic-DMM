@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/constants/color_constant.dart';
 import 'package:front/controller/history_controller.dart';
+import 'package:front/controller/main_controller.dart';
 import 'package:front/screens/history/activity/activity_screen.dart';
 import 'package:front/screens/history/event/event_screen.dart';
 
@@ -95,6 +96,7 @@ class mainScreen extends StatelessWidget {
         //return NewProjectScreen(); //새 프로젝트 만들기 홈으로 이동
 
         case 2:
+          Get.find<MainController>().loadList();
           return UserHistoryPage(nickName: nickName);
 
         default:

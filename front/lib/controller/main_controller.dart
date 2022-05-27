@@ -1,21 +1,20 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:front/constants/constatns.dart';
 import 'package:get/state_manager.dart';
 
 class MainController extends GetxController {
-  var list = [].obs;
+  var uid = "";
 
+  var list = [].obs;
   void loadList() async {
     var dio = Dio();
 
     var resp = await dio.get(
-      "http://$serverAdr/api/v1/objectList",
-      options: Options(
-        headers: {"uid": "tmpuid"},
-      ),
+      "http://$serverAdr/api/v1/objectList?uid=$uid",
     );
     print(resp.data);
     list.value = resp.data;
@@ -23,16 +22,13 @@ class MainController extends GetxController {
     // jsonDecode(source)
   }
 
-  MainController() {
-    loadList();
-  }
-
+//photomosaic으로 만들어진 것을 저장
   Future<void> Save(String pid) async {
     Dio dio = Dio();
 
     var body = <String, dynamic>{
       "pid": pid,
-      "uid": "tmpuid",
+      "uid": uid,
     };
 
     await dio
@@ -67,6 +63,7 @@ class MainController extends GetxController {
       "http://$serverAdr/api/v1/photomosaic/create",
       queryParameters: <String, dynamic>{
         "theme": theme,
+        "uid": uid,
       },
       data: data,
     )
@@ -91,8 +88,6 @@ class MainController extends GetxController {
     if (pid.isEmpty) {
       return false;
     }
-
-    var uid = "tmpuid";
 
     Dio dio = Dio();
     dio.delete("http://$serverAdr/api/v1/delete",
