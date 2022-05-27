@@ -44,6 +44,8 @@ def main(opt):
     height, width, num_channels = input_image.shape
     blank_image = np.zeros((height, width, 3), np.uint8)
     images, avg_colors = get_component_images(opt.pool, opt.stride)
+
+    # Making PhotoMosaic
     for i, j in product(range(int(width / opt.stride)), range(int(height / opt.stride))):
         partial_input_image = input_image[j * opt.stride: (j + 1) * opt.stride,
                                           i * opt.stride: (i + 1) * opt.stride, :]
@@ -54,6 +56,8 @@ def main(opt):
         idx = np.argmin(distance_matrix)
         blank_image[j * opt.stride: (j + 1) * opt.stride, i *
                     opt.stride: (i + 1) * opt.stride, :] = images[idx]
+
+        # Adding (blending) two images code
         img = cv2.addWeighted(input_image, float(
             70/100), blank_image, float(30/100), 0)
     cv2.imwrite(opt.output, img)

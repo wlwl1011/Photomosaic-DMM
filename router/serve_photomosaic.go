@@ -26,20 +26,27 @@ func postPhotomosaic(c *gin.Context) {
 	log.Println("upload file")
 	file := form.File["files"][0]
 
+	uid := c.Query("uid")
+	if len(theme) == 0 {
+		panic(errors.New("request should include uid query parameter"))
+	}
+	log.Println(uid)
+
 	reader, err := file.Open()
 	if err != nil {
 		panic(err)
 	}
 
 	pid := common.GeneratePID("picture", filepath.Ext(file.Filename))
-	err = db.Upload("tmpuid", pid, reader, file.Size)
+
+	err = db.Upload(uid, pid, reader, file.Size)
 	if err != nil {
 		panic(err)
 	}
 
 	reader.Seek(0, 0)
 	log.Println("theme is", theme)
-	err = makePhotomosaic(pid, theme, reader)
+	err = makePhotomosaic(uid, pid, theme, reader)
 	if err != nil {
 		panic(err)
 	}
@@ -74,7 +81,7 @@ func putPhotomosaic(c *gin.Context) {
 	}
 }
 
-func makePhotomosaic(pid, theme string, reader io.Reader) error {
+func makePhotomosaic(uid, pid, theme string, reader io.Reader) error {
 	defer func() {
 		// 파일 삭제
 		os.Remove("./photomosaic/" + pid)
@@ -108,7 +115,8 @@ func makePhotomosaic(pid, theme string, reader io.Reader) error {
 	input := "./photomosaic/" + pid
 	output := "./photomosaic/photomosaic-" + pid[7:]
 
-	_, err = exec.Command("python", "photomosaic.py", "--pool", pool, "--input", input, "--output", output).Output()
+	_, err = exec.Command("python", "photomosaic.py", "--pool", pool,
+		"--input", input, "--output", output).Output()
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -121,7 +129,7 @@ func makePhotomosaic(pid, theme string, reader io.Reader) error {
 	defer f.Close()
 	info, _ := f.Stat()
 
-	err = db.Upload("tmpuid", "photomosaic-"+pid[7:], f, info.Size())
+	err = db.Upload(uid, "photomosaic-"+pid[7:], f, info.Size())
 	if err != nil {
 		return err
 	}
