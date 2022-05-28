@@ -41,6 +41,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
     var pid = widget.pid;
 
     print(pid);
+    var userId = user.uid;
     FirebaseFirestore.instance.collection('post').add({
       'heart': 0,
       'photoUrl':

@@ -97,6 +97,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
 
   Widget _createNewProjectBodyWidget() {
     final user = FirebaseAuth.instance.currentUser;
+    String userId = user!.uid;
     return Container(
       //height: MediaQuery.of(context).size.height - 50,
       width: double.infinity,
@@ -133,7 +134,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               child: SizedBox(
                 height: 250,
                 child: Image.network(
-                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${user!.uid}',
+                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=$userId',
                 ),
               ),
             ),
@@ -176,7 +177,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ElevatedButton.icon(
               onPressed: () {
                 String photo_path =
-                    'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${user.uid}';
+                    'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=$userId';
                 GallerySaver.saveImage(photo_path).then((value) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
@@ -298,7 +299,6 @@ class _CreateNewProjectState extends State<CreateNewProject> {
   }
 
   void showShareDialogPop() {
-    final user = FirebaseAuth.instance.currentUser;
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -348,6 +348,8 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                               .isKakaotalkInstalled()
                               .then((installed) {
                             if (installed) {
+                              final user = FirebaseAuth.instance.currentUser;
+
                               String photo_path =
                                   'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${user!.uid}';
                               KakaoShareManager().shareMyCode(
@@ -359,7 +361,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                           });
                         },
                         color: kWhiteColor,
-                        icon: Icon(Icons.share),
+                        icon: const Icon(Icons.share),
                       )),
                 ],
               ),
