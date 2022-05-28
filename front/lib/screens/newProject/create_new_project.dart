@@ -96,6 +96,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
   }
 
   Widget _createNewProjectBodyWidget() {
+    final user = FirebaseAuth.instance.currentUser;
     return Container(
       //height: MediaQuery.of(context).size.height - 50,
       width: double.infinity,
@@ -132,21 +133,9 @@ class _CreateNewProjectState extends State<CreateNewProject> {
               child: SizedBox(
                 height: 250,
                 child: Image.network(
-                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid',
+                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${user!.uid}',
                 ),
               ),
-              // child: Container(
-              //   height: 250,
-              //   width: MediaQuery.of(context).size.width - 100,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image: FileImage(photomosaicImage),
-              //       fit: BoxFit.contain,
-              //     ),
-
-              //     image: .image,
-              //   ),
-              // ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
@@ -187,7 +176,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
             ElevatedButton.icon(
               onPressed: () {
                 String photo_path =
-                    'http://$serverAdr/api/v1/object?pid=photomosaic-$pid';
+                    'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${user.uid}';
                 GallerySaver.saveImage(photo_path).then((value) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
@@ -309,6 +298,7 @@ class _CreateNewProjectState extends State<CreateNewProject> {
   }
 
   void showShareDialogPop() {
+    final user = FirebaseAuth.instance.currentUser;
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -354,22 +344,12 @@ class _CreateNewProjectState extends State<CreateNewProject> {
                       flex: 1,
                       child: IconButton(
                         onPressed: () async {
-                          //URL 카피
-                          // String link = await KakaoLinkWithDynamicLink().buildDynamicLink('CreatePhotomosaic',widget.detailNotice.id);
-                          // KakaoLinkWithDynamicLink().isKakaotalkInstalled().then((installed) {
-                          //   if (installed) {
-                          //     KakaoLinkWithDynamicLink().shareMyCode(widget.detialNoice, link);
-                          //   }
-                          //   else {
-                          //     Share.share(link);
-                          //   }
-                          // });
                           KakaoShareManager()
                               .isKakaotalkInstalled()
                               .then((installed) {
                             if (installed) {
                               String photo_path =
-                                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid';
+                                  'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${user!.uid}';
                               KakaoShareManager().shareMyCode(
                                   photo_path, 'create_new_project');
                             } else {

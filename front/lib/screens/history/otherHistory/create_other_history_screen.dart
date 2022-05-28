@@ -43,7 +43,8 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
     print(pid);
     FirebaseFirestore.instance.collection('post').add({
       'heart': 0,
-      'photoUrl': 'http://$serverAdr/api/v1/object?pid=photomosaic-$pid',
+      'photoUrl':
+          'http://$serverAdr/api/v1/object?pid=photomosaic-$pid&uid=${user.uid}',
       'text': _userEnterText,
       'time': Timestamp.now(),
       'userPhotoUrl': userData.data()!['photoUrl'],
@@ -58,7 +59,7 @@ class _CreateOtherHistoryScreenState extends State<CreateOtherHistoryScreen> {
   Widget _createOtherHistoryScreenBodyWidget() {
     print('........');
     var pid = widget.pid;
-    print('http://$serverAdr/api/v1/object?pid=photomosaic-$pid');
+    //print('http://$serverAdr/api/v1/object?pid=photomosaic-$pid');
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,

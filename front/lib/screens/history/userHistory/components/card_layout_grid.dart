@@ -57,7 +57,7 @@ class CardLayoutGrid extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
     return GetBuilder<MainController>(builder: (ctrl) {
       return Image.network(
-        'http://$serverAdr/api/v1/object?pid=${items[idx]["pid"]}&uid={ctrl.user!.uid}',
+        'http://$serverAdr/api/v1/object?pid=${items[idx]["pid"]}&uid={ctrl.uid}',
 
         fit: BoxFit.fill,
         // headers: {"uid": items[idx]["uid"]!},
