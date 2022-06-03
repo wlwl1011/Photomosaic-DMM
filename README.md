@@ -27,13 +27,13 @@
 ## 실행방법
 
 
-## pre-requirements
+# pre-requirements
 
 - postgres docker
 - minio docker
 - minio-ui (optional : if you need admin dashboard page to check minio)
 
-### how to deploy docker
+# how to deploy docker
 
 ```zsh
 cd docker
@@ -43,7 +43,7 @@ docker-compose up -d
 - you can access `minioui.localhost:9001` at admin dashboard
 - Please modify the `docker-compose.yaml` in docker directory for custom configuration
 
-## front
+# front
 
 - You can develop front with flutter on `front` directory
 - Please use `front/deploy.sh` to deploy front
@@ -51,7 +51,7 @@ docker-compose up -d
   bash front/deploy.sh
   ```
 
-## How to run
+# How to run
 
 ```zsh
 go run main.go
