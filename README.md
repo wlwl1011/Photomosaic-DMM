@@ -80,13 +80,13 @@ go run main.go
 
 ### Client
 
-- flutter
+- Flutter
 
 ### Server 
 
-#### Authorization Server와 
+#### Authorization Server
 
-- firebase
+- Firebase
 
 #### Data Management Module  
 
