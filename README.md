@@ -78,17 +78,17 @@ go run main.go
 
 ![sysA 001](https://user-images.githubusercontent.com/62577565/171769542-72ab3482-e2b8-4409-ae1c-075fc4701e39.jpeg)
 
-# Client
+### Client
 
 - flutter
 
-# Server 
+### Server 
 
-1. Authorization Server와 
+#### Authorization Server와 
 
 - firebase
 
-2. Data Management Module  
+#### Data Management Module  
 
 - MINIO : Save image object
 - PostgreSQL : image meta data
