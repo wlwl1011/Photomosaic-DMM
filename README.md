@@ -27,13 +27,13 @@
 ## 실행방법
 
 
-# pre-requirements
+### pre-requirements
 
 - postgres docker
 - minio docker
 - minio-ui (optional : if you need admin dashboard page to check minio)
 
-# how to deploy docker
+### how to deploy docker
 
 ```zsh
 cd docker
@@ -43,7 +43,7 @@ docker-compose up -d
 - you can access `minioui.localhost:9001` at admin dashboard
 - Please modify the `docker-compose.yaml` in docker directory for custom configuration
 
-# front
+### front
 
 - You can develop front with flutter on `front` directory
 - Please use `front/deploy.sh` to deploy front
@@ -51,7 +51,7 @@ docker-compose up -d
   bash front/deploy.sh
   ```
 
-# How to run
+### How to run
 
 ```zsh
 go run main.go
@@ -131,9 +131,9 @@ go run main.go
 
 ![Untitled](https://user-images.githubusercontent.com/62577565/171770341-d2f5dc37-5f6b-4790-9a57-dd1eb68f1b8c.jpg)
 
-- 이 때 데이터베이스 내의 소스 이미지의 개수가 많아질 수록 타깃 이미지의 각 셀마다 가지고 있는 고유한 값을 표현하기 위한 비교 가능한 셋이 많아지기 때문에 처리 시간이 증가하는 문제를 확인 할 수 있었는데요,
+- 이 때 데이터베이스 내의 소스 이미지의 개수가 많아질 수록 타깃 이미지의 각 셀마다 가지고 있는 고유한 값을 표현하기 위한 비교 가능한 셋이 많아지기 때문에 처리 시간이 증가하는 문제 발견
 ## 기대효과
 
 
 ## 데모영상
-
+https://www.youtube.com/watch?v=3KBc8UICEtQ&feature=youtu.be
