@@ -1,4 +1,4 @@
-# Photomosaic-DMM
+# Photomosaic
 
 # 2022 1학기 종합프로젝트 설계-2
 - Deep learning을 활용한 Photomosaic 개발 (참여 기업체 : (주)빈즈 소프트)
