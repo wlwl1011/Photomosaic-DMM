@@ -184,5 +184,6 @@ go run main.go
 -  바이럴 마케팅, 배너 광고는 물론, 단일 코드 베이스인 flutter를 이용한다는 점에서 경제적 효과와 홍보효과를 기대함
 
 
+
 ## 데모영상
 https://www.youtube.com/watch?v=3KBc8UICEtQ&feature=youtu.be
