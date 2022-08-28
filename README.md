@@ -61,7 +61,7 @@ go run main.go
 
 ![Untitled](https://user-images.githubusercontent.com/62577565/171769318-99eece14-d89d-436c-9a9d-3fc34165489f.jpg)
 
-- 최근 딥러닝 기술이 각광받게 되면서 딥러닝을 이용해 컴퓨터가 자동으로 Photomosaic를 생성하도록 하는 기술이 활성화 되었음. 
+- 최근 딥러닝 기술이 각광받게 되면서 딥러닝을 이용해 컴퓨터가 자동으로 Photomosaic를 생성하도록 하는 기술이 활성화 되었음
 - 이를 통해 서울 관광 홍보 application과 같이 다양한 서비스도 탄생함
 
 >> 이러한 배경으로 빈즈소프트에서도 Photomosaic과 관련된 서비스를 제공하는 application을 기획하였고 저희에게 프로젝트 수행을 요청
